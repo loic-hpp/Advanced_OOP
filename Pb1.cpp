@@ -15,17 +15,12 @@ void getStringInfo(string text) {
 
 	for (int i = 0; i <= text.length(); i++)
 	{
-		if ((text[i] != ' '))
+		if ((text[i] != ' ') && (i != text.length()))
 		{
 			tempWord += text[i];
 			tempLen++;
 		}
-		else if (i == text.length())
-		{
-			sum += tempLen;
-			tempLen = 0;
-			numOfWords++;
-		}
+		
 		else
 		{
 			sum += tempLen;
@@ -36,12 +31,14 @@ void getStringInfo(string text) {
 			{
 				shortestWord = tempWord;
 			}
-			else if (tempWord.length() < shortestWord.length())
-			{
-				shortestWord = tempWord;
-			}
+			
 			else
 			{
+				if (tempWord.length() < shortestWord.length())
+				{
+				shortestWord = tempWord;
+				}
+
 				longestWord = tempWord;
 			}
 			tempWord = "";
