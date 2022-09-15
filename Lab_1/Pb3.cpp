@@ -12,7 +12,7 @@ void printList(int list[], int length)
 	{
 	for (int i = 0; i < length; i++)
 	{
-		if (list[i] != 0)
+		if (list[i] > 0)
 		{
 			cout << list[i] << " "; 
 		}
