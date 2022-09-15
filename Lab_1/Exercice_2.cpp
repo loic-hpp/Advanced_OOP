@@ -1,3 +1,11 @@
+/*
+Programme qui retourne une approximation de la limite de la suite Un+1 = sqrt(2+Un)
+avec une précision de epsilon
+Fichier   Exercice_2.cpp
+Auteurs Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+Date	14 septembre 2022
+Créé le 6 septembre 2022
+*/
 #include <iostream>
 #include <string>
 #include <cmath>

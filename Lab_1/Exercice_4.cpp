@@ -1,3 +1,10 @@
+/*
+Programme qui implémente une multiplication russe et teste le résultat
+Fichier   Exercice_4.cpp
+Auteurs Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+Date	14 septembre 2022
+Créé le 6 septembre 2022
+*/
 #include <iostream>
 #include <string>
 #include <vector>

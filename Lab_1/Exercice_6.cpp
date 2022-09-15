@@ -1,3 +1,10 @@
+/*
+Programme qui  détermine le vainceur d'une partie de Tic-Tac-Toe
+Fichier   Exercice_6.cpp
+Auteur Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+Date	14 septembre 2022
+Créé le 6 septembre 2022
+*/
 #include <iostream>
 #include <string>
 #include <fstream>
