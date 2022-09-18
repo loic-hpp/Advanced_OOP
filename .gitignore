@@ -1,0 +1,13 @@
+# Ignore all files
+*
+#But not these 
+!.gitignore
+!.h
+!.hpp
+!.c
+!.cpp
+!Makefile
+# ...even if they are in subdirectories
+!*/
+cppitertools/
+gsl/
