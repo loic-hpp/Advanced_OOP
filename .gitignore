@@ -1,18 +1,27 @@
 # Ignore all files
-*
+#*
 #But not these 
 !.gitignore
-#!./Lab_1/*.hpp
-!./Lab_2/*.hpp
-#!./Lab_3/*.hpp
-#!./Lab_4/*.hpp
-#!./Lab_5/*.hpp
-#!./Lab_6/*.hpp
-#!./Lab_1/*.cpp
-!./Lab_2/*.cpp
-#!./Lab_3/*.cpp
-#!./Lab_4/*.cpp
-#!./Lab_5/*.cpp
-#!./Lab_6/*.cpp
-#!Makefile
-# ...even if they are in subdirectories
+/Lab_2/*
+!/Lab_2/*.cpp
+!/Lab_2/*.hpp
+
+/Lab_3/*
+!/Lab_3/*.cpp
+!/Lab_3/*.hpp
+
+/Lab_4/*
+!/Lab_4/*.cpp
+!/Lab_4/*.hpp
+
+/Lab_5/*
+!/Lab_5/*.cpp
+!/Lab_5/*.hpp
+
+/Lab_6/*
+!/Lab_6/*.cpp
+!/Lab_6/*.hpp
+
+/Lab_7/*
+!/Lab_7/*.cpp
+!/Lab_7/*.hpp
