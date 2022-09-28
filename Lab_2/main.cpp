@@ -111,10 +111,10 @@ void changerTailleListeJeux(ListeJeux& listejeux) {
 		nouvelleListe[i] = jeu;
 		i++;
 	}
-	for (int j : iter::range(listejeux.nElements)) {
+	/*for (int j : iter::range(listejeux.nElements)) {
 		delete[] listejeux.elements[j];
 	}
-	delete[] listejeux.elements;
+	delete[] listejeux.elements;*/
 	listejeux.elements = 0;
 	listejeux.elements = nouvelleListe;
 }
@@ -165,13 +165,13 @@ Jeu* lireJeu(ListeJeux& listeJeux, istream& fichier)
 	// que contient un jeu. Servez-vous de votre fonction d'ajout de jeu car la
 	// liste de jeux participé est une ListeJeu. Afficher un message lorsque
 	// l'allocation du jeu est réussie.
-	
+
 	Jeu* nouveauJeu = new Jeu(jeu);
 	for ([[maybe_unused]] size_t i : iter::range(jeu.concepteurs.capacite)) {
 		jeu.concepteurs.elements[i] = lireConcepteur(listeJeux, fichier);
 		ajouterJeuListeJeux(jeu.concepteurs.elements[i]->jeuxConcus, nouveauJeu);
-		  //TODO: Mettre le concepteur dans la liste des concepteur du jeu.
-		//TODO: Ajouter le jeu à la liste des jeux auquel a participé le concepteur.
+		//TODO: Mettre le concepteur dans la liste des concepteur du jeu.
+	  //TODO: Ajouter le jeu à la liste des jeux auquel a participé le concepteur.
 	}
 	return nouveauJeu; //TODO: Retourner le pointeur vers le nouveau jeu.
 }
