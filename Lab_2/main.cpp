@@ -111,11 +111,6 @@ void changerTailleListeJeux(ListeJeux& listejeux) {
 		nouvelleListe[i] = jeu;
 		i++;
 	}
-	/*for (int j : iter::range(listejeux.nElements)) {
-		delete[] listejeux.elements[j];
-	}
-	delete[] listejeux.elements;*/
-	listejeux.elements = 0;
 	listejeux.elements = nouvelleListe;
 }
 
@@ -141,8 +136,13 @@ void ajouterJeuListeJeux(ListeJeux& listejeux, Jeu* jeu) {
 // Puisque l'ordre de la ListeJeux n'a pas être conservé, on peut remplacer le
 // jeu à être retiré par celui présent en fin de liste et décrémenter la taille
 // de celle-ci.
-void supprimerJeuListeJeux(ListeJeux& listejeux, Jeu* jeu) {
-	listejeux.elements[listejeux.nElements - 1] = jeu;
+void supprimerJeuListeJeux(ListeJeux& listejeux, Jeu* jeuParametre) {
+	int i = 0;
+	for (Jeu*& jeu : gsl::span(listejeux.elements, listejeux.nElements)) {
+		if (jeuParametre == jeu)
+			listejeux.elements[i] = jeuParametre;
+		i++;
+	}
 	listejeux.elements[listejeux.nElements - 1] = nullptr;
 	listejeux.nElements--;
 }
@@ -194,8 +194,19 @@ ListeJeux creerListeJeux(const string& nomFichier)
 
 //TODO: Fonction pour détruire un concepteur (libération de mémoire allouée).
 // Lorsqu'on détruit un concepteur, on affiche son nom pour fins de débogage.
+void supprimerConcepteur(Concepteur* concepteur) {
+	delete[] concepteur;
+	concepteur = 0;
+}
 
 //TODO: Fonction qui détermine si un concepteur participe encore à un jeu.
+bool estConcepteurJeu(Jeu* jeu, string nom) {
+	for (Concepteur* concepteur : gsl::span(jeu->concepteurs.elements, jeu->concepteurs.nElements)) {
+		if (concepteur->nom == nom)
+			return true;
+	}
+	return false;
+}
 
 //TODO: Fonction pour détruire un jeu (libération de mémoire allouée).
 // Attention, ici il faut relâcher toute les cases mémoires occupées par un jeu.
@@ -204,8 +215,36 @@ ListeJeux creerListeJeux(const string& nomFichier)
 // qu'un concepteur a participé (jeuxConcus). Si le concepteur n'a plus de
 // jeux présents dans sa liste de jeux participés, il faut le supprimer.  Pour
 // fins de débogage, affichez le nom du jeu lors de sa destruction.
+void desallouerListeJeuxVide(ListeJeux& listeJeux) {
+	for (int j : iter::range((int)listeJeux.nElements)) {
+		delete[] listeJeux.elements[j];
+	}
+	delete[] listeJeux.elements;
+	listeJeux.elements = 0;
+}
+void supprimerJeu(Jeu* jeu) {
+	for (Concepteur*& concepteur : gsl::span(jeu->concepteurs.elements, jeu->concepteurs.nElements)) {
+		if (estConcepteurJeu(jeu, concepteur->nom)) {
+			supprimerJeuListeJeux(concepteur->jeuxConcus, jeu);
+			if (concepteur->jeuxConcus.nElements == 0) {
+				cout << "\nLa suppression du concepteur: " << concepteur->nom << " est terminée" << endl;
+				desallouerListeJeuxVide(concepteur->jeuxConcus); //DOUTES
+				supprimerConcepteur(concepteur);
+			}
+		}
+	}
+	//delete[] jeu->concepteurs.elements;
+	//delete[] jeu;
+	jeu = 0;
+}
 
 //TODO: Fonction pour détruire une ListeJeux et tous ses jeux.
+void desallouerListeJeux(ListeJeux& listeJeux) {
+	for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)) {
+		supprimerJeu(jeu);
+	}
+	delete[] listeJeux.elements;
+}
 
 void afficherConcepteur(const Concepteur& d)
 {
@@ -215,10 +254,23 @@ void afficherConcepteur(const Concepteur& d)
 
 //TODO: Fonction pour afficher les infos d'un jeu ainsi que ses concepteurs.
 // Servez-vous de la fonction afficherConcepteur ci-dessus.
+void afficherJeu(Jeu* jeu) {
+	cout << "\n\ttitre" << "!\t\t\t\tAnne de sortie" << endl;
+	cout << "\n\t" << jeu->titre << "!\t\t\t\t" << jeu->anneeSortie << "\n\nCONCEPTEURS\n" << endl;
+	for (int i : iter::range(jeu->concepteurs.capacite))
+		afficherConcepteur(*(jeu->concepteurs.elements[i]));
+}
 
 //TODO: Fonction pour afficher tous les jeux de ListeJeux, séparés par un ligne.
 // Servez-vous de la fonction d'affichage d'un jeu crée ci-dessus. Votre ligne
 // de séparation doit être différent de celle utilisée dans le main.
+void afficherListeJeux(const ListeJeux& listeJeux) {
+	for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)) {
+		afficherJeu(jeu);
+		cout << "\n_____________________________________________________\n";
+
+	}
+}
 
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
@@ -230,9 +282,9 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	bibliotheque_cours::activerCouleursAnsi();
 #pragma endregion
 
-	int* fuite = new int;  // Pour vérifier que la détection de fuites fonctionne; un message devrait dire qu'il y a une fuite à cette ligne.
+	//int* fuite = new int;  // Pour vérifier que la détection de fuites fonctionne; un message devrait dire qu'il y a une fuite à cette ligne.
 
-	creerListeJeux("jeux.bin"); //TODO: Appeler correctement votre fonction de création de la liste de jeux.
+	ListeJeux listeJeux = creerListeJeux("jeux.bin"); //TODO: Appeler correctement votre fonction de création de la liste de jeux.
 
 	static const string ligneSeparation = "\n\033[35m════════════════════════════════════════\033[0m\n";
 	cout << ligneSeparation << endl;
@@ -242,8 +294,10 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	cout << ligneSeparation << endl;
 
 	//TODO: Appel à votre fonction d'affichage de votre liste de jeux.
-
+	afficherListeJeux(listeJeux);
 	//TODO: Faire les appels à toutes vos fonctions/méthodes pour voir qu'elles fonctionnent et avoir 0% de lignes non exécutées dans le programme (aucune ligne rouge dans la couverture de code; c'est normal que les lignes de "new" et "delete" soient jaunes).  Vous avez aussi le droit d'effacer les lignes du programmes qui ne sont pas exécutée, si finalement vous pensez qu'elle ne sont pas utiles.
 
 	//TODO: Détruire tout avant de terminer le programme.  Devrait afficher "Aucune fuite detectee." a la sortie du programme; il affichera "Fuite detectee:" avec la liste des blocs, s'il manque des delete.
+	//desallouerListeJeux(listeJeux);
+
 }
