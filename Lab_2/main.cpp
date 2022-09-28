@@ -56,19 +56,19 @@ gsl::span<Concepteur*> spanListeConcepteurs(const ListeConcepteurs& liste)
 // Cette fonction renvoie le pointeur vers le concepteur si elle le trouve dans
 // un des jeux de la ListeJeux. En cas contraire, elle renvoie un pointeur nul.
 Concepteur* rechercherConcepteur(ListeJeux& listeJeux, string nom) {
-	Concepteur* concepteurTemp = new Concepteur;
+	//Concepteur* concepteurTemp = new Concepteur;
 	if (listeJeux.nElements == 0)
-		concepteurTemp = nullptr;
+		return nullptr;
 	else {
 		for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)) {
 			for (Concepteur*& concepteur : gsl::span(jeu->concepteurs.elements, jeu->concepteurs.nElements)) {
 				if (concepteur->nom == nom)
-					concepteurTemp = concepteur;
+					return concepteur;
 			}
 		}
-		concepteurTemp = nullptr;
+		//concepteurTemp = nullptr;
 	}
-	return concepteurTemp;
+	return nullptr;
 }
 
 
@@ -140,7 +140,7 @@ void supprimerJeuListeJeux(ListeJeux& listejeux, Jeu* jeuParametre) {
 	int i = 0;
 	for (Jeu*& jeu : gsl::span(listejeux.elements, listejeux.nElements)) {
 		if (jeuParametre == jeu)
-			listejeux.elements[i] = jeuParametre;
+			listejeux.elements[i] = listejeux.elements[listejeux.nElements - 1];
 		i++;
 	}
 	listejeux.elements[listejeux.nElements - 1] = nullptr;
@@ -167,12 +167,15 @@ Jeu* lireJeu(ListeJeux& listeJeux, istream& fichier)
 	// l'allocation du jeu est réussie.
 
 	Jeu* nouveauJeu = new Jeu(jeu);
-	for ([[maybe_unused]] size_t i : iter::range(jeu.concepteurs.capacite)) {
-		jeu.concepteurs.elements[i] = lireConcepteur(listeJeux, fichier);
-		ajouterJeuListeJeux(jeu.concepteurs.elements[i]->jeuxConcus, nouveauJeu);
+	for ([[maybe_unused]] size_t i : iter::range(nouveauJeu->concepteurs.capacite)) {
+		nouveauJeu->concepteurs.elements[i] = lireConcepteur(listeJeux, fichier);
+		nouveauJeu->concepteurs.nElements++;
+		ajouterJeuListeJeux(nouveauJeu->concepteurs.elements[i]->jeuxConcus, nouveauJeu);
 		//TODO: Mettre le concepteur dans la liste des concepteur du jeu.
 	  //TODO: Ajouter le jeu à la liste des jeux auquel a participé le concepteur.
 	}
+
+	//nouveauJeu->concepteurs.nElements = jeu->concepteurs.nElements;
 	return nouveauJeu; //TODO: Retourner le pointeur vers le nouveau jeu.
 }
 
@@ -195,13 +198,14 @@ ListeJeux creerListeJeux(const string& nomFichier)
 //TODO: Fonction pour détruire un concepteur (libération de mémoire allouée).
 // Lorsqu'on détruit un concepteur, on affiche son nom pour fins de débogage.
 void supprimerConcepteur(Concepteur* concepteur) {
-	delete[] concepteur;
+	if(concepteur != nullptr)
+		delete concepteur;
 	concepteur = 0;
 }
 
 //TODO: Fonction qui détermine si un concepteur participe encore à un jeu.
 bool estConcepteurJeu(Jeu* jeu, string nom) {
-	for (Concepteur* concepteur : gsl::span(jeu->concepteurs.elements, jeu->concepteurs.nElements)) {
+	for (Concepteur* concepteur : gsl::span(jeu->concepteurs.elements, jeu->concepteurs.capacite)) {
 		if (concepteur->nom == nom)
 			return true;
 	}
@@ -217,33 +221,36 @@ bool estConcepteurJeu(Jeu* jeu, string nom) {
 // fins de débogage, affichez le nom du jeu lors de sa destruction.
 void desallouerListeJeuxVide(ListeJeux& listeJeux) {
 	for (int j : iter::range((int)listeJeux.nElements)) {
-		delete[] listeJeux.elements[j];
+		delete listeJeux.elements[j];
 	}
 	delete[] listeJeux.elements;
 	listeJeux.elements = 0;
 }
-void supprimerJeu(Jeu* jeu) {
-	for (Concepteur*& concepteur : gsl::span(jeu->concepteurs.elements, jeu->concepteurs.nElements)) {
-		if (estConcepteurJeu(jeu, concepteur->nom)) {
-			supprimerJeuListeJeux(concepteur->jeuxConcus, jeu);
-			if (concepteur->jeuxConcus.nElements == 0) {
-				cout << "\nLa suppression du concepteur: " << concepteur->nom << " est terminée" << endl;
-				desallouerListeJeuxVide(concepteur->jeuxConcus); //DOUTES
-				supprimerConcepteur(concepteur);
+void supprimerJeu(Jeu*& jeu) {
+	//delete[] jeu->concepteurs.elements;
+	//for (Concepteur*& concepteur : gsl::span(jeu->concepteurs.elements, jeu->concepteurs.capacite)){
+	for(int i : iter::range(jeu->concepteurs.capacite)) {
+		if (estConcepteurJeu(jeu, jeu->concepteurs.elements[i]->nom)) {
+			supprimerJeuListeJeux(jeu->concepteurs.elements[i]->jeuxConcus, jeu);
+			if (jeu->concepteurs.elements[i]->jeuxConcus.nElements == 0) {
+				cout << "\nLa suppression du concepteur: " << jeu->concepteurs.elements[i]->nom << " est terminée" << endl;
+				desallouerListeJeuxVide(jeu->concepteurs.elements[i]->jeuxConcus); //DOUTES
+				supprimerConcepteur(jeu->concepteurs.elements[i]);
 			}
 		}
 	}
-	//delete[] jeu->concepteurs.elements;
-	//delete[] jeu;
+	delete[] jeu->concepteurs.elements;
+	delete jeu;
 	jeu = 0;
 }
 
 //TODO: Fonction pour détruire une ListeJeux et tous ses jeux.
 void desallouerListeJeux(ListeJeux& listeJeux) {
-	for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)) {
-		supprimerJeu(jeu);
+	for (int i : iter::range(listeJeux.nElements)) {
+		supprimerJeu(listeJeux.elements[i]);
 	}
-	delete[] listeJeux.elements;
+		//delete[] listeJeux.elements;
+	//listeJeux.elements = 0;
 }
 
 void afficherConcepteur(const Concepteur& d)
@@ -255,8 +262,8 @@ void afficherConcepteur(const Concepteur& d)
 //TODO: Fonction pour afficher les infos d'un jeu ainsi que ses concepteurs.
 // Servez-vous de la fonction afficherConcepteur ci-dessus.
 void afficherJeu(Jeu* jeu) {
-	cout << "\n\ttitre" << "!\t\t\t\tAnne de sortie" << endl;
-	cout << "\n\t" << jeu->titre << "!\t\t\t\t" << jeu->anneeSortie << "\n\nCONCEPTEURS\n" << endl;
+	cout << "\nInformations" << endl;
+	cout << "\n\t" << jeu->titre << "\t" << jeu->anneeSortie << "\n\nCONCEPTEURS\n" << endl;
 	for (int i : iter::range(jeu->concepteurs.capacite))
 		afficherConcepteur(*(jeu->concepteurs.elements[i]));
 }
@@ -265,7 +272,7 @@ void afficherJeu(Jeu* jeu) {
 // Servez-vous de la fonction d'affichage d'un jeu crée ci-dessus. Votre ligne
 // de séparation doit être différent de celle utilisée dans le main.
 void afficherListeJeux(const ListeJeux& listeJeux) {
-	for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)) {
+	for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)){
 		afficherJeu(jeu);
 		cout << "\n_____________________________________________________\n";
 
@@ -298,6 +305,8 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	//TODO: Faire les appels à toutes vos fonctions/méthodes pour voir qu'elles fonctionnent et avoir 0% de lignes non exécutées dans le programme (aucune ligne rouge dans la couverture de code; c'est normal que les lignes de "new" et "delete" soient jaunes).  Vous avez aussi le droit d'effacer les lignes du programmes qui ne sont pas exécutée, si finalement vous pensez qu'elle ne sont pas utiles.
 
 	//TODO: Détruire tout avant de terminer le programme.  Devrait afficher "Aucune fuite detectee." a la sortie du programme; il affichera "Fuite detectee:" avec la liste des blocs, s'il manque des delete.
-	//desallouerListeJeux(listeJeux);
+	desallouerListeJeux(listeJeux);
+	cout << "\n____________________________________________________________________________\n";
+	
 
 }
