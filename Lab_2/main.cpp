@@ -107,12 +107,12 @@ void changerTailleListeJeux(ListeJeux& listeJeux) {
 		listeJeux.capacite *= 2;
 	Jeu** nouvelleListe = new Jeu * [listeJeux.capacite];
 	int i = 0;
-	for (Jeu* jeu : gsl::span(listeJeux.elements, listeJeux.nElements)) {
+	for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)) {
 		nouvelleListe[i] = jeu;
 		i++;
 	}
 	delete[] listeJeux.elements; 
-	//listeJeux.elements = 0;
+	listeJeux.elements = nullptr;
 	listeJeux.elements = nouvelleListe;
 }
 
@@ -251,8 +251,8 @@ void desallouerListeJeux(ListeJeux& listeJeux) {
 	for (int i : iter::range(listeJeux.nElements)) {
 		supprimerJeu(listeJeux.elements[i]);
 	}
-		//delete[] listeJeux.elements;
-	//listeJeux.elements = 0;
+	delete[] listeJeux.elements;
+	listeJeux.elements = 0;
 }
 
 void afficherConcepteur(const Concepteur& d)
