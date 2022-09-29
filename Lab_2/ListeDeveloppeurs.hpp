@@ -13,12 +13,27 @@ private:
 	Developpeur** elements;
 };
 
+// TODO: On veut pouvoir ajouter et enlever un Developpeur* de la liste, 
+// avec réallocation dynamique tel que faite pour ListeJeux.
 ListeDeveloppeurs::~ListeDeveloppeurs()
 {
-
+	// Liberer
 }
 
-//TODO: On veut pouvoir ajouter et enlever un Developpeur* de la liste, avec réallocation dynamique tel que faite pour ListeJeux.
+void afficher(ListeJeux listeJeux)
+{
+	//TODO
+}
+
+void ajouterDeveloppeur(ListeJeux listeJeux) 
+{
+	//TODO
+}
+
+void retirerDeveloppeur(ListeJeux listeJeux)
+{
+	//TODO
+}
 
 //NOTE: Le code sera principalement copié de certaines fonctions écrites pour la partie 1, mais mises dans une classe.
 };
