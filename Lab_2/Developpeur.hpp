@@ -13,6 +13,7 @@ public:
 	string obtenirNom() const;
 	int obtenirNombreJeuxDeveloppes(ListeJeux listeJeux);
 	ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete);
+	void afficherListeJeuxDeveloppes(ListeJeux listeJeuxDeveloppes);
 
 private:
 	string name_;
@@ -21,7 +22,10 @@ private:
 };
 
 //TODO: La destruction d'un Developpeur doit s'assurer que la désallocation de ListeJeux est faite.
-~Developpeur() {};
+Developpeur::~Developpeur()
+{
+	//Desallocation ici
+};
 
 //TODO: Les méthodes à faire...
 string Developpeur::obtenirNom() const
@@ -34,7 +38,7 @@ int Developpeur::obtenirNombreJeuxDeveloppes(ListeJeux listeJeux)
 	//TODO
 }
 
-ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete) 
+ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete)
 {
 	//TODO
 }
@@ -42,7 +46,7 @@ ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete)
 void afficherListeJeuxDeveloppes(ListeJeux listeJeuxDeveloppes)
 {
 	int i = 0;
-	for (auto i : listeJeuxDeveloppes) 
+	for (auto i : listeJeuxDeveloppes)
 	{
 		//TODO
 	}
