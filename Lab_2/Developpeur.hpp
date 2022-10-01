@@ -9,7 +9,13 @@ class Developpeur
 {
 	//TODO: En faire une classe qui suit les principes OO.
 public:
-	Developpeur(ListeJeux listeJeux);
+	Developpeur(string name)
+	{
+		name_ = name;
+		ListeJeux listeJeux = {};
+		paireNomJeux_ = {obtenirNom(), listeJeux};
+	}
+
 	string obtenirNom() const;
 	int obtenirNombreJeuxDeveloppes(ListeJeux listeJeux);
 	ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete);
@@ -17,8 +23,8 @@ public:
 
 private:
 	string name_;
-	string paireNomJeux_;
-	int nombreJeuxDeveloppes;
+	/* Quel type doit etre ici? */ paireNomJeux_[2];
+	int nombreJeuxDeveloppes_;
 };
 
 //TODO: La destruction d'un Developpeur doit s'assurer que la désallocation de ListeJeux est faite.
@@ -30,7 +36,7 @@ Developpeur::~Developpeur()
 //TODO: Les méthodes à faire...
 string Developpeur::obtenirNom() const
 {
-	//TODO	
+	return name_;
 }
 
 int Developpeur::obtenirNombreJeuxDeveloppes(ListeJeux listeJeux)
