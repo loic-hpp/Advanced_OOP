@@ -36,10 +36,11 @@ private:
 	int nJeuxDeveloppes_;
 };
 
-//TODO: La destruction d'un Developpeur doit s'assurer que la désallocation de ListeJeux est faite.
 Developpeur::~Developpeur()
 {
-	delete[] paireNomJeux_.second;
+	delete[] paireNomJeux_.second; // Quoi faire ici?
+	//TODO: La destruction d'un Developpeur doit s'assurer que la désallocation 
+	// de ListeJeux est faite.
 };
 
 const string Developpeur::obtenirNom() const
@@ -47,18 +48,21 @@ const string Developpeur::obtenirNom() const
 	return nom_;
 }
 
+// La méthode s’applique sur un développeur et reçoit la liste des jeux dans 
+// laquelle compter le nombre de fois où on trouve ce développeur.
 int Developpeur::obtenirNombreJeuxDeveloppes(ListeJeux listeJeuxDeveloppes)
 {
 	for (size_t i : range(ListeJeuxDeveloppes))
 	{
-		//TODO
+		
 	}
 	return nJeuxDeveloppes_;
 }
 
 ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete)
 {
-	//TODO
+	// TODO: Doit utiliser obtenirNombreJeuxDeveloppes() pour eviter de faire plusieurs réallocations
+	// pendant que les jeux developpes par ce developpeur sont ajoutés a la liste.
 }
 
 void afficherListeJeuxDeveloppes(ListeJeux listeJeuxDeveloppes)
