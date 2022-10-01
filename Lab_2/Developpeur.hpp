@@ -16,7 +16,7 @@ public:
 	{
 		ListeJeux listeJeuxDeveloppes = {}; // Repétitif avec autre constructeur
 		nom_ = "inconnu";
-		paireNomJeux_ = { nom_, listeJeuxDeveloppes };
+		paireNomJeux_ = { obtenirNom(), listeJeuxDeveloppes};
 		nJeuxDeveloppes_ = 0;
 	}
 
@@ -25,6 +25,7 @@ public:
 		ListeJeux listeJeuxDeveloppes = {};
 		nom_ = nom;
 		paireNomJeux_ = { obtenirNom(), listeJeuxDeveloppes };
+		nJeuxDeveloppes_ = 0;
 	};
 
 	const string obtenirNom() const;
@@ -40,7 +41,7 @@ private:
 
 Developpeur::~Developpeur()
 {
-	delete[] paireNomJeux_.second; // Quoi faire ici?
+	delete[] paireNomJeux_.second; // Comment faire ici?
 	//TODO: La destruction d'un Developpeur doit s'assurer que la désallocation 
 	// de ListeJeux est faite.
 };
@@ -54,9 +55,12 @@ const string Developpeur::obtenirNom() const
 // laquelle compter le nombre de fois où on trouve ce développeur.
 int Developpeur::obtenirNombreJeuxDeveloppes(ListeJeux listeJeuxDeveloppes)
 {
-	for (size_t i : range(listeJeuxDeveloppes))
+	for (Jeu*& jeu : gsl::span(listeJeuxDeveloppes.elements, listeJeuxDeveloppes.nElements))
 	{
-		
+		if (jeu->developpeur == obtenirNom()) 
+		{
+			nJeuxDeveloppes_++;
+		}
 	}
 	return nJeuxDeveloppes_;
 }
