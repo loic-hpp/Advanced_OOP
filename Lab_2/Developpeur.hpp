@@ -9,13 +9,21 @@ class Developpeur
 {
 	//TODO: En faire une classe qui suit les principes OO.
 public:
-	Developpeur(string nom)
+	Developpeur()
 	{
-		ListeJeux listeJeux = {};
+		ListeJeux listeJeuxDeveloppes = {}; // Repétitif avec autre constructeur
+		nom_ = "inconnu";
+		paireNomJeux_ = { nom_, listeJeuxDeveloppes};
+		nJeuxDeveloppes_ = 0;
+	}
+
+	Developpeur(const string& nom)
+	{
+		ListeJeux listeJeuxDeveloppes = {};
 		nom_ = nom;
-		paireNomJeux_ = { nom_, listeJeux };
+		paireNomJeux_ = {obtenirNom(), listeJeuxDeveloppes};
 	};
-	string obtenirNom() const;
+	const string obtenirNom() const;
 	int obtenirNombreJeuxDeveloppes(ListeJeux listeJeux);
 	ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete);
 	void afficherListeJeuxDeveloppes(ListeJeux listeJeuxDeveloppes);
@@ -23,7 +31,7 @@ public:
 private:
 	string nom_;
 	std::pair<std::string, ListeJeux> paireNomJeux_;
-	int nombreJeuxDeveloppes_;
+	int nJeuxDeveloppes_;
 };
 
 //TODO: La destruction d'un Developpeur doit s'assurer que la désallocation de ListeJeux est faite.
