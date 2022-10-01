@@ -16,7 +16,7 @@ public:
 	{
 		ListeJeux listeJeuxDeveloppes = {}; // Repétitif avec autre constructeur
 		nom_ = "inconnu";
-		paireNomJeux_ = { obtenirNom(), listeJeuxDeveloppes};
+		paireNomJeux_ = { obtenirNom(), listeJeuxDeveloppes };
 		nJeuxDeveloppes_ = 0;
 	}
 
@@ -57,7 +57,7 @@ int Developpeur::obtenirNombreJeuxDeveloppes(ListeJeux listeJeuxDeveloppes)
 {
 	for (Jeu*& jeu : gsl::span(listeJeuxDeveloppes.elements, listeJeuxDeveloppes.nElements))
 	{
-		if (jeu->developpeur == obtenirNom()) 
+		if (jeu->developpeur == obtenirNom())  // erreur dans jeu encore?
 		{
 			nJeuxDeveloppes_++;
 		}
@@ -69,9 +69,10 @@ ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete)
 {
 	// TODO: Doit utiliser obtenirNombreJeuxDeveloppes() pour eviter de faire plusieurs réallocations
 	// pendant que les jeux developpes par ce developpeur sont ajoutés a la liste.
+
 }
 
-void afficherListeJeuxDeveloppes(const ListeJeux& listeJeuxDeveloppes, Jeu* jeu)
+void afficherListeJeuxDeveloppes(const ListeJeux& listeJeuxDeveloppes)
 {
 	for (Jeu*& jeu : gsl::span(listeJeuxDeveloppes.elements, listeJeuxDeveloppes.nElements)) {
 		cout << "\nInformations" << endl;
