@@ -277,7 +277,6 @@ void afficherListeJeux(const ListeJeux& listeJeux) {
 	for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)) {
 		afficherJeu(jeu);
 		cout << "\n_____________________________________________________\n";
-
 	}
 }
 

@@ -15,6 +15,7 @@ private:
 
 // TODO: On veut pouvoir ajouter et enlever un Developpeur* de la liste, 
 // avec réallocation dynamique tel que faite pour ListeJeux.
+
 ListeDeveloppeurs::~ListeDeveloppeurs()
 {
 	// Liberer

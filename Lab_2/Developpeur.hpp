@@ -2,6 +2,8 @@
 #include <string>
 #include "ListeJeux.hpp"
 #include <string>
+#include <gsl/span>
+#include <iostream>
 #include <cppitertools/range.hpp>
 
 using namespace std;
@@ -52,7 +54,7 @@ const string Developpeur::obtenirNom() const
 // laquelle compter le nombre de fois où on trouve ce développeur.
 int Developpeur::obtenirNombreJeuxDeveloppes(ListeJeux listeJeuxDeveloppes)
 {
-	for (size_t i : range(ListeJeuxDeveloppes))
+	for (size_t i : range(listeJeuxDeveloppes))
 	{
 		
 	}
@@ -65,12 +67,11 @@ ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete)
 	// pendant que les jeux developpes par ce developpeur sont ajoutés a la liste.
 }
 
-void afficherListeJeuxDeveloppes(ListeJeux listeJeuxDeveloppes)
+void afficherListeJeuxDeveloppes(const ListeJeux& listeJeuxDeveloppes, Jeu* jeu)
 {
-	int i = 0;
-	for (size_t i : range(listeJeuxDeveloppes))
-	{
-		//TODO
+	for (Jeu*& jeu : gsl::span(listeJeuxDeveloppes.elements, listeJeuxDeveloppes.nElements)) {
+		cout << "\nInformations" << endl;
+		cout << "\n\t" << jeu->titre << endl; //erreur dans jeu ici?
+		cout << "\n_____________________________________________________\n";
 	}
-
 }
