@@ -9,17 +9,19 @@ class Developpeur
 {
 	//TODO: En faire une classe qui suit les principes OO.
 public:
-	Developpeur();
-	Developpeur(const string& name_ = "inconnu",
-		paireNomJeux_ = { });
-
+	Developpeur(string nom)
+	{
+		ListeJeux listeJeux = {};
+		nom_ = nom;
+		paireNomJeux_ = { nom_, listeJeux };
+	};
 	string obtenirNom() const;
 	int obtenirNombreJeuxDeveloppes(ListeJeux listeJeux);
 	ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete);
 	void afficherListeJeuxDeveloppes(ListeJeux listeJeuxDeveloppes);
 
 private:
-	string name_;
+	string nom_;
 	std::pair<std::string, ListeJeux> paireNomJeux_;
 	int nombreJeuxDeveloppes_;
 };
