@@ -2,6 +2,7 @@
 #include <string>
 #include "ListeJeux.hpp"
 #include <string>
+#include <cppitertools/range.hpp>
 
 using namespace std;
 
@@ -13,7 +14,7 @@ public:
 	{
 		ListeJeux listeJeuxDeveloppes = {}; // Repétitif avec autre constructeur
 		nom_ = "inconnu";
-		paireNomJeux_ = { nom_, listeJeuxDeveloppes};
+		paireNomJeux_ = { nom_, listeJeuxDeveloppes };
 		nJeuxDeveloppes_ = 0;
 	}
 
@@ -21,8 +22,9 @@ public:
 	{
 		ListeJeux listeJeuxDeveloppes = {};
 		nom_ = nom;
-		paireNomJeux_ = {obtenirNom(), listeJeuxDeveloppes};
+		paireNomJeux_ = { obtenirNom(), listeJeuxDeveloppes };
 	};
+
 	const string obtenirNom() const;
 	int obtenirNombreJeuxDeveloppes(ListeJeux listeJeux);
 	ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete);
@@ -37,18 +39,21 @@ private:
 //TODO: La destruction d'un Developpeur doit s'assurer que la désallocation de ListeJeux est faite.
 Developpeur::~Developpeur()
 {
-	//Desallocation ici
+	delete[] paireNomJeux_.second;
 };
 
-//TODO: Les méthodes à faire...
-string Developpeur::obtenirNom() const
+const string Developpeur::obtenirNom() const
 {
-	return name_;
+	return nom_;
 }
 
-int Developpeur::obtenirNombreJeuxDeveloppes(ListeJeux listeJeux)
+int Developpeur::obtenirNombreJeuxDeveloppes(ListeJeux listeJeuxDeveloppes)
 {
-	//TODO
+	for (size_t i : range(ListeJeuxDeveloppes))
+	{
+		//TODO
+	}
+	return nJeuxDeveloppes_;
 }
 
 ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete)
@@ -59,7 +64,7 @@ ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete)
 void afficherListeJeuxDeveloppes(ListeJeux listeJeuxDeveloppes)
 {
 	int i = 0;
-	for (auto i : listeJeuxDeveloppes)
+	for (size_t i : range(listeJeuxDeveloppes))
 	{
 		//TODO
 	}
