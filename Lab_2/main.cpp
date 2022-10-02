@@ -223,9 +223,6 @@ bool estConcepteurJeu(Jeu* jeu, string nom) {
 // jeux présents dans sa liste de jeux participés, il faut le supprimer.  Pour
 // fins de débogage, affichez le nom du jeu lors de sa destruction.
 void desallouerListeJeuxVide(ListeJeux& listeJeux) {
-	for (int j : iter::range((int)listeJeux.nElements)) {
-		delete listeJeux.elements[j];
-	}
 	delete[] listeJeux.elements;
 	listeJeux.elements = 0;
 }
