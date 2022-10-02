@@ -57,4 +57,3 @@ void Developpeur::afficherDeveloppeur() {
 		std::cout << "\n\t- " << paireNomJeux_.second.elements[i]->titre << std::endl;
 	}
 }
-
