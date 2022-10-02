@@ -16,9 +16,9 @@
 class Developpeur
 {
 	//TODO: En faire une classe qui suit les principes OO.
-	
+
 	//TODO: La destruction d'un Developpeur doit s'assurer que la désallocation de ListeJeux est faite.
-	
+
 	//TODO: Les méthodes à faire...
 public:
 	Developpeur(std::string nomDeveloppeur, ListeJeux listejeux = {});
@@ -28,7 +28,7 @@ public:
 	int participationJeux(const ListeJeux& listejeux);
 	void mettreAJourListe(ListeJeux listeJeux);
 	void afficherDeveloppeur();
-	
+
 private:
 	std::pair<std::string, ListeJeux> paireNomJeux_;
 	bool estDeveloppeur(const ListeJeux& listeJeux);

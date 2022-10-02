@@ -120,7 +120,7 @@ void changerTailleListeJeux(ListeJeux& listeJeux) {
 		nouvelleListe[i] = jeu;
 		i++;
 	}
-	delete[] listeJeux.elements; 
+	delete[] listeJeux.elements;
 	listeJeux.elements = nullptr;
 	listeJeux.elements = nouvelleListe;
 }
@@ -209,7 +209,7 @@ ListeJeux creerListeJeux(const string& nomFichier)
 //TODO: Fonction pour détruire un concepteur (libération de mémoire allouée).
 // Lorsqu'on détruit un concepteur, on affiche son nom pour fins de débogage.
 void supprimerConcepteur(Concepteur* concepteur) {
-	if(concepteur != nullptr)
+	if (concepteur != nullptr)
 		delete concepteur;
 	concepteur = 0;
 }
@@ -237,7 +237,7 @@ void desallouerListeJeuxVide(ListeJeux& listeJeux) {
 void supprimerJeu(Jeu*& jeu) {
 	//delete[] jeu->concepteurs.elements;
 	//for (Concepteur*& concepteur : gsl::span(jeu->concepteurs.elements, jeu->concepteurs.capacite)){
-	for(size_t i : iter::range(jeu->concepteurs.capacite)) {
+	for (size_t i : iter::range(jeu->concepteurs.capacite)) {
 		if (estConcepteurJeu(jeu, jeu->concepteurs.elements[i]->nom)) {
 			supprimerJeuListeJeux(jeu->concepteurs.elements[i]->jeuxConcus, jeu);
 			if (jeu->concepteurs.elements[i]->jeuxConcus.nElements == 0) {
@@ -280,7 +280,7 @@ void afficherJeu(Jeu* jeu) {
 // Servez-vous de la fonction d'affichage d'un jeu crée ci-dessus. Votre ligne
 // de séparation doit être différent de celle utilisée dans le main.
 void afficherListeJeux(const ListeJeux& listeJeux) {
-	for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)){
+	for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)) {
 		afficherJeu(jeu);
 		cout << "\n_____________________________________________________\n";
 
@@ -322,7 +322,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	//TODO: Détruire tout avant de terminer le programme.  Devrait afficher "Aucune fuite detectee." a la sortie du programme; il affichera "Fuite detectee:" avec la liste des blocs, s'il manque des delete.
 	desallouerListeJeux(listeJeux);
 	cout << "\n____________________________________________________________________________\n";
-	
+
 	//Developpeur test("teste", listeJeux);
 
 }
