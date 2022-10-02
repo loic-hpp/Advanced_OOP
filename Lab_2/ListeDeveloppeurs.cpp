@@ -4,9 +4,10 @@
 //NOTE: Le code sera principalement copié de certaines fonctions écrites pour la partie 1, mais mises dans une classe.
 ListeDeveloppeurs::~ListeDeveloppeurs()
 {
-	// Liberer
-	// TODO: On veut pouvoir ajouter et enlever un Developpeur* de la liste, 
-	// avec réallocation dynamique tel que faite pour ListeJeux.
+	for (int i : iter::range(nElements_)) {
+		elements_[i] -> ~Developpeur();
+	}
+	delete[] elements_;
 }
 
 size_t ListeDeveloppeurs::obtenirNElements() const
@@ -56,7 +57,6 @@ void afficher(ListeJeux listeJeux)
 
 void ajouterDeveloppeur(ListeDeveloppeurs& listeDeveloppeurs, Developpeur* developpeur)
 {
-	//TODO: à adapter 
 	size_t index = listeDeveloppeurs.obtenirNElements();
 	if (listeDeveloppeurs.obtenirNElements() == listeDeveloppeurs.obtenirCapacite()) {
 		if (listeDeveloppeurs.obtenirCapacite() == 0)
@@ -92,6 +92,7 @@ void retirerDeveloppeur(ListeDeveloppeurs& listeDeveloppeurs, Developpeur* devel
 			listeDeveloppeurs.modifierElements(listeDeveloppeurs.obtenirElements(listeDeveloppeurs.obtenirNElements() - 1), i);
 		i++;
 	}
-	listeDeveloppeurs.modifierElements(nullptr, listeDeveloppeurs.modifierNElements(listeDeveloppeurs.obtenirNElements() - 1));
+	listeDeveloppeurs.modifierNElements(listeDeveloppeurs.obtenirNElements() - 1);
+	listeDeveloppeurs.modifierElements(nullptr, listeDeveloppeurs.obtenirNElements());
 	listeDeveloppeurs.modifierNElements(listeDeveloppeurs.obtenirNElements() - 1);
 }
