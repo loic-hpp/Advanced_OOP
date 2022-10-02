@@ -11,9 +11,9 @@ Developpeur::~Developpeur() {
 	compteur--;
 }
 
-Developpeur::Developpeur(std::string nom, ListeJeux liste) {
+Developpeur::Developpeur(std::string nom, ListeJeux listeJeux) {
 	paireNomJeux_.first = nom;
-	paireNomJeux_.second = liste;
+	paireNomJeux_.second = listeJeux;
 	compteur++;
 }
 
@@ -22,22 +22,22 @@ int Developpeur::nombreDinstances() { return compteur; }
 std::string Developpeur::nomDeveloppeur() { return paireNomJeux_.first; }
 
 bool Developpeur::estDeveloppeur(const ListeJeux& listeJeux) {
-	bool estdev = false;
+	bool estDeveloppeur = false;
 	for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements))
 	{
 		if (jeu->developpeur == paireNomJeux_.first)
-			estdev = true;
+			estDeveloppeur = true;
 	}
-	return estdev;
+	return estDeveloppeur;
 }
 
 int Developpeur::participationJeux(const ListeJeux& listeJeux) {
-	int participation = 0;
+	int nParticipation = 0;
 	for (int i = 0; i < listeJeux.nElements; i++) {
 		if (Developpeur::estDeveloppeur(listeJeux))
-			participation++;
+			nParticipation++;
 	}
-	return participation;
+	return nParticipation;
 }
 
 void Developpeur::mettreAJourListe(ListeJeux listeJeux) {

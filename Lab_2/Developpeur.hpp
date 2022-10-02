@@ -20,11 +20,11 @@ class Developpeur
 
 	//TODO: Les méthodes à faire...
 public:
-	Developpeur(std::string nomDeveloppeur, ListeJeux listejeux = {});
+	Developpeur(std::string nomDeveloppeur, ListeJeux listeJeux = {});
 	~Developpeur();
 	int nombreDinstances();
 	std::string nomDeveloppeur();
-	int participationJeux(const ListeJeux& listejeux);
+	int participationJeux(const ListeJeux& listeJeux);
 	void mettreAJourListe(ListeJeux listeJeux);
 	void afficherDeveloppeur();
 

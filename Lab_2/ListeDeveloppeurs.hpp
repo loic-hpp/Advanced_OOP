@@ -14,7 +14,7 @@
 class ListeDeveloppeurs
 {
 public:
-	ListeDeveloppeurs(int nElt = 0, int capacite = 0, Developpeur** element = nullptr);
+	ListeDeveloppeurs(int nElements = 0, int capacite = 0, Developpeur** elements = nullptr);
 	~ListeDeveloppeurs();
 	void afficher();
 	void ajouterDeveloppeur(Developpeur* developpeur);

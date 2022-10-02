@@ -64,7 +64,6 @@ gsl::span<Concepteur*> spanListeConcepteurs(const ListeConcepteurs& liste)
 // Cette fonction renvoie le pointeur vers le concepteur si elle le trouve dans
 // un des jeux de la ListeJeux. En cas contraire, elle renvoie un pointeur nul.
 Concepteur* rechercherConcepteur(ListeJeux& listeJeux, string nom) {
-	//Concepteur* concepteurTemp = new Concepteur;
 	if (listeJeux.nElements == 0)
 		return nullptr;
 	else {
@@ -74,7 +73,6 @@ Concepteur* rechercherConcepteur(ListeJeux& listeJeux, string nom) {
 					return concepteur;
 			}
 		}
-		//concepteurTemp = nullptr;
 	}
 	return nullptr;
 }
@@ -110,7 +108,7 @@ Concepteur* lireConcepteur(ListeJeux& listeJeux, istream& fichier)
 // des pointeurs de jeux. Il n'y a donc aucune nouvelle allocation de jeu ici !
 void changerTailleListeJeux(ListeJeux& listeJeux) {
 	if (listeJeux.capacite == 0)
-		listeJeux.capacite = 2;
+		listeJeux.capacite = 1;
 	else
 		listeJeux.capacite *= 2;
 	Jeu** nouvelleListe = new Jeu * [listeJeux.capacite];
@@ -129,15 +127,15 @@ void changerTailleListeJeux(ListeJeux& listeJeux) {
 // le jeu existant. De plus, en cas de saturation du tableau elements, cette
 // fonction doit doubler la taille du tableau elements de ListeJeux.
 // Utilisez la fonction pour changer la taille du tableau écrite plus haut.
-void ajouterJeuListeJeux(ListeJeux& listejeux, Jeu* jeu) {
-	size_t index = listejeux.nElements;
-	if (listejeux.nElements == listejeux.capacite) {
-		if (listejeux.capacite == 0)
+void ajouterJeuListeJeux(ListeJeux& listeJeux, Jeu* jeu) {
+	size_t index = listeJeux.nElements;
+	if (listeJeux.nElements == listeJeux.capacite) {
+		if (listeJeux.capacite == 0)
 			index = 0;
-		changerTailleListeJeux(listejeux);
+		changerTailleListeJeux(listeJeux);
 	}
-	listejeux.elements[index] = jeu;
-	listejeux.nElements++;
+	listeJeux.elements[index] = jeu;
+	listeJeux.nElements++;
 }
 
 //TODO: Fonction qui enlève un jeu de ListeJeux.
@@ -146,15 +144,15 @@ void ajouterJeuListeJeux(ListeJeux& listejeux, Jeu* jeu) {
 // Puisque l'ordre de la ListeJeux n'a pas être conservé, on peut remplacer le
 // jeu à être retiré par celui présent en fin de liste et décrémenter la taille
 // de celle-ci.
-void supprimerJeuListeJeux(ListeJeux& listejeux, Jeu* jeuParametre) {
+void supprimerJeuListeJeux(ListeJeux& listeJeux, Jeu* jeuParametre) {
 	int i = 0;
-	for (Jeu*& jeu : gsl::span(listejeux.elements, listejeux.nElements)) {
+	for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)) {
 		if (jeuParametre == jeu)
-			listejeux.elements[i] = listejeux.elements[listejeux.nElements - 1];
+			listeJeux.elements[i] = listeJeux.elements[listeJeux.nElements - 1];
 		i++;
 	}
-	listejeux.elements[listejeux.nElements - 1] = nullptr;
-	listejeux.nElements--;
+	listeJeux.elements[listeJeux.nElements - 1] = nullptr;
+	listeJeux.nElements--;
 }
 
 Jeu* lireJeu(ListeJeux& listeJeux, istream& fichier)
@@ -182,10 +180,9 @@ Jeu* lireJeu(ListeJeux& listeJeux, istream& fichier)
 		nouveauJeu->concepteurs.nElements++;
 		ajouterJeuListeJeux(nouveauJeu->concepteurs.elements[i]->jeuxConcus, nouveauJeu);
 		//TODO: Mettre le concepteur dans la liste des concepteur du jeu.
-	  //TODO: Ajouter le jeu à la liste des jeux auquel a participé le concepteur.
+		//TODO: Ajouter le jeu à la liste des jeux auquel a participé le concepteur.
 	}
 
-	//nouveauJeu->concepteurs.nElements = jeu->concepteurs.nElements;
 	return nouveauJeu; //TODO: Retourner le pointeur vers le nouveau jeu.
 }
 
@@ -234,8 +231,6 @@ void desallouerListeJeuxVide(ListeJeux& listeJeux) {
 	listeJeux.elements = 0;
 }
 void supprimerJeu(Jeu*& jeu) {
-	//delete[] jeu->concepteurs.elements;
-	//for (Concepteur*& concepteur : gsl::span(jeu->concepteurs.elements, jeu->concepteurs.capacite)){
 	for (size_t i : iter::range(jeu->concepteurs.capacite)) {
 		if (estConcepteurJeu(jeu, jeu->concepteurs.elements[i]->nom)) {
 			supprimerJeuListeJeux(jeu->concepteurs.elements[i]->jeuxConcus, jeu);
@@ -260,9 +255,9 @@ void desallouerListeJeux(ListeJeux& listeJeux) {
 	listeJeux.elements = 0;
 }
 
-void afficherConcepteur(const Concepteur& d)
+void afficherConcepteur(const Concepteur& concepteur)
 {
-	cout << "\t" << d.nom << ", " << d.anneeNaissance << ", " << d.pays
+	cout << "\t" << concepteur.nom << ", " << concepteur.anneeNaissance << ", " << concepteur.pays
 		<< endl;
 }
 
@@ -282,10 +277,8 @@ void afficherListeJeux(const ListeJeux& listeJeux) {
 	for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)) {
 		afficherJeu(jeu);
 		cout << "\n_____________________________________________________\n";
-
 	}
 }
-
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 {
@@ -295,8 +288,6 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	// les supportent normalement par défaut.
 	bibliotheque_cours::activerCouleursAnsi();
 #pragma endregion
-
-	//int* fuite = new int;  // Pour vérifier que la détection de fuites fonctionne; un message devrait dire qu'il y a une fuite à cette ligne.
 
 	ListeJeux listeJeux = creerListeJeux("jeux.bin"); //TODO: Appeler correctement votre fonction de création de la liste de jeux.
 
@@ -321,7 +312,4 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	//TODO: Détruire tout avant de terminer le programme.  Devrait afficher "Aucune fuite detectee." a la sortie du programme; il affichera "Fuite detectee:" avec la liste des blocs, s'il manque des delete.
 	desallouerListeJeux(listeJeux);
 	cout << "\n____________________________________________________________________________\n";
-
-	//Developpeur test("teste", listeJeux);
-
 }
