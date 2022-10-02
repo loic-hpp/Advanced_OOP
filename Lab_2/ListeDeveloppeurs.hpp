@@ -10,9 +10,14 @@ public:
 	{
 		ListeDeveloppeurs listeDeveloppeurs = {};
 	}
+	
 	const size_t obtenirNElements(ListeDeveloppeurs liste) const;
-	const Developpeur** obtenirElements(ListeDeveloppeurs liste) const;
 	const size_t obtenirCapacite(ListeDeveloppeurs liste) const;
+	const Developpeur** obtenirElements(ListeDeveloppeurs liste) const;
+	
+	const void modifierNElements(ListeDeveloppeurs liste) const;
+	const void modifierCapacite(ListeDeveloppeurs liste) const;
+	const void modifierElements(ListeDeveloppeurs liste) const;
 
 private:
 	std::size_t nElements_, capacite_;
@@ -23,7 +28,7 @@ ListeDeveloppeurs::~ListeDeveloppeurs()
 {
 	// Liberer
 	// TODO: On veut pouvoir ajouter et enlever un Developpeur* de la liste, 
-// avec réallocation dynamique tel que faite pour ListeJeux.
+	// avec réallocation dynamique tel que faite pour ListeJeux.
 }
 
 const size_t ListeDeveloppeurs::obtenirNElements(ListeDeveloppeurs liste) const
@@ -38,6 +43,20 @@ const size_t ListeDeveloppeurs::obtenirCapacite(ListeDeveloppeurs liste) const
 const Developpeur** ListeDeveloppeurs::obtenirElements(ListeDeveloppeurs liste) const
 {
 	return liste.elements_;
+}
+
+const void ListeDeveloppeurs::modifierNElements(ListeDeveloppeurs liste) const
+{
+	// TODO
+}
+
+const void ListeDeveloppeurs::modifierCapacite(ListeDeveloppeurs liste) const
+{
+	// TODO
+}
+const void ListeDeveloppeurs::modifierElements(ListeDeveloppeurs liste) const
+{
+	// TODO
 }
 
 void afficher(ListeJeux listeJeux)
