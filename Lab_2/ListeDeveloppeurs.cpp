@@ -1,98 +1,61 @@
-#include "Developpeur.hpp"
 #include "ListeDeveloppeurs.hpp"
 
 //NOTE: Le code sera principalement copié de certaines fonctions écrites pour la partie 1, mais mises dans une classe.
 ListeDeveloppeurs::~ListeDeveloppeurs()
 {
-	for (int i : iter::range(nElements_)) {
+	/*for (int i : iter::range(nElements_)) {
 		elements_[i] -> ~Developpeur();
-	}
+	}*/
 	delete[] elements_;
 }
-
-size_t ListeDeveloppeurs::obtenirNElements() const
+ListeDeveloppeurs::ListeDeveloppeurs(int nelt, int capacite, Developpeur** elements) : nElements_(nelt), capacite_(capacite), elements_(elements)
 {
-	return nElements_;
 }
 
-size_t ListeDeveloppeurs::obtenirCapacite() const
+void ListeDeveloppeurs::afficher()
 {
-	return capacite_;
-}
-
-Developpeur** ListeDeveloppeurs::obtenirElements() const
-{
-	return elements_;
-}
-
-Developpeur* ListeDeveloppeurs::obtenirElements(int index) const
-{
-	return elements_[index];
-}
-
-void ListeDeveloppeurs::modifierNElements(size_t nouveauNElements)
-{
-	nElements_ = nouveauNElements;
-}
-
-void ListeDeveloppeurs::modifierCapacite(size_t nouvelleCapacite)
-{
-	capacite_ = nouvelleCapacite;
-}
-
-void ListeDeveloppeurs::modifierElements(Developpeur** elements)
-{
-	elements_ = elements;
-}
-
-void ListeDeveloppeurs::modifierElements(Developpeur* elements, int index)
-{
-	elements_[index] = elements;
-}
-
-void afficher(ListeJeux listeJeux)
-{
-	afficherListeJeuxDeveloppes(listeJeux);
-}
-
-void ajouterDeveloppeur(ListeDeveloppeurs& listeDeveloppeurs, Developpeur* developpeur)
-{
-	size_t index = listeDeveloppeurs.obtenirNElements();
-	if (listeDeveloppeurs.obtenirNElements() == listeDeveloppeurs.obtenirCapacite()) {
-		if (listeDeveloppeurs.obtenirCapacite() == 0)
-			index = 0;
-		changerTailleListeDeveloppeurs(listeDeveloppeurs);
+	for (int i = 0; i < nElements_; i++) {
+		elements_[i]->afficheListeJeuxDev();
 	}
-	listeDeveloppeurs.modifierElements(developpeur, index);
-	listeDeveloppeurs.modifierNElements(listeDeveloppeurs.obtenirNElements() + 1);
 }
 
-void changerTailleListeDeveloppeurs(ListeDeveloppeurs& listeDeveloppeurs)
+void ListeDeveloppeurs::ajouterDeveloppeur(Developpeur* developpeur)
 {
-	if (listeDeveloppeurs.obtenirCapacite() == 0)
-		listeDeveloppeurs.modifierCapacite(1);
+	size_t index = nElements_;
+	if (nElements_ == capacite_) {
+		if (capacite_ == 0)
+			index = 0;
+		this->changerTailleListeDeveloppeurs();
+	}
+	elements_[index] = developpeur;
+	nElements_++;
+}
+
+void ListeDeveloppeurs::changerTailleListeDeveloppeurs()
+{
+	if (capacite_ == 0)
+		capacite_ = 1;
 	else
-		listeDeveloppeurs.modifierCapacite(listeDeveloppeurs.obtenirCapacite() * 2);
-	Developpeur** nouvelleListe = new Developpeur * [listeDeveloppeurs.obtenirCapacite()];
+		capacite_ *=2;
+	Developpeur** nouvelleListe = new Developpeur * [capacite_];
 	int i = 0;
-	for (Developpeur* developpeur : gsl::span(listeDeveloppeurs.obtenirElements(), listeDeveloppeurs.obtenirNElements())) {
+	for (Developpeur* developpeur : gsl::span(elements_, nElements_)) {
 		nouvelleListe[i] = developpeur;
 		i++;
 	}
-	delete[] listeDeveloppeurs.obtenirElements();
-	listeDeveloppeurs.modifierElements(nullptr);
-	listeDeveloppeurs.modifierElements(nouvelleListe);
+	delete[] elements_;
+	elements_ = nullptr;
+	elements_ = nouvelleListe;
 }
 
-void retirerDeveloppeur(ListeDeveloppeurs& listeDeveloppeurs, Developpeur* developpeurParametre)
+void ListeDeveloppeurs::retirerDeveloppeur(Developpeur* developpeurParametre)
 {
 	int i = 0;
-	for (Developpeur*& developpeur : gsl::span(listeDeveloppeurs.obtenirElements(), listeDeveloppeurs.obtenirNElements())) {
-		if (developpeurParametre == developpeur)
-			listeDeveloppeurs.modifierElements(listeDeveloppeurs.obtenirElements(listeDeveloppeurs.obtenirNElements() - 1), i);
+	for (Developpeur*& developpeur : gsl::span(elements_, nElements_)) {
+		if (developpeurParametre->nomDeveloppeur() == developpeur->nomDeveloppeur())
+			elements_[i] = elements_[nElements_ - 1];
 		i++;
 	}
-	listeDeveloppeurs.modifierNElements(listeDeveloppeurs.obtenirNElements() - 1);
-	listeDeveloppeurs.modifierElements(nullptr, listeDeveloppeurs.obtenirNElements());
-	listeDeveloppeurs.modifierNElements(listeDeveloppeurs.obtenirNElements() - 1);
+	elements_[nElements_ - 1] = nullptr;
+	nElements_--;
 }

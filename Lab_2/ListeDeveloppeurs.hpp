@@ -1,33 +1,21 @@
 ﻿#pragma once
 #include <cstddef>
+#include <iostream>
 #include "Developpeur.hpp"
+#include "ListeJeux.hpp"
+
 
 class ListeDeveloppeurs
 {
 public:
-	ListeDeveloppeurs()
-	{
-		ListeDeveloppeurs listeDeveloppeurs = {};
-		listeDeveloppeurs.capacite_ = 0;
-		listeDeveloppeurs.nElements_ = 0;
-	}
-	
-	size_t obtenirNElements() const;
-	size_t obtenirCapacite() const;
-	Developpeur** obtenirElements() const;
-	Developpeur* obtenirElements(int index) const;
-	
-	void modifierNElements(size_t nouveauNElements);
-	void modifierCapacite(size_t nouvelleCapacite);
-	void modifierElements(Developpeur** elements);
-	void modifierElements(Developpeur* elements, int index);
-
-	void afficher(ListeJeux listeJeux);
-	void ajouterDeveloppeur(ListeDeveloppeurs& listeDeveloppeurs, Developpeur* developpeur);
-	void changerTailleListeDeveloppeurs(ListeDeveloppeurs& listeDeveloppeurs);
-	void retirerDeveloppeur(ListeDeveloppeurs& listeDeveloppeurs, Developpeur* developpeurParametre);
+	ListeDeveloppeurs(int nElt = 0, int capacite = 0, Developpeur** element = nullptr);
+	~ListeDeveloppeurs();
+	void afficher();
+	void ajouterDeveloppeur(Developpeur* developpeur);
+	void retirerDeveloppeur(Developpeur* developpeurParametre);
 
 private:
 	std::size_t nElements_, capacite_;
 	Developpeur** elements_;
+	void changerTailleListeDeveloppeurs();
 };
