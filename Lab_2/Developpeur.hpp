@@ -24,5 +24,5 @@ public:
 private:
 	std::pair<std::string, ListeJeux> paireNomJeux_;
 	bool estDeveloppeur(const ListeJeux& listeJeux);
-	int compteur = 0;
+	int compteur = 0;	//Compteur d'instances
 };

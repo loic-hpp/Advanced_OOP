@@ -304,12 +304,14 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	//TODO: Appel à votre fonction d'affichage de votre liste de jeux.
 	afficherListeJeux(listeJeux);
 	//TODO: Faire les appels à toutes vos fonctions/méthodes pour voir qu'elles fonctionnent et avoir 0% de lignes non exécutées dans le programme (aucune ligne rouge dans la couverture de code; c'est normal que les lignes de "new" et "delete" soient jaunes).  Vous avez aussi le droit d'effacer les lignes du programmes qui ne sont pas exécutée, si finalement vous pensez qu'elle ne sont pas utiles.
-	Developpeur test("Square");
-	test.mettreAJourListe(listeJeux);
+	Developpeur dev("Square");
+	dev.mettreAJourListe(listeJeux);
 	ListeDeveloppeurs listeDev;
-	listeDev.ajouterDeveloppeur(&test);
-	listeDev.ajouterDeveloppeur(&test);
+	listeDev.ajouterDeveloppeur(&dev);
+	listeDev.ajouterDeveloppeur(&dev);
+	listeDev.ajouterDeveloppeur(&dev);
 	listeDev.afficher();
+	listeDev.retirerDeveloppeur(&dev);
 	//TODO: Détruire tout avant de terminer le programme.  Devrait afficher "Aucune fuite detectee." a la sortie du programme; il affichera "Fuite detectee:" avec la liste des blocs, s'il manque des delete.
 	desallouerListeJeux(listeJeux);
 	cout << "\n____________________________________________________________________________\n";
