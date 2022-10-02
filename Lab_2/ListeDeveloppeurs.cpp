@@ -5,6 +5,7 @@ ListeDeveloppeurs::~ListeDeveloppeurs()
 {
 	delete[] elements_;
 }
+
 ListeDeveloppeurs::ListeDeveloppeurs(int nelt, int capacite, Developpeur** elements) : nElements_(nelt), capacite_(capacite), elements_(elements)
 {
 }
