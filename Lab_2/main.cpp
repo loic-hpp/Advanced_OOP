@@ -223,9 +223,6 @@ bool estConcepteurJeu(Jeu* jeu, string nom) {
 // jeux présents dans sa liste de jeux participés, il faut le supprimer.  Pour
 // fins de débogage, affichez le nom du jeu lors de sa destruction.
 void desallouerListeJeuxVide(ListeJeux& listeJeux) {
-	for (int j : iter::range((int)listeJeux.nElements)) {
-		delete listeJeux.elements[j];
-	}
 	delete[] listeJeux.elements;
 	listeJeux.elements = 0;
 }
@@ -237,7 +234,7 @@ void supprimerJeu(Jeu*& jeu) {
 			supprimerJeuListeJeux(jeu->concepteurs.elements[i]->jeuxConcus, jeu);
 			if (jeu->concepteurs.elements[i]->jeuxConcus.nElements == 0) {
 				cout << "\nLa suppression du concepteur: " << jeu->concepteurs.elements[i]->nom << " est terminée" << endl;
-				desallouerListeJeuxVide(jeu->concepteurs.elements[i]->jeuxConcus); //DOUTES
+				desallouerListeJeuxVide(jeu->concepteurs.elements[i]->jeuxConcus);
 				supprimerConcepteur(jeu->concepteurs.elements[i]);
 			}
 		}
