@@ -14,9 +14,11 @@ public:
 	~Developpeur();
 	int nombreDinstances();
 	std::string nomDeveloppeur();
-	int participationJeux(ListeJeux listejeux);
+	int participationJeux(const ListeJeux& listejeux);
+	void mettreAJourListe(ListeJeux listeJeux);
 	
 private:
 	std::pair<std::string, ListeJeux> paireNomJeux_;
+	bool estDeveloppeur(const ListeJeux& listeJeux);
 	int compteur = 0;
 };
