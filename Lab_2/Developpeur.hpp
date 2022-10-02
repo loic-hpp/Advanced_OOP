@@ -74,8 +74,8 @@ ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete)
 
 void afficherListeJeuxDeveloppes(const ListeJeux& listeJeuxDeveloppes)
 {
+	cout << "\nListe de jeux developpés:" << endl;
 	for (Jeu*& jeu : gsl::span(listeJeuxDeveloppes.elements, listeJeuxDeveloppes.nElements)) {
-		cout << "\nInformations" << endl;
 		cout << "\n\t" << jeu->titre << endl; //erreur dans jeu ici?
 		cout << "\n_____________________________________________________\n";
 	}
