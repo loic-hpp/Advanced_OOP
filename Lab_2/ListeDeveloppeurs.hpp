@@ -3,6 +3,7 @@
 #include <iostream>
 #include "Developpeur.hpp"
 #include "ListeJeux.hpp"
+#include <string>
 
 
 class ListeDeveloppeurs
@@ -18,4 +19,5 @@ private:
 	std::size_t nElements_, capacite_;
 	Developpeur** elements_;
 	void changerTailleListeDeveloppeurs();
+	bool estDansListeDeveloppeur(std::string nom);
 };

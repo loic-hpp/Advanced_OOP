@@ -46,7 +46,3 @@ void Developpeur::mettreAJourListe(ListeJeux listeJeux) {
 
 }
 
-void Developpeur::afficheListeJeuxDev() {
-	std::cout << "\nVoici la liste de jeu du développeur: " << paireNomJeux_.first << "\n" << std::endl;
-	afficherListeJeux(paireNomJeux_.second);
-}
