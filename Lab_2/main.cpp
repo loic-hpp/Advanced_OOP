@@ -1,5 +1,4 @@
-﻿//	Programme qui inspectionne un string et retourne le mot le plus petit,
-//	le plus grand et la longueur moyenne des mots.
+﻿//	Test de toutes les classes et structs implementés.
 //	Fichier:  main.cpp
 //	Auteurs partiels (seulement des TODOS): Rodrigo A. Merino Martel et Loïc Nguemegne Temena
 //	Date	2 octobre 2022
