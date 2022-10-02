@@ -1,5 +1,4 @@
-//	Programme qui inspectionne un string et retourne le mot le plus petit,
-//	le plus grand et la longueur moyenne des mots.
+//	Implementation de la classe ListeDeveloppeurs.
 //	Fichier:  ListeDeveloppeurs.cpp
 //	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
 //	Date	2 octobre 2022
@@ -36,15 +35,15 @@ bool ListeDeveloppeurs::estDansListeDeveloppeur(std::string nom) {
 
 void ListeDeveloppeurs::ajouterDeveloppeur(Developpeur* developpeur)
 {
-	if(!(this->estDansListeDeveloppeur(developpeur->nomDeveloppeur()))){
-	size_t index = nElements_;
-	if (nElements_ == capacite_) {
-		if (capacite_ == 0)
-			index = 0;
-		this->changerTailleListeDeveloppeurs();
-	}
-	elements_[index] = developpeur;
-	nElements_++;
+	if (!(this->estDansListeDeveloppeur(developpeur->nomDeveloppeur()))) {
+		size_t index = nElements_;
+		if (nElements_ == capacite_) {
+			if (capacite_ == 0)
+				index = 0;
+			this->changerTailleListeDeveloppeurs();
+		}
+		elements_[index] = developpeur;
+		nElements_++;
 	}
 }
 
@@ -53,7 +52,7 @@ void ListeDeveloppeurs::changerTailleListeDeveloppeurs()
 	if (capacite_ == 0)
 		capacite_ = 1;
 	else
-		capacite_ *=2;
+		capacite_ *= 2;
 	Developpeur** nouvelleListe = new Developpeur * [capacite_];
 	for (int i = 0; i < nElements_; i++)
 		nouvelleListe[i] = elements_[i];
