@@ -27,7 +27,7 @@ bool Developpeur::estDeveloppeur(const ListeJeux& listeJeux) {
 
 int Developpeur::participationJeux(const ListeJeux& listeJeux) {
 	int participation = 0;
-	for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)){
+	for (int i = 0; i < listeJeux.nElements; i++) {
 	if (Developpeur::estDeveloppeur(listeJeux))
 		participation++;
 	}
@@ -38,12 +38,10 @@ void Developpeur::mettreAJourListe(ListeJeux listeJeux) {
 	paireNomJeux_.second.elements = new Jeu * [Developpeur::participationJeux(listeJeux)];
 	paireNomJeux_.second.capacite = participationJeux(listeJeux);
 	paireNomJeux_.second.nElements = 0;
-	int i = 0;
-	for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)) {
+	for(size_t i : iter::range(listeJeux.nElements)){
 		if (Developpeur::estDeveloppeur(listeJeux))
-			paireNomJeux_.second.elements[i] = jeu;
+			paireNomJeux_.second.elements[i] = listeJeux.elements[i];
 		paireNomJeux_.second.nElements++;
-		i++;
 	}
 
 }

@@ -229,7 +229,7 @@ void desallouerListeJeuxVide(ListeJeux& listeJeux) {
 void supprimerJeu(Jeu*& jeu) {
 	//delete[] jeu->concepteurs.elements;
 	//for (Concepteur*& concepteur : gsl::span(jeu->concepteurs.elements, jeu->concepteurs.capacite)){
-	for(int i : iter::range(jeu->concepteurs.capacite)) {
+	for(size_t i : iter::range(jeu->concepteurs.capacite)) {
 		if (estConcepteurJeu(jeu, jeu->concepteurs.elements[i]->nom)) {
 			supprimerJeuListeJeux(jeu->concepteurs.elements[i]->jeuxConcus, jeu);
 			if (jeu->concepteurs.elements[i]->jeuxConcus.nElements == 0) {
@@ -246,7 +246,7 @@ void supprimerJeu(Jeu*& jeu) {
 
 //TODO: Fonction pour détruire une ListeJeux et tous ses jeux.
 void desallouerListeJeux(ListeJeux& listeJeux) {
-	for (int i : iter::range(listeJeux.nElements)) {
+	for (size_t i : iter::range(listeJeux.nElements)) {
 		supprimerJeu(listeJeux.elements[i]);
 	}
 	delete[] listeJeux.elements;
@@ -264,7 +264,7 @@ void afficherConcepteur(const Concepteur& d)
 void afficherJeu(Jeu* jeu) {
 	cout << "\nInformations" << endl;
 	cout << "\n\t" << jeu->titre << "\t" << jeu->anneeSortie << "\n\nCONCEPTEURS\n" << endl;
-	for (int i : iter::range(jeu->concepteurs.capacite))
+	for (size_t i : iter::range(jeu->concepteurs.capacite))
 		afficherConcepteur(*(jeu->concepteurs.elements[i]));
 }
 

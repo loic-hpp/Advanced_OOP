@@ -3,6 +3,7 @@
 #include "ListeJeux.hpp"
 #include "Jeu.hpp"
 #include "gsl/span"
+#include "cppitertools/range.hpp"
 
 class Developpeur
 {
