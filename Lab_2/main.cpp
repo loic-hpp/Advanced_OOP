@@ -1,4 +1,11 @@
-﻿#include "Jeu.hpp"
+﻿//	Programme qui inspectionne un string et retourne le mot le plus petit,
+//	le plus grand et la longueur moyenne des mots.
+//	Fichier:  main.cpp
+//	Auteurs partiels (seulement des TODOS): Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	2 octobre 2022
+//	Créé le 26 septembre 2022
+
+#include "Jeu.hpp"
 #include <iostream>
 #include <fstream>
 #include <cstdint>

@@ -1,4 +1,11 @@
-﻿#pragma once
+﻿//	Programme qui inspectionne un string et retourne le mot le plus petit,
+//	le plus grand et la longueur moyenne des mots.
+//	Fichier:  Developpeur.hpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	2 octobre 2022
+//	Créé le 26 septembre 2022
+
+#pragma once
 #include <string>
 #include <iostream>
 #include "ListeJeux.hpp"

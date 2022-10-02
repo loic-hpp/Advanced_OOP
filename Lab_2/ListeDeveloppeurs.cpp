@@ -1,3 +1,10 @@
+//	Programme qui inspectionne un string et retourne le mot le plus petit,
+//	le plus grand et la longueur moyenne des mots.
+//	Fichier:  ListeDeveloppeurs.cpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	2 octobre 2022
+//	Créé le 26 septembre 2022
+
 #include "ListeDeveloppeurs.hpp"
 
 //NOTE: Le code sera principalement copié de certaines fonctions écrites pour la partie 1, mais mises dans une classe.
