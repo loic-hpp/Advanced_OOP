@@ -28,7 +28,7 @@ public:
 		nJeuxDeveloppes_ = 0;
 	};
 
-	const string obtenirNom() const;
+	string obtenirNom() const;
 	void changerNom(string nouveauNom);
 
 	int obtenirNombreJeuxDeveloppes(ListeJeux listeJeux);
@@ -48,7 +48,7 @@ Developpeur::~Developpeur()
 	// de ListeJeux est faite.
 };
 
-const string Developpeur::obtenirNom() const
+string Developpeur::obtenirNom() const
 {
 	return nom_;
 }

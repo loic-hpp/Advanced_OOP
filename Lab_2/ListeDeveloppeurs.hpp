@@ -9,6 +9,8 @@ public:
 	ListeDeveloppeurs()
 	{
 		ListeDeveloppeurs listeDeveloppeurs = {};
+		listeDeveloppeurs.capacite_ = 0;
+		listeDeveloppeurs.nElements_ = 0;
 	}
 	
 	size_t obtenirNElements() const;
@@ -47,8 +49,8 @@ size_t ListeDeveloppeurs::obtenirCapacite() const
 }
 
 Developpeur** ListeDeveloppeurs::obtenirElements(int index) const
-{
-	return elements_[index];
+{    
+	
 }
 
 void ListeDeveloppeurs::modifierNElements(size_t nouveauNElements)
