@@ -1,6 +1,7 @@
 #include "Developpeur.hpp"
 #include "ListeDeveloppeurs.hpp"
 
+//NOTE: Le code sera principalement copié de certaines fonctions écrites pour la partie 1, mais mises dans une classe.
 ListeDeveloppeurs::~ListeDeveloppeurs()
 {
 	// Liberer
@@ -18,9 +19,14 @@ size_t ListeDeveloppeurs::obtenirCapacite() const
 	return capacite_;
 }
 
-Developpeur** ListeDeveloppeurs::obtenirElements(int index) const
+Developpeur** ListeDeveloppeurs::obtenirElements() const
 {
+	return elements_;
+}
 
+Developpeur* ListeDeveloppeurs::obtenirElements(int index) const
+{
+	return elements_[index];
 }
 
 void ListeDeveloppeurs::modifierNElements(size_t nouveauNElements)
@@ -33,9 +39,14 @@ void ListeDeveloppeurs::modifierCapacite(size_t nouvelleCapacite)
 	capacite_ = nouvelleCapacite;
 }
 
-void ListeDeveloppeurs::modifierElements(ListeDeveloppeurs listeDeveloppeurs)
+void ListeDeveloppeurs::modifierElements(Developpeur** elements)
 {
-	// TODO
+	elements_ = elements;
+}
+
+void ListeDeveloppeurs::modifierElements(Developpeur* elements, int index)
+{
+	elements_[index] = elements;
 }
 
 void afficher(ListeJeux listeJeux)
@@ -52,7 +63,7 @@ void ajouterDeveloppeur(ListeDeveloppeurs& listeDeveloppeurs, Developpeur* devel
 			index = 0;
 		changerTailleListeDeveloppeurs(listeDeveloppeurs);
 	}
-	listeDeveloppeurs.elements[index] = developpeur;
+	listeDeveloppeurs.modifierElements(developpeur, index);
 	listeDeveloppeurs.modifierNElements(listeDeveloppeurs.obtenirNElements() + 1);
 }
 
@@ -64,24 +75,23 @@ void changerTailleListeDeveloppeurs(ListeDeveloppeurs& listeDeveloppeurs)
 		listeDeveloppeurs.modifierCapacite(listeDeveloppeurs.obtenirCapacite() * 2);
 	Developpeur** nouvelleListe = new Developpeur * [listeDeveloppeurs.obtenirCapacite()];
 	int i = 0;
-	for (Developpeur* developpeur : gsl::span(listeDeveloppeurs.elements, listeDeveloppeurs.obtenirNElements())) {
+	for (Developpeur* developpeur : gsl::span(listeDeveloppeurs.obtenirElements(), listeDeveloppeurs.obtenirNElements())) {
 		nouvelleListe[i] = developpeur;
 		i++;
 	}
-	delete[] listeDeveloppeurs.elements;
-	listeDeveloppeurs.elements = nullptr;
-	listeDeveloppeurs.elements = nouvelleListe;
+	delete[] listeDeveloppeurs.obtenirElements();
+	listeDeveloppeurs.modifierElements(nullptr);
+	listeDeveloppeurs.modifierElements(nouvelleListe);
 }
 
 void retirerDeveloppeur(ListeDeveloppeurs& listeDeveloppeurs, Developpeur* developpeurParametre)
 {
 	int i = 0;
-	for (Developpeur*& developpeur : gsl::span(listeDeveloppeurs.elements, listeDeveloppeurs.obtenirNElements())) {
+	for (Developpeur*& developpeur : gsl::span(listeDeveloppeurs.obtenirElements(), listeDeveloppeurs.obtenirNElements())) {
 		if (developpeurParametre == developpeur)
-			listeDeveloppeurs.elements[i] = listeDeveloppeurs.elements[listeDeveloppeurs.obtenirNElements() - 1];
+			listeDeveloppeurs.modifierElements(listeDeveloppeurs.obtenirElements(listeDeveloppeurs.obtenirNElements() - 1), i);
 		i++;
 	}
-	listeDeveloppeurs.elements[listeDeveloppeurs.modifierNElements(listeDeveloppeurs.obtenirNElements() - 1)] = nullptr;
+	listeDeveloppeurs.modifierElements(nullptr, listeDeveloppeurs.modifierNElements(listeDeveloppeurs.obtenirNElements() - 1));
 	listeDeveloppeurs.modifierNElements(listeDeveloppeurs.obtenirNElements() - 1);
 }
-//NOTE: Le code sera principalement copié de certaines fonctions écrites pour la partie 1, mais mises dans une classe.

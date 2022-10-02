@@ -14,11 +14,13 @@ public:
 	
 	size_t obtenirNElements() const;
 	size_t obtenirCapacite() const;
-	Developpeur** obtenirElements(int index) const;
+	Developpeur** obtenirElements() const;
+	Developpeur* obtenirElements(int index) const;
 	
 	void modifierNElements(size_t nouveauNElements);
 	void modifierCapacite(size_t nouvelleCapacite);
-	void modifierElements(ListeDeveloppeurs liste);
+	void modifierElements(Developpeur** elements);
+	void modifierElements(Developpeur* elements, int index);
 
 	void afficher(ListeJeux listeJeux);
 	void ajouterDeveloppeur(ListeDeveloppeurs& listeDeveloppeurs, Developpeur* developpeur);
