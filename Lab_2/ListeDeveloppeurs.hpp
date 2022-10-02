@@ -15,9 +15,14 @@ public:
 	const size_t obtenirCapacite(ListeDeveloppeurs liste) const;
 	const Developpeur** obtenirElements(ListeDeveloppeurs liste) const;
 	
-	const void modifierNElements(ListeDeveloppeurs liste) const;
-	const void modifierCapacite(ListeDeveloppeurs liste) const;
-	const void modifierElements(ListeDeveloppeurs liste) const;
+	void modifierNElements(ListeDeveloppeurs liste);
+	void modifierCapacite(ListeDeveloppeurs liste);
+	void modifierElements(ListeDeveloppeurs liste);
+
+	void afficher(ListeJeux listeJeux);
+	void ajouterDeveloppeur(ListeDeveloppeurs& listeDeveloppeurs, Developpeur* developpeur);
+	void changerTailleListeDeveloppeurs(ListeDeveloppeurs& listeDeveloppeurs);
+	void retirerDeveloppeur(ListeDeveloppeurs& listeDeveloppeurs, Developpeur* developpeurParametre)
 
 private:
 	std::size_t nElements_, capacite_;
@@ -31,30 +36,30 @@ ListeDeveloppeurs::~ListeDeveloppeurs()
 	// avec réallocation dynamique tel que faite pour ListeJeux.
 }
 
-const size_t ListeDeveloppeurs::obtenirNElements(ListeDeveloppeurs liste) const
+const size_t ListeDeveloppeurs::obtenirNElements(ListeDeveloppeurs listeDeveloppeurs) const
 {
-	return liste.nElements_;
+	return listeDeveloppeurs.nElements_;
 }
 
-const size_t ListeDeveloppeurs::obtenirCapacite(ListeDeveloppeurs liste) const
+const size_t ListeDeveloppeurs::obtenirCapacite(ListeDeveloppeurs listeDeveloppeurs) const
 {
-	return liste.capacite_;
+	return listeDeveloppeurs.capacite_;
 }
-const Developpeur** ListeDeveloppeurs::obtenirElements(ListeDeveloppeurs liste) const
+const Developpeur** ListeDeveloppeurs::obtenirElements(ListeDeveloppeurs listeDeveloppeurs) const
 {
-	return liste.elements_;
+	return listeDeveloppeurs.elements_;
 }
 
-const void ListeDeveloppeurs::modifierNElements(ListeDeveloppeurs liste) const
+void ListeDeveloppeurs::modifierNElements(ListeDeveloppeurs listeDeveloppeurs)
 {
 	// TODO
 }
 
-const void ListeDeveloppeurs::modifierCapacite(ListeDeveloppeurs liste) const
+void ListeDeveloppeurs::modifierCapacite(ListeDeveloppeurs listeDeveloppeurs)
 {
 	// TODO
 }
-const void ListeDeveloppeurs::modifierElements(ListeDeveloppeurs liste) const
+void ListeDeveloppeurs::modifierElements(ListeDeveloppeurs listeDeveloppeurs)
 {
 	// TODO
 }
@@ -77,7 +82,8 @@ void ajouterDeveloppeur(ListeDeveloppeurs& listeDeveloppeurs, Developpeur* devel
 	listeDeveloppeurs.nElements++;
 }
 
-void changerTailleListeDeveloppeurs(ListeDeveloppeurs& listeDeveloppeurs) {
+void changerTailleListeDeveloppeurs(ListeDeveloppeurs& listeDeveloppeurs)
+{
 	if (listeDeveloppeurs.capacite == 0)
 		listeDeveloppeurs.capacite = 2;
 	else
