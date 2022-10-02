@@ -13,7 +13,7 @@ void ListeDeveloppeurs::afficher()
 {
 	std::cout << "\nVoici la liste des développeurs:\n" << std::endl;
 	for (int i = 0; i < nElements_; i++) {
-		std::cout << "\n\t- " << elements_[i]->nomDeveloppeur() << std::endl;
+		elements_[i]->afficherDeveloppeur();
 	}
 }
 

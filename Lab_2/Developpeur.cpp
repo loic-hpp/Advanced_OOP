@@ -43,6 +43,12 @@ void Developpeur::mettreAJourListe(ListeJeux listeJeux) {
 			paireNomJeux_.second.elements[i] = listeJeux.elements[i];
 		paireNomJeux_.second.nElements++;
 	}
+}
 
+void Developpeur::afficherDeveloppeur() {
+	std::cout << "\nVoici la liste des jeux pour: " << paireNomJeux_.first << std::endl;
+	for (int i = 0; i < paireNomJeux_.second.nElements; i++) {
+		std::cout << "\n\t- " << paireNomJeux_.second.elements[i]->titre << std::endl;
+	}
 }
 

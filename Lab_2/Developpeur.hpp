@@ -20,6 +20,7 @@ public:
 	std::string nomDeveloppeur();
 	int participationJeux(const ListeJeux& listejeux);
 	void mettreAJourListe(ListeJeux listeJeux);
+	void afficherDeveloppeur();
 	
 private:
 	std::pair<std::string, ListeJeux> paireNomJeux_;
