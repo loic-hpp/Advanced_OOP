@@ -29,6 +29,8 @@ public:
 	};
 
 	const string obtenirNom() const;
+	void changerNom(string nouveauNom);
+
 	int obtenirNombreJeuxDeveloppes(ListeJeux listeJeux);
 	ListeJeux mettreAJourListeJeux(ListeJeux listeJeuxComplete);
 	void afficherListeJeuxDeveloppes(ListeJeux listeJeuxDeveloppes);
@@ -49,6 +51,11 @@ Developpeur::~Developpeur()
 const string Developpeur::obtenirNom() const
 {
 	return nom_;
+}
+
+void Developpeur::changerNom(string nouveauNom)
+{
+	nom_ = nouveauNom;
 }
 
 // La méthode s’applique sur un développeur et reçoit la liste des jeux dans 
