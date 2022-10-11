@@ -18,11 +18,26 @@ public:
 	}
 
 	void ajouterElement(std::shared_ptr<T> element) {
-		
+		if (!(this->estDansListe(T->getNom()))) {
+			size_t index = nElements_;
+			if (nElements_ == capacite_) {
+				index = 0;
+			this->changerTailleListe();
+			}
+			elements_[nElements_] = element;
+			nElements_++;
+		}
 	}
 	
 	
-	void retirerElement(std::shared_ptr<T> element);
+	void retirerElement(std::shared_ptr<T> element) {
+		for (int i = 0; i < nElements_; i++) {
+			if (elements_[i]->getNom() == element->getNom())
+				elements_[i] = move(elements_[nElements_ - 1]);
+		}
+		elements_[nElements_ - 1] = nullptr;
+		nElements_--;
+	}
 
 private:
 	std::size_t nElements_, capacite_;

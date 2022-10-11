@@ -8,5 +8,5 @@ struct Concepteur
 	int anneeNaissance;
 	std::string pays;
 	ListeJeux jeuxConcus;
-	string getNom() { return titre; }
+	std::string getNom() { return nom; }
 };

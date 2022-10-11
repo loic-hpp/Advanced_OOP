@@ -16,6 +16,7 @@
 #include "debogage_memoire.hpp"  //NOTE: Incompatible avec le "placement new", ne pas utiliser cette entête si vous utilisez ce type de "new" dans les lignes qui suivent cette inclusion.
 #include "Developpeur.hpp"
 #include "ListeDeveloppeurs.hpp"
+#include "Liste.hpp"
 
 using namespace std;
 using namespace iter;
