@@ -9,7 +9,7 @@ public:
 		capacite_ = capacite;
 		elements_ = std::make_unique<std::shared_ptr<T>[]>(capacite);
 	}
-	~Liste(){}
+	//~Liste(){}
 
 	void afficher() {
 		std::cout << "\nVoici la liste des éléments:\n" << std::endl;
@@ -18,7 +18,7 @@ public:
 	}
 
 	void ajouterElement(std::shared_ptr<T> element) {
-		if (!(this->estDansListe(T->getNom()))) {
+		if (!(this->estDansListe(element->getNom()))) {
 			size_t index = nElements_;
 			if (nElements_ == capacite_) {
 				index = 0;
@@ -38,6 +38,9 @@ public:
 		elements_[nElements_ - 1] = nullptr;
 		nElements_--;
 	}
+
+	std::shared_ptr<T>& operator[] (int index) { return elements_[index]; }
+	friend std::ostream& operator<< (std::ostream& o, const Liste& foo);
 
 private:
 	std::size_t nElements_, capacite_;

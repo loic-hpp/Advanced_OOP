@@ -24,6 +24,7 @@ public:
 	~Developpeur();
 	int nombreDinstances();
 	std::string nomDeveloppeur();
+	std::string getNom() { return paireNomJeux_.first; }
 	int participationJeux(const ListeJeux& listeJeux);
 	void mettreAJourListe(ListeJeux listeJeux);
 	void afficherDeveloppeur();
