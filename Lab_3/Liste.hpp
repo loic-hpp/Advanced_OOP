@@ -17,15 +17,6 @@ public:
 			elements_[i]->afficher();
 	}
 
-	bool estDansListe(std::string nom) {
-		bool estDansListe = false;
-		for (int i = 0; i < (int)nElements_; i++) {
-			if (elements_[i]->getNom() == nom)
-				estDansListe = true;
-		}
-		return estDansListe;
-	}
-
 	void ajouterElement(std::shared_ptr<T> element) {
 			if (nElements_ == capacite_)
 				this->changerTailleListe();
@@ -34,7 +25,7 @@ public:
 	}
 
 	template<typename F>
-	int trouverElementQuelconque(std::string nom, const F fonction) {
+	int trouverElementQuelconque(const F fonction) {
 		static const int indexe_pas_trouve = -1;
 		for (int i = 0; i < nElements_; i++) {
 			if (fonction(elements_[i]))
@@ -43,11 +34,14 @@ public:
 		return indexe_pas_trouve;
 	}
 
-	std::shared_ptr<T> trouverElement(std::string nom) {
-		for (int i = 0; i < (int)nElements_; i++) {
-			if (nom == elements_[i]->getNom())
-				return elements_[i];
+	template<typename F>
+	bool estDansListeElementQuelconque(const F fonction) {
+		bool estDansListe = false;
+		for (int i = 0; i < nElements_; i++) {
+			if (fonction(elements_[i]))
+				return true;
 		}
+		return estDansListe;
 	}
 	
 	

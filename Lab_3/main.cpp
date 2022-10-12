@@ -61,15 +61,21 @@ gsl::span<Concepteur*> spanListeConcepteurs(const ListeConcepteurs& liste)
 }
 #pragma endregion
 
-shared_ptr<Concepteur> lireConcepteur(istream& fichier)
+shared_ptr<Concepteur> lireConcepteur(istream& fichier, Liste<Concepteur>& listeConcepteur)
 {
 	Concepteur concepteur = {}; // On initialise une structure vide de type Concepteur.
 	concepteur.nom = lireString(fichier);
 	concepteur.anneeNaissance = int(lireUintTailleVariable(fichier));
 	concepteur.pays = lireString(fichier);
+	shared_ptr<Concepteur> ptrConcepteur = make_shared<Concepteur>(concepteur);
+
+	if (!(listeConcepteur.estDansListeElementQuelconque([&](auto v) { return v->nom == concepteur.nom; })))
+		listeConcepteur.ajouterElement(ptrConcepteur);
+	else
+		ptrConcepteur = listeConcepteur[listeConcepteur.trouverElementQuelconque([&](auto v) { return v->nom == concepteur.nom; })];
 
 	cout << "\nLa lecture du concepteur: " << concepteur.nom << " est terminé" << endl;
-	return make_shared<Concepteur>(concepteur); //TODO: Retourner le pointeur vers le concepteur crée.
+	return ptrConcepteur; //TODO: Retourner le pointeur vers le concepteur crée.
 
 }
 
@@ -82,19 +88,11 @@ shared_ptr<Jeu> lireJeu(istream& fichier, Liste<Concepteur>& listeConcepteur)
 	jeu.developpeur = lireString(fichier);
 	size_t nElements = lireUintTailleVariable(fichier);
 	jeu.concepteurs = Liste<Concepteur>();
-	
-	
 
 	shared_ptr<Jeu> nouveauJeu = make_shared<Jeu>(move(jeu));
 	for ([[maybe_unused]] size_t i : iter::range(nElements)) {
-		shared_ptr<Concepteur> ptrConcepteur = lireConcepteur(fichier);
-		if (!(listeConcepteur.estDansListe(ptrConcepteur->getNom()))) {
-			listeConcepteur.ajouterElement(ptrConcepteur);
-			nouveauJeu->concepteurs.ajouterElement(ptrConcepteur);
-		}
-		else
-			nouveauJeu->concepteurs.ajouterElement(listeConcepteur.trouverElement(ptrConcepteur->getNom()));
-	
+		shared_ptr<Concepteur> ptrConcepteur = lireConcepteur(fichier, listeConcepteur);
+		nouveauJeu->concepteurs.ajouterElement(ptrConcepteur);
 	}
 
 	return nouveauJeu; //TODO: Retourner le pointeur vers le nouveau jeu.
@@ -156,7 +154,10 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 
 	static const string ligneSeparation = "\n\033[35m════════════════════════════════════════\033[0m\n";
 	cout << ligneSeparation << listeJeux << ligneSeparation;
-	ofstream("sortie.txt") << listeJeux;
+	//ofstream("sortie.txt") << listeJeux;
 	cout << "\n____________________________________________________________________________\n";
-	cout << listeConcepteurs.trouverElementQuelconque("Yoshinori Kitase", [](auto v) { return v->nom == "Yoshinori Kitase";});
+	
+	 auto concepteur = listeConcepteurs[listeConcepteurs.trouverElementQuelconque([&](auto v) { return v->nom == "Yoshinori Kitase"; })];
+	 cout<< "\t" << concepteur->nom << ", " << concepteur->anneeNaissance << ", " << concepteur->pays
+		 << endl;
 }

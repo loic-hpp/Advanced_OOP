@@ -9,5 +9,4 @@ struct Jeu
 	int anneeSortie;
 	std::string developpeur;
 	Liste<Concepteur> concepteurs;
-	std::string getNom() { return titre; }
 };
