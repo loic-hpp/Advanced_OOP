@@ -7,6 +7,6 @@ struct Concepteur
 	std::string nom;
 	int anneeNaissance;
 	std::string pays;
-	ListeJeux jeuxConcus;
+	//ListeJeux jeuxConcus;
 	std::string getNom() { return nom; }
 };

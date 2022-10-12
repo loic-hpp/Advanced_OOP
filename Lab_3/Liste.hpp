@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
-template <class T>
+template <typename T>
 class Liste {
 public:
 	Liste(int nElements = 0, int capacite = 0){
@@ -18,32 +18,31 @@ public:
 	}
 
 	void ajouterElement(std::shared_ptr<T> element) {
-		if (!(this->estDansListe(element->getNom()))) {
-			size_t index = nElements_;
-			if (nElements_ == capacite_) {
-				index = 0;
-			this->changerTailleListe();
-			}
-			elements_[nElements_] = element;
+		//if (!(this->estDansListe(element->getNom()))) {
+			if (nElements_ == capacite_)
+				this->changerTailleListe();
+			elements_[nElements_] = move(element);
 			nElements_++;
-		}
+		//}
 	}
 	
 	
 	void retirerElement(std::shared_ptr<T> element) {
 		for (int i = 0; i < nElements_; i++) {
 			if (elements_[i]->getNom() == element->getNom())
-				elements_[i] = move(elements_[nElements_ - 1]);
+				elements_[i] = elements_[nElements_ - 1];
 		}
 		elements_[nElements_ - 1] = nullptr;
 		nElements_--;
 	}
 
 	std::shared_ptr<T>& operator[] (int index) { return elements_[index]; }
+	const std::shared_ptr<T>& operator[] (int index) const { return elements_[index]; } 
 	friend std::ostream& operator<< (std::ostream& o, const Liste& foo);
 
+	std::size_t nElements_;
 private:
-	std::size_t nElements_, capacite_;
+	std::size_t capacite_;
 	std::unique_ptr<std::shared_ptr<T>[]> elements_;
 
 	bool estDansListe(std::string nom) {
