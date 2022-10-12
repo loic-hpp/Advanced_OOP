@@ -120,23 +120,23 @@ std::ostream& afficherConcepteur(std::ostream& o, const shared_ptr<Concepteur>& 
 		<< endl;
 }
 
-std::ostream& operator<< (std::ostream& o, const Liste<Concepteur>& foo) {
-	for (int i = 0; i < foo.nElements_; i++)
-		afficherConcepteur(o,foo[i]);
+std::ostream& operator<< (std::ostream& o, const Liste<Concepteur>& listeConcepteur) {
+	for (int i = 0; i < listeConcepteur.nElements_; i++)
+		afficherConcepteur(o, listeConcepteur[i]);
 	return o;
 }
 
 std::ostream& afficherJeu(std::ostream& o, const shared_ptr<Jeu>& jeu) {
-	o << "\nInformations" << endl;
+	o << "\nInformations du jeu" << endl;
 	o << "\n\t" << jeu->titre << "\t" << jeu->anneeSortie << "\n\nCONCEPTEURS\n" << endl;
 	o << jeu->concepteurs;
 	return o;
 }
 
 
-std::ostream& operator<< (std::ostream& o, const Liste<Jeu>& foo) {
-	for(int i = 0; i<foo.nElements_; i++)
-		afficherJeu(o,foo[i]) << "\n_____________________________________________________\n" << std::endl;
+std::ostream& operator<< (std::ostream& o, const Liste<Jeu>& listeJeux) {
+	for(int i = 0; i< listeJeux.nElements_; i++)
+		afficherJeu(o, listeJeux[i]) << "\n_____________________________________________________\n" << std::endl;
 	return o;
 }
 
@@ -156,6 +156,6 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 
 	static const string ligneSeparation = "\n\033[35m════════════════════════════════════════\033[0m\n";
 	cout << ligneSeparation << listeJeux << ligneSeparation;
-
+	ofstream("sortie.txt") << listeJeux;
 	cout << "\n____________________________________________________________________________\n";
 }
