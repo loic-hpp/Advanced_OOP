@@ -158,4 +158,5 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	cout << ligneSeparation << listeJeux << ligneSeparation;
 	ofstream("sortie.txt") << listeJeux;
 	cout << "\n____________________________________________________________________________\n";
+	cout << listeConcepteurs.trouverElementQuelconque("Yoshinori Kitase", [](auto v) { return v->nom == "Yoshinori Kitase";});
 }

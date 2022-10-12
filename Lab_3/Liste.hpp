@@ -33,6 +33,16 @@ public:
 			nElements_++;
 	}
 
+	template<typename F>
+	int trouverElementQuelconque(std::string nom, const F fonction) {
+		static const int indexe_pas_trouve = -1;
+		for (int i = 0; i < nElements_; i++) {
+			if (fonction(elements_[i]))
+				return i;
+		}
+		return indexe_pas_trouve;
+	}
+
 	std::shared_ptr<T> trouverElement(std::string nom) {
 		for (int i = 0; i < (int)nElements_; i++) {
 			if (nom == elements_[i]->getNom())
