@@ -17,13 +17,27 @@ public:
 			elements_[i]->afficher();
 	}
 
+	bool estDansListe(std::string nom) {
+		bool estDansListe = false;
+		for (int i = 0; i < (int)nElements_; i++) {
+			if (elements_[i]->getNom() == nom)
+				estDansListe = true;
+		}
+		return estDansListe;
+	}
+
 	void ajouterElement(std::shared_ptr<T> element) {
-		//if (!(this->estDansListe(element->getNom()))) {
 			if (nElements_ == capacite_)
 				this->changerTailleListe();
 			elements_[nElements_] = move(element);
 			nElements_++;
-		//}
+	}
+
+	std::shared_ptr<T> trouverElement(std::string nom) {
+		for (int i = 0; i < (int)nElements_; i++) {
+			if (nom == elements_[i]->getNom())
+				return elements_[i];
+		}
 	}
 	
 	
@@ -40,19 +54,9 @@ public:
 	const std::shared_ptr<T>& operator[] (int index) const { return elements_[index]; } 
 	friend std::ostream& operator<< (std::ostream& o, const Liste& foo);
 
-	std::size_t nElements_;
 private:
-	std::size_t capacite_;
+	std::size_t nElements_, capacite_;
 	std::unique_ptr<std::shared_ptr<T>[]> elements_;
-
-	bool estDansListe(std::string nom) {
-		bool estDansListe = false;
-		for (int i = 0; i < (int)nElements_; i++) {
-				if (elements_[i]->getNom() == nom)
-					estDansListe = true;
-		}
-		return estDansListe;
-	}
 
 	void changerTailleListe() {
 		if (capacite_ == 0)

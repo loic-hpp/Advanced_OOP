@@ -61,24 +61,6 @@ gsl::span<Concepteur*> spanListeConcepteurs(const ListeConcepteurs& liste)
 }
 #pragma endregion
 
-//TODO: Fonction qui cherche un concepteur par son nom dans une ListeJeux.
-// Cette fonction renvoie le pointeur vers le concepteur si elle le trouve dans
-// un des jeux de la ListeJeux. En cas contraire, elle renvoie un pointeur nul.
-/*Concepteur* rechercherConcepteur(ListeJeux& listeJeux, string nom) {
-	if (listeJeux.nElements == 0)
-		return nullptr;
-	else {
-		for (Jeu*& jeu : gsl::span(listeJeux.elements, listeJeux.nElements)) {
-			for (Concepteur*& concepteur : gsl::span(jeu->concepteurs.elements, jeu->concepteurs.nElements)) {
-				if (concepteur->nom == nom)
-					return concepteur;
-			}
-		}
-	}
-	return nullptr;
-}*/
-
-
 shared_ptr<Concepteur> lireConcepteur(istream& fichier)
 {
 	Concepteur concepteur = {}; // On initialise une structure vide de type Concepteur.
@@ -89,16 +71,10 @@ shared_ptr<Concepteur> lireConcepteur(istream& fichier)
 	cout << "\nLa lecture du concepteur: " << concepteur.nom << " est terminé" << endl;
 	return make_shared<Concepteur>(concepteur); //TODO: Retourner le pointeur vers le concepteur crée.
 
-	//return nullptr;
 }
 
-//TODO: Fonction qui change la taille du tableau de jeux de ListeJeux.
-// Cette fonction doit recevoir en paramètre la nouvelle capacité du nouveau
-// tableau. Il faut allouer un nouveau tableau assez grand, copier ce qu'il y
-// avait dans l'ancien, et éliminer l'ancien trop petit. N'oubliez pas, on copie
-// des pointeurs de jeux. Il n'y a donc aucune nouvelle allocation de jeu ici !
 
-shared_ptr<Jeu> lireJeu(istream& fichier)
+shared_ptr<Jeu> lireJeu(istream& fichier, Liste<Concepteur>& listeConcepteur)
 {
 	Jeu jeu = {}; // On initialise une structure vide de type Jeu
 	jeu.titre = lireString(fichier);
@@ -111,15 +87,20 @@ shared_ptr<Jeu> lireJeu(istream& fichier)
 
 	shared_ptr<Jeu> nouveauJeu = make_shared<Jeu>(move(jeu));
 	for ([[maybe_unused]] size_t i : iter::range(nElements)) {
-		nouveauJeu->concepteurs.ajouterElement(lireConcepteur(fichier));
+		shared_ptr<Concepteur> ptrConcepteur = lireConcepteur(fichier);
+		if (!(listeConcepteur.estDansListe(ptrConcepteur->getNom()))) {
+			listeConcepteur.ajouterElement(ptrConcepteur);
+			nouveauJeu->concepteurs.ajouterElement(ptrConcepteur);
+		}
+		else
+			nouveauJeu->concepteurs.ajouterElement(listeConcepteur.trouverElement(ptrConcepteur->getNom()));
 	
 	}
 
 	return nouveauJeu; //TODO: Retourner le pointeur vers le nouveau jeu.
-	//return nullptr;
 }
 
-Liste<Jeu> creerListeJeux(const string& nomFichier)
+Liste<Jeu> creerListeJeux(const string& nomFichier, Liste<Concepteur>& listeConcepteur)
 {
 	ifstream fichier(nomFichier, ios::binary);
 	fichier.exceptions(ios::failbit);
@@ -127,7 +108,7 @@ Liste<Jeu> creerListeJeux(const string& nomFichier)
 	Liste<Jeu> listeJeux = {};
 	for ([[maybe_unused]] size_t n : iter::range(nElements))
 	{
-		listeJeux.ajouterElement(lireJeu(fichier));
+		listeJeux.ajouterElement(lireJeu(fichier, listeConcepteur));
 	}
 
 	return listeJeux; //TODO: Renvoyer la ListeJeux.
@@ -149,8 +130,8 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	// les supportent normalement par défaut.
 	bibliotheque_cours::activerCouleursAnsi();
 #pragma endregion
-
-	Liste<Jeu> listeJeux = creerListeJeux("jeux.bin"); //TODO: Appeler correctement votre fonction de création de la liste de jeux.
+	Liste<Concepteur> listeConcepteurs = {};
+	Liste<Jeu> listeJeux = creerListeJeux("jeux.bin", listeConcepteurs); //TODO: Appeler correctement votre fonction de création de la liste de jeux.
 
 	static const string ligneSeparation = "\n\033[35m════════════════════════════════════════\033[0m\n";
 	cout << ligneSeparation << endl;
