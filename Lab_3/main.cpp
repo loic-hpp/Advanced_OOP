@@ -133,6 +133,8 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	Liste<Concepteur> listeConcepteurs = {};
 	Liste<Jeu> listeJeux = creerListeJeux("jeux.bin", listeConcepteurs); //TODO: Appeler correctement votre fonction de création de la liste de jeux.
 
+	cout << listeJeux[2]->titre << endl;
+	cout << listeJeux[2]->concepteurs[1]->nom << endl;
 	static const string ligneSeparation = "\n\033[35m════════════════════════════════════════\033[0m\n";
 	cout << ligneSeparation << endl;
 	cout << "Premier jeu de la liste :" << endl;
