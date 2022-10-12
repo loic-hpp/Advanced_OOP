@@ -114,13 +114,31 @@ Liste<Jeu> creerListeJeux(const string& nomFichier, Liste<Concepteur>& listeConc
 	return listeJeux; //TODO: Renvoyer la ListeJeux.
 }
 
+std::ostream& afficherConcepteur(std::ostream& o, const shared_ptr<Concepteur>& concepteur)
+{
+	return o << "\t" << concepteur->nom << ", " << concepteur->anneeNaissance << ", " << concepteur->pays
+		<< endl;
+}
+
+std::ostream& operator<< (std::ostream& o, const Liste<Concepteur>& foo) {
+	for (int i = 0; i < foo.nElements_; i++)
+		afficherConcepteur(o,foo[i]);
+	return o;
+}
+
+std::ostream& afficherJeu(std::ostream& o, const shared_ptr<Jeu>& jeu) {
+	o << "\nInformations" << endl;
+	o << "\n\t" << jeu->titre << "\t" << jeu->anneeSortie << "\n\nCONCEPTEURS\n" << endl;
+	o << jeu->concepteurs;
+	return o;
+}
 
 
-
-/*std::ostream& operator<< (std::ostream& o, const Liste<Jeu>& foo) {
+std::ostream& operator<< (std::ostream& o, const Liste<Jeu>& foo) {
 	for(int i = 0; i<foo.nElements_; i++)
-	return o << foo[i]->titre << "\n_____________________________________________________\n" << std::endl;
-}*/
+		afficherJeu(o,foo[i]) << "\n_____________________________________________________\n" << std::endl;
+	return o;
+}
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 {
@@ -135,10 +153,9 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 
 	cout << listeJeux[2]->titre << endl;
 	cout << listeJeux[2]->concepteurs[1]->nom << endl;
+
 	static const string ligneSeparation = "\n\033[35m════════════════════════════════════════\033[0m\n";
-	cout << ligneSeparation << endl;
-	cout << "Premier jeu de la liste :" << endl;
-	cout << ligneSeparation << endl;
+	cout << ligneSeparation << listeJeux << ligneSeparation;
 
 	cout << "\n____________________________________________________________________________\n";
 }
