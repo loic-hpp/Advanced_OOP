@@ -87,8 +87,9 @@ shared_ptr<Jeu> lireJeu(istream& fichier, Liste<Concepteur>& listeConcepteur)
 	jeu.anneeSortie = int(lireUintTailleVariable(fichier));
 	jeu.developpeur = lireString(fichier);
 	size_t nElements = lireUintTailleVariable(fichier);
-	jeu.concepteurs = Liste<Concepteur>();
 
+	jeu.concepteurs = Liste<Concepteur>();
+	
 	shared_ptr<Jeu> nouveauJeu = make_shared<Jeu>(move(jeu));
 	for ([[maybe_unused]] size_t i : iter::range(nElements)) {
 		shared_ptr<Concepteur> ptrConcepteur = lireConcepteur(fichier, listeConcepteur);
@@ -111,6 +112,7 @@ Liste<Jeu> creerListeJeux(const string& nomFichier, Liste<Concepteur>& listeConc
 
 	return listeJeux; //TODO: Renvoyer la ListeJeux.
 }
+
 
 std::ostream& afficherConcepteur(std::ostream& o, const shared_ptr<Concepteur>& concepteur)
 {
@@ -157,7 +159,9 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	//ofstream("sortie.txt") << listeJeux;
 	cout << "\n____________________________________________________________________________\n";
 	
-	 auto concepteur = listeConcepteurs[listeConcepteurs.trouverElementQuelconque([&](auto v) { return v->nom == "Yoshinori Kitase"; })];
+	std::shared_ptr<Concepteur> concepteur = listeConcepteurs[listeConcepteurs.trouverElementQuelconque([&](auto v) { return v->nom == "Yoshinori Kitase"; })];
 	 cout<< "\t" << concepteur->nom << ", " << concepteur->anneeNaissance << ", " << concepteur->pays
 		 << endl;
+	 //Jeu copieJeu = *(listeJeux[2].get());
+	 //copieJeu.concepteurs[2] = copieJeu.concepteurs[2];
 }

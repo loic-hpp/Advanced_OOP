@@ -9,7 +9,33 @@ public:
 		capacite_ = capacite;
 		elements_ = std::make_unique<std::shared_ptr<T>[]>(capacite);
 	}
-	//~Liste(){}
+
+	/*Liste operator=(Liste& autreListe) {
+		nElements_ = autreListe.nElements_;
+		capacite_ = autreListe.capacite_;
+		elements_ = std::make_unique<std::shared_ptr<T>[]>(capacite_);
+		for (int i = 0; i < nElements_; i++) {
+			elements_[i] = std::make_shared<T>(*autreListe[i].get());
+		}
+		return *this;
+
+	}
+
+	Liste(Liste& autreListe) {
+		*this = autreListe;
+	}*/
+
+	/*Liste(const Liste& autreListe) {
+		nElements_ = autreListe.nElements_;
+		capacite_ = autreListe.capacite_;
+		elements_ = std::make_unique<std::shared_ptr<T>[]>(capacite_);
+		for (int i = 0; i < nElements_; i++) {
+			elements_[i] = std::make_shared<T>(*autreListe[i].get());
+		}
+		return *this;
+
+	}*/
+
 
 	void afficher() {
 		std::cout << "\nVoici la liste des éléments:\n" << std::endl;
