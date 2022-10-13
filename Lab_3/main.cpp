@@ -89,6 +89,7 @@ shared_ptr<Jeu> lireJeu(istream& fichier, Liste<Concepteur>& listeConcepteur)
 	size_t nElements = lireUintTailleVariable(fichier);
 
 	jeu.concepteurs = Liste<Concepteur>();
+	Liste<Concepteur> j1(jeu.concepteurs);
 	
 	shared_ptr<Jeu> nouveauJeu = make_shared<Jeu>(move(jeu));
 	for ([[maybe_unused]] size_t i : iter::range(nElements)) {
@@ -150,18 +151,30 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 #pragma endregion
 	Liste<Concepteur> listeConcepteurs = {};
 	Liste<Jeu> listeJeux = creerListeJeux("jeux.bin", listeConcepteurs); //TODO: Appeler correctement votre fonction de création de la liste de jeux.
-
-	cout << listeJeux[2]->titre << endl;
-	cout << listeJeux[2]->concepteurs[1]->nom << endl;
-
+	
 	static const string ligneSeparation = "\n\033[35m════════════════════════════════════════\033[0m\n";
-	cout << ligneSeparation << listeJeux << ligneSeparation;
+	//cout << ligneSeparation << listeJeux << ligneSeparation;
 	//ofstream("sortie.txt") << listeJeux;
 	cout << "\n____________________________________________________________________________\n";
+
+	//Question 4 surcharge d'opérateurs[]
+	cout << listeJeux[2]->titre << endl;
+	cout << listeJeux[2]->concepteurs[1]->nom << endl;
 	
+	//Question 5 Fonction lambda
 	std::shared_ptr<Concepteur> concepteur = listeConcepteurs[listeConcepteurs.trouverElementQuelconque([&](auto v) { return v->nom == "Yoshinori Kitase"; })];
 	 cout<< "\t" << concepteur->nom << ", " << concepteur->anneeNaissance << ", " << concepteur->pays
 		 << endl;
-	 //Jeu copieJeu = *(listeJeux[2].get());
-	 //copieJeu.concepteurs[2] = copieJeu.concepteurs[2];
+	 // Question 7 copie
+	 Jeu copieJeu = *(listeJeux[2].get());
+	 copieJeu.concepteurs[2] = copieJeu.concepteurs[0];
+	 cout<< "\nInformations du jeu" << endl
+		 << "\n\t" << listeJeux[2]->titre << "\t" << listeJeux[2]->anneeSortie << "\n\nCONCEPTEURS\n" << endl
+		 << listeJeux[2]->concepteurs
+		 << "\n____________________________________________________________________________\n"
+		 << "\nInformations du jeu" << endl
+		 << "\n\t" << copieJeu.titre << "\t" << copieJeu.anneeSortie << "\n\nCONCEPTEURS\n" << endl
+		 << copieJeu.concepteurs<<endl
+		 << listeJeux[2]->concepteurs[0] << endl
+		 << copieJeu.concepteurs[0] << endl;
 }

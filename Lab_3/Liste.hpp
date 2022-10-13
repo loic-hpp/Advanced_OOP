@@ -10,20 +10,21 @@ public:
 		elements_ = std::make_unique<std::shared_ptr<T>[]>(capacite);
 	}
 
-	/*Liste operator=(Liste& autreListe) {
+	Liste& operator=(const Liste& autreListe) {
 		nElements_ = autreListe.nElements_;
 		capacite_ = autreListe.capacite_;
 		elements_ = std::make_unique<std::shared_ptr<T>[]>(capacite_);
 		for (int i = 0; i < nElements_; i++) {
-			elements_[i] = std::make_shared<T>(*autreListe[i].get());
+			//elements_[i] = std::make_shared<T>(*autreListe[i].get());
+			elements_[i] = autreListe[i];
 		}
 		return *this;
 
 	}
 
-	Liste(Liste& autreListe) {
+	Liste(const Liste& autreListe) {
 		*this = autreListe;
-	}*/
+	}
 
 	/*Liste(const Liste& autreListe) {
 		nElements_ = autreListe.nElements_;
