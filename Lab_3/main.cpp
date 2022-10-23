@@ -1,4 +1,9 @@
-﻿//	Test de toutes les classes et structs implementés.
+﻿//	Description: Nous avons créé en plus de ce qui a été demandé, une Liste<Concepteur> 
+//	qui va contenir un pointeur vers tous nos concepteurs ceci dans le but de faciliter 
+//	la recherche en effet on ne souhaite pas que le même concepteur soit créé 2 fois en 
+//	mémoire et pour éviter de parcourir la liste de jeux ainsi que chaque jeu notre 
+//	alternative est donc cette grande liste de concepteurs qui va contenir un pointeur 
+//	vers tous les concepteurs.
 //	Fichier:  main.cpp
 //	Auteurs partiels (seulement des TODOS): Rodrigo A. Merino Martel et Loïc Nguemegne Temena
 //	Date	2 octobre 2022
