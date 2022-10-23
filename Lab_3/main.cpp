@@ -13,7 +13,9 @@
 #include "gsl/span"
 #include "bibliotheque_cours.hpp"
 #include "verification_allocation.hpp"
-#include "debogage_memoire.hpp"  //NOTE: Incompatible avec le "placement new", ne pas utiliser cette entête si vous utilisez ce type de "new" dans les lignes qui suivent cette inclusion.
+#include "debogage_memoire.hpp"  
+//NOTE: Incompatible avec le "placement new", ne pas utiliser cette entête si 
+//vous utilisez ce type de "new" dans les lignes qui suivent cette inclusion.
 #include "Developpeur.hpp"
 #include "ListeDeveloppeurs.hpp"
 #include "Liste.hpp"
@@ -80,7 +82,6 @@ shared_ptr<Concepteur> lireConcepteur(istream& fichier, Liste<Concepteur>& liste
 
 }
 
-
 shared_ptr<Jeu> lireJeu(istream& fichier, Liste<Concepteur>& listeConcepteur)
 {
 	Jeu jeu = {}; // On initialise une structure vide de type Jeu
@@ -115,7 +116,6 @@ Liste<Jeu> creerListeJeux(const string& nomFichier, Liste<Concepteur>& listeConc
 	return listeJeux; //TODO: Renvoyer la ListeJeux.
 }
 
-
 std::ostream& afficherConcepteur(std::ostream& o, const shared_ptr<Concepteur>& concepteur)
 {
 	return o << "\t" << concepteur->nom << ", " << 
@@ -135,7 +135,6 @@ std::ostream& afficherJeu(std::ostream& o, const shared_ptr<Jeu>& jeu) {
 	return o;
 }
 
-
 std::ostream& operator<< (std::ostream& o, const Liste<Jeu>& listeJeux) {
 	for(int i = 0; i< listeJeux.nElements_; i++)
 		afficherJeu(o, listeJeux[i]) 
@@ -151,6 +150,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	// les supportent normalement par défaut.
 	bibliotheque_cours::activerCouleursAnsi();
 #pragma endregion
+
 	Liste<Concepteur> listeConcepteurs = {};
 	Liste<Jeu> listeJeux = creerListeJeux("jeux.bin", listeConcepteurs); 
 	//TODO: Appeler correctement votre fonction de création de la liste de jeux.
@@ -170,6 +170,7 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 			{ return v->nom == "Yoshinori Kitase"; })];
 	 cout << "\t" << concepteur->nom << ", " << concepteur->anneeNaissance 
 		  << ", " << concepteur->pays<< endl;
+
 	 // Question 7 copie
 	 Jeu copieJeu = *(listeJeux[2].get());
 	 copieJeu.concepteurs[2] = copieJeu.concepteurs[0];

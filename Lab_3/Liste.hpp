@@ -1,7 +1,14 @@
+//	Implementation de la classe générique Liste.
+//	Fichier:  Liste.hpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	23 octobre 2022
+//	Créé le 11 octobre 2022
+
 #pragma once
 #include <iostream>
 #include <string>
 template <typename T>
+
 class Liste {
 public:
 	Liste(int nElements = 0, int capacite = 0){
@@ -15,7 +22,6 @@ public:
 		capacite_ = autreListe.capacite_;
 		elements_ = std::make_unique<std::shared_ptr<T>[]>(capacite_);
 		for (int i = 0; i < nElements_; i++) {
-			//elements_[i] = std::make_shared<T>(*autreListe[i].get());
 			elements_[i] = autreListe[i];
 		}
 		return *this;
@@ -26,18 +32,6 @@ public:
 		*this = autreListe;
 	}
 
-	/*Liste(const Liste& autreListe) {
-		nElements_ = autreListe.nElements_;
-		capacite_ = autreListe.capacite_;
-		elements_ = std::make_unique<std::shared_ptr<T>[]>(capacite_);
-		for (int i = 0; i < nElements_; i++) {
-			elements_[i] = std::make_shared<T>(*autreListe[i].get());
-		}
-		return *this;
-
-	}*/
-
-
 	void afficher() {
 		std::cout << "\nVoici la liste des éléments:\n" << std::endl;
 		for (int i = 0; i < (int)nElements_; i++)
@@ -46,7 +40,7 @@ public:
 
 	void ajouterElement(std::shared_ptr<T> element) {
 			if (nElements_ == capacite_)
-				this->changerTailleListe();
+				this->changerTaille();
 			elements_[nElements_] = move(element);
 			nElements_++;
 	}
@@ -71,7 +65,6 @@ public:
 		return estDansListe;
 	}
 	
-	
 	void retirerElement(std::shared_ptr<T> element) {
 		for (int i = 0; i < nElements_; i++) {
 			if (elements_[i]->getNom() == element->getNom())
@@ -89,7 +82,7 @@ private:
 	std::size_t nElements_, capacite_;
 	std::unique_ptr<std::shared_ptr<T>[]> elements_;
 
-	void changerTailleListe() {
+	void changerTaille() {
 		if (capacite_ == 0)
 			capacite_ = 1;
 		else
