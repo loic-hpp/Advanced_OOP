@@ -10,3 +10,4 @@ struct Jeu
 	std::string developpeur;
 	Liste<Concepteur> concepteurs;
 };
+
