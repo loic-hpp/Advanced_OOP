@@ -79,8 +79,8 @@ shared_ptr<Concepteur> lireConcepteur(istream& fichier, Liste<Concepteur>& liste
 	if (!(listeConcepteur.estDansListeElementQuelconque([&](auto v) { return v->nom == concepteur.nom; })))
 		listeConcepteur.ajouterElement(ptrConcepteur);
 	else
-		ptrConcepteur = listeConcepteur[listeConcepteur.trouverElementQuelconque([&](auto v)
-			{ return v->nom == concepteur.nom; })];
+		ptrConcepteur = listeConcepteur.trouverElementQuelconque([&](auto v)
+			{ return v->nom == concepteur.nom; });
 
 	cout << "\nLa lecture du concepteur: " << concepteur.nom << " est terminé" << endl;
 	return ptrConcepteur; //TODO: Retourner le pointeur vers le concepteur crée.
@@ -171,10 +171,15 @@ int main([[maybe_unused]] int argc, [[maybe_unused]] char** argv)
 	
 	//Question 5 Fonction lambda
 	std::shared_ptr<Concepteur> concepteur = 
-		listeConcepteurs[listeConcepteurs.trouverElementQuelconque([&](auto v)
-			{ return v->nom == "Yoshinori Kitase"; })];
-	 cout << "\t" << concepteur->nom << ", " << concepteur->anneeNaissance 
-		  << ", " << concepteur->pays<< endl;
+		listeJeux[0]->trouverConcepteur([&](auto v)
+			{ return v->nom == "Yoshinori Kitase"; });
+	//Bon concepteur trouvé
+	cout << "\t" << concepteur->nom << ", " << concepteur->anneeNaissance
+		<< ", " << concepteur->pays << endl
+		// Montrer que les 2 on la même adresse
+		<< concepteur.get() << "--------------" << endl
+		<< (listeJeux[1]->trouverConcepteur([&](auto v)
+			{ return v->nom == "Yoshinori Kitase"; })).get() << "-------------" << endl;
 
 	 // Question 7 copie
 	 Jeu copieJeu = *(listeJeux[2].get());

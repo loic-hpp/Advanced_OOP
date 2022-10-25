@@ -46,13 +46,12 @@ public:
 	}
 
 	template<typename F>
-	int trouverElementQuelconque(const F fonction) {
-		static const int indexe_pas_trouve = -1;
+	std::shared_ptr<T> trouverElementQuelconque(const F fonction) {
 		for (int i = 0; i < nElements_; i++) {
 			if (fonction(elements_[i]))
-				return i;
+				return elements_[i];
 		}
-		return indexe_pas_trouve;
+		return nullptr;
 	}
 
 	template<typename F>
