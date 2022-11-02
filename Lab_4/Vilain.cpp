@@ -9,7 +9,7 @@ Vilain::Vilain(const std::string& nom, const std::string& parution, const std::s
 void Vilain::afficher(std::ostream& os) const
 {
 	Personnage::afficher(os);
-	os << "Objectif: "
+	os << "\nObjectif: "
 		<< objectif_;
 }
 

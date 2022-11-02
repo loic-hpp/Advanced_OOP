@@ -11,7 +11,7 @@ void Personnage::afficher(std::ostream& os) const
 	os << "\nNom: "
 		<< nom_
 		<< "\nParution: "
-		<< parution_ << "\n";
+		<< parution_;
 }
 
 void Personnage::changerCouleur(std::ostream& os, const std::string& couleur) const

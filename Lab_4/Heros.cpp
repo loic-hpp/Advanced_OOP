@@ -1,9 +1,8 @@
 #include "Heros.hpp"
 
-Heros::Heros(const std::string& nom, const std::string& parution, const std::string& ennemi, const std::vector<std::string>& allies) : 
+Heros::Heros(const std::string& nom, const std::string& parution, const std::string& ennemi) : 
 	Personnage(nom, parution),
-	ennemi_(ennemi),
-	allies_(allies)
+	ennemi_(ennemi)
 {
 }
 
@@ -13,7 +12,7 @@ void Heros::afficher(std::ostream& os) const
 	os << "\nEnnemi: "
 		<< ennemi_;
 	os << "\nAlies: ";
-	for (int i = 0 < allies_.size(); i++;)
+	for (int i = 0; i< allies_.size(); i++)
 		os << "\n \t" << allies_[i];
 }
 

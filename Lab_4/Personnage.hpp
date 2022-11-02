@@ -5,10 +5,13 @@ class Personnage :
     public Affichable
 {
 public:
+    Personnage() = default;
     Personnage(const std::string& nom, const std::string& parution);
     virtual void afficher(std::ostream& os) const override;
     virtual void changerCouleur(std::ostream& os, const std::string&) const override;
     virtual ~Personnage() = default;
+    virtual std::string getNom()const { return nom_; }
+    virtual std::string getParution()const { return parution_; }
 private:
     std::string nom_;
     std::string parution_;
