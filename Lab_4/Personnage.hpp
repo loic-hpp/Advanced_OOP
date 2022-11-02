@@ -6,8 +6,9 @@ class Personnage :
 {
 public:
     Personnage(const std::string& nom, const std::string& parution);
-    void afficher(std::ostream& os) const override;
-    void changerCouleur(std::ostream& os, const std::string&) const override;
+    virtual void afficher(std::ostream& os) const override;
+    virtual void changerCouleur(std::ostream& os, const std::string&) const override;
+    virtual ~Personnage() = default;
 private:
     std::string nom_;
     std::string parution_;
