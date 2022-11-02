@@ -3,6 +3,12 @@
 #include <sstream>
 #include <cassert>
 #include "bibliotheque_cours.hpp"
+#include "Affichable.hpp"
+#include "Personnage.hpp"
+#include "Heros.hpp"
+#include "Vilain.hpp"
+#include "VilainHeros.hpp"
+
 using namespace std;
 
 ifstream ouvrirFichierBinaire(const string& nomFichier)
