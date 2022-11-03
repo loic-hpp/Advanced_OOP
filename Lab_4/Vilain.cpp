@@ -6,6 +6,11 @@ Vilain::Vilain(const std::string& nom, const std::string& parution, const std::s
 {
 }
 
+Vilain::Vilain(const Vilain& vilain) : Personnage(vilain.getNom(), vilain.getObjectif())
+{
+	objectif_ = vilain.objectif_;
+}
+
 void Vilain::afficher(std::ostream& os) const
 {
 	changerCouleur(os);

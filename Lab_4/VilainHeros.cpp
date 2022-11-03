@@ -4,14 +4,14 @@ VilainHeros::VilainHeros(const Heros& hero, const Vilain& vilain) :
 	Heros(hero),
 	Vilain(vilain),
 	Personnage(vilain.getNom() + '-' + hero.getNom(), vilain.getParution() + '-' + hero.getParution()),
-	missionSpeciale_(vilain.getObjectif() + "dans le monde de" + hero.getParution())
+	missionSpeciale_(vilain.getObjectif() + "dans le monde de " + hero.getParution())
 
 {
 }
 
 void VilainHeros::afficher(std::ostream& os) const
 {
-	changerCouleur(os);
+	Heros::changerCouleur(os, "\033[95m");
 	Heros::afficher(os);
 	changerCouleur(os);
 	os << "\nObjectif: "

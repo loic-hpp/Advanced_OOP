@@ -5,6 +5,7 @@ class Heros :
 {
 public:
     Heros(const std::string& nom, const std::string& parution, const std::string& ennemi);
+    Heros(const Heros& hero);
     virtual void afficher(std::ostream& os) const override;
     virtual void changerCouleur(std::ostream& os, const std::string& couleur = "\033[94m") const override;
     virtual void setListeAlie(const std::vector<std::string>& allies) { allies_=allies; }

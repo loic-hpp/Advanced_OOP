@@ -97,6 +97,9 @@ int main()
 	// afficherVilain(listeVilain);
 	// afficherHero(listeHero);
 
+	VilainHeros vilainhero(*listeHero[0].get(), *listeVilain[2].get());
+	cout << vilainhero;
+
 	vector <unique_ptr< Personnage >> listePersonnage;
 	for (size_t i = 0; i < listeVilain.size(); i++)
 		listePersonnage.push_back(move(listeVilain[i]));
@@ -105,7 +108,6 @@ int main()
 	for (size_t i = 0; i < listePersonnage.size(); i++)
 		cout << *listePersonnage[i].get() << endl << TRAIT << endl;
 
-	//VilainHeros vilainhero(*listeHero[0].get(), *listeVilain[2].get());
 		
 	// Trait de separation
 

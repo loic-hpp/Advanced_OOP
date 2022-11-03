@@ -6,6 +6,12 @@ Heros::Heros(const std::string& nom, const std::string& parution, const std::str
 {
 }
 
+Heros::Heros(const Heros& hero) : Personnage(hero.getNom(), hero.getParution())
+{
+	ennemi_ = hero.ennemi_;
+	allies_ = hero.allies_;
+}
+
 void Heros::afficher(std::ostream& os) const
 {
 	changerCouleur(os);
