@@ -12,34 +12,27 @@ Heros::Heros(const Heros& hero) : Personnage(hero.getNom(), hero.getParution())
 	allies_ = hero.allies_;
 }
 
-void Heros::affichageSansCouleur(std::ostream& os) const
-{
-	Personnage::afficher(os);
-	changerCouleur(os, "\033[95m");
-	os << "\nEnnemi: "
-		<< ennemi_;
-	os << "\nAlies: ";
-	for (int i = 0; i < allies_.size(); i++) {
-		changerCouleur(os, "\033[95m");
-		os << "\n \t" << allies_[i];
-	}
-}
-
 void Heros::afficher(std::ostream& os) const
 {
-	changerCouleur(os);
-	Personnage::afficher(os);
-	changerCouleur(os);
-	os << "\nEnnemi: "
-		<< ennemi_;
-	os << "\nAlies: ";
-	for (int i = 0; i < allies_.size(); i++) {
-	changerCouleur(os);
-	os << "\n \t" << allies_[i] << CODE_COULEUR_FIN;
-	}
+	changerCouleur(os, "\033[94m");
+	afficherAlie(os, "\033[94m");
 }
 
 void Heros::changerCouleur(std::ostream& os, const std::string& couleur) const
 {
 	os << couleur;
+	Personnage::changerCouleur(os, couleur);
+	os << "\033[94m";
+	os << "\nEnnemi: "
+		<< ennemi_;
+	
+}
+
+void Heros::afficherAlie(std::ostream& os, const std::string& couleur) const {
+	os << couleur
+		<< "\nAlies: ";
+	for (int i = 0; i < allies_.size(); i++) {
+		os << couleur;
+		os << "\n \t" << allies_[i] << CODE_COULEUR_FIN;
+	}
 }

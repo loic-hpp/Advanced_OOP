@@ -8,14 +8,15 @@ Personnage::Personnage(const std::string& nom, const std::string& parution) :
 
 void Personnage::afficher(std::ostream& os) const
 {
-	os << "\nNom: "
-		<< nom_
-		<< "\nParution: "
-		<< parution_
-		<< CODE_COULEUR_FIN;
+	changerCouleur(os,"\033[0m");
 }
 
 void Personnage::changerCouleur(std::ostream& os, const std::string& couleur) const
 {
-	os << couleur;
+	os << couleur
+		<< "\nNom: "
+		<< nom_
+		<< "\nParution: "
+		<< parution_
+		<< CODE_COULEUR_FIN;
 }

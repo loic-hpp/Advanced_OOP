@@ -13,15 +13,16 @@ Vilain::Vilain(const Vilain& vilain) : Personnage(vilain.getNom(), vilain.getPar
 
 void Vilain::afficher(std::ostream& os) const
 {
-	changerCouleur(os);
-	Personnage::afficher(os);
-	changerCouleur(os);
-	os << "\nObjectif: "
-		<< objectif_
-		<< CODE_COULEUR_FIN;
+	changerCouleur(os, "\033[91m");
+	
 }
 
 void Vilain::changerCouleur(std::ostream& os, const std::string& couleur) const
 {
 	os << couleur;
+	Personnage::changerCouleur(os, couleur);
+	os << couleur
+		<< "\nObjectif: "
+		<< objectif_
+		<< CODE_COULEUR_FIN;
 }
