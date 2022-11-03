@@ -8,17 +8,19 @@ Heros::Heros(const std::string& nom, const std::string& parution, const std::str
 
 void Heros::afficher(std::ostream& os) const
 {
+	changerCouleur(os);
 	Personnage::afficher(os);
+	changerCouleur(os);
 	os << "\nEnnemi: "
 		<< ennemi_;
 	os << "\nAlies: ";
-	for (int i = 0; i< allies_.size(); i++)
-		os << "\n \t" << allies_[i];
+	for (int i = 0; i < allies_.size(); i++) {
+	changerCouleur(os);
+	os << "\n \t" << allies_[i] << CODE_COULEUR_FIN;
+	}
 }
 
 void Heros::changerCouleur(std::ostream& os, const std::string& couleur) const
 {
 	os << couleur;
-	afficher(os);
-	os << CODE_COULEUR_FIN;
 }

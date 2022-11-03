@@ -8,14 +8,15 @@ Vilain::Vilain(const std::string& nom, const std::string& parution, const std::s
 
 void Vilain::afficher(std::ostream& os) const
 {
+	changerCouleur(os);
 	Personnage::afficher(os);
+	changerCouleur(os);
 	os << "\nObjectif: "
-		<< objectif_;
+		<< objectif_
+		<< CODE_COULEUR_FIN;
 }
 
 void Vilain::changerCouleur(std::ostream& os, const std::string& couleur) const
 {
 	os << couleur;
-	afficher(os);
-	os << CODE_COULEUR_FIN;
 }

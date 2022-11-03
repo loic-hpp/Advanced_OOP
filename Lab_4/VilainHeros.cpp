@@ -11,16 +11,17 @@ VilainHeros::VilainHeros(const Heros& hero, const Vilain& vilain) :
 
 void VilainHeros::afficher(std::ostream& os) const
 {
+	changerCouleur(os);
 	Heros::afficher(os);
+	changerCouleur(os);
 	os << "\nObjectif: "
 		<< Vilain::getObjectif()
 		<< "\nMission speciale: "
-		<< missionSpeciale_;
+		<< missionSpeciale_
+		<< CODE_COULEUR_FIN;
 }
 
 void VilainHeros::changerCouleur(std::ostream& os, const std::string& couleur) const
 {
 	os << couleur;
-	afficher(os);
-	os << CODE_COULEUR_FIN;
 }

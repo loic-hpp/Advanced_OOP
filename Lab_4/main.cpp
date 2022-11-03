@@ -9,12 +9,16 @@
 #include "Vilain.hpp"
 #include "VilainHeros.hpp"
 
+const std::string TRAIT =
+"═════════════════════════════════════════════════════════════════════════";
+
 using namespace std;
 
 ostream& operator<< (ostream& os, const Personnage& personnage) {
 	personnage.afficher(os);
 	return os;
 }
+
 
 ifstream ouvrirFichierBinaire(const string& nomFichier)
 {
@@ -31,36 +35,49 @@ void testsPourCouvertureLectureBinaire()
 	assert(lireUintTailleVariable(iss) == 0xFEDCBA98);
 }
 
-void lireVilain() {
+vector <unique_ptr< Vilain >> lireVilain() {
 	ifstream fichier = ouvrirFichierBinaire("vilains.bin");
 	size_t nElements = lireUintTailleVariable(fichier);
 	vector <unique_ptr< Vilain >> listeVilain;
-	for (size_t i = 0; i < nElements; i++)
-		listeVilain.push_back(make_unique<Vilain>(Vilain(lireString(fichier),
-			lireString(fichier), lireString(fichier))));
-
+	string nom, parution, objectif;
 	for (size_t i = 0; i < nElements; i++) {
-		cout << *listeVilain[i].get() << endl;
+		nom = lireString(fichier);
+		parution = lireString(fichier);
+		objectif = lireString(fichier);
+		listeVilain.push_back(make_unique<Vilain>(Vilain(nom, parution, objectif)));
+	}
+	return listeVilain;
+}
+
+void afficherVilain(const vector<unique_ptr<Vilain>>& vilains) {
+	for (size_t i = 0; i < vilains.size(); i++) {
+		cout << *vilains[i].get() << endl << TRAIT << endl;
 	}
 }
 
-void lireHeros() {
+vector <unique_ptr< Heros >> lireHeros() {
 	ifstream fichier = ouvrirFichierBinaire("heros.bin");
 	size_t nElements = lireUintTailleVariable(fichier);
 	vector <unique_ptr< Heros >> listeHero;
+	string nom, parution, ennemi;
 	for (size_t i = 0; i < nElements; i++) {
 		vector<string> alies;
-		listeHero.push_back(make_unique<Heros>(Heros(lireString(fichier),
-			lireString(fichier), lireString(fichier))));
+		nom = lireString(fichier);
+		parution = lireString(fichier);
+		ennemi = lireString(fichier);
+		listeHero.push_back(make_unique<Heros>(Heros(nom, parution, ennemi)));
 		size_t nAlie = lireUintTailleVariable(fichier);
 		for (size_t j = 0; j < nAlie; j++) {
 			alies.push_back(lireString(fichier));
 		}
 		listeHero[i].get()->setListeAlie(alies);
 	}
+	return listeHero;
+}
 
-	for (size_t i = 0; i < nElements; i++) {
-		cout << *listeHero[i].get() << endl;
+void afficherHero(const vector<unique_ptr<Heros>>& heros) {
+	for (size_t i = 0; i < heros.size(); i++) {
+		cout << *heros[i].get() << endl << TRAIT << endl;
 	}
 }
 
@@ -75,12 +92,22 @@ int main()
 	
 	testsPourCouvertureLectureBinaire();
 
-	//lireVilain();
-	lireHeros();
+	vector <unique_ptr< Vilain >> listeVilain = lireVilain();
+	vector <unique_ptr< Heros >> listeHero = lireHeros();
+	// afficherVilain(listeVilain);
+	// afficherHero(listeHero);
 
+	vector <unique_ptr< Personnage >> listePersonnage;
+	for (size_t i = 0; i < listeVilain.size(); i++)
+		listePersonnage.push_back(move(listeVilain[i]));
+	for (size_t i = 0; i < listeHero.size(); i++)
+		listePersonnage.push_back(move(listeHero[i]));
+	for (size_t i = 0; i < listePersonnage.size(); i++)
+		cout << *listePersonnage[i].get() << endl << TRAIT << endl;
+
+	//VilainHeros vilainhero(*listeHero[0].get(), *listeVilain[2].get());
+		
 	// Trait de separation
-	static const string trait =
-		"═════════════════════════════════════════════════════════════════════════";
 
 	// Ouverture des fichiers binaires
 	ifstream fichierHeros = ouvrirFichierBinaire("heros.bin");
