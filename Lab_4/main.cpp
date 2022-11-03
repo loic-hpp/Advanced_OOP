@@ -94,10 +94,11 @@ int main()
 
 	vector <unique_ptr< Vilain >> listeVilain = lireVilain();
 	vector <unique_ptr< Heros >> listeHero = lireHeros();
-	// afficherVilain(listeVilain);
-	// afficherHero(listeHero);
+	//afficherVilain(listeVilain);
+	//afficherHero(listeHero);
 
 	VilainHeros vilainhero(*listeHero[0].get(), *listeVilain[2].get());
+	vilainhero.changerCouleur(cout, "\033[96m");
 
 	vector <unique_ptr< Personnage >> listePersonnage;
 	for (size_t i = 0; i < listeVilain.size(); i++)

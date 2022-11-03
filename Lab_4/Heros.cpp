@@ -22,8 +22,8 @@ void Heros::changerCouleur(std::ostream& os, const std::string& couleur) const
 {
 	os << couleur;
 	Personnage::changerCouleur(os, couleur);
-	os << "\033[94m";
-	os << "\nEnnemi: "
+	os << couleur
+		<< "\nEnnemi: "
 		<< ennemi_;
 	
 }
@@ -31,8 +31,7 @@ void Heros::changerCouleur(std::ostream& os, const std::string& couleur) const
 void Heros::afficherAlie(std::ostream& os, const std::string& couleur) const {
 	os << couleur
 		<< "\nAlies: ";
-	for (int i = 0; i < allies_.size(); i++) {
-		os << couleur;
-		os << "\n \t" << allies_[i] << CODE_COULEUR_FIN;
-	}
+	for (int i = 0; i < allies_.size(); i++) 
+		os << "\n \t" << allies_[i];
+	os << CODE_COULEUR_FIN;
 }
