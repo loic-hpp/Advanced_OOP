@@ -12,6 +12,19 @@ Heros::Heros(const Heros& hero) : Personnage(hero.getNom(), hero.getParution())
 	allies_ = hero.allies_;
 }
 
+void Heros::affichageSansCouleur(std::ostream& os) const
+{
+	Personnage::afficher(os);
+	changerCouleur(os, "\033[95m");
+	os << "\nEnnemi: "
+		<< ennemi_;
+	os << "\nAlies: ";
+	for (int i = 0; i < allies_.size(); i++) {
+		changerCouleur(os, "\033[95m");
+		os << "\n \t" << allies_[i];
+	}
+}
+
 void Heros::afficher(std::ostream& os) const
 {
 	changerCouleur(os);

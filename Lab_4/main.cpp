@@ -98,13 +98,13 @@ int main()
 	// afficherHero(listeHero);
 
 	VilainHeros vilainhero(*listeHero[0].get(), *listeVilain[2].get());
-	cout << vilainhero;
 
 	vector <unique_ptr< Personnage >> listePersonnage;
 	for (size_t i = 0; i < listeVilain.size(); i++)
 		listePersonnage.push_back(move(listeVilain[i]));
 	for (size_t i = 0; i < listeHero.size(); i++)
 		listePersonnage.push_back(move(listeHero[i]));
+	listePersonnage.push_back(make_unique<VilainHeros>(vilainhero));
 	for (size_t i = 0; i < listePersonnage.size(); i++)
 		cout << *listePersonnage[i].get() << endl << TRAIT << endl;
 

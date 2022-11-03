@@ -11,8 +11,8 @@ VilainHeros::VilainHeros(const Heros& hero, const Vilain& vilain) :
 
 void VilainHeros::afficher(std::ostream& os) const
 {
-	Heros::changerCouleur(os, "\033[95m");
-	Heros::afficher(os);
+	changerCouleur(os); 
+	Heros::affichageSansCouleur(os);
 	changerCouleur(os);
 	os << "\nObjectif: "
 		<< Vilain::getObjectif()
