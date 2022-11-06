@@ -1,12 +1,19 @@
 #pragma once
 #include "Affichable.hpp"
+#include <string>
 
 class Personnage : public Affichable
 {
 public:
+	Personnage() = default;
+	Personnage(string& nom, string& parution);
+	void afficher(std::ostream& os) const override;
+	void changerCouleur(std::ostream& os, const int couleurAffichage) const override;
+	virtual ~Personnage() = default; // Pourquoi cette ligne
+	virtual string obtenirNom() const;
+	virtual string obtenirParution() const;
 
-	string afficher(string texte) override;
-	Couleur changerCouleur(Couleur couleur, int couleurAffichage) override;
 private:
 	string nom_;
+	string parution_;
 };
