@@ -1,15 +1,15 @@
 #pragma once
 #include <string>
-#include <Affichable.hpp>
+#include "Personnage.hpp"
 
 using namespace std;
 
-class Heros: public Affichable
+// TODO
+class Heros: public Personnage
 {
 public:
 	Heros();
-	string afficher(string texte) const override;
-	Couleur changerCouleur(Couleur couleur) const override;
+	
 private:
 	string nom;
 };
