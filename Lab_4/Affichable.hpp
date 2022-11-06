@@ -6,11 +6,10 @@ using namespace std;
 
 class Affichable {
 public:
-	// Des méthodes virtuelles pures -> créent interface pour travailler
+	virtual ~Affichable() = default;
 	virtual string afficher(string texte) = 0;
-	virtual Couleur changerCouleur(Couleur couleur) = 0; // 2e paramètre??
-
-	// Destructeur par défaut à faire
+	// couleurAffichage peut aussi etre char our char[]
+	virtual Couleur changerCouleur(Couleur couleur, int couleurAffichage) = 0;
 
 private:
 	Couleur couleur;
