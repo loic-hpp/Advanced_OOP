@@ -9,7 +9,7 @@ public:
 	Personnage(string& nom, string& parution);
 	void afficher(std::ostream& os) const override;
 	void changerCouleur(std::ostream& os, const int couleurAffichage) const override;
-	virtual ~Personnage() = default; // Pourquoi cette ligne
+	virtual ~Personnage() = default;
 	virtual string obtenirNom() const;
 	virtual string obtenirParution() const;
 
