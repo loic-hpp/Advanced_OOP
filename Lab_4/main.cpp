@@ -1,4 +1,11 @@
-﻿#include "lectureBinaire.hpp"
+﻿//	Description: Programme permettant de vérifier le comportement polymorphique
+//	des classes Vilain, Hero, VilainHero dans un vecteur de personnages
+//	Fichier:  main.cpp
+//	Auteurs partiels (seulement des TODOS): Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	07 novembre 2022
+//	Créé le 26 octobre 2022
+
+#include "lectureBinaire.hpp"
 #include <fstream>
 #include <sstream>
 #include <cassert>
@@ -11,6 +18,8 @@
 
 const std::string TRAIT =
 "═════════════════════════════════════════════════════════════════════════";
+const std::string SEPARATION =
+"-------------------------------------------------------------------------";
 
 using namespace std;
 
@@ -94,11 +103,12 @@ int main()
 
 	vector <unique_ptr< Vilain >> listeVilain = lireVilain();
 	vector <unique_ptr< Heros >> listeHero = lireHeros();
-	//afficherVilain(listeVilain);
-	//afficherHero(listeHero);
 
+	// TEST CHANGER COULEUR POUR VILAIN HERO
+	cout << "TEST CHANGER COULEUR POUR VILAIN HERO";
 	VilainHeros vilainhero(*listeHero[0].get(), *listeVilain[2].get());
 	vilainhero.changerCouleur(cout, "\033[96m");
+	cout << endl<<SEPARATION<<endl;
 
 	vector <unique_ptr< Personnage >> listePersonnage;
 	for (size_t i = 0; i < listeVilain.size(); i++)
@@ -106,16 +116,11 @@ int main()
 	for (size_t i = 0; i < listeHero.size(); i++)
 		listePersonnage.push_back(move(listeHero[i]));
 	listePersonnage.push_back(make_unique<VilainHeros>(vilainhero));
+
+	// AFFICHAGE POLYMORPHIQUE DES OBJETS DANS UN VECTEUR DE PERSONNAGES
+	cout << "AFFICHAGE POLYMORPHIQUE DES OBJETS DANS UN VECTEUR DE PERSONNAGES"
+		<< endl << "Vilain en rouge, Heros en bleu, VilainHero en mauve";
 	for (size_t i = 0; i < listePersonnage.size(); i++)
 		cout << *listePersonnage[i].get() << endl << TRAIT << endl;
-
-		
-	// Trait de separation
-
-	// Ouverture des fichiers binaires
-	ifstream fichierHeros = ouvrirFichierBinaire("heros.bin");
-	ifstream fichierVilains = ouvrirFichierBinaire("vilains.bin");
-
-	//TODO: Votre code pour le main commence ici (mais vous pouvez aussi ajouter/modifier du code avant si nécessaire)
 
 }

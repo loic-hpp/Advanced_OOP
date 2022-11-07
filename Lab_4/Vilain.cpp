@@ -1,3 +1,9 @@
+//	Description: Implémentation de la classe Vilain
+//	Fichier:  Vilain.cpp
+//	Auteurs : Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	07 novembre 2022
+//	Créé le 26 octobre 2022
+
 #include "Vilain.hpp"
 
 Vilain::Vilain(const std::string& nom, const std::string& parution, const std::string& objectif) : 
@@ -13,7 +19,7 @@ Vilain::Vilain(const Vilain& vilain) : Personnage(vilain.getNom(), vilain.getPar
 
 void Vilain::afficher(std::ostream& os) const
 {
-	changerCouleur(os, "\033[91m");
+	changerCouleur(os, ROUGE);
 	
 }
 

@@ -1,3 +1,9 @@
+//	Description: Définition de la classe interface Affichable
+//	Fichier: Affichable.hpp
+//	Auteurs  Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	07 novembre 2022
+//	Créé le 26 octobre 2022
+
 #pragma once
 #include <iostream>
 #include <vector>

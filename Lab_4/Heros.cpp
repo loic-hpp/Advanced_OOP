@@ -1,3 +1,9 @@
+//	Description: Implémentation de la classe Heros
+//	Fichier:  Heros.cpp
+//	Auteurs : Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	07 novembre 2022
+//	Créé le 26 octobre 2022
+
 #include "Heros.hpp"
 
 Heros::Heros(const std::string& nom, const std::string& parution, const std::string& ennemi) : 
@@ -14,8 +20,8 @@ Heros::Heros(const Heros& hero) : Personnage(hero.getNom(), hero.getParution())
 
 void Heros::afficher(std::ostream& os) const
 {
-	changerCouleur(os, "\033[94m");
-	afficherAlie(os, "\033[94m");
+	changerCouleur(os, BLEU);
+	afficherAlie(os, BLEU);
 }
 
 void Heros::changerCouleur(std::ostream& os, const std::string& couleur) const
