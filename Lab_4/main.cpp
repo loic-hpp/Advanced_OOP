@@ -1,9 +1,9 @@
 ﻿//	Description: Programme permettant de vérifier le comportement polymorphique
-//	des classes Vilain, Hero, VilainHero dans un vecteur de personnages
+//	des classes Vilain, Hero et VilainHero dans un vecteur de personnages
 //	Fichier:  main.cpp
 //	Auteurs partiels (seulement des TODOS): Rodrigo A. Merino Martel et Loïc Nguemegne Temena
 //	Date	07 novembre 2022
-//	Créé le 26 octobre 2022
+//	Créé le 8 novembre 2022
 
 #include "lectureBinaire.hpp"
 #include <fstream>
@@ -79,7 +79,7 @@ vector <unique_ptr< Heros >> lireHeros() {
 		for (size_t j = 0; j < nAlie; j++) {
 			alies.push_back(lireString(fichier));
 		}
-		listeHero[i].get()->setListeAlie(alies);
+		listeHero[i].get()->mettreListeAllies(alies);
 	}
 	return listeHero;
 }
@@ -92,13 +92,13 @@ void afficherHero(const vector<unique_ptr<Heros>>& heros) {
 
 int main()
 {
-	#pragma region "Bibliothèque du cours"
+#pragma region "Bibliothèque du cours"
 	// Permet sous Windows les "ANSI escape code" pour changer de couleur
 	// https://en.wikipedia.org/wiki/ANSI_escape_code ; les consoles Linux/Mac
 	// les supportent normalement par défaut.
 	bibliotheque_cours::activerCouleursAnsi();
-	#pragma endregion
-	
+#pragma endregion
+
 	testsPourCouvertureLectureBinaire();
 
 	vector <unique_ptr< Vilain >> listeVilain = lireVilain();
@@ -108,7 +108,7 @@ int main()
 	cout << "TEST CHANGER COULEUR POUR VILAIN HERO";
 	VilainHeros vilainhero(*listeHero[0].get(), *listeVilain[2].get());
 	vilainhero.changerCouleur(cout, "\033[96m");
-	cout << endl<<SEPARATION<<endl;
+	cout << endl << SEPARATION << endl;
 
 	vector <unique_ptr< Personnage >> listePersonnage;
 	for (size_t i = 0; i < listeVilain.size(); i++)
