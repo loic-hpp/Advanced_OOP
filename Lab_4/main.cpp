@@ -1,4 +1,10 @@
-﻿#include "lectureBinaire.hpp"
+﻿//	Implementation de la classe main pour tester classes crées.
+//	Fichier:  Liste.hpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	8 novembre 2022
+//	Créé le 6 novembre 2022
+
+#include "lectureBinaire.hpp"
 #include <fstream>
 #include <sstream>
 #include <cassert>

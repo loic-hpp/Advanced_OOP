@@ -34,7 +34,7 @@ void Heros::afficherAllies(ostream& os, int& couleur) const
 {
 	os <<
 		"Allies : ";
-	for (int i = 0; i < nomAllies_.size(); i++) 
+	for (int i = 0; i < nomAllies_.size(); i++)
 	{
 		os << "\t" << nomAllies_[i];
 	}

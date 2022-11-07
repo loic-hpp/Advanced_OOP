@@ -1,3 +1,9 @@
+//	Implementation de la classe Personnage.
+//	Fichier:  Liste.hpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	8 novembre 2022
+//	Créé le 6 novembre 2022
+
 #include "Personnage.hpp"
 
 Personnage::Personnage(string& nom, string& parution)
