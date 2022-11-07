@@ -20,8 +20,7 @@ public:
 	string obtenirNom() const override;
 	string obtenirParution() const override;
 
-	virtual void obtenirObjectif() const;
-	virtual void afficherObjectif(ostream& os, int& couleur) const;
+	virtual string obtenirObjectif() const;
 
 	virtual ~Villain() = default;
 private:

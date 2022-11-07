@@ -15,30 +15,17 @@ Villain::Villain(string& nom, string& parution, string& objectif) :
 
 void Villain::afficher(std::ostream& os) const
 {
-
+	changerCouleur(os, 199);
 }
 
 void Villain::changerCouleur(std::ostream& os, const int couleurAffichage) const
 {
-
+	os <<
+		"Objectif : " << obtenirObjectif() << "\n";
+	// Code couleur qqch.
 }
 
-string Villain::obtenirNom() const
+string Villain::obtenirObjectif() const
 {
-
-}
-
-string Villain::obtenirParution() const
-{
-
-}
-
-void Villain::obtenirObjectif() const
-{
-
-}
-
-void Villain::afficherObjectif(ostream& os, int& couleur) const
-{
-
+	return objectif_;
 }
