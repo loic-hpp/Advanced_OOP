@@ -10,7 +10,7 @@ VilainHeros::VilainHeros(const Heros& hero, const Vilain& vilain) :
 	Heros(hero),
 	Vilain(vilain),
 	Personnage(vilain.getNom() + '-' + hero.getNom(), vilain.getParution() + '-' + hero.getParution()),
-	missionSpeciale_(vilain.getObjectif() + "dans le monde de " + hero.getParution())
+	missionSpeciale_(vilain.getObjectif() + " dans le monde de " + hero.getParution())
 
 {
 }
