@@ -79,7 +79,7 @@ vector <unique_ptr< Heros >> lireHeros() {
 		for (size_t j = 0; j < nAlie; j++) {
 			alies.push_back(lireString(fichier));
 		}
-		listeHero[i].get()->setListeAlie(alies);
+		listeHero[i].get()->mettreAllies(alies);
 	}
 	return listeHero;
 }
