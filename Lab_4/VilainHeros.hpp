@@ -7,13 +7,13 @@
 #pragma once
 #include <string>
 #include "Heros.hpp"
-#include "Villain.hpp"
+#include "Vilain.hpp"
 
 // TODO: Pourquoi cette erreur?
-class VillainHeros : public Heros, public Villain
+class VilainHeros : public Heros, public Vilain
 {
 public:
-	VillainHeros(const Heros& hero, const Villain& villain);
+	VilainHeros(const Heros& hero, const Vilain& villain);
 	virtual void afficher(std::ostream& os) const override;
 	virtual void changerCouleur(std::ostream& os, const int couleurAffichage) const override;
 

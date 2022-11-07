@@ -11,10 +11,10 @@
 
 using namespace std;
 
-class Villain : virtual public Personnage
+class Vilain : virtual public Personnage
 {
 public:
-	Villain(string& nom, string& parution, string& objectif);
+	Vilain(string& nom, string& parution, string& objectif);
 	void afficher(std::ostream& os) const override;
 	void changerCouleur(std::ostream& os, const int couleurAffichage) const override;
 	string obtenirNom() const override;
@@ -22,7 +22,7 @@ public:
 
 	virtual string obtenirObjectif() const;
 
-	virtual ~Villain() = default;
+	virtual ~Vilain() = default;
 private:
 	string objectif_;
 };
