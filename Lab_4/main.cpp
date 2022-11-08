@@ -101,26 +101,36 @@ int main()
 
 	testsPourCouvertureLectureBinaire();
 
+	// CREATION DES INSTANCES
 	vector <unique_ptr< Vilain >> listeVilain = lireVilain();
 	vector <unique_ptr< Heros >> listeHero = lireHeros();
-
-	// TEST CHANGER COULEUR POUR VILAIN HERO
-	cout << "TEST CHANGER COULEUR POUR VILAIN HERO";
 	VilainHeros vilainhero(*listeHero[0].get(), *listeVilain[2].get());
-	vilainhero.changerCouleur(cout, "\033[96m");
+
+	// AFFICHAGE VILAINHERO SEUL
+	cout << "AFFICHAGE VILAINHERO SEUL" << endl;
+	cout << vilainhero;
+	cout << endl << SEPARATION << endl;
+	
+	// AFFICHAGE VECTEUR DE VILAINS
+	cout << endl << "AFFICHAGE VECTEUR DE VILAINS" << endl;
+	afficherVilain(listeVilain);
+	cout << endl << SEPARATION << endl;
+	// AFFICHAGE VECTEUR DE HEROS
+	cout << endl << "AFFICHAGE VECTEUR DE HEROS" << endl;
+	afficherHero(listeHero);
 	cout << endl << SEPARATION << endl;
 
-	vector <unique_ptr< Personnage >> listePersonnage;
+	vector<Personnage*> listePersonnage;
 	for (size_t i = 0; i < listeVilain.size(); i++)
-		listePersonnage.push_back(move(listeVilain[i]));
+		listePersonnage.push_back(listeVilain[i].get());
 	for (size_t i = 0; i < listeHero.size(); i++)
-		listePersonnage.push_back(move(listeHero[i]));
-	listePersonnage.push_back(make_unique<VilainHeros>(vilainhero));
+		listePersonnage.push_back(listeHero[i].get());
+	listePersonnage.push_back(&vilainhero);
 
 	// AFFICHAGE POLYMORPHIQUE DES OBJETS DANS UN VECTEUR DE PERSONNAGES
 	cout << "AFFICHAGE POLYMORPHIQUE DES OBJETS DANS UN VECTEUR DE PERSONNAGES"
 		<< endl << "Vilain en rouge, Heros en bleu, VilainHero en mauve";
 	for (size_t i = 0; i < listePersonnage.size(); i++)
-		cout << *listePersonnage[i].get() << endl << TRAIT << endl;
+		cout << *listePersonnage[i] << endl << TRAIT << endl;
 
 }

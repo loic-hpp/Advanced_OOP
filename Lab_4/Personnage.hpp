@@ -18,6 +18,8 @@ public:
 	virtual ~Personnage() = default;
 	virtual std::string obtenirNom()const { return nom_; }
 	virtual std::string obtenirParution()const { return parution_; }
+	Personnage(const Personnage&) = delete;
+	Personnage& operator= (const Personnage&) = delete;
 private:
 	std::string nom_;
 	std::string parution_;
