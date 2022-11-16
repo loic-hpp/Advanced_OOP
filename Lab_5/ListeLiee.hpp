@@ -56,8 +56,7 @@ public:
 	}
 	//TODO: Ajouter ce qu'il manque pour que les boucles sur intervalles fonctionnent sur une ListeLiee.
 	bool operator==(const Iterateur<T>& it) const = default;
-private:
-	Noeud<T>* position_;
+
 	void avancer()
 	{
 		Expects(position_ != nullptr);
@@ -71,6 +70,9 @@ private:
 		//TODO: Changez la position de l'itérateur pour le noeud précédent
 		position_ = position_->precedent_;
 	}
+
+private:
+	Noeud<T>* position_;
 };
 
 template<typename T>
@@ -141,8 +143,7 @@ public:
 		//    (précédent de l'itérateur) afin qu'il point vers le noeud créé.
 		// 5. Incrémentez la taille de la liste.
 		// 6. Retournez un nouvel itérateur initialisé au nouveau noeud.
-		if (it.position_ == Noeud<T>::passeFin
-			or it.position_ == queue_) {
+		if (it.position_ == Noeud<T>::passeFin) {
 			push_back(item);
 			return iterator(queue_);
 		}
@@ -195,7 +196,6 @@ public:
 private:
 	gsl::owner<Noeud<T>*> tete_;  //NOTE: Vous pouvez changer le type si vous voulez.
 
-	//Noeud<T>* tete_;
 	Noeud<T>* queue_;
 	unsigned taille_;
 };

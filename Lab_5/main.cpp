@@ -15,6 +15,8 @@
 #include "bibliotheque_cours.hpp"
 #include"ListeLiee.hpp"
 #include <list>
+#include <set>
+#include <map>
 using namespace std;
 using namespace iter;
 
@@ -127,42 +129,75 @@ int main()
 	#endif
 	//}
 
-	Noeud<int> ab;
-	Iterateur<int> bc;
-	ListeLiee<int> liste;
-	liste.push_back(5);
-	liste.push_back(6);
-	liste.insert(liste.begin(), 10);
-	auto a = liste.begin();
-	++a;
-	liste.erase(a);
-
-	/*list<int> al;
-	al.push_back(1);
-	al.push_back(2);
-	al.insert(al.end(), 3);*/
-
-	cout << "sdfasd";
-	
 	//TODO: Transférez les héros du vecteur heros dans une ListeLiee.
+	ListeLiee<Heros> listeHeros;
+	for (int i = 0; i < heros.size(); i++)
+		listeHeros.push_back(heros[i]);
 
 	//TODO: Créez un itérateur sur la liste liée à la position du héros Alucard.  Servez-vous de la fonction trouverParNom définie plus haut.
-
+	ListeLiee<Heros>::iterator iterAlucard = trouverParNom(listeHeros, "Alucard");
 	//TODO: Servez-vous de l'itérateur créé précédemment pour trouver l'héroine Aya Brea, en sachant qu'elle se trouve plus loin dans la liste, en itérant sur les éléments.
-
+	ListeLiee<Heros>::iterator iterAya;
+	for (ListeLiee<Heros>::iterator it = iterAlucard; it != listeHeros.end(); ++it) {
+		if ((*it).getNom() == "Aya Brea") {
+			iterAya = it;
+			break;
+		}
+	}
 	//TODO: Ajouter un hero bidon à la liste avant Aya Brea en vous servant de l'itérateur.
+	listeHeros.insert(iterAya, Heros("Bidon", "Bidon", "Bidon"));
 	//TODO: Assurez-vous que la taille de la liste est correcte après l'ajout.
-
+	cout << "\nLanouvelle devrait être 10 et sa valeur est:\t"<<listeHeros.size() << endl;
 	//TODO: Reculez votre itérateur jusqu'au héros Mario et effacez-le en utilisant l'itérateur, puis affichez le héros suivant dans la liste (devrait êter "Naked Snake/John").
+	ListeLiee<Heros>::iterator iterMario = trouverParNom(listeHeros, "Mario");
+	iterMario = listeHeros.erase(iterMario);
+	cout << "\n" << (*iterMario).getNom() << endl;
 	//TODO: Assurez-vous que la taille de la liste est correcte après le retrait.
-
+	cout << "\nLanouvelle devrait être 9 et sa valeur est:\t" << listeHeros.size() << endl;
+	cout << "\n";
 	//TODO: Effacez le premier élément de la liste.
+	listeHeros.erase(listeHeros.begin());
 
 	//TODO: Affichez votre liste de héros en utilisant un itérateur. La liste débute avec le héros Randi, n'a pas Mario, et le précédent de "Aya Brea" est ce que vous avez inséré. Servez-vous des methodes begin et end de la liste...
-
+	for (ListeLiee<Heros>::iterator it = listeHeros.begin(); it != listeHeros.end(); ++it) {
+		(*it).afficher(cout);
+		cout << "\n";
+	}
 	//TODO: Refaite le même affichage mais en utilisant une simple boucle "for" sur intervalle.
+	cout << "\n" << trait << "\n";
+	ListeLiee<Heros>::iterator it = listeHeros.begin();
+	for (unsigned i = 0; i < listeHeros.size(); i++) {
+		(*it).afficher(cout);
+		cout << "\n";
+		++it;
+	}
 
 	//TODO: Utilisez un conteneur pour avoir les héros en ordre alphabétique (voir point 2 de l'énoncé).
+	struct MaComparaison {
+		bool operator() (const Heros& h1, const Heros& h2) const
+		{
+			return h1.getNom() < h2.getNom();
+		}
+	};
 
+	set<Heros, MaComparaison> ensembleHeros;
+	for (int i = 0; i < heros.size(); i++)
+		ensembleHeros.insert(heros[i]);
+
+	cout << "\n" << trait << "\n";
+
+	for (auto& hero : ensembleHeros)
+		if (hero.getNom() == "Mario")
+			hero.afficher(cout);
+
+// 2-2) La complexité moyenne de la recherche dans un ensemble trié est O(log(n))
+// Car vu que l'ensemble est trié la probabilité qu'il trouve l'élément avant d'atteindre
+// la fin de l'ensemble est très grande ce n'est pas une complexité O(n) et ce n'est pas
+// non plus une complexité O(1) par élimination, on conclut donc qu'il s'agit d'une 
+// complexité O(log(n))
+ 
+// 2-3) C'est l'ensemble qui permet de faire une recherche plus rapide par nom
+// 	Car l'ensemble est trié alors que la liste n'est pas triée et est non contigue donc la probabilité
+// 	d'avoir a itérer plusieurs fois sur la liste pour retrouver le héros est plus grande
 	//TODO: Assurez-vous de n'avoir aucune ligne non couverte dans les classes pour la liste liée.  Il peut y avoir des lignes non couvertes dans les personnages...
 }
