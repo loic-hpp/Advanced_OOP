@@ -1,4 +1,10 @@
-﻿#pragma once
+﻿//	Description: Implementation des classes Noeud, Iterateur et ListeLiee.
+//	Fichier: ListeLiee.hpp
+//	Auteurs partiels (TODOS): Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	21 novembre 2022
+//	Créé le 15 novembre 2022
+
+#pragma once
 #include "gsl/gsl_assert"
 #include "gsl/pointers"
 
@@ -10,13 +16,13 @@ struct Noeud
 {
 	friend class ListeLiee<T>;
 	friend class Iterateur<T>;
-public:	
+public:
 	//TODO: Constructeur(s)
-	Noeud(const Noeud& autre) : 
+	Noeud(const Noeud& autre) :
 		donnee_(autre.donnee_),
-	suivant_(autre.suivant_),
-	precedent_(autre.precedent_)
-	{	
+		suivant_(autre.suivant_),
+		precedent_(autre.precedent_)
+	{
 	}
 	Noeud(const T& donnee = T()) {
 		donnee_ = donnee;
@@ -38,8 +44,8 @@ class Iterateur
 	friend class ListeLiee<T>;
 public:
 	//TODO: Constructeur(s).
-	Iterateur(const Iterateur& autre) : position_(autre.position_){}
-	Iterateur(Noeud<T>* position = Noeud<T>::passeFin): position_(position){}
+	Iterateur(const Iterateur& autre) : position_(autre.position_) {}
+	Iterateur(Noeud<T>* position = Noeud<T>::passeFin) : position_(position) {}
 	Iterateur& operator++ () {
 		avancer();
 		return *this;
@@ -88,26 +94,26 @@ public:
 		queue_ = Noeud<T>::passeFin;
 		taille_ = 0;
 	}
-	
+
 	~ListeLiee()
 	{
 		//TODO: Enlever la tête à répétition jusqu'à ce qu'il ne reste aucun élément.
 		// Pour enlever la tête, 
 		// 1. La tête doit devenir le suivant de la tête actuelle.
 		// 2. Ne pas oublier de désallouer le noeud de l'ancienne tête (si pas fait automatiquement).
-		for (iterator it= begin(); it!=end(); ++it) {
-		tete_ = it.position_;
-		auto sauvegardeSuivant = tete_->suivant_;
-		delete tete_;
-		it.position_->suivant_ = sauvegardeSuivant;
+		for (iterator it = begin(); it != end(); ++it) {
+			tete_ = it.position_;
+			auto sauvegardeSuivant = tete_->suivant_;
+			delete tete_;
+			it.position_->suivant_ = sauvegardeSuivant;
 		}
 	}
 
-	bool estVide() const  { return taille_ == 0; }
+	bool estVide() const { return taille_ == 0; }
 	unsigned size() const { return taille_; }
 	//NOTE: to_address (C++20) permet que ce même code fonctionne que vous utilisiez des pointeurs bruts ou intelligents (ça prend le pointeur brut associé au pointeur intelligent, s'il est intelligent).
-	iterator begin()  { return {to_address(tete_)}; }
-	iterator end()    { return {to_address(queue_->suivant_)}; }
+	iterator begin() { return { to_address(tete_) }; }
+	iterator end() { return { to_address(queue_->suivant_) }; }
 
 	// Ajoute à la fin de la liste.
 	void push_back(const T& item)
@@ -147,19 +153,19 @@ public:
 			push_back(item);
 			return iterator(queue_);
 		}
-		else{
-		Noeud<T>* apres = it.position_;
-		Noeud<T>* avant = apres->precedent_;
-		Noeud<T>* noeud = new Noeud<T>(item);
-		noeud->suivant_ = apres;
-		noeud->precedent_ = avant;
-		apres->precedent_ = noeud;
-		if (avant == Noeud<T>::passeFin)
-			tete_ = noeud;
-		else
-			avant->suivant_ = noeud;
-		taille_++;
-		return iterator(noeud);
+		else {
+			Noeud<T>* apres = it.position_;
+			Noeud<T>* avant = apres->precedent_;
+			Noeud<T>* noeud = new Noeud<T>(item);
+			noeud->suivant_ = apres;
+			noeud->precedent_ = avant;
+			apres->precedent_ = noeud;
+			if (avant == Noeud<T>::passeFin)
+				tete_ = noeud;
+			else
+				avant->suivant_ = noeud;
+			taille_++;
+			return iterator(noeud);
 		}
 	}
 
