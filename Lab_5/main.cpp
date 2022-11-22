@@ -192,18 +192,22 @@ int main()
 
 	cout << "\n" << trait << "\n";
 
-	for (auto& hero : ensembleHeros)
-		if (hero.getNom() == "Mario")
-			hero.afficher(cout);
+	// 2-1) Retchercher un Heros dans mon set, pour cela, on besoin
+	// passer un personnage à la fonction find de notre Set
+	//Uniquement les nom sont comparés donc nous passons un héros bidon
+	(ensembleHeros.find(Heros("Mario", "bidon", "bidon")))->afficher(cout);
 
-	// 2.2) La complexité moyenne de la recherche dans un ensemble trié est O(log(n))
-	// Car vu que l'ensemble est trié la probabilité qu'il trouve l'élément avant d'atteindre
-	// la fin de l'ensemble est très grande ce n'est pas une complexité O(n) et ce n'est pas
+
+	// 2-2) La complexité moyenne de la recherche dans un ensemble trié est O(log(n)) lorsqu'on utilise la fonction find
+	//  vu que l'ensemble est trié, l'ensemble utilise l'algorithme de dichotomie pour la recherche
+	// L'ensemble est divisé en plusieurs noeud et en partant d'une tête on suit un chemin pour retrouver l'élément 
+	// la recherche dans l'ensemble avec la méthode find n'itère pas sur tous les éléments
+	// ce n'est donc pas une complexité O(n) et ce n'est pas
 	// non plus une complexité O(1) par élimination, on conclut donc qu'il s'agit d'une 
 	// complexité O(log(n))
-
-	// 2.3) C'est l'ensemble qui permet de faire une recherche plus rapide par nom
-	// 	Car l'ensemble est trié alors que la liste n'est pas triée et est non contigue donc la probabilité
-	// 	d'avoir a itérer plusieurs fois sur la liste pour retrouver le héros est plus grande
+	// 
+	// 2-3) C'est l'ensemble qui permet de faire une recherche plus rapide par nom
+	// Car l'ensemble est trié alors que la liste n'est pas triée et est non contigue donc la probabilité
+	// d'avoir a itérer plusieurs fois sur la liste pour retrouver le héros est plus grande
 		//TODO: Assurez-vous de n'avoir aucune ligne non couverte dans les classes pour la liste liée.  Il peut y avoir des lignes non couvertes dans les personnages...
 }
