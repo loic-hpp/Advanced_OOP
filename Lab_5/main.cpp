@@ -197,7 +197,6 @@ int main()
 	//Uniquement les nom sont comparés donc nous passons un héros bidon
 	(ensembleHeros.find(Heros("Mario", "bidon", "bidon")))->afficher(cout);
 
-
 	// 2-2) La complexité moyenne de la recherche dans un ensemble trié est O(log(n)) lorsqu'on utilise la fonction find
 	//  vu que l'ensemble est trié, l'ensemble utilise l'algorithme de dichotomie pour la recherche
 	// L'ensemble est divisé en plusieurs noeud et en partant d'une tête on suit un chemin pour retrouver l'élément 
