@@ -1,4 +1,14 @@
+<<<<<<< HEAD
 ﻿#pragma once
+=======
+﻿//	Description: Implementation des classes Noeud, Iterateur et ListeLiee.
+//	Fichier: ListeLiee.hpp
+//	Auteurs partiels (TODOS): Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	21 novembre 2022
+//	Créé le 15 novembre 2022
+
+#pragma once
+>>>>>>> main
 #include "gsl/gsl_assert"
 #include "gsl/pointers"
 
@@ -11,9 +21,31 @@ struct Noeud
 	friend class ListeLiee<T>;
 	friend class Iterateur<T>;
 public:
+<<<<<<< HEAD
 	//TODO: Constructeur(s).
 private:
 	//TODO: Attributs d'un noeud.
+=======
+	//TODO: Constructeur(s)
+	Noeud(const Noeud& autre) :
+		donnee_(autre.donnee_),
+		suivant_(autre.suivant_),
+		precedent_(autre.precedent_)
+	{
+	}
+	Noeud(const T& donnee = T()) {
+		donnee_ = donnee;
+		suivant_ = passeFin;
+		precedent_ = passeFin;
+	}
+
+private:
+	//TODO: Attributs d'un noeud
+	T donnee_;
+	Noeud* suivant_;
+	Noeud* precedent_;
+	inline static constexpr Noeud* passeFin = nullptr;
+>>>>>>> main
 };
 
 template<typename T>
@@ -22,6 +54,7 @@ class Iterateur
 	friend class ListeLiee<T>;
 public:
 	//TODO: Constructeur(s).
+<<<<<<< HEAD
 	void avancer()
 	{
 		Expects(position_ != nullptr);
@@ -33,12 +66,44 @@ public:
 		Expects(position_ != nullptr);
 		//TODO: Changez la position de l'itérateur pour le noeud précédent
 	}
+=======
+	Iterateur(const Iterateur& autre) : position_(autre.position_) {}
+	Iterateur(Noeud<T>* position = Noeud<T>::passeFin) : position_(position) {}
+	Iterateur& operator++ () {
+		avancer();
+		return *this;
+	}
+
+	Iterateur& operator-- () {
+		avancer();
+		return *this;
+	}
+
+>>>>>>> main
 	T& operator*()
 	{
 		return position_->donnee_;
 	}
 	//TODO: Ajouter ce qu'il manque pour que les boucles sur intervalles fonctionnent sur une ListeLiee.
 	bool operator==(const Iterateur<T>& it) const = default;
+<<<<<<< HEAD
+=======
+
+	void avancer()
+	{
+		Expects(position_ != nullptr);
+		//TODO: Changez la position de l'itérateur pour le noeud suivant
+		position_ = position_->suivant_;
+	}
+	void reculer()
+	{
+		//NOTE: On ne demande pas de supporter de reculer à partir de l'itérateur end().
+		Expects(position_ != nullptr);
+		//TODO: Changez la position de l'itérateur pour le noeud précédent
+		position_ = position_->precedent_;
+	}
+
+>>>>>>> main
 private:
 	Noeud<T>* position_;
 };
@@ -51,12 +116,22 @@ public:
 	using iterator = Iterateur<T>;  // Définit un alias au type, pour que ListeLiee<T>::iterator corresponde au type de son itérateur.
 
 	//TODO: La construction par défaut doit créer une liste vide valide.
+<<<<<<< HEAD
+=======
+	ListeLiee() {
+		tete_ = Noeud<T>::passeFin;
+		queue_ = Noeud<T>::passeFin;
+		taille_ = 0;
+	}
+
+>>>>>>> main
 	~ListeLiee()
 	{
 		//TODO: Enlever la tête à répétition jusqu'à ce qu'il ne reste aucun élément.
 		// Pour enlever la tête, 
 		// 1. La tête doit devenir le suivant de la tête actuelle.
 		// 2. Ne pas oublier de désallouer le noeud de l'ancienne tête (si pas fait automatiquement).
+<<<<<<< HEAD
 	}
 
 	bool estVide() const  { return taille_ == 0; }
@@ -64,6 +139,21 @@ public:
 	//NOTE: to_address (C++20) permet que ce même code fonctionne que vous utilisiez des pointeurs bruts ou intelligents (ça prend le pointeur brut associé au pointeur intelligent, s'il est intelligent).
 	iterator begin()  { return {to_address(tete_)}; }
 	iterator end()    { return {to_address(queue_->suivant_)}; }
+=======
+		for (iterator it = begin(); it != end(); ++it) {
+			tete_ = it.position_;
+			auto sauvegardeSuivant = tete_->suivant_;
+			delete tete_;
+			it.position_->suivant_ = sauvegardeSuivant;
+		}
+	}
+
+	bool estVide() const { return taille_ == 0; }
+	unsigned size() const { return taille_; }
+	//NOTE: to_address (C++20) permet que ce même code fonctionne que vous utilisiez des pointeurs bruts ou intelligents (ça prend le pointeur brut associé au pointeur intelligent, s'il est intelligent).
+	iterator begin() { return { to_address(tete_) }; }
+	iterator end() { return { to_address(queue_->suivant_) }; }
+>>>>>>> main
 
 	// Ajoute à la fin de la liste.
 	void push_back(const T& item)
@@ -71,6 +161,19 @@ public:
 		//TODO: Vous devez créer un nouveau noeud en mémoire.
 		//TODO: Si la liste était vide, ce nouveau noeud est la tête et la queue;
 		// autrement, ajustez la queue et pointeur(s) adjacent(s) en conséquence.
+<<<<<<< HEAD
+=======
+		Noeud<T>* noeud = new Noeud<T>(item);
+		if (estVide())
+			tete_ = noeud;
+		else {
+			queue_->suivant_ = noeud;
+			//queue_-­>suivant_ = noeud;
+			noeud->precedent_ = queue_;
+		}
+		queue_ = noeud;
+		taille_++;
+>>>>>>> main
 	}
 
 	// Insère avant la position de l'itérateur.
@@ -89,6 +192,27 @@ public:
 		//    (précédent de l'itérateur) afin qu'il point vers le noeud créé.
 		// 5. Incrémentez la taille de la liste.
 		// 6. Retournez un nouvel itérateur initialisé au nouveau noeud.
+<<<<<<< HEAD
+=======
+		if (it.position_ == Noeud<T>::passeFin) {
+			push_back(item);
+			return iterator(queue_);
+		}
+		else {
+			Noeud<T>* apres = it.position_;
+			Noeud<T>* avant = apres->precedent_;
+			Noeud<T>* noeud = new Noeud<T>(item);
+			noeud->suivant_ = apres;
+			noeud->precedent_ = avant;
+			apres->precedent_ = noeud;
+			if (avant == Noeud<T>::passeFin)
+				tete_ = noeud;
+			else
+				avant->suivant_ = noeud;
+			taille_++;
+			return iterator(noeud);
+		}
+>>>>>>> main
 	}
 
 	// Enlève l'élément à la position it et retourne un itérateur vers le suivant.
@@ -108,6 +232,20 @@ public:
 		//  donc en 2. il se peut qu'il n'y ait pas de précédent et alors c'est
 		//  la tête de liste qu'il faut ajuster.
 		//NOTE: On ne demande pas de supporter d'effacer le dernier élément (c'est similaire au cas pour enlever le premier).
+<<<<<<< HEAD
+=======
+		Noeud<T>* apres = it.position_->suivant_;
+		Noeud<T>* avant = it.position_->precedent_;
+		apres->precedent_ = avant;
+		if (avant == Noeud<T>::passeFin)
+			tete_ = apres;
+		else
+			avant->suivant_ = apres;
+		gsl::owner<Noeud<T>*> proprietaire = it.position_;
+		delete proprietaire;
+		taille_--;
+		return iterator(apres);
+>>>>>>> main
 	}
 
 private:

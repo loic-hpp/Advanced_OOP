@@ -1,9 +1,17 @@
 ﻿//	Description: Programme permettant de vérifier le comportement polymorphique
+<<<<<<< HEAD
 //	des classes Vilain, Hero, VilainHero dans un vecteur de personnages
 //	Fichier:  main.cpp
 //	Auteurs partiels (seulement des TODOS): Rodrigo A. Merino Martel et Loïc Nguemegne Temena
 //	Date	07 novembre 2022
 //	Créé le 26 octobre 2022
+=======
+//	des classes Vilain, Hero et VilainHero dans un vecteur de personnages
+//	Fichier:  main.cpp
+//	Auteurs partiels (seulement des TODOS): Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	07 novembre 2022
+//	Créé le 8 novembre 2022
+>>>>>>> main
 
 #include "lectureBinaire.hpp"
 #include <fstream>
@@ -79,7 +87,11 @@ vector <unique_ptr< Heros >> lireHeros() {
 		for (size_t j = 0; j < nAlie; j++) {
 			alies.push_back(lireString(fichier));
 		}
+<<<<<<< HEAD
 		listeHero[i].get()->mettreAllies(alies);
+=======
+		listeHero[i].get()->mettreListeAllies(alies);
+>>>>>>> main
 	}
 	return listeHero;
 }
@@ -101,6 +113,7 @@ int main()
 
 	testsPourCouvertureLectureBinaire();
 
+<<<<<<< HEAD
 	vector <unique_ptr< Vilain >> listeVilain = lireVilain();
 	vector <unique_ptr< Heros >> listeHero = lireHeros();
 
@@ -116,11 +129,42 @@ int main()
 	for (size_t i = 0; i < listeHero.size(); i++)
 		listePersonnage.push_back(move(listeHero[i]));
 	listePersonnage.push_back(make_unique<VilainHeros>(vilainhero));
+=======
+	// CREATION DES INSTANCES
+	vector <unique_ptr< Vilain >> listeVilain = lireVilain();
+	vector <unique_ptr< Heros >> listeHero = lireHeros();
+	VilainHeros vilainhero(*listeHero[0].get(), *listeVilain[2].get());
+
+	// AFFICHAGE VILAINHERO SEUL
+	cout << "AFFICHAGE VILAINHERO SEUL" << endl;
+	cout << vilainhero;
+	cout << endl << SEPARATION << endl;
+	
+	// AFFICHAGE VECTEUR DE VILAINS
+	cout << endl << "AFFICHAGE VECTEUR DE VILAINS" << endl;
+	afficherVilain(listeVilain);
+	cout << endl << SEPARATION << endl;
+	// AFFICHAGE VECTEUR DE HEROS
+	cout << endl << "AFFICHAGE VECTEUR DE HEROS" << endl;
+	afficherHero(listeHero);
+	cout << endl << SEPARATION << endl;
+
+	vector<Personnage*> listePersonnage;
+	for (size_t i = 0; i < listeVilain.size(); i++)
+		listePersonnage.push_back(listeVilain[i].get());
+	for (size_t i = 0; i < listeHero.size(); i++)
+		listePersonnage.push_back(listeHero[i].get());
+	listePersonnage.push_back(&vilainhero);
+>>>>>>> main
 
 	// AFFICHAGE POLYMORPHIQUE DES OBJETS DANS UN VECTEUR DE PERSONNAGES
 	cout << "AFFICHAGE POLYMORPHIQUE DES OBJETS DANS UN VECTEUR DE PERSONNAGES"
 		<< endl << "Vilain en rouge, Heros en bleu, VilainHero en mauve";
 	for (size_t i = 0; i < listePersonnage.size(); i++)
+<<<<<<< HEAD
 		cout << *listePersonnage[i].get() << endl << TRAIT << endl;
+=======
+		cout << *listePersonnage[i] << endl << TRAIT << endl;
+>>>>>>> main
 
 }
