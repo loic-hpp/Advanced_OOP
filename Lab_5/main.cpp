@@ -200,10 +200,7 @@ int main()
 	// 2-2) La complexité moyenne de la recherche dans un ensemble trié est O(log(n)) lorsqu'on utilise la fonction find
 	//  vu que l'ensemble est trié, l'ensemble utilise l'algorithme de dichotomie pour la recherche
 	// L'ensemble est divisé en plusieurs noeud et en partant d'une tête on suit un chemin pour retrouver l'élément 
-	// la recherche dans l'ensemble avec la méthode find n'itère pas sur tous les éléments
-	// ce n'est donc pas une complexité O(n) et ce n'est pas
-	// non plus une complexité O(1) par élimination, on conclut donc qu'il s'agit d'une 
-	// complexité O(log(n))
+	// la recherche dans l'ensemble avec la méthode find n'itère pas sur tous les éléments.
 	// 
 	// 2-3) C'est l'ensemble qui permet de faire une recherche plus rapide par nom
 	// Car l'ensemble est trié alors que la liste n'est pas triée et est non contigue donc la probabilité
