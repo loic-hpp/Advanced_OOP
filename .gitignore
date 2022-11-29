@@ -21,3 +21,8 @@
 /Lab_6/*
 !/Lab_6/*.cpp
 !/Lab_6/*.hpp
+
+/Projet/*
+!/Projet/*.cpp
+!/Projet/*.hpp
+
