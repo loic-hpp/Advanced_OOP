@@ -1,8 +1,13 @@
-﻿#include <QApplication>
+﻿//	Description: Creation de l'objet maingui.
+//	Fichier: main.cpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	6 decembre 2022
+//	Créé le 25 novembre 2022
+
+#include <QApplication>
 #include <QLabel>
 #include <iostream>
 #include "MainGui.hpp"
-
 
 #if __has_include("bibliotheque_cours.hpp")
 #include "bibliotheque_cours.hpp"
@@ -29,13 +34,11 @@ void initialiserBibliothequeCours([[maybe_unused]] int argc, [[maybe_unused]] ch
 	//NOTE: C'est normal que la couverture de code dans l'Explorateur de tests de Visual Studio ne couvre pas la fin de cette fonction ni la fin du main après l'appel à cette fonction puisqu'il exécute uniquement les tests Google Test dans l'appel ci-dessus.
 }
 
-
-
 int main(int argc, char* argv[])
 {
 	bibliotheque_cours::VerifierFuitesAllocations verifierFuitesAllocations;
 	QApplication app(argc, argv);
-	MainGui maingui;
-	maingui.show();
+	MainGUI mainGUI;
+	mainGUI.show();
 	return app.exec();
 }

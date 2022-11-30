@@ -1,5 +1,10 @@
-#include <string>
+//	Description: Definition de la struct Article.
+//	Fichier: Article.hpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	6 decembre 2022
+//	Créé le 25 novembre 2022
 
+#include <string>
 
 struct Article
 {

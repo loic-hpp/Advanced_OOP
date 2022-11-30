@@ -1,3 +1,9 @@
+//	Description: Definition de la classe mainGUI.
+//	Fichier: mainGUI.hpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	6 decembre 2022
+//	Créé le 25 novembre 2022
+
 #pragma once
 #include <QApplication>
 #include <QLabel>
@@ -20,11 +26,11 @@
 #include <QScrollBar>
 #include <list>
 
-class MainGui :
+class MainGUI :
     public QMainWindow
 {
 public:
-    MainGui(QWidget* parent=nullptr);
+    MainGUI(QWidget* parent=nullptr);
 private:
     void loadItems();
     void setUI();

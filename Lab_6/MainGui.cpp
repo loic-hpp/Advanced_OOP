@@ -1,16 +1,22 @@
+//	Description: Implementation de la classe mainGUI.
+//	Fichier: mainGUI.cpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	6 decembre 2022
+//	Créé le 25 novembre 2022
+
 #include "MainGui.hpp"
 
-MainGui::MainGui(QWidget* parent)
+MainGUI::MainGUI(QWidget* parent)
 {
 	setup();
 }
 
-void MainGui::loadItems()
+void MainGUI::loadItems()
 {
 	itemList->clear();
 } 
 
-void MainGui::setUI()
+void MainGUI::setUI()
 {
 	// Section de gauche
 	// Création du container gauche
@@ -68,13 +74,13 @@ void MainGui::setUI()
 	setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 }
 
-void MainGui::setup()
+void MainGUI::setup()
 {
 	setMenu();
 	setUI();
 }
 
-void MainGui::setMenu()
+void MainGUI::setMenu()
 {
 	QAction* exit = new QAction(tr("E&xit"), this);
 	exit->setShortcuts(QKeySequence::Quit);
@@ -83,7 +89,7 @@ void MainGui::setMenu()
 	fileMenu->addAction(exit);
 }
 
-void MainGui::setListItems()
+void MainGUI::setListItems()
 {
 	itemList = new QListWidget(this);
 	itemList->setSortingEnabled(true);
@@ -91,13 +97,13 @@ void MainGui::setListItems()
 	
 }
 
-QCheckBox* MainGui::addTaxableCheckBox()
+QCheckBox* MainGUI::addTaxableCheckBox()
 {
 	taxableCheckBox = new QCheckBox("&Taxable", this);
 	return taxableCheckBox;
 }
 
-QHBoxLayout* MainGui::setLeftWidgetButton()
+QHBoxLayout* MainGUI::setLeftWidgetButton()
 {
 	add = new QPushButton(this);
 	add->setText("Ajouter");
@@ -113,7 +119,7 @@ QHBoxLayout* MainGui::setLeftWidgetButton()
 	return lefButtonLayout;
 }
 
-QVBoxLayout* MainGui::setRightLayoutEdit()
+QVBoxLayout* MainGUI::setRightLayoutEdit()
 {
 	QLabel* descriptionlabel = new QLabel;
 	descriptionlabel->setText("Description:\t");
@@ -136,7 +142,7 @@ QVBoxLayout* MainGui::setRightLayoutEdit()
 	return rightEditLayout;
 }
 
-QHBoxLayout* MainGui::QlistHeader()
+QHBoxLayout* MainGUI::QlistHeader()
 {
 	QLabel* descriptionHeaderLabel = new QLabel;
 	descriptionHeaderLabel->setText("DESCRIPTION\t");
@@ -151,7 +157,7 @@ QHBoxLayout* MainGui::QlistHeader()
 	return headerLayout;
 }
 
-QVBoxLayout* MainGui::displayPriceLayout()
+QVBoxLayout* MainGUI::displayPriceLayout()
 {
 	QLabel* totalBeforeTaxelabel = new QLabel;
 	totalBeforeTaxelabel->setText("Total av. taxes:\t");
