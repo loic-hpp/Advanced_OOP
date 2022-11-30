@@ -154,7 +154,7 @@ QHBoxLayout* MainGui::QlistHeader()
 QVBoxLayout* MainGui::displayPriceLayout()
 {
 	QLabel* totalBeforeTaxelabel = new QLabel;
-	totalBeforeTaxelabel->setText("Total av taxes:\t");
+	totalBeforeTaxelabel->setText("Total av. taxes:\t");
 	totalBeforeTaxe = new QLineEdit;
 	totalBeforeTaxe->setReadOnly(true);
 	totalBeforeTaxe->resize(10, totalBeforeTaxe->height());
@@ -165,7 +165,7 @@ QVBoxLayout* MainGui::displayPriceLayout()
 	totalBeforeTaxeLayout->addWidget(totalBeforeTaxe, 0, Qt::AlignRight);
 
 	QLabel* totalTaxelabel = new QLabel;
-	totalTaxelabel->setText("Total Taxes:\t");
+	totalTaxelabel->setText("Total taxes:\t");
 	totalTaxe = new QLineEdit;
 	totalTaxe->setReadOnly(true);
 	QHBoxLayout* totalTaxelLayout = new QHBoxLayout;
