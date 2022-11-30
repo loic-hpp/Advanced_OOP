@@ -22,6 +22,7 @@ void MainGui::setUI()
 
 
 	//Ajout des élément du Widget gauche
+	displayLeftLayout->addLayout(QlistHeader());
 	displayLeftLayout->addWidget(itemList);
 	displayLeftLayout->addWidget(horizontalFrameLine);
 	displayLeftLayout->addLayout(setLeftWidgetButton());
@@ -34,9 +35,13 @@ void MainGui::setUI()
 
 	//Section de droite
 	QVBoxLayout* displayRightLayout = new QVBoxLayout;
-	displayRightLayout->addLayout(setRightWidgetEdit());
-	displayRightLayout->addWidget(addTaxableCheckBox());
-	displayRightLayout->addLayout(displayPriceWidget());
+	QWidget* widgetRightLayoutEdit = new QWidget;
+	widgetRightLayoutEdit->setLayout(setRightLayoutEdit());
+	QWidget* widgetPriceLayout = new QWidget;
+	widgetPriceLayout->setLayout(displayPriceLayout());
+
+	displayRightLayout->addWidget(widgetRightLayoutEdit, 0, Qt::AlignTop);
+	displayRightLayout->addWidget(widgetPriceLayout,0 , Qt::AlignBottom);
 
 	//Mettre la droite et la gauche ensemble
 	QVBoxLayout* mainLayout = new QVBoxLayout;
@@ -83,6 +88,7 @@ void MainGui::setListItems()
 	itemList = new QListWidget(this);
 	itemList->setSortingEnabled(true);
 	
+	
 }
 
 QCheckBox* MainGui::addTaxableCheckBox()
@@ -107,7 +113,7 @@ QHBoxLayout* MainGui::setLeftWidgetButton()
 	return lefButtonLayout;
 }
 
-QVBoxLayout* MainGui::setRightWidgetEdit()
+QVBoxLayout* MainGui::setRightLayoutEdit()
 {
 	QLabel* descriptionlabel = new QLabel;
 	descriptionlabel->setText("Description:\t");
@@ -126,35 +132,53 @@ QVBoxLayout* MainGui::setRightWidgetEdit()
 	QVBoxLayout* rightEditLayout = new QVBoxLayout;
 	rightEditLayout->addLayout(descriptionLayout);
 	rightEditLayout->addLayout(priceLayout);
+	rightEditLayout->addWidget(addTaxableCheckBox(), 0, Qt::AlignRight);
 	return rightEditLayout;
 }
 
-QVBoxLayout* MainGui::displayPriceWidget()
+QHBoxLayout* MainGui::QlistHeader()
+{
+	QLabel* descriptionHeaderLabel = new QLabel;
+	descriptionHeaderLabel->setText("DESCRIPTION\t");
+	QLabel* priceHeaderLabel = new QLabel;
+	priceHeaderLabel->setText("PRIX\t");
+	QLabel* taxableHeaderLabel = new QLabel;
+	taxableHeaderLabel->setText("TAXABLE\t");
+	QHBoxLayout* headerLayout = new QHBoxLayout;
+	headerLayout->addWidget(descriptionHeaderLabel, 0, Qt::AlignLeft);
+	headerLayout->addWidget(priceHeaderLabel, 0, Qt::AlignCenter);
+	headerLayout->addWidget(taxableHeaderLabel);
+	return headerLayout;
+}
+
+QVBoxLayout* MainGui::displayPriceLayout()
 {
 	QLabel* totalBeforeTaxelabel = new QLabel;
 	totalBeforeTaxelabel->setText("Total av taxes:\t");
 	totalBeforeTaxe = new QLineEdit;
 	totalBeforeTaxe->setReadOnly(true);
+	totalBeforeTaxe->resize(10, totalBeforeTaxe->height());
+	//totalBeforeTaxe-­>resize(totalBeforeTaxe->width()/2, totalBeforeTaxe->height());
 	
 	QHBoxLayout* totalBeforeTaxeLayout = new QHBoxLayout;
-	totalBeforeTaxeLayout->addWidget(totalBeforeTaxelabel);
-	totalBeforeTaxeLayout->addWidget(totalBeforeTaxe);
+	totalBeforeTaxeLayout->addWidget(totalBeforeTaxelabel, 0, Qt::AlignRight);
+	totalBeforeTaxeLayout->addWidget(totalBeforeTaxe, 0, Qt::AlignRight);
 
 	QLabel* totalTaxelabel = new QLabel;
 	totalTaxelabel->setText("Total Taxes:\t");
 	totalTaxe = new QLineEdit;
 	totalTaxe->setReadOnly(true);
 	QHBoxLayout* totalTaxelLayout = new QHBoxLayout;
-	totalTaxelLayout->addWidget(totalTaxelabel);
-	totalTaxelLayout->addWidget(totalTaxe);
+	totalTaxelLayout->addWidget(totalTaxelabel, 0, Qt::AlignRight);
+	totalTaxelLayout->addWidget(totalTaxe, 0, Qt::AlignRight);
 
 	QLabel* totalToPaylabel = new QLabel;
 	totalToPaylabel->setText("Total a payer:\t");
 	totalToPay = new QLineEdit;
 	totalToPay->setReadOnly(true);
 	QHBoxLayout* totalToPayLayout = new QHBoxLayout;
-	totalToPayLayout->addWidget(totalToPaylabel);
-	totalToPayLayout->addWidget(totalToPay);
+	totalToPayLayout->addWidget(totalToPaylabel, 0, Qt::AlignRight);
+	totalToPayLayout->addWidget(totalToPay, 0, Qt::AlignRight);
 
 	QVBoxLayout* priceLayout = new QVBoxLayout;
 	priceLayout->addLayout(totalBeforeTaxeLayout);

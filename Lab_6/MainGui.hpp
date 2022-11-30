@@ -33,8 +33,9 @@ private:
     void setListItems();
     QCheckBox* addTaxableCheckBox();
     QHBoxLayout* setLeftWidgetButton();
-    QVBoxLayout* setRightWidgetEdit();
-    QVBoxLayout* displayPriceWidget();
+    QVBoxLayout* setRightLayoutEdit();
+    QHBoxLayout* QlistHeader();
+    QVBoxLayout* displayPriceLayout();
     QCheckBox* taxableCheckBox;
     QListWidget* itemList;
     QLineEdit* description, *price;
