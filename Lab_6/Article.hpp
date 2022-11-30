@@ -10,6 +10,7 @@ struct Article
 	bool taxable;
 	double totalBeforeTaxes;
 	std::string displayArticle() { return "a completer"; }
+	std::string displayPrice() { return "a completer"; }
 
 	// Conteneur STL pour les articles
 	/*template<typename F>

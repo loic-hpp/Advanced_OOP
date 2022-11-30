@@ -30,14 +30,17 @@ class MainGui :
 public:
     MainGui(std::vector<std::unique_ptr<std::list<Article>>>* billHistory, QWidget* parent = nullptr);
 
-//public slots:
-//    void selectItem(QListWidgetItem*);
+public slots:
+    void selectItem(QListWidgetItem* item);
 //    void cleanDisplay();
 //    void removeAllItem();
 //    void removeselectedItem();
 //    void createItem();
 //    void itemHasBeenAdded(Article*);
 //    void itemHasBeenDeleted(Article*);
+
+signals:
+    void itemClicked(QListWidgetItem* item);
 
 private:
     void loadItems();
@@ -50,11 +53,11 @@ private:
     QVBoxLayout* setRightLayoutEdit();
     QHBoxLayout* QlistHeader();
     QVBoxLayout* displayPriceLayout();
-    QCheckBox* taxableCheckBox;
-    QListWidget* itemList;
-    QLineEdit* description, *price;
-    QLineEdit* totalBeforeTaxe, * totalTaxe, *totalToPay;
-    QPushButton* add, *remove, *removeAll, *newCommand;
+    QCheckBox* taxableCheckBox_;
+    QListWidget* itemList_;
+    QLineEdit* description_, *price_;
+    QLineEdit* totalBeforeTaxe_, * totalTaxe_, *totalToPay_;
+    QPushButton* add_, *remove_, *removeAll_, *newCommand_;
     std::vector<std::unique_ptr<std::list<Article>>>* billHistory_;
     std::unique_ptr<std::list<Article>> listItemCreated_;
     std::string title = "Caisse enregistreuse";

@@ -8,14 +8,13 @@ MainGui::MainGui(std::vector<std::unique_ptr<std::list<Article>>>* billHistory, 
 
 void MainGui::loadItems()
 {
-	itemList->clear();
+	itemList_->clear();
 	if (listItemCreated_ != nullptr) {
 		if (!(listItemCreated_->empty())){
 		for (auto it = listItemCreated_->begin(); it != listItemCreated_->end(); ++it) {
-			auto b = *it;
 			QListWidgetItem* item = new QListWidgetItem(
-			QString::fromStdString(it->displayArticle()), itemList);
-			//item->setData(Qt::UserRole, QVariant::fromValue<Article*>(*it));
+			QString::fromStdString(it->displayArticle()), itemList_);
+			item->setData(Qt::UserRole, QVariant::fromValue<Article*>(&(*it)));
 			item->setHidden(false);
 		}
 	}
@@ -35,7 +34,7 @@ void MainGui::setUI()
 
 	//Ajout des élément du Widget gauche
 	displayLeftLayout->addLayout(QlistHeader());
-	displayLeftLayout->addWidget(itemList);
+	displayLeftLayout->addWidget(itemList_);
 	displayLeftLayout->addWidget(horizontalFrameLine);
 	displayLeftLayout->addLayout(setLeftWidgetButton());
 	
@@ -59,15 +58,15 @@ void MainGui::setUI()
 	QVBoxLayout* mainLayout = new QVBoxLayout;
 	QHBoxLayout* commandForm = new QHBoxLayout;
 
-	newCommand = new QPushButton(this);
-	newCommand->setText("Nouvelle commande");
+	newCommand_ = new QPushButton(this);
+	newCommand_->setText("Nouvelle commande");
 
 	commandForm->addLayout(displayLeftLayout);
 	commandForm->addWidget(verticalFrameLine);
 	commandForm->addLayout(displayRightLayout);
 
 	mainLayout->addLayout(commandForm);
-	mainLayout->addWidget(newCommand);
+	mainLayout->addWidget(newCommand_);
 	
 
 	QWidget* widget = new QWidget;
@@ -85,6 +84,7 @@ void MainGui::setup()
 	setMenu();
 	setUI();
 	loadItems();
+
 }
 
 void MainGui::setMenu()
@@ -98,31 +98,33 @@ void MainGui::setMenu()
 
 void MainGui::setListItems()
 {
-	itemList = new QListWidget(this);
-	itemList->setSortingEnabled(true);
-	
+	itemList_ = new QListWidget(this);
+	itemList_->setSortingEnabled(true);
+	connect(itemList_, SIGNAL(itemClicked(QListWidgetItem*)),
+		this, SLOT(selectItem(QListWidgetItem*)));
 	
 }
 
 QCheckBox* MainGui::addTaxableCheckBox()
 {
-	taxableCheckBox = new QCheckBox("&Taxable", this);
-	return taxableCheckBox;
+	taxableCheckBox_ = new QCheckBox("&Taxable", this);
+	return taxableCheckBox_;
 }
 
 QHBoxLayout* MainGui::setLeftWidgetButton()
 {
-	add = new QPushButton(this);
-	add->setText("Ajouter");
-	remove = new QPushButton(this);
-	remove->setText("Retirer");
-	removeAll = new QPushButton(this);
-	removeAll->setText("Tout retirer");
+	add_ = new QPushButton(this);
+	add_->setText("Ajouter");
+	remove_ = new QPushButton(this);
+	remove_->setText("Retirer");
+	remove_->setDisabled(true);
+	removeAll_ = new QPushButton(this);
+	removeAll_->setText("Tout retirer");
 
 	QHBoxLayout* lefButtonLayout = new QHBoxLayout;
-	lefButtonLayout->addWidget(add);
-	lefButtonLayout->addWidget(remove);
-	lefButtonLayout->addWidget(removeAll);
+	lefButtonLayout->addWidget(add_);
+	lefButtonLayout->addWidget(remove_);
+	lefButtonLayout->addWidget(removeAll_);
 	return lefButtonLayout;
 }
 
@@ -130,17 +132,17 @@ QVBoxLayout* MainGui::setRightLayoutEdit()
 {
 	QLabel* descriptionlabel = new QLabel;
 	descriptionlabel->setText("Description:\t");
-	description = new QLineEdit;
+	description_ = new QLineEdit;
 	QHBoxLayout* descriptionLayout = new QHBoxLayout;
 	descriptionLayout->addWidget(descriptionlabel);
-	descriptionLayout->addWidget(description);
+	descriptionLayout->addWidget(description_);
 
 	QLabel* pricelabel = new QLabel;
 	pricelabel->setText("Prix:\t\t");
-	price = new QLineEdit;
+	price_ = new QLineEdit;
 	QHBoxLayout* priceLayout = new QHBoxLayout;
 	priceLayout->addWidget(pricelabel);
-	priceLayout->addWidget(price);
+	priceLayout->addWidget(price_);
 
 	QVBoxLayout* rightEditLayout = new QVBoxLayout;
 	rightEditLayout->addLayout(descriptionLayout);
@@ -168,34 +170,45 @@ QVBoxLayout* MainGui::displayPriceLayout()
 {
 	QLabel* totalBeforeTaxelabel = new QLabel;
 	totalBeforeTaxelabel->setText("Total av taxes:\t");
-	totalBeforeTaxe = new QLineEdit;
-	totalBeforeTaxe->setReadOnly(true);
-	totalBeforeTaxe->resize(10, totalBeforeTaxe->height());
-	//totalBeforeTaxe-­>resize(totalBeforeTaxe->width()/2, totalBeforeTaxe->height());
+	totalBeforeTaxe_ = new QLineEdit;
+	totalBeforeTaxe_->setReadOnly(true);
+	totalBeforeTaxe_->resize(10, totalBeforeTaxe_->height());
 	
 	QHBoxLayout* totalBeforeTaxeLayout = new QHBoxLayout;
 	totalBeforeTaxeLayout->addWidget(totalBeforeTaxelabel, 0, Qt::AlignRight);
-	totalBeforeTaxeLayout->addWidget(totalBeforeTaxe, 0, Qt::AlignRight);
+	totalBeforeTaxeLayout->addWidget(totalBeforeTaxe_, 0, Qt::AlignRight);
 
 	QLabel* totalTaxelabel = new QLabel;
 	totalTaxelabel->setText("Total Taxes:\t");
-	totalTaxe = new QLineEdit;
-	totalTaxe->setReadOnly(true);
+	totalTaxe_ = new QLineEdit;
+	totalTaxe_->setReadOnly(true);
 	QHBoxLayout* totalTaxelLayout = new QHBoxLayout;
 	totalTaxelLayout->addWidget(totalTaxelabel, 0, Qt::AlignRight);
-	totalTaxelLayout->addWidget(totalTaxe, 0, Qt::AlignRight);
+	totalTaxelLayout->addWidget(totalTaxe_, 0, Qt::AlignRight);
 
 	QLabel* totalToPaylabel = new QLabel;
 	totalToPaylabel->setText("Total a payer:\t");
-	totalToPay = new QLineEdit;
-	totalToPay->setReadOnly(true);
+	totalToPay_ = new QLineEdit;
+	totalToPay_->setReadOnly(true);
 	QHBoxLayout* totalToPayLayout = new QHBoxLayout;
 	totalToPayLayout->addWidget(totalToPaylabel, 0, Qt::AlignRight);
-	totalToPayLayout->addWidget(totalToPay, 0, Qt::AlignRight);
+	totalToPayLayout->addWidget(totalToPay_, 0, Qt::AlignRight);
 
 	QVBoxLayout* priceLayout = new QVBoxLayout;
 	priceLayout->addLayout(totalBeforeTaxeLayout);
 	priceLayout->addLayout(totalTaxelLayout);
 	priceLayout->addLayout(totalToPayLayout);
 	return priceLayout;
+}
+
+void MainGui::selectItem(QListWidgetItem* item) {
+	Article* article = item->data(Qt::UserRole).value<Article*>();
+	description_->setDisabled(true);
+	description_->setText(QString::fromStdString(article->description));
+	price_->setDisabled(true);
+	price_->setText(QString::fromStdString(article->displayPrice()));
+	taxableCheckBox_->setDisabled(true);
+	taxableCheckBox_->setChecked(article->taxable);
+
+	remove_->setDisabled(false);
 }
