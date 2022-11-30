@@ -1,6 +1,6 @@
 #include "MainGui.hpp"
 
-MainGui::MainGui(std::vector<std::unique_ptr<std::list<Article>>>* billHistory, QWidget* parent):
+MainGui::MainGui(std::vector<std::unique_ptr<std::list<Article*>>>* billHistory, QWidget* parent):
 	billHistory_(billHistory)
 {
 	setup();
@@ -13,12 +13,13 @@ void MainGui::loadItems()
 		if (!(listItemCreated_->empty())){
 		for (auto it = listItemCreated_->begin(); it != listItemCreated_->end(); ++it) {
 			QListWidgetItem* item = new QListWidgetItem(
-			QString::fromStdString(it->displayArticle()), itemList_);
-			item->setData(Qt::UserRole, QVariant::fromValue<Article*>(&(*it)));
+				QString::fromStdString((*it)->displayArticle()), itemList_);
+			item->setData(Qt::UserRole, QVariant::fromValue<Article*>(*it));
 			item->setHidden(false);
 		}
 	}
 	}
+
 } 
 
 void MainGui::setUI()
@@ -115,11 +116,14 @@ QHBoxLayout* MainGui::setLeftWidgetButton()
 {
 	add_ = new QPushButton(this);
 	add_->setText("Ajouter");
+	connect(add_, SIGNAL(clicked()), this, SLOT(createItem()));
 	remove_ = new QPushButton(this);
 	remove_->setText("Retirer");
 	remove_->setDisabled(true);
+	connect(remove_, SIGNAL(clicked()), this, SLOT(removeSelectedItem()));
 	removeAll_ = new QPushButton(this);
 	removeAll_->setText("Tout retirer");
+	connect(removeAll_, SIGNAL(clicked()), this, SLOT(removeAllItem()));
 
 	QHBoxLayout* lefButtonLayout = new QHBoxLayout;
 	lefButtonLayout->addWidget(add_);
@@ -211,4 +215,40 @@ void MainGui::selectItem(QListWidgetItem* item) {
 	taxableCheckBox_->setChecked(article->taxable);
 
 	remove_->setDisabled(false);
+}
+void MainGui::removeSelectedItem() {
+	Article* article;
+	for (QListWidgetItem* item : itemList_->selectedItems()) {
+		article = item->data(Qt::UserRole).value<Article*>();
+		listItemCreated_->remove(article);
+	}
+	loadItems();
+}
+
+void MainGui::removeAllItem() {
+	if (listItemCreated_ != nullptr) {
+		if (!(listItemCreated_->empty())) {
+			for (int i = 0; i < listItemCreated_->size(); i++)
+				listItemCreated_->pop_back();
+		}
+	}
+	loadItems();
+}
+
+void MainGui::cleanDisplay() {
+	description_->setDisabled(false);
+	description_->setText("");
+	price_->setDisabled(false);
+	price_->setText("");
+	taxableCheckBox_->setDisabled(false);
+	taxableCheckBox_->setChecked(false);
+	loadItems();
+}
+
+void MainGui::createItem() {
+	if (listItemCreated_ == nullptr)
+		listItemCreated_ = std::make_unique<std::list<Article*>>();
+	Article article = { description_->text().toStdString(), price_->text().toDouble(), taxableCheckBox_->isChecked()};
+	listItemCreated_->push_back(new Article(article));
+	cleanDisplay();
 }

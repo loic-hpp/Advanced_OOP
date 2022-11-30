@@ -8,7 +8,7 @@ struct Article
 	std::string description;
 	double price;
 	bool taxable;
-	double totalBeforeTaxes;
+	~Article() = default;
 	std::string displayArticle() { return "a completer"; }
 	std::string displayPrice() { return "a completer"; }
 
