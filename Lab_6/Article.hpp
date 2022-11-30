@@ -4,9 +4,9 @@
 struct Article
 {
 	std::string description;
-	double prix;
+	double price;
 	bool taxable;
-	double totalAvantTaxes;
+	double totalBeforeTaxes;
 
 	// Conteneur STL pour les articles
 	/*template<typename F>

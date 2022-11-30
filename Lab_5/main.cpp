@@ -265,5 +265,5 @@ int main()
 	// Car l'ensemble est trié alors que la liste n'est pas triée et est non contigue donc la probabilité
 	// d'avoir a itérer plusieurs fois sur la liste pour retrouver le héros est plus grande
 		//TODO: Assurez-vous de n'avoir aucune ligne non couverte dans les classes pour la liste liée.  Il peut y avoir des lignes non couvertes dans les personnages...
->>>>>>> main
+
 }
