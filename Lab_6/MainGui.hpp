@@ -18,13 +18,27 @@
 #include <QButtonGroup>
 #include <QScrollArea>
 #include <QScrollBar>
+#include "Article.hpp"
+#include <vector>
 #include <list>
 
 class MainGui :
     public QMainWindow
 {
+    Q_OBJECT
+
 public:
-    MainGui(QWidget* parent=nullptr);
+    MainGui(std::vector<std::unique_ptr<std::list<Article>>>* billHistory, QWidget* parent = nullptr);
+
+//public slots:
+//    void selectItem(QListWidgetItem*);
+//    void cleanDisplay();
+//    void removeAllItem();
+//    void removeselectedItem();
+//    void createItem();
+//    void itemHasBeenAdded(Article*);
+//    void itemHasBeenDeleted(Article*);
+
 private:
     void loadItems();
     void setUI();
@@ -41,6 +55,8 @@ private:
     QLineEdit* description, *price;
     QLineEdit* totalBeforeTaxe, * totalTaxe, *totalToPay;
     QPushButton* add, *remove, *removeAll, *newCommand;
+    std::vector<std::unique_ptr<std::list<Article>>>* billHistory_;
+    std::unique_ptr<std::list<Article>> listItemCreated_;
     std::string title = "Caisse enregistreuse";
 };
 

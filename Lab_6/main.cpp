@@ -1,6 +1,7 @@
 ﻿#include <QApplication>
 #include <QLabel>
 #include <iostream>
+#include <list>
 #include "MainGui.hpp"
 
 
@@ -35,7 +36,8 @@ int main(int argc, char* argv[])
 {
 	bibliotheque_cours::VerifierFuitesAllocations verifierFuitesAllocations;
 	QApplication app(argc, argv);
-	MainGui maingui;
+	std::vector<std::unique_ptr<std::list<Article>>> billHistory;
+	MainGui maingui(&billHistory);
 	maingui.show();
 	return app.exec();
 }

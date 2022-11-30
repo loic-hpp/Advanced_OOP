@@ -1,3 +1,5 @@
+#pragma once
+#include <iostream>
 #include <string>
 
 
@@ -7,6 +9,7 @@ struct Article
 	double price;
 	bool taxable;
 	double totalBeforeTaxes;
+	std::string displayArticle() { return "a completer"; }
 
 	// Conteneur STL pour les articles
 	/*template<typename F>

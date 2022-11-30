@@ -1,6 +1,7 @@
 #include "MainGui.hpp"
 
-MainGui::MainGui(QWidget* parent)
+MainGui::MainGui(std::vector<std::unique_ptr<std::list<Article>>>* billHistory, QWidget* parent):
+	billHistory_(billHistory)
 {
 	setup();
 }
@@ -8,6 +9,17 @@ MainGui::MainGui(QWidget* parent)
 void MainGui::loadItems()
 {
 	itemList->clear();
+	if (listItemCreated_ != nullptr) {
+		if (!(listItemCreated_->empty())){
+		for (auto it = listItemCreated_->begin(); it != listItemCreated_->end(); ++it) {
+			auto b = *it;
+			QListWidgetItem* item = new QListWidgetItem(
+			QString::fromStdString(it->displayArticle()), itemList);
+			//item->setData(Qt::UserRole, QVariant::fromValue<Article*>(*it));
+			item->setHidden(false);
+		}
+	}
+	}
 } 
 
 void MainGui::setUI()
@@ -72,6 +84,7 @@ void MainGui::setup()
 {
 	setMenu();
 	setUI();
+	loadItems();
 }
 
 void MainGui::setMenu()
