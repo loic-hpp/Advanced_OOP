@@ -7,6 +7,7 @@ MainGui::MainGui(QWidget* parent)
 
 void MainGui::loadItems()
 {
+	itemList->clear();
 } 
 
 void MainGui::setUI()
@@ -34,17 +35,32 @@ void MainGui::setUI()
 	//Section de droite
 	QVBoxLayout* displayRightLayout = new QVBoxLayout;
 	displayRightLayout->addLayout(setRightWidgetEdit());
+	displayRightLayout->addWidget(addTaxableCheckBox());
 	displayRightLayout->addLayout(displayPriceWidget());
 
 	//Mettre la droite et la gauche ensemble
-	QHBoxLayout* mainLayout = new QHBoxLayout;
-	mainLayout->addLayout(displayLeftLayout);
-	mainLayout->addWidget(verticalFrameLine);
-	mainLayout->addLayout(displayRightLayout);
+	QVBoxLayout* mainLayout = new QVBoxLayout;
+	QHBoxLayout* commandForm = new QHBoxLayout;
+
+	newCommand = new QPushButton(this);
+	newCommand->setText("Nouvelle commande");
+
+	commandForm->addLayout(displayLeftLayout);
+	commandForm->addWidget(verticalFrameLine);
+	commandForm->addLayout(displayRightLayout);
+
+	mainLayout->addLayout(commandForm);
+	mainLayout->addWidget(newCommand);
+	
+
 	QWidget* widget = new QWidget;
 	widget->setLayout(mainLayout);
 	setCentralWidget(widget);
 	setWindowTitle(title.c_str());
+	//Bloquer le changement de taille de la fenêtre
+	// depuis cette page: https://stackoverflow.com/questions/16673074/how-can-i-fully-disable-resizing-a-window-including-the-resize-icon-when-the-mou
+	widget->setFixedSize(widget->width(), widget->height());
+	setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 }
 
 void MainGui::setup()
@@ -66,15 +82,22 @@ void MainGui::setListItems()
 {
 	itemList = new QListWidget(this);
 	itemList->setSortingEnabled(true);
+	
+}
+
+QCheckBox* MainGui::addTaxableCheckBox()
+{
+	taxableCheckBox = new QCheckBox("&Taxable", this);
+	return taxableCheckBox;
 }
 
 QHBoxLayout* MainGui::setLeftWidgetButton()
 {
-	QPushButton* add = new QPushButton(this);
+	add = new QPushButton(this);
 	add->setText("Ajouter");
-	QPushButton* remove = new QPushButton(this);
+	remove = new QPushButton(this);
 	remove->setText("Retirer");
-	QPushButton* removeAll = new QPushButton(this);
+	removeAll = new QPushButton(this);
 	removeAll->setText("Tout retirer");
 
 	QHBoxLayout* lefButtonLayout = new QHBoxLayout;
@@ -110,28 +133,32 @@ QVBoxLayout* MainGui::displayPriceWidget()
 {
 	QLabel* totalBeforeTaxelabel = new QLabel;
 	totalBeforeTaxelabel->setText("Total av taxes:\t");
-	//description = new QLineEdit;
+	totalBeforeTaxe = new QLineEdit;
+	totalBeforeTaxe->setReadOnly(true);
+	
 	QHBoxLayout* totalBeforeTaxeLayout = new QHBoxLayout;
 	totalBeforeTaxeLayout->addWidget(totalBeforeTaxelabel);
-	//totalBeforeTaxeLayout->addWidget(description);
+	totalBeforeTaxeLayout->addWidget(totalBeforeTaxe);
 
 	QLabel* totalTaxelabel = new QLabel;
 	totalTaxelabel->setText("Total Taxes:\t");
-	//description = new QLineEdit;
+	totalTaxe = new QLineEdit;
+	totalTaxe->setReadOnly(true);
 	QHBoxLayout* totalTaxelLayout = new QHBoxLayout;
 	totalTaxelLayout->addWidget(totalTaxelabel);
-	//totalTaxelLayout->addWidget(description);
+	totalTaxelLayout->addWidget(totalTaxe);
 
-	QLabel* TotalToPaylabel = new QLabel;
-	TotalToPaylabel->setText("Total a payer:\t");
-	//description = new QLineEdit;
-	QHBoxLayout* TotalToPayLayout = new QHBoxLayout;
-	TotalToPayLayout->addWidget(TotalToPaylabel);
-	//descriptionLayout->addWidget(description);
+	QLabel* totalToPaylabel = new QLabel;
+	totalToPaylabel->setText("Total a payer:\t");
+	totalToPay = new QLineEdit;
+	totalToPay->setReadOnly(true);
+	QHBoxLayout* totalToPayLayout = new QHBoxLayout;
+	totalToPayLayout->addWidget(totalToPaylabel);
+	totalToPayLayout->addWidget(totalToPay);
 
 	QVBoxLayout* priceLayout = new QVBoxLayout;
 	priceLayout->addLayout(totalBeforeTaxeLayout);
 	priceLayout->addLayout(totalTaxelLayout);
-	priceLayout->addLayout(TotalToPayLayout);
+	priceLayout->addLayout(totalToPayLayout);
 	return priceLayout;
 }
