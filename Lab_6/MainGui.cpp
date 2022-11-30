@@ -228,7 +228,8 @@ void MainGui::removeSelectedItem() {
 void MainGui::removeAllItem() {
 	if (listItemCreated_ != nullptr) {
 		if (!(listItemCreated_->empty())) {
-			for (int i = 0; i < listItemCreated_->size(); i++)
+			int size = listItemCreated_->size();
+			for (int i = 0; i < size; i++)
 				listItemCreated_->pop_back();
 		}
 	}
@@ -249,6 +250,7 @@ void MainGui::createItem() {
 	if (listItemCreated_ == nullptr)
 		listItemCreated_ = std::make_unique<std::list<Article*>>();
 	Article article = { description_->text().toStdString(), price_->text().toDouble(), taxableCheckBox_->isChecked()};
-	listItemCreated_->push_back(new Article(article));
+	std::unique_ptr<Article> article_ptr = std::make_unique<Article>(article);
+	listItemCreated_->push_back(article_ptr.get());
 	cleanDisplay();
 }
