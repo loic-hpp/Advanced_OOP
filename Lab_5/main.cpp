@@ -1,4 +1,10 @@
-﻿#include "Personnage.hpp"
+﻿//	Description: Utilisation des classes crees dans ListeLiee.hpp
+//	Fichier: main.cpp
+//	Auteurs partiels (TODOS): Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	21 novembre 2022
+//	Créé le 15 novembre 2022
+
+#include "Personnage.hpp"
 #include "Heros.hpp"
 #include "Vilain.hpp"
 #include "VilainHeros.hpp"
@@ -45,7 +51,7 @@ const Affichable& versReferenceAffichable(const unique_ptr<T>& p) { return *p; }
 
 // Trait de separation
 static const string trait =
-	"═════════════════════════════════════════════════════════════════════════";
+"═════════════════════════════════════════════════════════════════════════";
 
 // On ne demande pas particulièrement la surcharge de << dans ce TD.
 template <typename T>
@@ -83,15 +89,15 @@ ListeLiee<T>::iterator trouverParNom(ListeLiee<T>& liste, const string& nom)
 
 int main()
 {
-	#pragma region "Bibliothèque du cours"
+#pragma region "Bibliothèque du cours"
 	// Permet sous Windows les "ANSI escape code" pour changer de couleur
 	// https://en.wikipedia.org/wiki/ANSI_escape_code ; les consoles Linux/Mac
 	// les supportent normalement par défaut.
 	bibliotheque_cours::activerCouleursAnsi();
-	#pragma endregion
-	
+#pragma endregion
+
 	testsPourCouvertureLectureBinaire();
-	
+
 	static const string separateurSections = "\033[95m" + trait + "\033[0m\n";
 
 	//{ Solutionnaire du TD4:
@@ -99,7 +105,7 @@ int main()
 	vector<Vilain> vilains = lireVectorDuFichier<Vilain>("vilains.bin");
 	vector<unique_ptr<Personnage>> peronnages;  // Doit être des pointeurs pour le polymorphisme, l'énoncé ne force pas les unique_ptr.
 
-	#if 0 //TODO: Vous n'avez pas à conserver ces affichages pour le TD5, ils sont pour le solutionnaire du TD4:
+#if 0 //TODO: Vous n'avez pas à conserver ces affichages pour le TD5, ils sont pour le solutionnaire du TD4:
 	cout << separateurSections << "Heros:" << endl;
 	afficherAffichables(heros);
 
@@ -119,14 +125,14 @@ int main()
 
 	cout << separateurSections << "Un autre vilain heros (exemple de l'énoncé du TD), d'une autre couleur:" << endl;
 	VilainHeros kefkaCrono(vilains[2], heros[0]);
-	kefkaCrono.changerCouleur(cout,3);
+	kefkaCrono.changerCouleur(cout, 3);
 	kefkaCrono.afficher(cout);
-	
+
 	for (int i : range(5)) { // Pour la couverture de code des couleurs (on aurait aussi pu éliminer le code pour les couleurs non utilisées).
-		kefkaCrono.changerCouleur(cout,i);
+		kefkaCrono.changerCouleur(cout, i);
 		cout << "=";
 	}
-	#endif
+#endif
 	//}
 
 	//TODO: Transférez les héros du vecteur heros dans une ListeLiee.
@@ -147,13 +153,13 @@ int main()
 	//TODO: Ajouter un hero bidon à la liste avant Aya Brea en vous servant de l'itérateur.
 	listeHeros.insert(iterAya, Heros("Bidon", "Bidon", "Bidon"));
 	//TODO: Assurez-vous que la taille de la liste est correcte après l'ajout.
-	cout << "\nLanouvelle devrait être 10 et sa valeur est:\t"<<listeHeros.size() << endl;
+	cout << "\nLa nouvelle devrait être 10 et sa valeur est:\t" << listeHeros.size() << endl;
 	//TODO: Reculez votre itérateur jusqu'au héros Mario et effacez-le en utilisant l'itérateur, puis affichez le héros suivant dans la liste (devrait êter "Naked Snake/John").
 	ListeLiee<Heros>::iterator iterMario = trouverParNom(listeHeros, "Mario");
 	iterMario = listeHeros.erase(iterMario);
 	cout << "\n" << (*iterMario).getNom() << endl;
 	//TODO: Assurez-vous que la taille de la liste est correcte après le retrait.
-	cout << "\nLanouvelle devrait être 9 et sa valeur est:\t" << listeHeros.size() << endl;
+	cout << "\nLa nouvelle devrait être 9 et sa valeur est:\t" << listeHeros.size() << endl;
 	cout << "\n";
 	//TODO: Effacez le premier élément de la liste.
 	listeHeros.erase(listeHeros.begin());
@@ -190,18 +196,15 @@ int main()
 	// passer un personnage à la fonction find de notre Set
 	//Uniquement les nom sont comparés donc nous passons un héros bidon
 	(ensembleHeros.find(Heros("Mario", "bidon", "bidon")))->afficher(cout);
-	
 
-// 2-2) La complexité moyenne de la recherche dans un ensemble trié est O(log(n)) lorsqu'on utilise la fonction find
-// Car vu que l'ensemble est trié, l'ensemble utilise l'algorithme de dichotomie pour la recherche
-// L'ensemble est divisé en plusieurs noeud et en partant d'une tête on suit un chemin pour retrouver l'élément 
-// la recherche dans l'ensemble avec la méthode find n'itère pas sur tous les éléments
-// ce n'est donc pas une complexité O(n) et ce n'est pas
-// non plus une complexité O(1) par élimination, on conclut donc qu'il s'agit d'une 
-// complexité O(log(n))
-// 
-// 2-3) C'est l'ensemble qui permet de faire une recherche plus rapide par nom
-// Car l'ensemble est trié alors que la liste n'est pas triée et est non contigue donc la probabilité
-// d'avoir a itérer plusieurs fois sur la liste pour retrouver le héros est plus grande
-	//TODO: Assurez-vous de n'avoir aucune ligne non couverte dans les classes pour la liste liée.  Il peut y avoir des lignes non couvertes dans les personnages...
+	// 2-2) La complexité moyenne de la recherche dans un ensemble trié est O(log(n)) lorsqu'on utilise la fonction find
+	//  vu que l'ensemble est trié, l'ensemble utilise l'algorithme de dichotomie pour la recherche
+	// L'ensemble est divisé en plusieurs noeud et en partant d'une tête on suit un chemin pour retrouver l'élément 
+	// la recherche dans l'ensemble avec la méthode find n'itère pas sur tous les éléments.
+	// 
+	// 2-3) C'est l'ensemble qui permet de faire une recherche plus rapide par nom
+	// Car l'ensemble est trié alors que la liste n'est pas triée et est non contigue donc la probabilité
+	// d'avoir a itérer plusieurs fois sur la liste pour retrouver le héros est plus grande
+		//TODO: Assurez-vous de n'avoir aucune ligne non couverte dans les classes pour la liste liée.  Il peut y avoir des lignes non couvertes dans les personnages...
+
 }
