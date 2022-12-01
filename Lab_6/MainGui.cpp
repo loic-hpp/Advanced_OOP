@@ -8,17 +8,14 @@ MainGui::MainGui(QWidget* parent)
 void MainGui::loadItems()
 {
 	itemList_->clear();
-	if (listItemCreated != nullptr) {
-		if (!(listItemCreated->empty())){
-		for (auto it = listItemCreated->begin(); it != listItemCreated->end(); ++it) {
+	if (!register_.empty()) {
+		for (auto it = register_.getFirstItemIterator(); it != register_.getLastItemIterator(); ++it) {
 			QListWidgetItem* item = new QListWidgetItem(
 				QString::fromStdString((*it)->displayArticle()), itemList_);
 			item->setData(Qt::UserRole, QVariant::fromValue<std::shared_ptr<Article>>(*it));
 			item->setHidden(false);
 		}
 	}
-	}
-
 } 
 
 void MainGui::itemHasBeenAdded(std::shared_ptr<Article>& article) {
@@ -26,6 +23,7 @@ void MainGui::itemHasBeenAdded(std::shared_ptr<Article>& article) {
 		QString::fromStdString(article->displayArticle()), itemList_);
 	item->setData(Qt::UserRole, QVariant::fromValue<std::shared_ptr<Article>>(article));
 	item->setHidden(false);
+	cleanDisplay();
 }
 
 void MainGui::itemHasBeenDeleted(std::shared_ptr<Article>& article) {
@@ -129,10 +127,14 @@ QHBoxLayout* MainGui::setLeftWidgetButton()
 	add_ = new QPushButton(this);
 	add_->setText("Ajouter");
 	connect(add_, SIGNAL(clicked()), this, SLOT(createItem()));
+	connect(&register_, SIGNAL(itemAdded(std::shared_ptr<Article>&)),
+		this, SLOT(itemHasBeenAdded(std::shared_ptr<Article>&)));
 	remove_ = new QPushButton(this);
 	remove_->setText("Retirer");
 	remove_->setDisabled(true);
 	connect(remove_, SIGNAL(clicked()), this, SLOT(removeSelectedItem()));
+	connect(&register_, SIGNAL(itemDeleted(std::shared_ptr<Article>&)),
+		this, SLOT(itemHasBeenDeleted(std::shared_ptr<Article>&)));
 	removeAll_ = new QPushButton(this);
 	removeAll_->setText("Tout retirer");
 	actualiseRevoveAllButtonStatus();
@@ -243,19 +245,12 @@ void MainGui::removeSelectedItem() {
 	std::shared_ptr<Article> article;
 	for (QListWidgetItem* item : itemList_->selectedItems()) {
 		article = item->data(Qt::UserRole).value<std::shared_ptr<Article>>();
-		listItemCreated->remove(article);
+		register_.removeItem(article);
 	}
-	reactivateAdd();
 }
 
 void MainGui::removeAllItem() {
-	if (listItemCreated != nullptr) {
-		if (!(listItemCreated->empty())) {
-			int size = (int)listItemCreated->size();
-			for (int i = 0; i < size; i++)
-				listItemCreated->pop_back();
-		}
-	}
+	register_.removeAllItems();
 	reactivateAdd();
 }
 
@@ -273,29 +268,21 @@ void MainGui::cleanDisplay() {
 }
 
 void MainGui::createItem() {
-	if (listItemCreated == nullptr)
-		listItemCreated = std::make_shared<std::list<std::shared_ptr<Article>>>();
 	Article article = { description_->text().toStdString(), price_->text().toDouble(), taxableCheckBox_->isChecked()};
-	listItemCreated->push_back(std::make_shared<Article>(article));
-	cleanDisplay();
+	auto articlePtr = std::make_shared<Article>(article);
+	register_.addItem(articlePtr);
 }
 
 void MainGui::createNewCommand() {
-	billHistory.push_back(std::move(listItemCreated));
-	listItemCreated = std::make_shared<std::list<std::shared_ptr<Article>>>();
+	register_.createNewCommand();
 	reactivateAdd();
 }
 
 void MainGui::actualiseRevoveAllButtonStatus() {
-	if (listItemCreated == nullptr)
+	if (register_.empty())
 		removeAll_->setDisabled(true);
 	else
-	{
-		if (listItemCreated->empty())
-			removeAll_->setDisabled(true);
-		else
-			removeAll_->setDisabled(false);
-	}
+		removeAll_->setDisabled(false);
 }
 
 void MainGui::reactivateAdd() {
@@ -304,6 +291,6 @@ void MainGui::reactivateAdd() {
 }
 
 void MainGui::updatePrices() {
-	totalBeforeTaxes = Modele::curentTotal();
-	totalBeforeTaxe_->setText(QString::fromStdString(Modele::doubleToStr(totalBeforeTaxes)));
+	register_.curentTotal();
+	totalBeforeTaxe_->setText(QString::fromStdString(register_.doubleToStr(register_.getTotalBeforeTaxes())));
 }

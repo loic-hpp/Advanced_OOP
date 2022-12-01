@@ -26,9 +26,4 @@ namespace Modele {
 		}
 	};
 
-	std::string doubleToStr(double value);
-	double curentTotal();
-	extern std::vector<std::shared_ptr<std::list<std::shared_ptr<Article>>>> billHistory;
-	extern std::shared_ptr<std::list<std::shared_ptr<Article>>> listItemCreated;
-	extern double totalBeforeTaxes;
 }

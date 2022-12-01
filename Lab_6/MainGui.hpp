@@ -21,11 +21,8 @@
 #include "Modele.hpp"
 #include <vector>
 #include <list>
-#include "Caisse.hpp"
+#include "Register.hpp"
 using Modele::Article;
-using Modele::billHistory;
-using Modele::listItemCreated;
-using Modele::totalBeforeTaxes;
 const int WINDOWS_SIZE_AJUSTMENT = 50;
 
 class MainGui :
@@ -44,8 +41,8 @@ public slots:
     void createItem();
     void reactivateAdd();
     void createNewCommand();
-//    void itemHasBeenAdded(Article*);
-//    void itemHasBeenDeleted(Article*);
+    void itemHasBeenAdded(std::shared_ptr<Article>& article);
+    void itemHasBeenDeleted(std::shared_ptr<Article>& article);
 
 
 private:
@@ -66,7 +63,7 @@ private:
     QLineEdit* description_, *price_;
     QLineEdit* totalBeforeTaxe_, * totalTaxe_, *totalToPay_;
     QPushButton* add_, *remove_, *removeAll_, *newCommand_, *clear_;
-    Modele::Caisse caisse;
+    Modele::Register register_;
     std::string title = "Caisse enregistreuse";
     
 };
