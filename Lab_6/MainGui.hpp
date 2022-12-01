@@ -18,6 +18,7 @@
 #include <QButtonGroup>
 #include <QScrollArea>
 #include <QScrollBar>
+#include "QMessageBox"
 #include "Modele.hpp"
 #include <vector>
 #include <list>
@@ -43,6 +44,7 @@ public slots:
     void createNewCommand();
     void itemHasBeenAdded(std::shared_ptr<Article>& article);
     void itemHasBeenDeleted(std::shared_ptr<Article>& article);
+    void invalidDataError();
 
 
 private:
@@ -63,6 +65,7 @@ private:
     QLineEdit* description_, *price_;
     QLineEdit* totalBeforeTaxe_, * totalTaxe_, *totalToPay_;
     QPushButton* add_, *remove_, *removeAll_, *newCommand_, *clear_;
+    QMessageBox* errorBox;
     Modele::Register register_;
     std::string title = "Caisse enregistreuse";
     

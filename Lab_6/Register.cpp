@@ -24,8 +24,14 @@ namespace Modele {
 	void Register::addItem(std::shared_ptr<Article>& article) {
 		if (listItemCreated_ == nullptr)
 			listItemCreated_ = std::make_shared<std::list<std::shared_ptr<Article>>>();
-		listItemCreated_->push_back(article);
-		emit itemAdded(article);
+		if (article->description == "" or article->price == 0.0) {
+			//throw std::invalid_argument("Champs requis vide(s)");
+			emit invalidData();
+		}
+		else{
+			listItemCreated_->push_back(article);
+			emit itemAdded(article);
+		}
 	}
 
 	void Register::removeItem(std::shared_ptr<Article>& article) {

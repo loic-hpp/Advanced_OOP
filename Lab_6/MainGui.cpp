@@ -87,6 +87,9 @@ void MainGui::setUI()
 	// depuis cette page: https://stackoverflow.com/questions/16673074/how-can-i-fully-disable-resizing-a-window-including-the-resize-icon-when-the-mou
 	widget->setFixedSize(widget->width()+ WINDOWS_SIZE_AJUSTMENT, widget->height());
 	setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
+
+	//Gerer les champs vides
+	connect(&register_, SIGNAL(invalidData()), this, SLOT(invalidDataError()));
 }
 
 void MainGui::setup()
@@ -293,4 +296,11 @@ void MainGui::reactivateAdd() {
 void MainGui::updatePrices() {
 	register_.curentTotal();
 	totalBeforeTaxe_->setText(QString::fromStdString(register_.doubleToStr(register_.getTotalBeforeTaxes())));
+}
+
+void MainGui::invalidDataError() {
+	errorBox = new QMessageBox(this);
+	errorBox->setText("Les champs DESCRIPTION et PRIX sont requis");
+	errorBox->setWindowTitle("error");
+	errorBox->show();
 }
