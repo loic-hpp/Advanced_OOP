@@ -1,8 +1,6 @@
 #include "MainGui.hpp"
 
-MainGui::MainGui(std::shared_ptr<std::list<std::shared_ptr<Article>>>& listItemCreated, std::vector<std::shared_ptr<std::list<std::shared_ptr<Article>>>>* billHistory, QWidget* parent):
-	listItemCreated_(listItemCreated),
-	billHistory_(billHistory)
+MainGui::MainGui(QWidget* parent)
 {
 	setup();
 }
@@ -10,9 +8,9 @@ MainGui::MainGui(std::shared_ptr<std::list<std::shared_ptr<Article>>>& listItemC
 void MainGui::loadItems()
 {
 	itemList_->clear();
-	if (listItemCreated_ != nullptr) {
-		if (!(listItemCreated_->empty())){
-		for (auto it = listItemCreated_->begin(); it != listItemCreated_->end(); ++it) {
+	if (listItemCreated != nullptr) {
+		if (!(listItemCreated->empty())){
+		for (auto it = listItemCreated->begin(); it != listItemCreated->end(); ++it) {
 			QListWidgetItem* item = new QListWidgetItem(
 				QString::fromStdString((*it)->displayArticle()), itemList_);
 			item->setData(Qt::UserRole, QVariant::fromValue<std::shared_ptr<Article>>(*it));
@@ -234,17 +232,17 @@ void MainGui::removeSelectedItem() {
 	std::shared_ptr<Article> article;
 	for (QListWidgetItem* item : itemList_->selectedItems()) {
 		article = item->data(Qt::UserRole).value<std::shared_ptr<Article>>();
-		listItemCreated_->remove(article);
+		listItemCreated->remove(article);
 	}
 	reactivateAdd();
 }
 
 void MainGui::removeAllItem() {
-	if (listItemCreated_ != nullptr) {
-		if (!(listItemCreated_->empty())) {
-			int size = (int)listItemCreated_->size();
+	if (listItemCreated != nullptr) {
+		if (!(listItemCreated->empty())) {
+			int size = (int)listItemCreated->size();
 			for (int i = 0; i < size; i++)
-				listItemCreated_->pop_back();
+				listItemCreated->pop_back();
 		}
 	}
 	reactivateAdd();
@@ -264,25 +262,25 @@ void MainGui::cleanDisplay() {
 }
 
 void MainGui::createItem() {
-	if (listItemCreated_ == nullptr)
-		listItemCreated_ = std::make_shared<std::list<std::shared_ptr<Article>>>();
+	if (listItemCreated == nullptr)
+		listItemCreated = std::make_shared<std::list<std::shared_ptr<Article>>>();
 	Article article = { description_->text().toStdString(), price_->text().toDouble(), taxableCheckBox_->isChecked()};
-	listItemCreated_->push_back(std::make_shared<Article>(article));
+	listItemCreated->push_back(std::make_shared<Article>(article));
 	cleanDisplay();
 }
 
 void MainGui::createNewCommand() {
-	billHistory_->push_back(std::move(listItemCreated_));
-	listItemCreated_ = std::make_shared<std::list<std::shared_ptr<Article>>>();
+	billHistory.push_back(std::move(listItemCreated));
+	listItemCreated = std::make_shared<std::list<std::shared_ptr<Article>>>();
 	reactivateAdd();
 }
 
 void MainGui::actualiseRevoveAllButtonStatus() {
-	if (listItemCreated_ == nullptr)
+	if (listItemCreated == nullptr)
 		removeAll_->setDisabled(true);
 	else
 	{
-		if (listItemCreated_->empty())
+		if (listItemCreated->empty())
 			removeAll_->setDisabled(true);
 		else
 			removeAll_->setDisabled(false);
