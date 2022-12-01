@@ -28,7 +28,7 @@ class MainGui :
     Q_OBJECT
 
 public:
-    MainGui(std::vector<std::unique_ptr<std::list<Article*>>>* billHistory, QWidget* parent = nullptr);
+    MainGui(std::vector<std::unique_ptr<std::list<std::shared_ptr<Article>>>>* billHistory, QWidget* parent = nullptr);
 
 public slots:
     void selectItem(QListWidgetItem* item);
@@ -59,8 +59,8 @@ private:
     QLineEdit* description_, *price_;
     QLineEdit* totalBeforeTaxe_, * totalTaxe_, *totalToPay_;
     QPushButton* add_, *remove_, *removeAll_, *newCommand_;
-    std::vector<std::unique_ptr<std::list<Article*>>>* billHistory_;
-    std::unique_ptr<std::list<Article*>> listItemCreated_;
+    std::vector<std::unique_ptr<std::list<std::shared_ptr<Article>>>>* billHistory_;
+    std::unique_ptr<std::list<std::shared_ptr<Article>>> listItemCreated_;
     std::string title = "Caisse enregistreuse";
 };
 

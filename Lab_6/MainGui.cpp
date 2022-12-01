@@ -1,6 +1,6 @@
 #include "MainGui.hpp"
 
-MainGui::MainGui(std::vector<std::unique_ptr<std::list<Article*>>>* billHistory, QWidget* parent):
+MainGui::MainGui(std::vector<std::unique_ptr<std::list<std::shared_ptr<Article>>>>* billHistory, QWidget* parent):
 	billHistory_(billHistory)
 {
 	setup();
@@ -14,7 +14,7 @@ void MainGui::loadItems()
 		for (auto it = listItemCreated_->begin(); it != listItemCreated_->end(); ++it) {
 			QListWidgetItem* item = new QListWidgetItem(
 				QString::fromStdString((*it)->displayArticle()), itemList_);
-			item->setData(Qt::UserRole, QVariant::fromValue<Article*>(*it));
+			item->setData(Qt::UserRole, QVariant::fromValue<std::shared_ptr<Article>>(*it));
 			item->setHidden(false);
 		}
 	}
@@ -207,7 +207,7 @@ QVBoxLayout* MainGui::displayPriceLayout()
 }
 
 void MainGui::selectItem(QListWidgetItem* item) {
-	Article* article = item->data(Qt::UserRole).value<Article*>();
+	std::shared_ptr<Article> article = item->data(Qt::UserRole).value<std::shared_ptr<Article>>();
 	description_->setDisabled(true);
 	description_->setText(QString::fromStdString(article->description));
 	price_->setDisabled(true);
@@ -218,9 +218,9 @@ void MainGui::selectItem(QListWidgetItem* item) {
 	remove_->setDisabled(false);
 }
 void MainGui::removeSelectedItem() {
-	Article* article;
+	std::shared_ptr<Article> article;
 	for (QListWidgetItem* item : itemList_->selectedItems()) {
-		article = item->data(Qt::UserRole).value<Article*>();
+		article = item->data(Qt::UserRole).value<std::shared_ptr<Article>>();
 		listItemCreated_->remove(article);
 	}
 	loadItems();
@@ -249,16 +249,15 @@ void MainGui::cleanDisplay() {
 
 void MainGui::createItem() {
 	if (listItemCreated_ == nullptr)
-		listItemCreated_ = std::make_unique<std::list<Article*>>();
+		listItemCreated_ = std::make_unique<std::list<std::shared_ptr<Article>>>();
 	Article article = { description_->text().toStdString(), price_->text().toDouble(), taxableCheckBox_->isChecked()};
-	std::unique_ptr<Article> article_ptr = std::make_unique<Article>(article);
-	listItemCreated_->push_back(new Article(article));
+	listItemCreated_->push_back(std::make_shared<Article>(article));
 	cleanDisplay();
 }
 
 void MainGui::createNewCommand() {
 	billHistory_->push_back(std::move(listItemCreated_));
-	listItemCreated_ = std::make_unique<std::list<Article*>>();
+	listItemCreated_ = std::make_unique<std::list<std::shared_ptr<Article>>>();
 	loadItems();
 	cleanDisplay();
 }

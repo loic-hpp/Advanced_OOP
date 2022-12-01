@@ -36,7 +36,7 @@ int main(int argc, char* argv[])
 {
 	bibliotheque_cours::VerifierFuitesAllocations verifierFuitesAllocations;
 	QApplication app(argc, argv);
-	std::vector<std::unique_ptr<std::list<Article*>>> billHistory;
+	std::vector<std::unique_ptr<std::list<std::shared_ptr<Article>>>> billHistory;
 	MainGui maingui(&billHistory);
 	maingui.show();
 	return app.exec();
