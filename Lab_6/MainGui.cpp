@@ -190,6 +190,7 @@ QVBoxLayout* MainGui::displayPriceLayout()
 	totalBeforeTaxe_ = new QLineEdit;
 	totalBeforeTaxe_->setReadOnly(true);
 	totalBeforeTaxe_->resize(10, totalBeforeTaxe_->height());
+
 	
 	QHBoxLayout* totalBeforeTaxeLayout = new QHBoxLayout;
 	totalBeforeTaxeLayout->addWidget(totalBeforeTaxelabel, 0, Qt::AlignRight);
@@ -235,18 +236,18 @@ void MainGui::removeSelectedItem() {
 		article = item->data(Qt::UserRole).value<std::shared_ptr<Article>>();
 		listItemCreated_->remove(article);
 	}
-	cleanDisplay();
+	reactivateAdd();
 }
 
 void MainGui::removeAllItem() {
 	if (listItemCreated_ != nullptr) {
 		if (!(listItemCreated_->empty())) {
-			int size = listItemCreated_->size();
+			int size = (int)listItemCreated_->size();
 			for (int i = 0; i < size; i++)
 				listItemCreated_->pop_back();
 		}
 	}
-	cleanDisplay();
+	reactivateAdd();
 }
 
 void MainGui::cleanDisplay() {
@@ -259,6 +260,7 @@ void MainGui::cleanDisplay() {
 	taxableCheckBox_->setDisabled(false);
 	taxableCheckBox_->setChecked(false);
 	loadItems();
+	updatePrices();
 }
 
 void MainGui::createItem() {
@@ -290,4 +292,9 @@ void MainGui::actualiseRevoveAllButtonStatus() {
 void MainGui::reactivateAdd() {
 	cleanDisplay();
 	add_->setDisabled(false);
+}
+
+void MainGui::updatePrices() {
+	totalBeforeTaxes = Modele::curentTotal();
+	totalBeforeTaxe_->setText(QString::fromStdString(Modele::doubleToStr(totalBeforeTaxes)));
 }

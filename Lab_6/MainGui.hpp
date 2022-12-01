@@ -18,9 +18,11 @@
 #include <QButtonGroup>
 #include <QScrollArea>
 #include <QScrollBar>
-#include "Article.hpp"
+#include "Modele.hpp"
 #include <vector>
 #include <list>
+using Modele::Article;
+using Modele::totalBeforeTaxes;
 const int WINDOWS_SIZE_AJUSTMENT = 50;
 
 class MainGui :
@@ -52,6 +54,7 @@ private:
     void setMenu();
     void setListItems();
     void actualiseRevoveAllButtonStatus();
+    void updatePrices();
     QCheckBox* addTaxableCheckBox();
     QHBoxLayout* setLeftWidgetButton();
     QVBoxLayout* setRightLayoutEdit();
