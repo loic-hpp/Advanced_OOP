@@ -36,9 +36,9 @@ int main(int argc, char* argv[])
 {
 	bibliotheque_cours::VerifierFuitesAllocations verifierFuitesAllocations;
 	QApplication app(argc, argv);
-	std::vector<std::unique_ptr<std::list<std::shared_ptr<Article>>>> billHistory;
-	std::list<std::shared_ptr<Article>> listItemCreated_;
-	MainGui maingui(&billHistory);
+	std::vector<std::shared_ptr<std::list<std::shared_ptr<Article>>>> billHistory;
+	std::shared_ptr<std::list<std::shared_ptr<Article>>> listItemCreated;
+	MainGui maingui(listItemCreated, &billHistory);
 	maingui.show();
 	return app.exec();
 }

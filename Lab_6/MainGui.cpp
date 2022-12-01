@@ -1,6 +1,7 @@
 #include "MainGui.hpp"
 
-MainGui::MainGui(std::vector<std::unique_ptr<std::list<std::shared_ptr<Article>>>>* billHistory, QWidget* parent):
+MainGui::MainGui(std::shared_ptr<std::list<std::shared_ptr<Article>>>& listItemCreated, std::vector<std::shared_ptr<std::list<std::shared_ptr<Article>>>>* billHistory, QWidget* parent):
+	listItemCreated_(listItemCreated),
 	billHistory_(billHistory)
 {
 	setup();
@@ -262,7 +263,7 @@ void MainGui::cleanDisplay() {
 
 void MainGui::createItem() {
 	if (listItemCreated_ == nullptr)
-		listItemCreated_ = std::make_unique<std::list<std::shared_ptr<Article>>>();
+		listItemCreated_ = std::make_shared<std::list<std::shared_ptr<Article>>>();
 	Article article = { description_->text().toStdString(), price_->text().toDouble(), taxableCheckBox_->isChecked()};
 	listItemCreated_->push_back(std::make_shared<Article>(article));
 	cleanDisplay();
@@ -270,8 +271,8 @@ void MainGui::createItem() {
 
 void MainGui::createNewCommand() {
 	billHistory_->push_back(std::move(listItemCreated_));
-	listItemCreated_ = std::make_unique<std::list<std::shared_ptr<Article>>>();
-	cleanDisplay();
+	listItemCreated_ = std::make_shared<std::list<std::shared_ptr<Article>>>();
+	reactivateAdd();
 }
 
 void MainGui::actualiseRevoveAllButtonStatus() {
