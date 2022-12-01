@@ -295,7 +295,10 @@ void MainGui::reactivateAdd() {
 
 void MainGui::updatePrices() {
 	register_.curentTotal();
+
 	totalBeforeTaxe_->setText(QString::fromStdString(register_.doubleToStr(register_.getTotalBeforeTaxes())));
+	totalTaxe_->setText(QString::fromStdString(register_.doubleToStr(register_.getTotalTaxes())));
+	totalToPay_->setText(QString::fromStdString(register_.doubleToStr(register_.getTotalToPay())));
 }
 
 void MainGui::invalidDataError() {

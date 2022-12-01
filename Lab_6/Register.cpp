@@ -19,6 +19,7 @@ namespace Modele {
 			}
 		}
 		totalBeforeTaxes_ = total;
+		updateTotal();
 	}
 
 	void Register::addItem(std::shared_ptr<Article>& article) {
@@ -36,6 +37,7 @@ namespace Modele {
 
 	void Register::removeItem(std::shared_ptr<Article>& article) {
 		listItemCreated_->remove(article);
+		updateTotal();
 		emit itemDeleted(article);
 	}
 
@@ -53,11 +55,20 @@ namespace Modele {
 				for (int i = 0; i < size; i++)
 					listItemCreated_->pop_back();
 			}
+		updateTotal();
 		}
 
 	void Register::createNewCommand() {
 		billHistory_.push_back(std::move(listItemCreated_));
 		listItemCreated_ = std::make_shared<std::list<std::shared_ptr<Article>>>();
+	}
+
+	void Register::updateTotal() {
+		taxesTotal_ = 0.0;
+		auto a = std::count_if(listItemCreated_->begin(), listItemCreated_->end(), 
+			[&](auto item) {if ((item)->taxable) { taxesTotal_ += (item)->price* TAXES_VALUE; }
+				return item->taxable; });
+		totalToPay_ = totalBeforeTaxes_ + taxesTotal_;
 	}
 
 	}
