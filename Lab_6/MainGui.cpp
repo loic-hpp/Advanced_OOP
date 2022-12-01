@@ -104,6 +104,7 @@ void MainGui::setListItems()
 	itemList_->setSortingEnabled(true);
 	connect(itemList_, SIGNAL(itemClicked(QListWidgetItem*)),
 		this, SLOT(selectItem(QListWidgetItem*)));
+
 	
 }
 
@@ -124,6 +125,7 @@ QHBoxLayout* MainGui::setLeftWidgetButton()
 	connect(remove_, SIGNAL(clicked()), this, SLOT(removeSelectedItem()));
 	removeAll_ = new QPushButton(this);
 	removeAll_->setText("Tout retirer");
+	actualiseRevoveAllButtonStatus();
 	connect(removeAll_, SIGNAL(clicked()), this, SLOT(removeAllItem()));
 
 	QHBoxLayout* lefButtonLayout = new QHBoxLayout;
@@ -149,10 +151,19 @@ QVBoxLayout* MainGui::setRightLayoutEdit()
 	priceLayout->addWidget(pricelabel);
 	priceLayout->addWidget(price_);
 
+	QFrame* horizontalFrameLine = new QFrame;
+	horizontalFrameLine->setFrameShape(QFrame::HLine);
+
+	clear_ = new QPushButton(this);
+	clear_->setText("Efaccer");
+	connect(clear_, SIGNAL(clicked()), this, SLOT(reactivateAdd()));
+
 	QVBoxLayout* rightEditLayout = new QVBoxLayout;
 	rightEditLayout->addLayout(descriptionLayout);
 	rightEditLayout->addLayout(priceLayout);
 	rightEditLayout->addWidget(addTaxableCheckBox(), 0, Qt::AlignRight);
+	rightEditLayout->addWidget(horizontalFrameLine);
+	rightEditLayout->addWidget(clear_);
 	return rightEditLayout;
 }
 
@@ -214,7 +225,7 @@ void MainGui::selectItem(QListWidgetItem* item) {
 	price_->setText(QString::fromStdString(article->displayPrice()));
 	taxableCheckBox_->setDisabled(true);
 	taxableCheckBox_->setChecked(article->taxable);
-
+	add_->setDisabled(true);
 	remove_->setDisabled(false);
 }
 void MainGui::removeSelectedItem() {
@@ -223,7 +234,7 @@ void MainGui::removeSelectedItem() {
 		article = item->data(Qt::UserRole).value<std::shared_ptr<Article>>();
 		listItemCreated_->remove(article);
 	}
-	loadItems();
+	cleanDisplay();
 }
 
 void MainGui::removeAllItem() {
@@ -234,10 +245,12 @@ void MainGui::removeAllItem() {
 				listItemCreated_->pop_back();
 		}
 	}
-	loadItems();
+	cleanDisplay();
 }
 
 void MainGui::cleanDisplay() {
+	actualiseRevoveAllButtonStatus();
+	remove_->setDisabled(true);
 	description_->setDisabled(false);
 	description_->setText("");
 	price_->setDisabled(false);
@@ -258,6 +271,22 @@ void MainGui::createItem() {
 void MainGui::createNewCommand() {
 	billHistory_->push_back(std::move(listItemCreated_));
 	listItemCreated_ = std::make_unique<std::list<std::shared_ptr<Article>>>();
-	loadItems();
 	cleanDisplay();
+}
+
+void MainGui::actualiseRevoveAllButtonStatus() {
+	if (listItemCreated_ == nullptr)
+		removeAll_->setDisabled(true);
+	else
+	{
+		if (listItemCreated_->empty())
+			removeAll_->setDisabled(true);
+		else
+			removeAll_->setDisabled(false);
+	}
+}
+
+void MainGui::reactivateAdd() {
+	cleanDisplay();
+	add_->setDisabled(false);
 }

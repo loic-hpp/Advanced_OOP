@@ -36,6 +36,7 @@ public slots:
     void removeAllItem();
     void removeSelectedItem();
     void createItem();
+    void reactivateAdd();
     void createNewCommand();
 //    void itemHasBeenAdded(Article*);
 //    void itemHasBeenDeleted(Article*);
@@ -49,6 +50,7 @@ private:
     void setup();
     void setMenu();
     void setListItems();
+    void actualiseRevoveAllButtonStatus();
     QCheckBox* addTaxableCheckBox();
     QHBoxLayout* setLeftWidgetButton();
     QVBoxLayout* setRightLayoutEdit();
@@ -58,7 +60,7 @@ private:
     QListWidget* itemList_;
     QLineEdit* description_, *price_;
     QLineEdit* totalBeforeTaxe_, * totalTaxe_, *totalToPay_;
-    QPushButton* add_, *remove_, *removeAll_, *newCommand_;
+    QPushButton* add_, *remove_, *removeAll_, *newCommand_, *clear_;
     std::vector<std::unique_ptr<std::list<std::shared_ptr<Article>>>>* billHistory_;
     std::unique_ptr<std::list<std::shared_ptr<Article>>> listItemCreated_;
     std::string title = "Caisse enregistreuse";
