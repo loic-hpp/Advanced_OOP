@@ -77,7 +77,7 @@ void MainGui::setUI()
 	setWindowTitle(title.c_str());
 	//Bloquer le changement de taille de la fenêtre
 	// depuis cette page: https://stackoverflow.com/questions/16673074/how-can-i-fully-disable-resizing-a-window-including-the-resize-icon-when-the-mou
-	widget->setFixedSize(widget->width(), widget->height());
+	widget->setFixedSize(widget->width()+ WINDOWS_SIZE_AJUSTMENT, widget->height());
 	setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 }
 
@@ -174,11 +174,11 @@ QHBoxLayout* MainGui::QlistHeader()
 	QLabel* priceHeaderLabel = new QLabel;
 	priceHeaderLabel->setText("PRIX\t");
 	QLabel* taxableHeaderLabel = new QLabel;
-	taxableHeaderLabel->setText("TAXABLE\t");
+	taxableHeaderLabel->setText("TAXABLE");
 	QHBoxLayout* headerLayout = new QHBoxLayout;
 	headerLayout->addWidget(descriptionHeaderLabel, 0, Qt::AlignLeft);
 	headerLayout->addWidget(priceHeaderLabel, 0, Qt::AlignCenter);
-	headerLayout->addWidget(taxableHeaderLabel);
+	headerLayout->addWidget(taxableHeaderLabel, 0, Qt::AlignRight);
 	return headerLayout;
 }
 

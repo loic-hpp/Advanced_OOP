@@ -21,6 +21,7 @@
 #include "Article.hpp"
 #include <vector>
 #include <list>
+const int WINDOWS_SIZE_AJUSTMENT = 50;
 
 class MainGui :
     public QMainWindow

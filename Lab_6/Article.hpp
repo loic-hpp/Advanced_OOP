@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <iomanip>
+#include <sstream>
 
 
 struct Article
@@ -9,18 +11,13 @@ struct Article
 	double price;
 	bool taxable;
 	~Article() = default;
-	std::string displayArticle() { return "a completer"; }
-	std::string displayPrice() { return "a completer"; }
+	std::string displayArticle() { return (description + "\t"
+		+ displayPrice() + "\t" 
+		+ (taxable ? "Taxable" : "Non taxable")); }
+	std::string displayPrice() { 
+		std::stringstream stream;
+		stream << std::fixed << std::setprecision(2) << price;
+		return stream.str();}
 
-	// Conteneur STL pour les articles
-	/*template<typename F>
-	std::shared_ptr<Concepteur> trouverConcepteur(const F fonction) {
-		return concepteurs.trouverElementQuelconque(fonction);
-	}*/
 
-	// fonction lambda pour total des taxes et algo STL -> parcourir articles dans vecteur SANS FOR OU WHILE
-
-	// Retirer article -> iterateur pour vector -> INDEX INTERDIT
 };
-
-// TODO: lancer exception capturee par vue quand description vide ou prix = 0; Message different
