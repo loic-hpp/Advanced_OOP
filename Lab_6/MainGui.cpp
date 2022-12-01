@@ -21,6 +21,17 @@ void MainGui::loadItems()
 
 } 
 
+void MainGui::itemHasBeenAdded(std::shared_ptr<Article>& article) {
+	QListWidgetItem* item = new QListWidgetItem(
+		QString::fromStdString(article->displayArticle()), itemList_);
+	item->setData(Qt::UserRole, QVariant::fromValue<std::shared_ptr<Article>>(article));
+	item->setHidden(false);
+}
+
+void MainGui::itemHasBeenDeleted(std::shared_ptr<Article>& article) {
+	reactivateAdd();
+}
+
 void MainGui::setUI()
 {
 	// Section de gauche

@@ -21,6 +21,7 @@
 #include "Modele.hpp"
 #include <vector>
 #include <list>
+#include "Caisse.hpp"
 using Modele::Article;
 using Modele::billHistory;
 using Modele::listItemCreated;
@@ -46,8 +47,6 @@ public slots:
 //    void itemHasBeenAdded(Article*);
 //    void itemHasBeenDeleted(Article*);
 
-signals:
-    //void itemClicked(QListWidgetItem* item);
 
 private:
     void loadItems();
@@ -67,6 +66,8 @@ private:
     QLineEdit* description_, *price_;
     QLineEdit* totalBeforeTaxe_, * totalTaxe_, *totalToPay_;
     QPushButton* add_, *remove_, *removeAll_, *newCommand_, *clear_;
+    Modele::Caisse caisse;
     std::string title = "Caisse enregistreuse";
+    
 };
 
