@@ -36,6 +36,7 @@ public slots:
     void removeAllItem();
     void removeSelectedItem();
     void createItem();
+    void createNewCommand();
 //    void itemHasBeenAdded(Article*);
 //    void itemHasBeenDeleted(Article*);
 

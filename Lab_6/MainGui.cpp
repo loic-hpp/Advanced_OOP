@@ -61,6 +61,7 @@ void MainGui::setUI()
 
 	newCommand_ = new QPushButton(this);
 	newCommand_->setText("Nouvelle commande");
+	connect(newCommand_, SIGNAL(clicked()), this, SLOT(createNewCommand()));
 
 	commandForm->addLayout(displayLeftLayout);
 	commandForm->addWidget(verticalFrameLine);
@@ -251,6 +252,13 @@ void MainGui::createItem() {
 		listItemCreated_ = std::make_unique<std::list<Article*>>();
 	Article article = { description_->text().toStdString(), price_->text().toDouble(), taxableCheckBox_->isChecked()};
 	std::unique_ptr<Article> article_ptr = std::make_unique<Article>(article);
-	listItemCreated_->push_back(article_ptr.get());
+	listItemCreated_->push_back(new Article(article));
+	cleanDisplay();
+}
+
+void MainGui::createNewCommand() {
+	billHistory_->push_back(std::move(listItemCreated_));
+	listItemCreated_ = std::make_unique<std::list<Article*>>();
+	loadItems();
 	cleanDisplay();
 }
