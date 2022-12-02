@@ -88,8 +88,6 @@ void MainGui::setUI()
 	widget->setFixedSize(widget->width()+ WINDOWS_SIZE_AJUSTMENT, widget->height());
 	setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 
-	//Gerer les champs vides
-	connect(&register_, SIGNAL(invalidData()), this, SLOT(invalidDataError()));
 }
 
 void MainGui::setup()
@@ -273,7 +271,10 @@ void MainGui::cleanDisplay() {
 void MainGui::createItem() {
 	Article article = { description_->text().toStdString(), price_->text().toDouble(), taxableCheckBox_->isChecked()};
 	auto articlePtr = std::make_shared<Article>(article);
-	register_.addItem(articlePtr);
+	try { register_.addItem(articlePtr); }
+	catch (std::invalid_argument& error) {
+		invalidDataError();
+	}
 }
 
 void MainGui::createNewCommand() {
@@ -300,6 +301,7 @@ void MainGui::updatePrices() {
 	totalTaxe_->setText(QString::fromStdString(register_.doubleToStr(register_.getTotalTaxes())));
 	totalToPay_->setText(QString::fromStdString(register_.doubleToStr(register_.getTotalToPay())));
 }
+
 
 void MainGui::invalidDataError() {
 	errorBox = new QMessageBox(this);

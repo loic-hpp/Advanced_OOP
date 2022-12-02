@@ -28,7 +28,6 @@ namespace Modele {
 	signals:
 		void itemAdded(std::shared_ptr<Article>& article);
 		void itemDeleted(std::shared_ptr<Article>& article);
-		void invalidData();
 	private:
 		std::vector<std::shared_ptr<std::list<std::shared_ptr<Article>>>> billHistory_ = {};
 		std::shared_ptr<std::list<std::shared_ptr<Article>>> listItemCreated_ = {};

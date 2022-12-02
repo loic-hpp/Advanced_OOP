@@ -26,8 +26,7 @@ namespace Modele {
 		if (listItemCreated_ == nullptr)
 			listItemCreated_ = std::make_shared<std::list<std::shared_ptr<Article>>>();
 		if (article->description == "" or article->price == 0.0) {
-			//throw std::invalid_argument("Champs requis vide(s)");
-			emit invalidData();
+			throw std::invalid_argument("Champs requis vide(s)");
 		}
 		else{
 			listItemCreated_->push_back(article);
