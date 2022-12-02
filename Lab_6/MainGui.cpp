@@ -24,7 +24,7 @@ void MainGUI::loadItems()
 	}
 } 
 
-void MainGui::itemHasBeenAdded(std::shared_ptr<Article>& article) {
+void MainGUI::itemHasBeenAdded(std::shared_ptr<Article>& article) {
 	QListWidgetItem* item = new QListWidgetItem(
 		QString::fromStdString(article->displayArticle()), itemList_);
 	item->setData(Qt::UserRole, QVariant::fromValue<std::shared_ptr<Article>>(article));
@@ -32,11 +32,11 @@ void MainGui::itemHasBeenAdded(std::shared_ptr<Article>& article) {
 	cleanDisplay();
 }
 
-void MainGui::itemHasBeenDeleted(std::shared_ptr<Article>& article) {
+void MainGUI::itemHasBeenDeleted(std::shared_ptr<Article>& article) {
 	reactivateAdd();
 }
 
-void MainGui::setUI()
+void MainGUI::setUI()
 {
 	// Section de gauche
 	// Création du container gauche
@@ -205,9 +205,9 @@ QVBoxLayout* MainGUI::displayPriceLayout()
 {
 	QLabel* totalBeforeTaxelabel = new QLabel;
 	totalBeforeTaxelabel->setText("Total av taxes:\t");
-	totalBeforeTaxe = new QLineEdit;
-	totalBeforeTaxe->setReadOnly(true);
-	totalBeforeTaxe->resize(10, totalBeforeTaxe->height());
+	totalBeforeTaxe_ = new QLineEdit;
+	totalBeforeTaxe_->setReadOnly(true);
+	totalBeforeTaxe_->resize(10, totalBeforeTaxe_->height());
 	//totalBeforeTaxe-­>resize(totalBeforeTaxe->width()/2, totalBeforeTaxe->height());
 	
 	QHBoxLayout* totalBeforeTaxeLayout = new QHBoxLayout;
@@ -216,8 +216,8 @@ QVBoxLayout* MainGUI::displayPriceLayout()
 
 	QLabel* totalTaxelabel = new QLabel;
 	totalTaxelabel->setText("Total Taxes:\t");
-	totalTaxe = new QLineEdit;
-	totalTaxe->setReadOnly(true);
+	totalTaxe_ = new QLineEdit;
+	totalTaxe_->setReadOnly(true);
 	QHBoxLayout* totalTaxelLayout = new QHBoxLayout;
 	totalTaxelLayout->addWidget(totalTaxelabel, 0, Qt::AlignRight);
 	totalTaxelLayout->addWidget(totalTaxe_, 0, Qt::AlignRight);
@@ -237,7 +237,7 @@ QVBoxLayout* MainGUI::displayPriceLayout()
 	return priceLayout;
 }
 
-void MainGui::selectItem(QListWidgetItem* item) {
+void MainGUI::selectItem(QListWidgetItem* item) {
 	std::shared_ptr<Article> article = item->data(Qt::UserRole).value<std::shared_ptr<Article>>();
 	description_->setDisabled(true);
 	description_->setText(QString::fromStdString(article->description));
@@ -248,7 +248,7 @@ void MainGui::selectItem(QListWidgetItem* item) {
 	add_->setDisabled(true);
 	remove_->setDisabled(false);
 }
-void MainGui::removeSelectedItem() {
+void MainGUI::removeSelectedItem() {
 	std::shared_ptr<Article> article;
 	for (QListWidgetItem* item : itemList_->selectedItems()) {
 		article = item->data(Qt::UserRole).value<std::shared_ptr<Article>>();
@@ -256,12 +256,12 @@ void MainGui::removeSelectedItem() {
 	}
 }
 
-void MainGui::removeAllItem() {
+void MainGUI::removeAllItem() {
 	register_.removeAllItems();
 	reactivateAdd();
 }
 
-void MainGui::cleanDisplay() {
+void MainGUI::cleanDisplay() {
 	actualiseRevoveAllButtonStatus();
 	remove_->setDisabled(true);
 	description_->setDisabled(false);
@@ -274,7 +274,7 @@ void MainGui::cleanDisplay() {
 	updatePrices();
 }
 
-void MainGui::createItem() {
+void MainGUI::createItem() {
 	Article article = { description_->text().toStdString(), price_->text().toDouble(), taxableCheckBox_->isChecked()};
 	auto articlePtr = std::make_shared<Article>(article);
 	try { register_.addItem(articlePtr); }
@@ -283,24 +283,24 @@ void MainGui::createItem() {
 	}
 }
 
-void MainGui::createNewCommand() {
+void MainGUI::createNewCommand() {
 	register_.createNewCommand();
 	reactivateAdd();
 }
 
-void MainGui::actualiseRevoveAllButtonStatus() {
+void MainGUI::actualiseRevoveAllButtonStatus() {
 	if (register_.empty())
 		removeAll_->setDisabled(true);
 	else
 		removeAll_->setDisabled(false);
 }
 
-void MainGui::reactivateAdd() {
+void MainGUI::reactivateAdd() {
 	cleanDisplay();
 	add_->setDisabled(false);
 }
 
-void MainGui::updatePrices() {
+void MainGUI::updatePrices() {
 	register_.curentTotal();
 
 	totalBeforeTaxe_->setText(QString::fromStdString(register_.doubleToStr(register_.getTotalBeforeTaxes())));
@@ -309,7 +309,7 @@ void MainGui::updatePrices() {
 }
 
 
-void MainGui::invalidDataError() {
+void MainGUI::invalidDataError() {
 	errorBox = new QMessageBox(this);
 	errorBox->setText("Les champs DESCRIPTION et PRIX sont requis");
 	errorBox->setWindowTitle("error");

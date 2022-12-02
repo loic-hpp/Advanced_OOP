@@ -38,7 +38,7 @@ class MainGUI :
     Q_OBJECT
 
 public:
-    MainGui(QWidget* parent = nullptr);
+    MainGUI(QWidget* parent = nullptr);
 
 public slots:
     void selectItem(QListWidgetItem* item);
