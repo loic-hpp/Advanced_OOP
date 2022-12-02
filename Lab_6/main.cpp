@@ -7,6 +7,7 @@
 #include <QApplication>
 #include <QLabel>
 #include <iostream>
+#include <list>
 #include "MainGui.hpp"
 
 #if __has_include("bibliotheque_cours.hpp")
@@ -33,6 +34,8 @@ void initialiserBibliothequeCours([[maybe_unused]] int argc, [[maybe_unused]] ch
 #endif
 	//NOTE: C'est normal que la couverture de code dans l'Explorateur de tests de Visual Studio ne couvre pas la fin de cette fonction ni la fin du main après l'appel à cette fonction puisqu'il exécute uniquement les tests Google Test dans l'appel ci-dessus.
 }
+
+int c;
 
 int main(int argc, char* argv[])
 {
