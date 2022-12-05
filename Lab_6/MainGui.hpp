@@ -50,8 +50,8 @@ public slots:
     void createNewCommand();
     void itemHasBeenAdded(std::shared_ptr<Article>& article);
     void itemHasBeenDeleted(std::shared_ptr<Article>& article);
-    void invalidDataError();
-
+    void invalidDescriptionError();
+    void invalidPriceError();
 
 private:
     void loadItems();

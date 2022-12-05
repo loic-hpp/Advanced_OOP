@@ -248,6 +248,7 @@ void MainGUI::selectItem(QListWidgetItem* item) {
 	add_->setDisabled(true);
 	remove_->setDisabled(false);
 }
+
 void MainGUI::removeSelectedItem() {
 	std::shared_ptr<Article> article;
 	for (QListWidgetItem* item : itemList_->selectedItems()) {
@@ -275,11 +276,18 @@ void MainGUI::cleanDisplay() {
 }
 
 void MainGUI::createItem() {
-	Article article = { description_->text().toStdString(), price_->text().toDouble(), taxableCheckBox_->isChecked()};
+	Article article = { description_->text().toStdString(), price_->text().toDouble(), taxableCheckBox_->isChecked() };
 	auto articlePtr = std::make_shared<Article>(article);
 	try { register_.addItem(articlePtr); }
 	catch (std::invalid_argument& error) {
-		invalidDataError();
+		if (article.description.size() > 15 || article.description.size() == 0)
+		{
+			invalidDescriptionError();
+		}
+		else if (price_->text() == "")
+		{
+			invalidPriceError();
+		}
 	}
 }
 
@@ -308,10 +316,16 @@ void MainGUI::updatePrices() {
 	totalToPay_->setText(QString::fromStdString(register_.doubleToStr(register_.getTotalToPay())));
 }
 
-
-void MainGUI::invalidDataError() {
+void MainGUI::invalidDescriptionError() {
 	errorBox = new QMessageBox(this);
-	errorBox->setText("Les champs DESCRIPTION et PRIX sont requis");
-	errorBox->setWindowTitle("error");
+	errorBox->setText("Les champs DESCRIPTION requiert un text de moins de 10 caracteres et non vide!");
+	errorBox->setWindowTitle("Erreur");
+	errorBox->show();
+}
+
+void MainGUI::invalidPriceError() {
+	errorBox = new QMessageBox(this);
+	errorBox->setText("Les champs PRIX est requis!");
+	errorBox->setWindowTitle("Erreur");
 	errorBox->show();
 }
