@@ -1,3 +1,9 @@
+//	Description: Implementation de la classe register.
+//	Fichier: Register.cpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	6 decembre 2022
+//	Créé le 25 novembre 2022
+
 #include "Register.hpp"
 namespace Modele {
 	std::string Register::doubleToStr(double value)

@@ -1,3 +1,9 @@
+//	Description: Definition de la classe register.
+//	Fichier: Register.hpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	6 decembre 2022
+//	Créé le 25 novembre 2022
+
 #pragma once
 #include "Modele.hpp"
 #include <QObject>

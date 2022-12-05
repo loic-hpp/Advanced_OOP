@@ -1,5 +1,5 @@
 //	Description: Definition de la classe mainGUI.
-//	Fichier: mainGUI.hpp
+//	Fichier: MainGUI.hpp
 //	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
 //	Date	6 decembre 2022
 //	Créé le 25 novembre 2022

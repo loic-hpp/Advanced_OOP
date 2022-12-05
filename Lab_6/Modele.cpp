@@ -1,3 +1,9 @@
+//	Description: Implementation de la classe modele.
+//	Fichier: Modele.cpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	6 decembre 2022
+//	Créé le 25 novembre 2022
+
 #include "Modele.hpp"
 
 namespace Modele {
