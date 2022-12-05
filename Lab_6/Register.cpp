@@ -34,7 +34,7 @@ namespace Modele {
 		if (article->description == "" or article->price == 0.0) {
 			throw std::invalid_argument("Champs requis vide(s)");
 		}
-		else{
+		else {
 			listItemCreated_->push_back(article);
 			emit itemAdded(article);
 		}
@@ -48,20 +48,21 @@ namespace Modele {
 
 	bool Register::empty() {
 		bool isEmpty = true;
-			if (listItemCreated_ != nullptr) {
-				if (!(listItemCreated_->empty()))
-					isEmpty = false;
-			}
-			return isEmpty;
-}
-	void Register::removeAllItems() {
-		if(!empty()) {
-				int size = (int)listItemCreated_->size();
-				for (int i = 0; i < size; i++)
-					listItemCreated_->pop_back();
-			}
-		updateTotal();
+		if (listItemCreated_ != nullptr) {
+			if (!(listItemCreated_->empty()))
+				isEmpty = false;
 		}
+		return isEmpty;
+	}
+
+	void Register::removeAllItems() {
+		if (!empty()) {
+			int size = (int)listItemCreated_->size();
+			for (int i = 0; i < size; i++)
+				listItemCreated_->pop_back();
+		}
+		updateTotal();
+	}
 
 	void Register::createNewCommand() {
 		billHistory_.push_back(std::move(listItemCreated_));
@@ -70,10 +71,9 @@ namespace Modele {
 
 	void Register::updateTotal() {
 		taxesTotal_ = 0.0;
-		auto a = std::count_if(listItemCreated_->begin(), listItemCreated_->end(), 
-			[&](auto item) {if ((item)->taxable) { taxesTotal_ += (item)->price* TAXES_VALUE; }
-				return item->taxable; });
+		auto a = std::count_if(listItemCreated_->begin(), listItemCreated_->end(),
+			[&](auto item) {if ((item)->taxable) { taxesTotal_ += (item)->price * TAXES_VALUE; }
+		return item->taxable; });
 		totalToPay_ = totalBeforeTaxes_ + taxesTotal_;
 	}
-
-	}
+}

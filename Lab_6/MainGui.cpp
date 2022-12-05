@@ -22,7 +22,7 @@ void MainGUI::loadItems()
 			item->setHidden(false);
 		}
 	}
-} 
+}
 
 void MainGUI::itemHasBeenAdded(std::shared_ptr<Article>& article) {
 	QListWidgetItem* item = new QListWidgetItem(
@@ -52,8 +52,8 @@ void MainGUI::setUI()
 	displayLeftLayout->addWidget(itemList_);
 	displayLeftLayout->addWidget(horizontalFrameLine);
 	displayLeftLayout->addLayout(setLeftWidgetButton());
-	
-	
+
+
 	// Trait de séparation droite gauche
 	QFrame* verticalFrameLine = new QFrame;
 	verticalFrameLine->setFrameShape(QFrame::VLine);
@@ -67,7 +67,7 @@ void MainGUI::setUI()
 	widgetPriceLayout->setLayout(displayPriceLayout());
 
 	displayRightLayout->addWidget(widgetRightLayoutEdit, 0, Qt::AlignTop);
-	displayRightLayout->addWidget(widgetPriceLayout,0 , Qt::AlignBottom);
+	displayRightLayout->addWidget(widgetPriceLayout, 0, Qt::AlignBottom);
 
 	//Mettre la droite et la gauche ensemble
 	QVBoxLayout* mainLayout = new QVBoxLayout;
@@ -83,7 +83,7 @@ void MainGUI::setUI()
 
 	mainLayout->addLayout(commandForm);
 	mainLayout->addWidget(newCommand_);
-	
+
 
 	QWidget* widget = new QWidget;
 	widget->setLayout(mainLayout);
@@ -91,7 +91,7 @@ void MainGUI::setUI()
 	setWindowTitle(title.c_str());
 	//Bloquer le changement de taille de la fenêtre
 	// depuis cette page: https://stackoverflow.com/questions/16673074/how-can-i-fully-disable-resizing-a-window-including-the-resize-icon-when-the-mou
-	widget->setFixedSize(widget->width()+ WINDOWS_SIZE_AJUSTMENT, widget->height());
+	widget->setFixedSize(widget->width() + WINDOWS_SIZE_AJUSTMENT, widget->height());
 	setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 
 }
@@ -120,7 +120,7 @@ void MainGUI::setListItems()
 	connect(itemList_, SIGNAL(itemClicked(QListWidgetItem*)),
 		this, SLOT(selectItem(QListWidgetItem*)));
 
-	
+
 }
 
 QCheckBox* MainGUI::addTaxableCheckBox()
@@ -209,7 +209,7 @@ QVBoxLayout* MainGUI::displayPriceLayout()
 	totalBeforeTaxe_->setReadOnly(true);
 	totalBeforeTaxe_->resize(10, totalBeforeTaxe_->height());
 	//totalBeforeTaxe-­>resize(totalBeforeTaxe->width()/2, totalBeforeTaxe->height());
-	
+
 	QHBoxLayout* totalBeforeTaxeLayout = new QHBoxLayout;
 	totalBeforeTaxeLayout->addWidget(totalBeforeTaxelabel, 0, Qt::AlignRight);
 	totalBeforeTaxeLayout->addWidget(totalBeforeTaxe_, 0, Qt::AlignRight);

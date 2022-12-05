@@ -27,7 +27,7 @@ namespace Modele {
 		double getTotalBeforeTaxes() { return totalBeforeTaxes_; }
 		double getTotalTaxes() { return taxesTotal_; }
 		double getTotalToPay() { return totalToPay_; }
-		std::list<std::shared_ptr<Article>>::iterator getFirstItemIterator() {return listItemCreated_->begin();}
+		std::list<std::shared_ptr<Article>>::iterator getFirstItemIterator() { return listItemCreated_->begin(); }
 		std::list<std::shared_ptr<Article>>::iterator getLastItemIterator() { return listItemCreated_->end(); }
 		bool empty();
 		void updateTotal();
@@ -38,7 +38,6 @@ namespace Modele {
 		std::vector<std::shared_ptr<std::list<std::shared_ptr<Article>>>> billHistory_ = {};
 		std::shared_ptr<std::list<std::shared_ptr<Article>>> listItemCreated_ = {};
 		double totalBeforeTaxes_, taxesTotal_, totalToPay_;
-
 	};
 }
 

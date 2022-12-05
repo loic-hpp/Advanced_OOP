@@ -33,47 +33,46 @@ using Modele::Article;
 const int WINDOWS_SIZE_AJUSTMENT = 50;
 
 class MainGUI :
-    public QMainWindow
+	public QMainWindow
 {
-    Q_OBJECT
+	Q_OBJECT
 
 public:
-    MainGUI(QWidget* parent = nullptr);
+	MainGUI(QWidget* parent = nullptr);
 
 public slots:
-    void selectItem(QListWidgetItem* item);
-    void cleanDisplay();
-    void removeAllItem();
-    void removeSelectedItem();
-    void createItem();
-    void reactivateAdd();
-    void createNewCommand();
-    void itemHasBeenAdded(std::shared_ptr<Article>& article);
-    void itemHasBeenDeleted(std::shared_ptr<Article>& article);
-    void invalidDescriptionError();
-    void invalidPriceError();
+	void selectItem(QListWidgetItem* item);
+	void cleanDisplay();
+	void removeAllItem();
+	void removeSelectedItem();
+	void createItem();
+	void reactivateAdd();
+	void createNewCommand();
+	void itemHasBeenAdded(std::shared_ptr<Article>& article);
+	void itemHasBeenDeleted(std::shared_ptr<Article>& article);
+	void invalidDescriptionError();
+	void invalidPriceError();
 
 private:
-    void loadItems();
-    void setUI();
-    void setup();
-    void setMenu();
-    void setListItems();
-    void actualiseRevoveAllButtonStatus();
-    void updatePrices();
-    QCheckBox* addTaxableCheckBox();
-    QHBoxLayout* setLeftWidgetButton();
-    QVBoxLayout* setRightLayoutEdit();
-    QHBoxLayout* QlistHeader();
-    QVBoxLayout* displayPriceLayout();
-    QCheckBox* taxableCheckBox_;
-    QListWidget* itemList_;
-    QLineEdit* description_, *price_;
-    QLineEdit* totalBeforeTaxe_, * totalTaxe_, *totalToPay_;
-    QPushButton* add_, *remove_, *removeAll_, *newCommand_, *clear_;
-    QMessageBox* errorBox;
-    Modele::Register register_;
-    std::string title = "Caisse enregistreuse";
-    
+	void loadItems();
+	void setUI();
+	void setup();
+	void setMenu();
+	void setListItems();
+	void actualiseRevoveAllButtonStatus();
+	void updatePrices();
+	QCheckBox* addTaxableCheckBox();
+	QHBoxLayout* setLeftWidgetButton();
+	QVBoxLayout* setRightLayoutEdit();
+	QHBoxLayout* QlistHeader();
+	QVBoxLayout* displayPriceLayout();
+	QCheckBox* taxableCheckBox_;
+	QListWidget* itemList_;
+	QLineEdit* description_, * price_;
+	QLineEdit* totalBeforeTaxe_, * totalTaxe_, * totalToPay_;
+	QPushButton* add_, * remove_, * removeAll_, * newCommand_, * clear_;
+	QMessageBox* errorBox;
+	Modele::Register register_;
+	std::string title = "Caisse enregistreuse";
 };
 

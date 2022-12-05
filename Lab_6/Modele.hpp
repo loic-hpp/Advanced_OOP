@@ -12,7 +12,6 @@
 #include <list>
 #include <vector>
 
-
 namespace Modele {
 	struct Article
 	{
@@ -31,5 +30,4 @@ namespace Modele {
 			return stream.str();
 		}
 	};
-
 }
