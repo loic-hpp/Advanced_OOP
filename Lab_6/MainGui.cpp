@@ -318,7 +318,7 @@ void MainGUI::updatePrices() {
 
 void MainGUI::invalidDescriptionError() {
 	errorBox = new QMessageBox(this);
-	errorBox->setText("Les champs DESCRIPTION requiert un text de moins de 10 caracteres et non vide!");
+	errorBox->setText("Les champs DESCRIPTION requiert un text de moins de 15 caractères et non vide!");
 	errorBox->setWindowTitle("Erreur");
 	errorBox->show();
 }
