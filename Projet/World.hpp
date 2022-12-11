@@ -12,6 +12,8 @@ public:
 	void moveWest();
 	void look();
 	void restart();
+	bool isPlaying() {return isRunning_;}
+	void setPlaying(bool status) { isRunning_ = status; }
 private:
 	void createRoom();
 	std::shared_ptr<class Room> currentRoom_;
@@ -19,6 +21,7 @@ private:
 	std::vector<std::shared_ptr<class Room>> rommList_;
 	std::string name_;
 	std::string header_;
+	bool isRunning_ = true;
 
 };
 

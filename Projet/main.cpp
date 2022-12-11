@@ -42,5 +42,7 @@ using namespace gsl;
 int main(int argc, char* argv[])
 {
 	initialiserBibliothequeCours(argc, argv);
+	View view;
+	view.playGame();
 
 }

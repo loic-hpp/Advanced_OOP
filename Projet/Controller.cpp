@@ -10,22 +10,25 @@ void Controller::execute(const std::string& command)
 	switch (commandMap_[command])
 	{
 	case NORTH:
-		world->moveNorth();
+		world_->moveNorth();
 		break;
 	case SOUTH:
-		world->moveSouth();
+		world_->moveSouth();
 		break;
 	case EAST:
-		world->moveEast();
+		world_->moveEast();
 		break;
 	case WEST:
-		world->moveWest();
+		world_->moveWest();
 		break;
 	case LOOK:
-		world->look();
+		world_->look();
 		break;
 	case RESTART:
-		world->restart();
+		world_->restart();
+		break;
+	case EXIT:
+		world_->setPlaying(false);
 		break;
 	default:
 		throw Invalidcommand("\nCommande non reconnue");
@@ -41,4 +44,5 @@ void Controller::initializeMapCommand()
 	commandMap_["E"] = CommandEnum_::WEST;
 	commandMap_["look"] = CommandEnum_::LOOK;
 	commandMap_["restart"] = CommandEnum_::RESTART;
+	commandMap_["exit"] = CommandEnum_::EXIT;
 }

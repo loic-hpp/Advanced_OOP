@@ -6,7 +6,7 @@ public:
 	Controller();
 	void execute(const std::string& command);
 private:
-	std::unique_ptr<World> world;
+	std::shared_ptr<World> world_;
 	 enum CommandEnum_ {
 		NORTH,
 		SOUTH,
@@ -14,6 +14,7 @@ private:
 		WEST,
 		LOOK,
 		RESTART,
+		EXIT,
 	};
 	inline static std::map<std::string, CommandEnum_> commandMap_;
 	void initializeMapCommand();
