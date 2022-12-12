@@ -67,12 +67,12 @@ void World::createRoom()
 	rommList_.push_back(std::make_shared<Room>("vestiaire", "Entree de l'hotel pour laisser menteaux et bottes"));
 	rommList_.push_back(std::make_shared<Room>("salle de reception", "Salle pour check-in et recuperer ses cles"));
 
-	rommList_[1]->setNeighbour(nullptr, rommList_[3]);
-	rommList_[3]->setNeighbour(rommList_[1], rommList_[4],nullptr, rommList_[2]);
-	rommList_[4]->setNeighbour(rommList_[3], nullptr, rommList_[5]);
-	rommList_[5]->setNeighbour(nullptr, nullptr, nullptr, rommList_[4]);
-	rommList_[2]->setNeighbour(nullptr, nullptr, rommList_[3]);
+	rommList_[1]->setNeighbour(nullptr, rommList_[3].get());
+	rommList_[3]->setNeighbour(rommList_[1].get(), rommList_[4].get(),nullptr, rommList_[2].get());
+	rommList_[4]->setNeighbour(rommList_[3].get(), nullptr, rommList_[5].get());
+	rommList_[5]->setNeighbour(nullptr, nullptr, nullptr, rommList_[4].get());
+	rommList_[2]->setNeighbour(nullptr, nullptr, rommList_[3].get());
 
-	currentRoom_ = rommList_[4];
-	beginRoom_ = rommList_[4];
+	currentRoom_ = rommList_[4].get();
+	beginRoom_ = rommList_[4].get();
 }
