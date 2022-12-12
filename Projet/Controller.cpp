@@ -1,3 +1,9 @@
+//	Description: Implementation de la classe Controller.
+//	Fichier: Controller.cpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	12 decembre 2022
+//	Créé le 11 décembre 2022
+
 #include "Controller.hpp"
 
 Controller::Controller(std::shared_ptr<World> world) :

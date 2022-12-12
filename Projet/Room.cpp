@@ -1,3 +1,9 @@
+//	Description: Implementation de la classe Room.
+//	Fichier: Room.cpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	12 decembre 2022
+//	Créé le 11 décembre 2022
+
 #include "Room.hpp"
 
 Room::Room(std::string name, std::string description):

@@ -1,3 +1,9 @@
+//	Description: Implementation de la classe View.
+//	Fichier: View.cpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	12 decembre 2022
+//	Créé le 11 décembre 2022
+
 #include "View.hpp"
 
 View::View(std::shared_ptr<Controller> controller, std::shared_ptr<World> world):

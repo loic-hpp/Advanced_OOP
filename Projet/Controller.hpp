@@ -1,3 +1,9 @@
+//	Description: Definition de la classe Controller.
+//	Fichier: Controller.hpp
+//	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
+//	Date	12 decembre 2022
+//	Créé le 11 décembre 2022
+
 #pragma once
 #include "World.hpp"
 class Controller
