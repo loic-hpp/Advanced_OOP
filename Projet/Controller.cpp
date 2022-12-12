@@ -46,7 +46,7 @@ void Controller::initializeMapCommand()
 	commandMap_["N"] = CommandEnum_::NORTH;
 	commandMap_["S"] = CommandEnum_::SOUTH;
 	commandMap_["E"] = CommandEnum_::EAST;
-	commandMap_["E"] = CommandEnum_::WEST;
+	commandMap_["O"] = CommandEnum_::WEST;
 	commandMap_["look"] = CommandEnum_::LOOK;
 	commandMap_["restart"] = CommandEnum_::RESTART;
 	commandMap_["exit"] = CommandEnum_::EXIT;
