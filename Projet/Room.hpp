@@ -3,6 +3,7 @@
 class Room
 {
 public:
+	Room(std::string name, std::string description_);
 	 void display(std::ostream& o);
 	 std::shared_ptr<class Room> getNorthneighbour();
 	 std::shared_ptr<class Room> getSouthneighbour();

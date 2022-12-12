@@ -1,5 +1,11 @@
 #include "View.hpp"
 
+View::View(std::shared_ptr<Controller> controller, std::shared_ptr<World> world):
+	controller_(controller), world_(world)
+{
+	setUpView();
+}
+
 void View::setUpView()
 {
 	world_->display(std::cout);

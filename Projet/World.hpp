@@ -3,7 +3,7 @@
 class World
 {
 public:
-	World();
+	World(std::string name, std::string header);
 	void display(std::ostream& o);
 	void displayCurrentRoom(std::ostream& o);
 	void moveNorth();

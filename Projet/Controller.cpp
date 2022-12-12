@@ -1,12 +1,16 @@
 #include "Controller.hpp"
 
-Controller::Controller()
+Controller::Controller(std::shared_ptr<World> world) :
+	world_(world)
 {
 	initializeMapCommand();
 }
 
-void Controller::execute(const std::string& command)
+void Controller::execute( std::string command)
 {
+	auto it = commandMap_.find(command);
+	if (it == commandMap_.end())
+		command = "default";
 	switch (commandMap_[command])
 	{
 	case NORTH:
@@ -30,6 +34,7 @@ void Controller::execute(const std::string& command)
 	case EXIT:
 		world_->setPlaying(false);
 		break;
+	case DEFAULTCASE:
 	default:
 		throw Invalidcommand("\nCommande non reconnue");
 		break;
@@ -45,4 +50,5 @@ void Controller::initializeMapCommand()
 	commandMap_["look"] = CommandEnum_::LOOK;
 	commandMap_["restart"] = CommandEnum_::RESTART;
 	commandMap_["exit"] = CommandEnum_::EXIT;
+	commandMap_["default"] = CommandEnum_::DEFAULTCASE;
 }

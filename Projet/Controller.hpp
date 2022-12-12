@@ -3,8 +3,8 @@
 class Controller
 {
 public:
-	Controller();
-	void execute(const std::string& command);
+	Controller(std::shared_ptr<World> world);
+	void execute( std::string command);
 private:
 	std::shared_ptr<World> world_;
 	 enum CommandEnum_ {
@@ -15,6 +15,7 @@ private:
 		LOOK,
 		RESTART,
 		EXIT,
+		DEFAULTCASE,
 	};
 	inline static std::map<std::string, CommandEnum_> commandMap_;
 	void initializeMapCommand();

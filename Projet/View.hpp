@@ -3,6 +3,7 @@
 class View
 {
 public:
+	View(std::shared_ptr<Controller> controller, std::shared_ptr<World> world);
 	void setUpView();
 	void actualizeView();
 	std::string getCommand();
@@ -10,7 +11,7 @@ public:
 	bool isPlaying() { return world_->isPlaying();}
 
 private:
-	std::unique_ptr<Controller> controller_;
+	std::shared_ptr<Controller> controller_;
 	std::shared_ptr<World> world_;
 };
 

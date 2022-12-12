@@ -1,19 +1,24 @@
 #include "Room.hpp"
 
+Room::Room(std::string name, std::string description):
+	name_(name), description_(description)
+{
+}
+
 void Room::display(std::ostream& o)
 {
-	o << "-- " << name_ << " --" << std::endl
-		<< description_ << std::endl;
+	o << "\n-- " << name_ << " --" << std::endl
+		<< description_;
 	for (auto it = neighbour_.begin(); it != neighbour_.end(); ++it) {
 		const auto& [key, value] = *it;
 		if (value != nullptr)
-			o << value->name_ << " se trouve à la position: " << key;
+			o <<"\n" << value->name_ << " se trouve à la position: " << key;
 	}
 }
 
 std::shared_ptr<class Room> Room::getNorthneighbour()
 {
-	return neighbour_["North (N)"];
+	return neighbour_["Nord (N)"];
 }
 
 std::shared_ptr<class Room> Room::getSouthneighbour() 

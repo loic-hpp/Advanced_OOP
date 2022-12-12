@@ -42,7 +42,13 @@ using namespace gsl;
 int main(int argc, char* argv[])
 {
 	initialiserBibliothequeCours(argc, argv);
-	View view;
-	view.playGame();
+	auto world = std::make_shared<World>("nom", "entête");
+	auto controller = std::make_shared<Controller>(world);
+	auto view = std::make_shared<View>(controller, world);
+	do
+	{
+		view->playGame();
+
+	} while (view->isPlaying());
 
 }
