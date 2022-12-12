@@ -22,8 +22,8 @@ public:
 	void setPlaying(bool status) { isRunning_ = status; }
 private:
 	void createRoom();
-	std::shared_ptr<class Room> currentRoom_;
-	std::shared_ptr<class Room> beginRoom_;
+	Room* currentRoom_;
+	Room* beginRoom_;
 	std::vector<std::shared_ptr<class Room>> rommList_;
 	std::string name_;
 	std::string header_;

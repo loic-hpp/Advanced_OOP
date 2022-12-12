@@ -22,27 +22,27 @@ void Room::display(std::ostream& o)
 	}
 }
 
-std::shared_ptr<class Room> Room::getNorthneighbour()
+Room* Room::getNorthneighbour()
 {
 	return neighbour_["Nord (N)"];
 }
 
-std::shared_ptr<class Room> Room::getSouthneighbour() 
+Room* Room::getSouthneighbour() 
 {
 	return neighbour_["Sud (S)"];
 }
 
-std::shared_ptr<class Room> Room::getEastneighbour() 
+Room* Room::getEastneighbour() 
 {
 	return neighbour_["Est (E)"];
 }
 
-std::shared_ptr<class Room> Room::getWestneighbour() 
+Room* Room::getWestneighbour() 
 {
 	return neighbour_["Ouest (O)"];
 }
 
-void Room::setNeighbour(std::shared_ptr<class Room> northNeighbour, std::shared_ptr<class Room> southNeighbour, std::shared_ptr<class Room> eastNeighbour, std::shared_ptr<class Room> westNeighbour)
+void Room::setNeighbour(Room* northNeighbour, Room* southNeighbour, Room* eastNeighbour, Room* westNeighbour)
 {
 	neighbour_["Nord (N)"] = northNeighbour;
 	neighbour_["Sud (S)"] = southNeighbour;

@@ -20,3 +20,4 @@
 #include <cppitertools/enumerate.hpp>
 #include <map>
 #include "exception.hpp"
+#include <stdlib.h>

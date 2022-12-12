@@ -46,7 +46,7 @@ using namespace gsl;
 int main(int argc, char* argv[])
 {
 	initialiserBibliothequeCours(argc, argv);
-	auto world = std::make_shared<World>("nom", "entête");
+	auto world = std::make_shared<World>("HOTEL POLY", "CARTE DE DEPLACEMENT");
 	auto controller = std::make_shared<Controller>(world);
 	auto view = std::make_shared<View>(controller, world);
 	do
