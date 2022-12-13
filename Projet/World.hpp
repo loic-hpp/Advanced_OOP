@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Room.hpp"
+
 class World
 {
 public:
@@ -28,7 +29,6 @@ private:
 	std::string name_;
 	std::string header_;
 	bool isRunning_ = true;
-
 };
 
 

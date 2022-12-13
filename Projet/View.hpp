@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Controller.hpp"
+
 class View
 {
 public:
@@ -14,7 +15,7 @@ public:
 	void actualizeView();
 	std::string getCommand();
 	void playGame();
-	bool isPlaying() { return world_->isPlaying();}
+	bool isPlaying() { return world_->isPlaying(); }
 
 private:
 	std::shared_ptr<Controller> controller_;

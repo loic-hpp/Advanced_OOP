@@ -22,22 +22,22 @@ void Room::display(std::ostream& o)
 	}
 }
 
-Room* Room::getNorthneighbour()
+Room* Room::getNorthNeighbour()
 {
 	return neighbour_["Nord (N)"];
 }
 
-Room* Room::getSouthneighbour() 
+Room* Room::getSouthNeighbour() 
 {
 	return neighbour_["Sud (S)"];
 }
 
-Room* Room::getEastneighbour() 
+Room* Room::getEastNeighbour() 
 {
 	return neighbour_["Est (E)"];
 }
 
-Room* Room::getWestneighbour() 
+Room* Room::getWestNeighbour() 
 {
 	return neighbour_["Ouest (O)"];
 }
