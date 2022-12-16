@@ -21,4 +21,3 @@ private:
 	std::shared_ptr<Controller> controller_;
 	std::shared_ptr<World> world_;
 };
-

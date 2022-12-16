@@ -25,4 +25,3 @@ private:
 	std::string description_;
 	std::map<std::string, Room*> neighbour_;
 };
-

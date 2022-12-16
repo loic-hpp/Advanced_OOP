@@ -30,6 +30,3 @@ private:
 	std::string header_;
 	bool isRunning_ = true;
 };
-
-
-
