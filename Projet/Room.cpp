@@ -54,3 +54,8 @@ std::string Room::getName(Room room)
 {
 	return room.name_;
 }
+
+std::string Room::getDescription(void)
+{
+	return description_;
+}

@@ -21,7 +21,9 @@ public:
 		 Room* eastNeighbour = nullptr,
 		 Room* westNeighbour = nullptr);
 	 std::string getName(Room room);
-	 enum roomEnum_
+	 std::string getDescription(void);
+	 // Comment leur donner une valeur sans devoir faire cast statique apres?
+	 /*enum roomEnum_
 	 {
 		 VESTIAIRE,
 		 SALLE_DE_RECEPTION,
@@ -30,7 +32,7 @@ public:
 		 CHAMBRE_A_COUCHER,
 		 BALCON,
 		 SALLE_SECRETE
-	 };
+	 };*/
 private:
 	std::string name_;
 	std::string description_;

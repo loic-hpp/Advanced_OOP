@@ -62,13 +62,38 @@ void World::moveWest()
 		currentRoom_ = currentRoom_->getWestNeighbour();
 }
 
-//TODO: Implementer ces trois methodes
 void World::look()
 {
+	// TODO: implementer ceci avec description d'items dans les rooms et non des chambres
+	// repetitif
 	std::string name = currentRoom_->getName(*currentRoom_);
-	switch (name)
+	if (name == "Balcon")
 	{
-
+		std::cout << currentRoom_->getDescription() << std::endl;
+	}
+	else if (name == "Salle de billard")
+	{
+		std::cout << currentRoom_->getDescription() << std::endl;
+	}
+	else if (name == "Chambre a coucher")
+	{
+		std::cout << currentRoom_->getDescription() << std::endl;
+	}
+	else if (name == "Grand couloir")
+	{
+		std::cout << currentRoom_->getDescription() << std::endl;
+	}
+	else if (name == "Vestiaire")
+	{
+		std::cout << currentRoom_->getDescription() << std::endl;
+	}
+	else if (name == "Salle de reception")
+	{
+		std::cout << currentRoom_->getDescription() << std::endl;
+	}
+	else if (name == "Salle secrete")
+	{
+		std::cout << currentRoom_->getDescription() << std::endl;
 	}
 }
 
@@ -98,7 +123,7 @@ void World::createRoom()
 	roomList_.push_back(std::make_shared<Room>("Salle de billard", "Sallon de jeux avec comme activité principale le billard"));
 	roomList_.push_back(std::make_shared<Room>("Chambre a coucher", "Chambre avec lit Queen de qualite superieure"));
 	roomList_.push_back(std::make_shared<Room>("Grand couloir", "Allee reliant plusieurs pieces dans l'hotel"));
-	roomList_.push_back(std::make_shared<Room>("Vestiaire", "Entree de l'hotel pour laisser menteaux et bottes"));
+	roomList_.push_back(std::make_shared<Room>("Vestiaire", "Entree de l'hotel pour laisser manteaux et bottes"));
 	roomList_.push_back(std::make_shared<Room>("Salle de reception", "Salle pour check-in et recuperer ses cles"));
 	roomList_.push_back(std::make_shared<Room>("Salle secrete", "Salle ou se trouve le secret le plus grande de Poly"));
 
