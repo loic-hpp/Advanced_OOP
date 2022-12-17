@@ -64,6 +64,10 @@ void World::moveWest()
 
 void World::look()
 {
+	//if ()
+	//{
+	//	// look suivi d'un autre mot (inspecter item)
+	//}
 }
 
 void World::use()
@@ -102,7 +106,6 @@ void World::createRoom()
 	roomList_[5]->setNeighbour(nullptr, nullptr, nullptr, roomList_[4].get());
 	roomList_[2]->setNeighbour(nullptr, nullptr, roomList_[3].get());
 	
-	// TODO : Ajouter setNeighbour de la salle secrete
 	if (true /* Condition pour verifier si joueur possede diamant pour afficher acces */)
 	{
 		roomList_[6]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
