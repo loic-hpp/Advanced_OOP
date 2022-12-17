@@ -18,6 +18,8 @@ public:
 	void moveEast();
 	void moveWest();
 	void look();
+	void use();
+	void take();
 	void restart();
 	bool isPlaying() {return isRunning_;}
 	void setPlaying(bool status) { isRunning_ = status; }

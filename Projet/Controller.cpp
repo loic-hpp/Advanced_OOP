@@ -34,6 +34,12 @@ void Controller::execute( std::string command)
 	case LOOK:
 		world_->look();
 		break;
+	case USE:
+		world_->use();
+		break;
+	case TAKE:
+		world_->take();
+		break;
 	case RESTART:
 		world_->restart();
 		break;
@@ -54,6 +60,8 @@ void Controller::initializeMapCommand()
 	commandMap_["E"] = CommandEnum_::EAST;
 	commandMap_["O"] = CommandEnum_::WEST;
 	commandMap_["look"] = CommandEnum_::LOOK;
+	commandMap_["use"] = CommandEnum_::USE;
+	commandMap_["take"] = CommandEnum_::TAKE;
 	commandMap_["restart"] = CommandEnum_::RESTART;
 	commandMap_["exit"] = CommandEnum_::EXIT;
 	commandMap_["default"] = CommandEnum_::DEFAULTCASE;

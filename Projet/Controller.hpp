@@ -20,6 +20,8 @@ private:
 		EAST,
 		WEST,
 		LOOK,
+		USE,
+		TAKE,
 		RESTART,
 		EXIT,
 		DEFAULTCASE,

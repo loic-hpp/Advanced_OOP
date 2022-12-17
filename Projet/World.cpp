@@ -55,7 +55,16 @@ void World::moveWest()
 		currentRoom_ = currentRoom_->getWestNeighbour();
 }
 
+//TODO: Implementer ces trois methodes
 void World::look()
+{
+}
+
+void World::use()
+{
+}
+
+void World::take()
 {
 }
 
