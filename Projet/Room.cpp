@@ -14,12 +14,19 @@ Room::Room(std::string name, std::string description):
 void Room::display(std::ostream& o)
 {
 	o << "\n-- " << name_ << " --" << std::endl
-		<< description_;
+		<< description_ << std::endl;
+
+	// TODO: afficher items dans cette room
+	// for () pour items dans la chambre
+
 	for (auto it = neighbour_.begin(); it != neighbour_.end(); ++it) {
 		const auto& [key, value] = *it;
 		if (value != nullptr)
 			o <<"\n" << value->name_ << " se trouve à la position: " << key;
 	}
+
+	// TODO: afficher items en possession
+	// for () 
 }
 
 Room* Room::getNorthNeighbour()

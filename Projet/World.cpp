@@ -64,37 +64,6 @@ void World::moveWest()
 
 void World::look()
 {
-	// TODO: implementer ceci avec description d'items dans les rooms et non des chambres
-	// repetitif
-	std::string name = currentRoom_->getName(*currentRoom_);
-	if (name == "Balcon")
-	{
-		std::cout << currentRoom_->getDescription() << std::endl;
-	}
-	else if (name == "Salle de billard")
-	{
-		std::cout << currentRoom_->getDescription() << std::endl;
-	}
-	else if (name == "Chambre a coucher")
-	{
-		std::cout << currentRoom_->getDescription() << std::endl;
-	}
-	else if (name == "Grand couloir")
-	{
-		std::cout << currentRoom_->getDescription() << std::endl;
-	}
-	else if (name == "Vestiaire")
-	{
-		std::cout << currentRoom_->getDescription() << std::endl;
-	}
-	else if (name == "Salle de reception")
-	{
-		std::cout << currentRoom_->getDescription() << std::endl;
-	}
-	else if (name == "Salle secrete")
-	{
-		std::cout << currentRoom_->getDescription() << std::endl;
-	}
 }
 
 void World::use()
