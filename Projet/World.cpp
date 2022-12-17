@@ -20,7 +20,14 @@ void World::display(std::ostream& o)
 
 void World::displayCurrentRoom(std::ostream& o)
 {
-	currentRoom_->display(o);
+	if (isRunning_) 
+	{
+		currentRoom_->display(o);
+	}
+	else
+	{
+		std::cout << "Fin de jeu, va t'en etre productif!" << std::endl;
+	}
 }
 
 void World::moveNorth()
@@ -74,6 +81,11 @@ void World::take()
 void World::restart()
 {
 	currentRoom_ = beginRoom_;
+}
+
+void World::setPlaying(bool status)
+{
+	isRunning_ = status;
 }
 
 void World::createRoom()

@@ -21,8 +21,8 @@ public:
 	void use();
 	void take();
 	void restart();
-	bool isPlaying() {return isRunning_;}
-	void setPlaying(bool status) { isRunning_ = status; }
+	bool isPlaying() { return isRunning_; }
+	void setPlaying(bool status);
 private:
 	void createRoom();
 	Room* currentRoom_;
