@@ -91,7 +91,16 @@ void World::createRoom()
 	roomList_[4]->setNeighbour(roomList_[3].get(), nullptr, roomList_[5].get());
 	roomList_[5]->setNeighbour(nullptr, nullptr, nullptr, roomList_[4].get());
 	roomList_[2]->setNeighbour(nullptr, nullptr, roomList_[3].get());
+	
+	// TODO : Ajouter setNeighbour de la salle secrete
+	if (true /* Condition pour verifier si joueur possede diamant pour afficher acces */)
+	{
+		roomList_[6]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
+	}
 
+	//	TODO : Ajouter setNeighbour du balcon pour utiliser tobogan
+	//	roomList_[0]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
+	//	Verifier quoi faire avec exactement
 
 	currentRoom_ = roomList_[4].get();
 	beginRoom_ = roomList_[4].get();

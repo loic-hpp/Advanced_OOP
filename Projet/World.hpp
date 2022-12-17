@@ -27,7 +27,7 @@ private:
 	void createRoom();
 	Room* currentRoom_;
 	Room* beginRoom_;
-	std::vector<std::shared_ptr<class Room>> rommList_;
+	std::vector<std::shared_ptr<class Room>> roomList_;
 	std::string name_;
 	std::string header_;
 	bool isRunning_ = true;
