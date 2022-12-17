@@ -22,10 +22,25 @@ void Item::createVectorListItems(void)
 	itemList_.push_back(std::make_shared<Item>("Une boite de monopoly vide"));
 }
 
-std::vector<Item> Item::getVectorListItems(void)
+void Item::takeItem(std::string item)
+{
+	takenItemsList_.push_back(item);
+}
+
+void Item::useItem(std::string item)
+{
+	// TODO: implementer 
+}
+
+std::vector<Item> Item::getTakenItemsList(void)
 {
 	// TODO : Regler ce retour ci
 	/*return itemList_;*/
+}
+
+std::vector<Item> getItemsFoundInRoom(void)
+{
+
 }
 
 std::string Item::getDescription()

@@ -13,10 +13,14 @@ class Item
 public:
 	Item(std::string description_);
 	void createVectorListItems(void);
-	std::vector<Item> getVectorListItems(void);
+	void takeItem(std::string item);
+	void useItem(std::string item);
+	std::vector<Item> getTakenItemsList(void);
+	std::vector<Item> getItemsFoundInRoom(void);
 	std::string getDescription();
 	// TODO: methode pour trouver mots cles de la description d'un item a partir de la commande passée
 private:
 	std::string description_;
 	std::vector<std::shared_ptr<class Item>> itemList_;
+	std::vector<Item> takenItemsList_;
 };

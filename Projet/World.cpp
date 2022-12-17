@@ -113,7 +113,6 @@ void World::createRoom()
 
 	//	TODO : Ajouter setNeighbour du balcon pour utiliser tobogan
 	//	roomList_[0]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
-	//	Verifier quoi faire avec exactement
 
 	currentRoom_ = roomList_[4].get();
 	beginRoom_ = roomList_[4].get();
