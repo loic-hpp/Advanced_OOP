@@ -65,7 +65,11 @@ void World::moveWest()
 //TODO: Implementer ces trois methodes
 void World::look()
 {
+	std::string name = currentRoom_->getName(*currentRoom_);
+	switch (name)
+	{
 
+	}
 }
 
 void World::use()

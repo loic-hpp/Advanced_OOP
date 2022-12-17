@@ -49,3 +49,8 @@ void Room::setNeighbour(Room* northNeighbour, Room* southNeighbour, Room* eastNe
 	neighbour_["Est (E)"] = eastNeighbour;
 	neighbour_["Ouest (O)"] = westNeighbour;
 }
+
+std::string Room::getName(Room room)
+{
+	return room.name_;
+}

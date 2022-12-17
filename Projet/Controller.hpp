@@ -14,7 +14,8 @@ public:
 	void execute(std::string command);
 private:
 	std::shared_ptr<World> world_;
-	 enum CommandEnum_ {
+	 enum CommandEnum_ 
+	 {
 		NORTH,
 		SOUTH,
 		EAST,

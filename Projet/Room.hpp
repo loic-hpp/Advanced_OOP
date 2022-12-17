@@ -20,6 +20,17 @@ public:
 		 Room* southNeighbour = nullptr,
 		 Room* eastNeighbour = nullptr,
 		 Room* westNeighbour = nullptr);
+	 std::string getName(Room room);
+	 enum roomEnum_
+	 {
+		 VESTIAIRE,
+		 SALLE_DE_RECEPTION,
+		 GRAND_COULOIR,
+		 SALLE_DE_BILLIARD,
+		 CHAMBRE_A_COUCHER,
+		 BALCON,
+		 SALLE_SECRETE
+	 };
 private:
 	std::string name_;
 	std::string description_;
