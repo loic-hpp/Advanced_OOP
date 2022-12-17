@@ -58,14 +58,17 @@ void World::moveWest()
 //TODO: Implementer ces trois methodes
 void World::look()
 {
+
 }
 
 void World::use()
 {
+
 }
 
 void World::take()
 {
+
 }
 
 void World::restart()
@@ -75,19 +78,21 @@ void World::restart()
 
 void World::createRoom()
 {
-	rommList_.push_back(std::make_shared<Room>("Balcon", "Petit coin ou profiter de l'air frais avec des chaises et tables"));
-	rommList_.push_back(std::make_shared<Room>("Salle de billard", "Sallon de jeux avec comme activité principale le billard"));
-	rommList_.push_back(std::make_shared<Room>("Chambre a coucher", "Chambre avec lit Queen de qualite superieure"));
-	rommList_.push_back(std::make_shared<Room>("Grand couloir", "Allee reliant plusieurs pieces dans l'hotel"));
-	rommList_.push_back(std::make_shared<Room>("Vestiaire", "Entree de l'hotel pour laisser menteaux et bottes"));
-	rommList_.push_back(std::make_shared<Room>("Salle de reception", "Salle pour check-in et recuperer ses cles"));
+	roomList_.push_back(std::make_shared<Room>("Balcon", "Petit coin ou profiter de l'air frais avec des chaises et tables"));
+	roomList_.push_back(std::make_shared<Room>("Salle de billard", "Sallon de jeux avec comme activité principale le billard"));
+	roomList_.push_back(std::make_shared<Room>("Chambre a coucher", "Chambre avec lit Queen de qualite superieure"));
+	roomList_.push_back(std::make_shared<Room>("Grand couloir", "Allee reliant plusieurs pieces dans l'hotel"));
+	roomList_.push_back(std::make_shared<Room>("Vestiaire", "Entree de l'hotel pour laisser menteaux et bottes"));
+	roomList_.push_back(std::make_shared<Room>("Salle de reception", "Salle pour check-in et recuperer ses cles"));
+	roomList_.push_back(std::make_shared<Room>("Salle secrete", "Salle ou se trouve le secret le plus grande de Poly"));
 
-	rommList_[1]->setNeighbour(nullptr, rommList_[3].get());
-	rommList_[3]->setNeighbour(rommList_[1].get(), rommList_[4].get(),nullptr, rommList_[2].get());
-	rommList_[4]->setNeighbour(rommList_[3].get(), nullptr, rommList_[5].get());
-	rommList_[5]->setNeighbour(nullptr, nullptr, nullptr, rommList_[4].get());
-	rommList_[2]->setNeighbour(nullptr, nullptr, rommList_[3].get());
+	roomList_[1]->setNeighbour(nullptr, roomList_[3].get());
+	roomList_[3]->setNeighbour(roomList_[1].get(), roomList_[4].get(),nullptr, roomList_[2].get());
+	roomList_[4]->setNeighbour(roomList_[3].get(), nullptr, roomList_[5].get());
+	roomList_[5]->setNeighbour(nullptr, nullptr, nullptr, roomList_[4].get());
+	roomList_[2]->setNeighbour(nullptr, nullptr, roomList_[3].get());
 
-	currentRoom_ = rommList_[4].get();
-	beginRoom_ = rommList_[4].get();
+
+	currentRoom_ = roomList_[4].get();
+	beginRoom_ = roomList_[4].get();
 }
