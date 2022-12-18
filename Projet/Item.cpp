@@ -31,6 +31,11 @@ void Item::displayItemsInInventory(std::ostream& o)
 	}*/
 }
 
+void Item::displayItemsFoundInRoom(std::ostream& o)
+{
+	// TODO: connecter avec les differentes chambres
+}
+
 void Item::createItemsList(void)
 {
 	// Salle de reception
@@ -74,14 +79,14 @@ void Item::useItem(std::shared_ptr<class Item> item, std::string word)
 	}
 }
 
-std::vector<std::shared_ptr<class Item>> Item::getItemsInInvetory(void)
-{
-	return itemsInInventory_;
-}
-
-std::vector<std::shared_ptr<class Item>> Item::getItemsFoundInRoom(void)
-{
-	// TODO : comment connecter ceci a Room?
-	return totalItemList_;
-}
+//std::vector<std::shared_ptr<class Item>> Item::getItemsInInvetory(void)
+//{
+//	return itemsInInventory_;
+//}
+//
+//std::vector<std::shared_ptr<class Item>> Item::getItemsFoundInRoom(void)
+//{
+//	// TODO : comment connecter ceci a Room?
+//	return totalItemList_;
+//}
 
