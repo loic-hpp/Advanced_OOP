@@ -20,8 +20,6 @@ public:
 	void useItem(std::shared_ptr<class Item> item, std::string word);
 	std::vector<std::shared_ptr<class Item>> getTakenItemsList(void);
 	std::vector<std::shared_ptr<class Item>> getItemsFoundInRoom(void);
-	bool isKeyInInventory(void);
-
 private:
 	std::string name_;
 	std::string description_;

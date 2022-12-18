@@ -21,15 +21,6 @@ std::string Item::getDescription()
 	return description_;
 }
 
-bool Item::isKeyInInventory(void)
-{
-	/*if ()
-	{
-	
-	}*/
-	return false;
-}
-
 void Item::createItemsList(void)
 {
 	// Salle de reception
@@ -42,22 +33,6 @@ void Item::createItemsList(void)
 	totalItemList_.push_back(std::make_shared<Item>("Une boite de monopoly", "Cette boite est vide"));
 	// Salle secrete
 	totalItemList_.push_back(std::make_shared<Item>("Une carte dans une enveloppe", "Cette carte contient le secret de Poly"));
-}
-
-void Item::takeItem(std::shared_ptr<class Item> item, std::string word)
-{
-	if (isItemInInvetory(word))
-	{
-		itemsInInventory_.push_back(item);
-	}
-}
-
-void Item::useItem(std::shared_ptr<class Item> item, std::string word)
-{
-	if (isItemInInvetory(word))
-	{
-		
-	}
 }
 
 // Cette methode aide a implementer les methodes des commandes look, use et take
@@ -74,6 +49,22 @@ bool Item::isItemInInvetory(std::string word)
 		}*/
 	}
 	return false;
+}
+
+void Item::takeItem(std::shared_ptr<class Item> item, std::string word)
+{
+	if (isItemInInvetory(word))
+	{
+		itemsInInventory_.push_back(item);
+	}
+}
+
+void Item::useItem(std::shared_ptr<class Item> item, std::string word)
+{
+	if (isItemInInvetory(word))
+	{
+		
+	}
 }
 
 std::vector<std::shared_ptr<class Item>> Item::getTakenItemsList(void)
