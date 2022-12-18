@@ -11,15 +11,37 @@ Item::Item(std::string name, std::string description):
 {
 }
 
-void Item::createVectorListItems(void)
+std::string Item::getName(void)
 {
+	return name_;
+}
+
+std::string Item::getDescription()
+{
+	return description_;
+}
+
+bool Item::isKeyInInventory(void)
+{
+	/*if ()
+	{
+	
+	}*/
+	return false;
+}
+
+void Item::createItemsList(void)
+{
+	// Salle de reception
 	itemList_.push_back(std::make_shared<Item>("Un diamant bleue",  "Ce diamant brillant sert comme cle"));
+	// Vestiaire
 	itemList_.push_back(std::make_shared<Item>("Un manteau brun", "Ce manteau est plein de neige"));
 	itemList_.push_back(std::make_shared<Item>("Une chaise antique", "Cette chaise est a l'envers"));
 	itemList_.push_back(std::make_shared<Item>("Un misterieux tobogan", "Ce tobogan est mauve"));
-	itemList_.push_back(std::make_shared<Item>("Une carte dans une enveloppe", "Cette carte contient le secret de Poly"));
 	itemList_.push_back(std::make_shared<Item>("Un oreiller blanc", "Cet oreiller a une tache de sang"));
 	itemList_.push_back(std::make_shared<Item>("Une boite de monopoly", "Cette boite est vide"));
+	// Salle secrete
+	itemList_.push_back(std::make_shared<Item>("Une carte dans une enveloppe", "Cette carte contient le secret de Poly"));
 }
 
 void Item::takeItem(std::string item)
@@ -31,6 +53,22 @@ void Item::useItem(std::string item)
 {
 	// TODO: implementer
 
+}
+
+// Cette methode aide a implementer les methodes des commandes look, use et take
+bool Item::isInItemList(std::string word)
+{
+	/*for (auto& item : itemList_)
+	{*/
+	for (int i = 0; i < itemList_.size(); i++)
+	{
+		// Pourquoi appel de getName marche pas?
+		/*if (itemList_.at(i).getName() == word)
+		{
+			return true;
+		}*/
+	}
+	return false;
 }
 
 std::vector<std::shared_ptr<class Item>> Item::getTakenItemsList(void)
@@ -45,12 +83,3 @@ std::vector<std::shared_ptr<class Item>> Item::getItemsFoundInRoom(void)
 	return itemList_;
 }
 
-std::string Item::getName(void)
-{
-	return name_;
-}
-
-std::string Item::getDescription()
-{
-	return description_;
-}

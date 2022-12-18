@@ -12,14 +12,16 @@ class Item
 {
 public:
 	Item(std::string name_, std::string description_);
-	void createVectorListItems(void);
+	void createItemsList(void);
 	void takeItem(std::string item);
 	void useItem(std::string item);
+	bool isInItemList(std::string word);
 	std::vector<std::shared_ptr<class Item>> getTakenItemsList(void);
 	std::vector<std::shared_ptr<class Item>> getItemsFoundInRoom(void);
 	std::string getName(void);
 	std::string getDescription(void);
-	// TODO: methode pour trouver mots cles de la description d'un item a partir de la commande passée
+	bool isKeyInInventory(void);
+
 private:
 	std::string name_;
 	std::string description_;
