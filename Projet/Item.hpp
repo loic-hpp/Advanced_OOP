@@ -12,19 +12,19 @@ class Item
 {
 public:
 	Item(std::string name_, std::string description_);
-	void createItemsList(void);
-	void takeItem(std::string item);
-	void useItem(std::string item);
-	bool isInItemList(std::string word);
-	std::vector<std::shared_ptr<class Item>> getTakenItemsList(void);
-	std::vector<std::shared_ptr<class Item>> getItemsFoundInRoom(void);
 	std::string getName(void);
 	std::string getDescription(void);
+	void createItemsList(void);
+	bool isItemInInvetory(std::string word);
+	void takeItem(std::shared_ptr<class Item> item, std::string word);
+	void useItem(std::shared_ptr<class Item> item, std::string word);
+	std::vector<std::shared_ptr<class Item>> getTakenItemsList(void);
+	std::vector<std::shared_ptr<class Item>> getItemsFoundInRoom(void);
 	bool isKeyInInventory(void);
 
 private:
 	std::string name_;
 	std::string description_;
-	std::vector<std::shared_ptr<class Item>> itemList_;
-	std::vector<std::string> takenItemsList_;
+	std::vector<std::shared_ptr<class Item>> totalItemList_;
+	std::vector<std::shared_ptr<class Item>> itemsInInventory_;
 };
