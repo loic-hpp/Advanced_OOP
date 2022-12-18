@@ -6,6 +6,7 @@
 
 #pragma once
 #include "inclusion.hpp"
+#include "Item.hpp"
 
 class Room
 {
@@ -22,6 +23,7 @@ public:
 		 Room* westNeighbour = nullptr);
 	 std::string getName(Room room);
 	 std::string getDescription(void);
+
 	 // Comment leur donner une valeur sans devoir faire cast statique apres?
 	 /*enum roomEnum_
 	 {

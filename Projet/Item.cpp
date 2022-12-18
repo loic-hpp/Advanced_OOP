@@ -21,6 +21,16 @@ std::string Item::getDescription()
 	return description_;
 }
 
+void Item::displayItemsInInventory(std::ostream& o)
+{
+	// TODO: afficher items en possession
+	//Item item = Item();
+	//std::vector<std::shared_ptr<Item>> itemsInInventory = item.getItemsInInvetory();
+	/*for (int i = 0; i < itemsInInventory_.size(); i++) {
+		o << itemsInInventory_[i].getName;
+	}*/
+}
+
 void Item::createItemsList(void)
 {
 	// Salle de reception
@@ -53,10 +63,7 @@ bool Item::isItemInInvetory(std::string word)
 
 void Item::takeItem(std::shared_ptr<class Item> item, std::string word)
 {
-	if (isItemInInvetory(word))
-	{
-		itemsInInventory_.push_back(item);
-	}
+	itemsInInventory_.push_back(item);
 }
 
 void Item::useItem(std::shared_ptr<class Item> item, std::string word)
@@ -67,10 +74,9 @@ void Item::useItem(std::shared_ptr<class Item> item, std::string word)
 	}
 }
 
-std::vector<std::shared_ptr<class Item>> Item::getTakenItemsList(void)
+std::vector<std::shared_ptr<class Item>> Item::getItemsInInvetory(void)
 {
-	// TODO : Regler ce retour ci
-	return totalItemList_;
+	return itemsInInventory_;
 }
 
 std::vector<std::shared_ptr<class Item>> Item::getItemsFoundInRoom(void)
