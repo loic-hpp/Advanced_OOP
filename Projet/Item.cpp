@@ -6,20 +6,20 @@
 
 #include "Item.hpp"
 
-Item::Item(std::string description):
-	description_(description)
+Item::Item(std::string name, std::string description):
+	name_(name), description_(description)
 {
 }
 
 void Item::createVectorListItems(void)
 {
-	itemList_.push_back(std::make_shared<Item>("Un diamant bleue brillant qui sert comme cle"));
-	itemList_.push_back(std::make_shared<Item>("Un manteau brun plein de neige"));
-	itemList_.push_back(std::make_shared<Item>("Une chaise a l'envers"));
-	itemList_.push_back(std::make_shared<Item>("Un misterieux tobogan mauve"));
-	itemList_.push_back(std::make_shared<Item>("Une carte contenant le secret de Poly"));
-	itemList_.push_back(std::make_shared<Item>("Un oreiller avec une tache de sang"));
-	itemList_.push_back(std::make_shared<Item>("Une boite de monopoly vide"));
+	itemList_.push_back(std::make_shared<Item>("Un diamant bleue",  "Ce diamant brillant sert comme cle"));
+	itemList_.push_back(std::make_shared<Item>("Un manteau brun", "Ce manteau est plein de neige"));
+	itemList_.push_back(std::make_shared<Item>("Une chaise antique", "Cette chaise est a l'envers"));
+	itemList_.push_back(std::make_shared<Item>("Un misterieux tobogan", "Ce tobogan est mauve"));
+	itemList_.push_back(std::make_shared<Item>("Une carte dans une enveloppe", "Cette carte contient le secret de Poly"));
+	itemList_.push_back(std::make_shared<Item>("Un oreiller blanc", "Cet oreiller a une tache de sang"));
+	itemList_.push_back(std::make_shared<Item>("Une boite de monopoly", "Cette boite est vide"));
 }
 
 void Item::takeItem(std::string item)
@@ -29,18 +29,25 @@ void Item::takeItem(std::string item)
 
 void Item::useItem(std::string item)
 {
-	// TODO: implementer 
+	// TODO: implementer
+
 }
 
-std::vector<Item> Item::getTakenItemsList(void)
+std::vector<std::shared_ptr<class Item>> Item::getTakenItemsList(void)
 {
 	// TODO : Regler ce retour ci
-	/*return itemList_;*/
+	return itemList_;
 }
 
-std::vector<Item> getItemsFoundInRoom(void)
+std::vector<std::shared_ptr<class Item>> Item::getItemsFoundInRoom(void)
 {
+	// TODO : comment connecter ceci a Room?
+	return itemList_;
+}
 
+std::string Item::getName(void)
+{
+	return name_;
 }
 
 std::string Item::getDescription()
