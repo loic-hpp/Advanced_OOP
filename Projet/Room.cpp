@@ -15,8 +15,9 @@ void Room::display(std::ostream& o)
 {
 	o << "\n-- " << name_ << " --" << std::endl
 		<< description_ << std::endl;
-
+	
 	// TODO: afficher items dans cette room (Reste a connecter quels items dans quels Rooms)
+	o << "Tu remarques:" << std::endl;
 	// item_.displayItemsFoundInRoom();
 
 	for (auto it = neighbour_.begin(); it != neighbour_.end(); ++it) {

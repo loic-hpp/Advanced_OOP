@@ -30,6 +30,19 @@ std::vector<std::shared_ptr<Item>> Item::getInventoryList(void)
 	return itemsInInventory_;
 }
 
+std::vector<std::shared_ptr<Item>> Item::getItemsInRoomList(void)
+{
+	return itemsInCurrentRoom_;
+}
+
+void Item::wipeItemsInRoomList()
+{
+	for (int i = 0; i <= itemsInCurrentRoom_.size(); i++)
+	{
+		itemsInCurrentRoom_[i] == nullptr;
+	}
+}
+
 bool Item::IsInventoryEmpty()
 {
 	if (itemsInInventory_.empty())
@@ -37,11 +50,6 @@ bool Item::IsInventoryEmpty()
 		return true;
 	}
 	return false;
-}
-
-void Item::displayItemsFoundInRoom(std::ostream& o)
-{
-	// TODO: connecter avec les differentes chambres
 }
 
 bool Item::isItemInInvetory(std::string command)
