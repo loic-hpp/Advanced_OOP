@@ -87,8 +87,10 @@ void World::setPlaying(bool status)
 	isRunning_ = status;
 }
 
+// TODO: affichage d'items dans une chambre
 void World::putItemInCurrentRoom()
 {
+	// TODO: repetitif
 	if (currentRoom_->getName(*currentRoom_) == "Balcon")
 	{
 		item_.addItemToCurrentRoomList("chaise");
@@ -141,10 +143,9 @@ void World::createRoom()
 		roomList_[6]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
 	}*/
 
-	//	TODO : Ajouter setNeighbour du balcon pour utiliser tobogan
+	//	TODO : Ajouter setNeighbour du balcon pour utiliser tobogan avec une condition
 	//	roomList_[0]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
 
 	currentRoom_ = roomList_[4].get();
 	beginRoom_ = roomList_[4].get();
-	//putItemInCurrentRoom();
 }

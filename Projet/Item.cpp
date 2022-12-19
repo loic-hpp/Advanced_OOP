@@ -77,13 +77,15 @@ bool Item::isItemInInvetory(std::string command)
 	return false;
 }
 
+// TODO : Ces deux methodes peuvent etre directement dans World
+// mais te force a appeler getInventoryList() avec un vector locale aux fonctions
 void Item::takeItem(std::string command)
 {
 	if (isItemInInvetory(command))
 	{
 		itemsInInventory_.push_back(totalItemList_[currentItemIndex_]);
 	}
-	// TODO : enlever items affiches dans la chambre pour seulement afficher dans inventaire
+	// TODO : enlever items affiches dans la chambre pour seulement afficher dans inventaire (comme image example)
 }
 
 void Item::useItem(std::string command)
@@ -100,9 +102,13 @@ void Item::createItemsList(void)
 	totalItemList_.push_back(std::make_shared<Item>("Un diamant bleue",  "Ce diamant brillant sert comme cle"));
 	// Vestiaire
 	totalItemList_.push_back(std::make_shared<Item>("Un manteau brun", "Ce manteau est plein de neige"));
+	// Balcon
 	totalItemList_.push_back(std::make_shared<Item>("Une chaise antique", "Cette chaise est a l'envers"));
+	// Salle de billard
 	totalItemList_.push_back(std::make_shared<Item>("Un misterieux tobogan", "Ce tobogan est mauve"));
+	// Chambre a coucher
 	totalItemList_.push_back(std::make_shared<Item>("Un oreiller blanc", "Cet oreiller a une tache de sang"));
+	// Grand couloir
 	totalItemList_.push_back(std::make_shared<Item>("Une boite de monopoly", "Cette boite est vide"));
 	// Salle secrete
 	totalItemList_.push_back(std::make_shared<Item>("Une carte dans une enveloppe", "Cette carte contient le secret de Poly"));
