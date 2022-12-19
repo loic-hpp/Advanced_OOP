@@ -17,15 +17,14 @@ void Room::display(std::ostream& o)
 		<< description_ << std::endl;
 
 	// TODO: afficher items dans cette room (Reste a connecter quels items dans quels Rooms)
-	// Item::displayItemsFoundInRoom();
+	// item_.displayItemsFoundInRoom();
 
 	for (auto it = neighbour_.begin(); it != neighbour_.end(); ++it) {
 		const auto& [key, value] = *it;
 		if (value != nullptr)
 			o << "\n" << value->name_ << " se trouve à la position: " << key;
 	}
-	Item item = Item();
-	item.displayItemsInInventory(o);
+	item_.displayItemsInInventory(o);
 }
 
 Room* Room::getNorthNeighbour()

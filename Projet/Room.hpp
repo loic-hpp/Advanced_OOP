@@ -40,4 +40,5 @@ private:
 	std::string name_;
 	std::string description_;
 	std::map<std::string, Room*> neighbour_;
+	Item item_ = Item();
 };

@@ -62,22 +62,19 @@ void World::moveWest()
 		currentRoom_ = currentRoom_->getWestNeighbour();
 }
 
-void World::look()
+void World::look(std::string command)
 {
-	//if ()
-	//{
-	//	// look suivi d'un autre mot (inspecter item)
-	//}
+	
 }
 
-void World::use()
+void World::use(std::string command)
 {
 
 }
 
-void World::take()
+void World::take(std::string command)
 {
-
+	
 }
 
 void World::restart()

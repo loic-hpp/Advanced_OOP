@@ -19,8 +19,8 @@ public:
 	void displayItemsFoundInRoom(std::ostream& o);
 	void createItemsList(void);
 	bool isItemInInvetory(std::string word);
-	void takeItem(std::shared_ptr<class Item> item, std::string word);
-	void useItem(std::shared_ptr<class Item> item, std::string word);
+	void takeItem(std::string word);
+	void useItem(std::string word);
 private:
 	std::string name_;
 	std::string description_;

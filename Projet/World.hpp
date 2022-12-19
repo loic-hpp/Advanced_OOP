@@ -6,6 +6,7 @@
 
 #pragma once
 #include "Room.hpp"
+#include "View.hpp"
 
 class World
 {
@@ -17,9 +18,9 @@ public:
 	void moveSouth();
 	void moveEast();
 	void moveWest();
-	void look();
-	void use();
-	void take();
+	void look(std::string command);
+	void use(std::string command);
+	void take(std::string command);
 	void restart();
 	bool isPlaying() { return isRunning_; }
 	void setPlaying(bool status);

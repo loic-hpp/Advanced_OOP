@@ -12,7 +12,7 @@ Controller::Controller(std::shared_ptr<World> world) :
 	initializeMapCommand();
 }
 
-void Controller::execute( std::string command)
+void Controller::execute(std::string command)
 {
 	auto it = commandMap_.find(command);
 	if (it == commandMap_.end())
@@ -32,13 +32,13 @@ void Controller::execute( std::string command)
 		world_->moveWest();
 		break;
 	case LOOK:
-		world_->look();
+		world_->look(command);
 		break;
 	case USE:
-		world_->use();
+		world_->use(command);
 		break;
 	case TAKE:
-		world_->take();
+		world_->take(command);
 		break;
 	case RESTART:
 		world_->restart();
