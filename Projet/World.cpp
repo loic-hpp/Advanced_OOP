@@ -146,4 +146,5 @@ void World::createRoom()
 
 	currentRoom_ = roomList_[4].get();
 	beginRoom_ = roomList_[4].get();
+	//putItemInCurrentRoom();
 }

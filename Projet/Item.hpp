@@ -15,8 +15,6 @@ public:
 	Item(std::string name_, std::string description_);
 	std::string getName(void);
 	std::string getDescription(void);
-	/*void displayItemsInInventory(std::ostream& o);
-	void displayItemsFoundInRoom(std::ostream& o);*/
 	void createItemsList(void);
 	std::vector<std::shared_ptr<Item>> getInventoryList(void);
 	std::vector<std::shared_ptr<Item>> getItemsInRoomList(void);

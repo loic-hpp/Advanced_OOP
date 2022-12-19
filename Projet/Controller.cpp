@@ -21,27 +21,35 @@ void Controller::execute(std::string command)
 	{
 	case NORTH:
 		world_->moveNorth();
+		world_->putItemInCurrentRoom();
 		break;
 	case SOUTH:
 		world_->moveSouth();
+		world_->putItemInCurrentRoom();
 		break;
 	case EAST:
 		world_->moveEast();
+		world_->putItemInCurrentRoom();
 		break;
 	case WEST:
 		world_->moveWest();
+		world_->putItemInCurrentRoom();
 		break;
 	case LOOK:
 		world_->look(command);
+		world_->putItemInCurrentRoom();
 		break;
 	case USE:
 		world_->use(command);
+		world_->putItemInCurrentRoom();
 		break;
 	case TAKE:
 		world_->take(command);
+		world_->putItemInCurrentRoom();
 		break;
 	case RESTART:
 		world_->restart();
+		world_->putItemInCurrentRoom();
 		break;
 	case EXIT:
 		world_->setPlaying(false);
