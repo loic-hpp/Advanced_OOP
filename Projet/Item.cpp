@@ -77,6 +77,16 @@ bool Item::isItemInInvetory(std::string command)
 	return false;
 }
 
+void Item::setIsUsed(bool boolean)
+{
+	isUsed_ = boolean;
+}
+
+bool Item::getIsUsed()
+{
+	return isUsed_;
+}
+
 // TODO : Ces deux methodes peuvent etre directement dans World
 // mais te force a appeler getInventoryList() avec un vector locale aux fonctions
 void Item::takeItem(std::string command)

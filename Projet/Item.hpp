@@ -25,10 +25,13 @@ public:
 	bool isItemInInvetory(std::string word);
 	void takeItem(std::string word);
 	void useItem(std::string word);
+	void setIsUsed(bool boolean);
+	bool getIsUsed();
 private:
 	std::string name_;
 	std::string description_;
 	int currentItemIndex_;
+	bool isUsed_ = false;
 	std::vector<std::shared_ptr<class Item>> totalItemList_;
 	std::vector<std::shared_ptr<class Item>> itemsInInventory_;
 	std::vector<std::shared_ptr<class Item>> itemsInCurrentRoom_;

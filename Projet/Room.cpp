@@ -11,10 +11,14 @@ Room::Room(std::string name, std::string description) :
 {
 }
 
+// TODO: peut etre bouger cette methode dans vue pour pouvoir afficher 
+// items dans la chambre presente ou c'est sense 
 void Room::display(std::ostream& o)
 {
 	o << "\n-- " << name_ << " --" << std::endl
 		<< description_ << std::endl;
+
+	// Affichage ici supossement
 
 	for (auto it = neighbour_.begin(); it != neighbour_.end(); ++it) {
 		const auto& [key, value] = *it;

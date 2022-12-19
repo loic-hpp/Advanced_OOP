@@ -70,6 +70,7 @@ void World::look(std::string command)
 void World::use(std::string command)
 {
 	item_.useItem(command);
+	item_.setIsUsed(true);
 }
 
 void World::take(std::string command)
@@ -138,12 +139,12 @@ void World::createRoom()
 	roomList_[2]->setNeighbour(nullptr, nullptr, roomList_[3].get());
 	
 	// TODO : condition salle secrete doit apparaitre seulement quand diamant utilise
-	/*if (item_.isItemInInvetory("diamant"))
+	if (!item_.getIsUsed())
 	{
 		roomList_[6]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
-	}*/
+		item_.setIsUsed(false);
+	}
 
-	//	TODO : Ajouter setNeighbour du balcon pour utiliser tobogan avec une condition
 	//	roomList_[0]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
 
 	currentRoom_ = roomList_[4].get();
