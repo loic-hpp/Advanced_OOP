@@ -32,4 +32,5 @@ private:
 	std::string name_;
 	std::string header_;
 	bool isRunning_ = true;
+	Item item_ = Item();
 };

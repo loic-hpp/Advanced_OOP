@@ -18,12 +18,15 @@ public:
 	void displayItemsInInventory(std::ostream& o);
 	void displayItemsFoundInRoom(std::ostream& o);
 	void createItemsList(void);
+	void addItemsToRooms();
 	bool isItemInInvetory(std::string word);
 	void takeItem(std::string word);
 	void useItem(std::string word);
 private:
 	std::string name_;
 	std::string description_;
+	int currentItemIndex_;
 	std::vector<std::shared_ptr<class Item>> totalItemList_;
 	std::vector<std::shared_ptr<class Item>> itemsInInventory_;
+	std::vector<std::shared_ptr<class Item>> itemsInCurrentRoom_;
 };

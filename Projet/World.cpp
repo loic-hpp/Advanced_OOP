@@ -69,12 +69,12 @@ void World::look(std::string command)
 
 void World::use(std::string command)
 {
-
+	item_.useItem(command);
 }
 
 void World::take(std::string command)
 {
-	
+	item_.takeItem(command);
 }
 
 void World::restart()
@@ -103,10 +103,11 @@ void World::createRoom()
 	roomList_[5]->setNeighbour(nullptr, nullptr, nullptr, roomList_[4].get());
 	roomList_[2]->setNeighbour(nullptr, nullptr, roomList_[3].get());
 	
-	if (true /* Condition pour verifier si joueur possede diamant pour afficher acces */)
+	// TODO : salle secrete doit apparaitre seulement quand diamant utilise
+	/*if (item_.isItemInInvetory("diamant"))
 	{
 		roomList_[6]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
-	}
+	}*/
 
 	//	TODO : Ajouter setNeighbour du balcon pour utiliser tobogan
 	//	roomList_[0]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());

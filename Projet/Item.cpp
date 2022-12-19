@@ -29,7 +29,7 @@ void Item::displayItemsInInventory(std::ostream& o)
 {
 	for (int i = 0; i < itemsInInventory_.size(); i++) 
 	{
-		// TODO: regler indentation
+		// TODO: regler indentation (me laisse pas faire "\n" au debut ??)
 		o << itemsInInventory_[i]->getName();
 	}
 }
@@ -39,28 +39,37 @@ void Item::displayItemsFoundInRoom(std::ostream& o)
 	// TODO: connecter avec les differentes chambres
 }
 
-bool Item::isItemInInvetory(std::string word)
+bool Item::isItemInInvetory(std::string command)
 {
 	for (int i = 0; i < totalItemList_.size(); i++)
 	{
-		// TODO: regler comparaison
-		if (totalItemList_[i]->getName() == word)
+		std::string name = totalItemList_[i]->getName();
+		if (name.contains(command.substr(4,command.size())) || 
+			name.contains(command.substr(5, command.size())))
 		{
+			currentItemIndex_ = i;
 			return true;
 		}
 	}
 	return false;
 }
 
-void Item::takeItem(std::string command)
+void Item::addItemsToRooms()
 {
-	// TODO: implementer methode de recherche avant
-	//itemsInInventory_.push_back(item);
+	// TODO : 
 }
 
-void Item::useItem(std::string word)
+void Item::takeItem(std::string command)
 {
-	if (isItemInInvetory(word))
+	if (isItemInInvetory(command))
+	{
+		itemsInInventory_.push_back(totalItemList_[currentItemIndex_]);
+	}
+}
+
+void Item::useItem(std::string command)
+{
+	if (isItemInInvetory(command))
 	{
 		// TODO: unlock room with tobogan ou diamant cle 
 	}
