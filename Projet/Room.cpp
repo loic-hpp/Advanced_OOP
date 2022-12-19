@@ -24,11 +24,19 @@ void Room::display(std::ostream& o)
 		if (value != nullptr)
 			o << "\n" << value->name_ << " se trouve à la position: " << key;
 	}
-
+	
+	o << "\n" << "Tu as:" << std::endl;
 	std::vector<std::shared_ptr<Item>> inventory = item_.getInventoryList();
-	for (int i = 0; i < inventory.size(); i++)
-	{ 
-		o << "\n" << inventory[i]->getName() << std::endl;
+	for (int i = 0; i <= inventory.size(); i++)
+	{
+		if (inventory.empty())
+		{
+			o << "\t" << "Tu as rien dans ton inventaire" << std::endl;
+		}
+		else
+		{
+			o << "\t" << inventory[i]->getName() << std::endl;
+		}
 	}
 }
 

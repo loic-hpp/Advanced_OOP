@@ -19,6 +19,7 @@ public:
 	void displayItemsFoundInRoom(std::ostream& o);
 	void createItemsList(void);
 	std::vector<std::shared_ptr<Item>> getInventoryList(void);
+	bool IsInventoryEmpty();
 	void addItemsToRooms();
 	bool isItemInInvetory(std::string word);
 	void takeItem(std::string word);

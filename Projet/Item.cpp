@@ -30,14 +30,14 @@ std::vector<std::shared_ptr<Item>> Item::getInventoryList(void)
 	return itemsInInventory_;
 }
 
-// Bcp d'erreurs generes par ceci!
-//void Item::displayItemsInInventory(std::ostream& o)
-//{
-//	for (int i = 0; i < itemsininventory_.size(); i++) 
-//	{
-//		o << itemsininventory_[i]->getname();
-//	}
-//}
+bool Item::IsInventoryEmpty()
+{
+	if (itemsInInventory_.empty())
+	{
+		return true;
+	}
+	return false;
+}
 
 void Item::displayItemsFoundInRoom(std::ostream& o)
 {
@@ -61,8 +61,7 @@ bool Item::isItemInInvetory(std::string command)
 
 void Item::addItemsToRooms()
 {
-	// TODO : 
-
+	// TODO :
 }
 
 void Item::takeItem(std::string command)
