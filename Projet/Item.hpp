@@ -20,9 +20,10 @@ public:
 	void createItemsList(void);
 	std::vector<std::shared_ptr<Item>> getInventoryList(void);
 	std::vector<std::shared_ptr<Item>> getItemsInRoomList(void);
-	void wipeItemsInRoomList();
+	std::vector<std::shared_ptr<Item>> getTotalItemList(void);
+	void addItemToCurrentRoomList(std::string command);
+	void clearItemsInRoomList();
 	bool IsInventoryEmpty();
-	void addItemsToRooms();
 	bool isItemInInvetory(std::string word);
 	void takeItem(std::string word);
 	void useItem(std::string word);

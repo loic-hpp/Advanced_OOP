@@ -35,12 +35,14 @@ std::vector<std::shared_ptr<Item>> Item::getItemsInRoomList(void)
 	return itemsInCurrentRoom_;
 }
 
-void Item::wipeItemsInRoomList()
+std::vector<std::shared_ptr<Item>> Item::getTotalItemList(void)
 {
-	for (int i = 0; i <= itemsInCurrentRoom_.size(); i++)
-	{
-		itemsInCurrentRoom_[i] == nullptr;
-	}
+	return totalItemList_;
+}
+
+void Item::clearItemsInRoomList()
+{
+	itemsInCurrentRoom_.clear();
 }
 
 bool Item::IsInventoryEmpty()
@@ -50,6 +52,14 @@ bool Item::IsInventoryEmpty()
 		return true;
 	}
 	return false;
+}
+
+void Item::addItemToCurrentRoomList(std::string command)
+{
+	if (isItemInInvetory(command))
+	{
+		itemsInCurrentRoom_.push_back(totalItemList_[currentItemIndex_]);
+	}
 }
 
 bool Item::isItemInInvetory(std::string command)
@@ -67,17 +77,13 @@ bool Item::isItemInInvetory(std::string command)
 	return false;
 }
 
-void Item::addItemsToRooms()
-{
-	// TODO :
-}
-
 void Item::takeItem(std::string command)
 {
 	if (isItemInInvetory(command))
 	{
 		itemsInInventory_.push_back(totalItemList_[currentItemIndex_]);
 	}
+	// TODO : enlever items affiches dans la chambre pour seulement afficher dans inventaire
 }
 
 void Item::useItem(std::string command)

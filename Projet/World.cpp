@@ -87,6 +87,38 @@ void World::setPlaying(bool status)
 	isRunning_ = status;
 }
 
+void World::putItemInCurrentRoom()
+{
+	if (currentRoom_->getName(*currentRoom_) == "Balcon")
+	{
+		item_.addItemToCurrentRoomList("chaise");
+	}
+	else if (currentRoom_->getName(*currentRoom_) == "Salle de billard")
+	{
+		item_.addItemToCurrentRoomList("tobogan");
+	}
+	else if (currentRoom_->getName(*currentRoom_) == "Chambre a coucher")
+	{
+		item_.addItemToCurrentRoomList("oreiller");
+	}
+	else if (currentRoom_->getName(*currentRoom_) == "Grand couloir")
+	{
+		item_.addItemToCurrentRoomList("monopoly");
+	}
+	else if (currentRoom_->getName(*currentRoom_) == "Vestiaire")
+	{
+		item_.addItemToCurrentRoomList("manteau");
+	}
+	else if (currentRoom_->getName(*currentRoom_) == "Salle de reception")
+	{
+		item_.addItemToCurrentRoomList("diamant");
+	}
+	else if (currentRoom_->getName(*currentRoom_) == "Salle secrete")
+	{
+		item_.addItemToCurrentRoomList("carte");
+	}
+}
+
 void World::createRoom()
 {
 	roomList_.push_back(std::make_shared<Room>("Balcon", "Petit coin ou profiter de l'air frais avec des chaises et tables"));

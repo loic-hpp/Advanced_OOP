@@ -6,7 +6,7 @@
 
 #include "Room.hpp"
 
-Room::Room(std::string name, std::string description):
+Room::Room(std::string name, std::string description) :
 	name_(name), description_(description)
 {
 }
@@ -15,24 +15,20 @@ void Room::display(std::ostream& o)
 {
 	o << "\n-- " << name_ << " --" << std::endl
 		<< description_ << std::endl;
-	
-	// TODO: afficher items dans cette room (Reste a connecter quels items dans quels Rooms)
-	o << "Tu remarques:" << std::endl;
-	// item_.displayItemsFoundInRoom();
 
 	for (auto it = neighbour_.begin(); it != neighbour_.end(); ++it) {
 		const auto& [key, value] = *it;
 		if (value != nullptr)
 			o << "\n" << value->name_ << " se trouve à la position: " << key;
 	}
-	
+
 	o << "\n" << "Tu as:" << std::endl;
 	std::vector<std::shared_ptr<Item>> inventory = item_.getInventoryList();
 	for (int i = 0; i <= inventory.size(); i++)
 	{
 		if (inventory.empty())
 		{
-			o << "\t" << "Tu as rien dans ton inventaire" << std::endl;
+			o << "\t" << "Rien dans ton inventaire" << std::endl;
 		}
 		else
 		{
@@ -46,17 +42,17 @@ Room* Room::getNorthNeighbour()
 	return neighbour_["Nord (N)"];
 }
 
-Room* Room::getSouthNeighbour() 
+Room* Room::getSouthNeighbour()
 {
 	return neighbour_["Sud (S)"];
 }
 
-Room* Room::getEastNeighbour() 
+Room* Room::getEastNeighbour()
 {
 	return neighbour_["Est (E)"];
 }
 
-Room* Room::getWestNeighbour() 
+Room* Room::getWestNeighbour()
 {
 	return neighbour_["Ouest (O)"];
 }

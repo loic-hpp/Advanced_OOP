@@ -23,6 +23,7 @@ public:
 	void restart();
 	bool isPlaying() { return isRunning_; }
 	void setPlaying(bool status);
+	void putItemInCurrentRoom();
 private:
 	void createRoom();
 	Room* currentRoom_;
