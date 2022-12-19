@@ -24,7 +24,16 @@ void Room::display(std::ostream& o)
 		if (value != nullptr)
 			o << "\n" << value->name_ << " se trouve à la position: " << key;
 	}
-	item_.displayItemsInInventory(o);
+
+	// Cet appel marche pas
+	//item_.displayItemsInInventory(std::cout);
+
+	std::vector<std::shared_ptr<Item>> inventory = item_.getInventoryList();
+	for (int i = 0; i < inventory.size(); i++)
+	{
+		// TODO: regler indentation (me laisse pas faire "\n" au debut ??)
+		o << inventory[i]->getName();
+	}
 }
 
 Room* Room::getNorthNeighbour()

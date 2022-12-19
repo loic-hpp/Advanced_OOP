@@ -6,7 +6,6 @@
 
 #pragma once
 #include "Room.hpp"
-#include "View.hpp"
 
 class World
 {

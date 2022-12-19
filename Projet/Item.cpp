@@ -25,13 +25,18 @@ std::string Item::getDescription()
 	return description_;
 }
 
+std::vector<std::shared_ptr<Item>> Item::getInventoryList(void)
+{
+	return itemsInInventory_;
+}
+
 void Item::displayItemsInInventory(std::ostream& o)
 {
-	for (int i = 0; i < itemsInInventory_.size(); i++) 
-	{
-		// TODO: regler indentation (me laisse pas faire "\n" au debut ??)
-		o << itemsInInventory_[i]->getName();
-	}
+	//for (int i = 0; i < itemsInInventory_.size(); i++) 
+	//{
+	//	// TODO: regler indentation (me laisse pas faire "\n" au debut ??)
+	//	o << itemsInInventory_[i]->getName();
+	//}
 }
 
 void Item::displayItemsFoundInRoom(std::ostream& o)
