@@ -21,8 +21,6 @@ public:
 	bool isItemInInvetory(std::string word);
 	void takeItem(std::shared_ptr<class Item> item, std::string word);
 	void useItem(std::shared_ptr<class Item> item, std::string word);
-	/*std::vector<std::shared_ptr<class Item>> getItemsInInvetory(void);
-	std::vector<std::shared_ptr<class Item>> getItemsFoundInRoom(void);*/
 private:
 	std::string name_;
 	std::string description_;

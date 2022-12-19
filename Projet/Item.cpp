@@ -29,7 +29,8 @@ void Item::displayItemsInInventory(std::ostream& o)
 {
 	for (int i = 0; i < itemsInInventory_.size(); i++) 
 	{
-		o <<"\n" << itemsInInventory_[i]->getName();
+		// TODO: regler indentation
+		o << itemsInInventory_[i]->getName();
 	}
 }
 
@@ -52,7 +53,6 @@ void Item::createItemsList(void)
 	totalItemList_.push_back(std::make_shared<Item>("Une carte dans une enveloppe", "Cette carte contient le secret de Poly"));
 }
 
-// Cette methode aide a implementer les methodes des commandes look, use et take
 bool Item::isItemInInvetory(std::string word)
 {
 	for (int i = 0; i < totalItemList_.size(); i++)
@@ -78,15 +78,4 @@ void Item::useItem(std::shared_ptr<class Item> item, std::string word)
 		// TODO: unlock room with tobogan ou diamant cle 
 	}
 }
-
-//std::vector<std::shared_ptr<class Item>> Item::getItemsInInvetory(void)
-//{
-//	return itemsInInventory_;
-//}
-//
-//std::vector<std::shared_ptr<class Item>> Item::getItemsFoundInRoom(void)
-//{
-//	// TODO : comment connecter ceci a Room?
-//	return totalItemList_;
-//}
 

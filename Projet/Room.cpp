@@ -22,10 +22,8 @@ void Room::display(std::ostream& o)
 	for (auto it = neighbour_.begin(); it != neighbour_.end(); ++it) {
 		const auto& [key, value] = *it;
 		if (value != nullptr)
-			o <<"\n" << value->name_ << " se trouve à la position: " << key;
+			o << "\n" << value->name_ << " se trouve à la position: " << key;
 	}
-
-	// TODO: appeler methode display de Item
 	Item item = Item();
 	item.displayItemsInInventory(o);
 }
