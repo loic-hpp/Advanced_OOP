@@ -30,14 +30,14 @@ std::vector<std::shared_ptr<Item>> Item::getInventoryList(void)
 	return itemsInInventory_;
 }
 
-void Item::displayItemsInInventory(std::ostream& o)
-{
-	//for (int i = 0; i < itemsInInventory_.size(); i++) 
-	//{
-	//	// TODO: regler indentation (me laisse pas faire "\n" au debut ??)
-	//	o << itemsInInventory_[i]->getName();
-	//}
-}
+// Bcp d'erreurs generes par ceci!
+//void Item::displayItemsInInventory(std::ostream& o)
+//{
+//	for (int i = 0; i < itemsininventory_.size(); i++) 
+//	{
+//		o << itemsininventory_[i]->getname();
+//	}
+//}
 
 void Item::displayItemsFoundInRoom(std::ostream& o)
 {
@@ -62,6 +62,7 @@ bool Item::isItemInInvetory(std::string command)
 void Item::addItemsToRooms()
 {
 	// TODO : 
+
 }
 
 void Item::takeItem(std::string command)
@@ -76,7 +77,7 @@ void Item::useItem(std::string command)
 {
 	if (isItemInInvetory(command))
 	{
-		// TODO: unlock room with tobogan ou diamant cle 
+		// TODO: unlock room with tobogan ou diamant cle
 	}
 }
 

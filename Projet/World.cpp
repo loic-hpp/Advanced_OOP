@@ -103,7 +103,7 @@ void World::createRoom()
 	roomList_[5]->setNeighbour(nullptr, nullptr, nullptr, roomList_[4].get());
 	roomList_[2]->setNeighbour(nullptr, nullptr, roomList_[3].get());
 	
-	// TODO : salle secrete doit apparaitre seulement quand diamant utilise
+	// TODO : condition salle secrete doit apparaitre seulement quand diamant utilise
 	/*if (item_.isItemInInvetory("diamant"))
 	{
 		roomList_[6]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
