@@ -35,6 +35,7 @@ public:
 		 BALCON,
 		 SALLE_SECRETE
 	 };*/
+
 private:
 	std::string name_;
 	std::string description_;

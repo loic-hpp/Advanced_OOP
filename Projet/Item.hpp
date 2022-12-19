@@ -11,6 +11,7 @@
 class Item
 {
 public:
+	Item();
 	Item(std::string name_, std::string description_);
 	std::string getName(void);
 	std::string getDescription(void);

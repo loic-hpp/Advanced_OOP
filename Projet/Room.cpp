@@ -26,7 +26,8 @@ void Room::display(std::ostream& o)
 	}
 
 	// TODO: appeler methode display de Item
-	// Item::displayItemsInInventory();
+	Item item = Item();
+	item.displayItemsInInventory(o);
 }
 
 Room* Room::getNorthNeighbour()

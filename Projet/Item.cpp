@@ -6,6 +6,10 @@
 
 #include "Item.hpp"
 
+Item::Item()
+{
+}
+
 Item::Item(std::string name, std::string description):
 	name_(name), description_(description)
 {
@@ -23,12 +27,10 @@ std::string Item::getDescription()
 
 void Item::displayItemsInInventory(std::ostream& o)
 {
-	// TODO: afficher items en possession
-	//Item item = Item();
-	//std::vector<std::shared_ptr<Item>> itemsInInventory = item.getItemsInInvetory();
-	/*for (int i = 0; i < itemsInInventory_.size(); i++) {
-		o << itemsInInventory_[i].getName;
-	}*/
+	for (int i = 0; i < itemsInInventory_.size(); i++) 
+	{
+		o <<"\n" << itemsInInventory_[i]->getName();
+	}
 }
 
 void Item::displayItemsFoundInRoom(std::ostream& o)
@@ -38,7 +40,7 @@ void Item::displayItemsFoundInRoom(std::ostream& o)
 
 void Item::createItemsList(void)
 {
-	// Salle de reception
+	//Salle de reception
 	totalItemList_.push_back(std::make_shared<Item>("Un diamant bleue",  "Ce diamant brillant sert comme cle"));
 	// Vestiaire
 	totalItemList_.push_back(std::make_shared<Item>("Un manteau brun", "Ce manteau est plein de neige"));
@@ -53,15 +55,13 @@ void Item::createItemsList(void)
 // Cette methode aide a implementer les methodes des commandes look, use et take
 bool Item::isItemInInvetory(std::string word)
 {
-	/*for (auto& item : itemList_)
-	{*/
 	for (int i = 0; i < totalItemList_.size(); i++)
 	{
-		// Pourquoi appel de getName marche pas?
-		/*if (itemList_.at(i).getName() == word)
+		// TODO: regler comparaison
+		if (totalItemList_[i]->getName() == word)
 		{
 			return true;
-		}*/
+		}
 	}
 	return false;
 }
@@ -75,7 +75,7 @@ void Item::useItem(std::shared_ptr<class Item> item, std::string word)
 {
 	if (isItemInInvetory(word))
 	{
-		
+		// TODO: unlock room with tobogan ou diamant cle 
 	}
 }
 

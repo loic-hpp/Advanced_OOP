@@ -26,6 +26,7 @@ void View::actualizeView()
 
 std::string View::getCommand()
 {
+	// TODO : recuperer look + autre mot
 	std::string command;
 	std::cout << std::endl << "> ";
 	std::getline(std::cin, command);
