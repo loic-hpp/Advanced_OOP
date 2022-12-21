@@ -12,29 +12,26 @@ Room::Room(std::string name, std::string description) :
 }
 
 Room::Room(std::string name, std::string description, std::vector<std::shared_ptr<Item>> items) :
-	name_(name), description_(description), items_(items)
+	name_(name), description_(description), itemsInRoom_(items)
 {
 }
 
-// TODO: peut etre bouger cette methode dans vue pour pouvoir afficher 
-// items dans la chambre presente ou c'est sense 
+// TODO: peut etre bouger cette methode dans vue ?? Trop de modifs a faire
 void Room::display(std::ostream& o)
 {
 	o << "\n-- " << name_ << " --" << std::endl
 		<< description_ << std::endl;
 
-	// Affichage ici supossement
 	o << "\n" << "Tu remarques:" << std::endl;
-	//std::vector<std::shared_ptr<Item>> itemsInCurrentRoom = item_.getItemsInRoomList();
-	for (int i = 0; i <= items_.size(); i++)
+	for (int i = 0; i <= itemsInRoom_.size(); i++)
 	{
-		if (items_.empty())
+		if (itemsInRoom_.empty())
 		{
 			o << "\t" << "Rien dans cette chambre" << std::endl;
 		}
 		else
 		{
-			o << "\t" << items_[i]->getName() << std::endl;
+			o << "\t" << itemsInRoom_[i]->getName() << std::endl;
 		}
 	}
 
@@ -60,18 +57,15 @@ void Room::display(std::ostream& o)
 	}
 }
 
-void Room::addItem(Item item)
+void Room::addItemToRoomList(Item item)
 {
-	items_.push_back(std::make_shared<Item>(item));
+	itemsInRoom_.push_back(std::make_shared<Item>(item));
 }
 
-//std::vector<std::shared_ptr<Item>> Room::getItemsList()
-//{
-//}
-
+// TODO: besoin?
 std::vector<std::shared_ptr<Item>> Room::getItemsInRoomList(void)
 {
-	return items_;
+	return itemsInRoom_;
 }
 
 Room* Room::getNorthNeighbour()

@@ -15,7 +15,6 @@ public:
 	Item(std::string name_, std::string description_);
 	std::string getName(void);
 	std::string getDescription(void);
-	//void createItemsList(void);
 	std::vector<std::shared_ptr<Item>> getInventoryList(void);
 	std::vector<std::shared_ptr<Item>> getTotalItemList(void);
 	bool IsInventoryEmpty();

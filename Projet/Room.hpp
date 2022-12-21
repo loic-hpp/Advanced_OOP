@@ -18,9 +18,7 @@ public:
 	Room* getSouthNeighbour();
 	Room* getEastNeighbour();
 	Room* getWestNeighbour();
-	void addItem(Item item);
-	//std::vector<std::shared_ptr<Item>> getItemsList();
-	void addItemToCurrentRoomList(std::string command);
+	void addItemToRoomList(Item item);
 	std::vector<std::shared_ptr<Item>> getItemsInRoomList(void);
 	void setNeighbour(Room* northNeighbour = nullptr,
 		Room* southNeighbour = nullptr,
@@ -31,7 +29,7 @@ public:
 private:
 	std::string name_;
 	std::string description_;
-	std::vector<std::shared_ptr<Item>> items_;
+	std::vector<std::shared_ptr<Item>> itemsInRoom_;
 	std::map<std::string, Room*> neighbour_;
 	//std::vector<std::shared_ptr<class Item>> itemsInCurrentRoom_;
 };
