@@ -30,19 +30,9 @@ std::vector<std::shared_ptr<Item>> Item::getInventoryList(void)
 	return itemsInInventory_;
 }
 
-std::vector<std::shared_ptr<Item>> Item::getItemsInRoomList(void)
-{
-	return itemsInCurrentRoom_;
-}
-
 std::vector<std::shared_ptr<Item>> Item::getTotalItemList(void)
 {
 	return totalItemList_;
-}
-
-void Item::clearItemsInRoomList()
-{
-	itemsInCurrentRoom_.clear();
 }
 
 bool Item::IsInventoryEmpty()
@@ -54,14 +44,7 @@ bool Item::IsInventoryEmpty()
 	return false;
 }
 
-void Item::addItemToCurrentRoomList(std::string command)
-{
-	if (isItemInInvetory(command))
-	{
-		itemsInCurrentRoom_.push_back(totalItemList_[currentItemIndex_]);
-	}
-}
-
+// TODO: Crois qu'il a un bogue
 bool Item::isItemInInvetory(std::string command)
 {
 	for (int i = 0; i < totalItemList_.size(); i++)
@@ -88,7 +71,7 @@ bool Item::getIsUsed()
 }
 
 // TODO : Ces deux methodes peuvent etre directement dans World
-// mais te force a appeler getInventoryList() avec un vector locale aux fonctions
+// mais te force a appeler getInventoryList() avec un vector local aux fonctions
 void Item::takeItem(std::string command)
 {
 	if (isItemInInvetory(command))
@@ -106,20 +89,20 @@ void Item::useItem(std::string command)
 	}
 }
 
-void Item::createItemsList(void)
-{
-	//Salle de reception
-	totalItemList_.push_back(std::make_shared<Item>("Un diamant bleue",  "Ce diamant brillant sert comme cle"));
-	// Vestiaire
-	totalItemList_.push_back(std::make_shared<Item>("Un manteau brun", "Ce manteau est plein de neige"));
-	// Balcon
-	totalItemList_.push_back(std::make_shared<Item>("Une chaise antique", "Cette chaise est a l'envers"));
-	// Salle de billard
-	totalItemList_.push_back(std::make_shared<Item>("Un misterieux tobogan", "Ce tobogan est mauve"));
-	// Chambre a coucher
-	totalItemList_.push_back(std::make_shared<Item>("Un oreiller blanc", "Cet oreiller a une tache de sang"));
-	// Grand couloir
-	totalItemList_.push_back(std::make_shared<Item>("Une boite de monopoly", "Cette boite est vide"));
-	// Salle secrete
-	totalItemList_.push_back(std::make_shared<Item>("Une carte dans une enveloppe", "Cette carte contient le secret de Poly"));
-}
+//void Item::createItemsList(void)
+//{
+//	//Salle de reception
+//	totalItemList_.push_back(std::make_shared<Item>("Un diamant bleue",  "Ce diamant brillant sert comme cle"));
+//	// Vestiaire
+//	totalItemList_.push_back(std::make_shared<Item>("Un manteau brun", "Ce manteau est plein de neige"));
+//	// Balcon
+//	totalItemList_.push_back(std::make_shared<Item>("Une chaise antique", "Cette chaise est a l'envers"));
+//	// Salle de billard
+//	totalItemList_.push_back(std::make_shared<Item>("Un misterieux tobogan", "Ce tobogan est mauve"));
+//	// Chambre a coucher
+//	totalItemList_.push_back(std::make_shared<Item>("Un oreiller blanc", "Cet oreiller a une tache de sang"));
+//	// Grand couloir
+//	totalItemList_.push_back(std::make_shared<Item>("Une boite de monopoly", "Cette boite est vide"));
+//	// Salle secrete
+//	totalItemList_.push_back(std::make_shared<Item>("Une carte dans une enveloppe", "Cette carte contient le secret de Poly"));
+//}

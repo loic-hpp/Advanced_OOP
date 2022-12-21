@@ -11,6 +11,11 @@ Room::Room(std::string name, std::string description) :
 {
 }
 
+Room::Room(std::string name, std::string description, std::vector<std::shared_ptr<Item>> items) :
+	name_(name), description_(description), items_(items)
+{
+}
+
 // TODO: peut etre bouger cette methode dans vue pour pouvoir afficher 
 // items dans la chambre presente ou c'est sense 
 void Room::display(std::ostream& o)
@@ -20,16 +25,16 @@ void Room::display(std::ostream& o)
 
 	// Affichage ici supossement
 	o << "\n" << "Tu remarques:" << std::endl;
-	std::vector<std::shared_ptr<Item>> itemsInCurrentRoom = item_.getItemsInRoomList();
-	for (int i = 0; i <= itemsInCurrentRoom.size(); i++)
+	//std::vector<std::shared_ptr<Item>> itemsInCurrentRoom = item_.getItemsInRoomList();
+	for (int i = 0; i <= items_.size(); i++)
 	{
-		if (itemsInCurrentRoom.empty())
+		if (items_.empty())
 		{
 			o << "\t" << "Rien dans cette chambre" << std::endl;
 		}
 		else
 		{
-			o << "\t" << itemsInCurrentRoom[i]->getName() << std::endl;
+			o << "\t" << items_[i]->getName() << std::endl;
 		}
 	}
 
@@ -40,7 +45,8 @@ void Room::display(std::ostream& o)
 	}
 
 	o << "\n" << "Tu as:" << std::endl;
-	std::vector<std::shared_ptr<Item>> inventory = item_.getInventoryList();
+	Item item = Item();
+	std::vector<std::shared_ptr<Item>> inventory = item.getInventoryList();
 	for (int i = 0; i <= inventory.size(); i++)
 	{
 		if (inventory.empty())
@@ -52,6 +58,20 @@ void Room::display(std::ostream& o)
 			o << "\t" << inventory[i]->getName() << std::endl;
 		}
 	}
+}
+
+void Room::addItem(Item item)
+{
+	items_.push_back(std::make_shared<Item>(item));
+}
+
+//std::vector<std::shared_ptr<Item>> Room::getItemsList()
+//{
+//}
+
+std::vector<std::shared_ptr<Item>> Room::getItemsInRoomList(void)
+{
+	return items_;
 }
 
 Room* Room::getNorthNeighbour()

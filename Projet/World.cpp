@@ -9,7 +9,7 @@
 World::World(std::string name, std::string header):
 	name_(name), header_(header)
 {
-	createRoom();
+	createRooms();
 }
 
 void World::display(std::ostream& o)
@@ -22,7 +22,7 @@ void World::displayCurrentRoom(std::ostream& o)
 {
 	if (isRunning_) 
 	{
-		putItemInCurrentRoom();
+		// Peut ne pas marcher
 		currentRoom_->display(o);
 	}
 	else
@@ -90,40 +90,40 @@ void World::setPlaying(bool status)
 }
 
 // TODO: ne montre pas items dans console
-void World::putItemInCurrentRoom()
-{
-	// TODO: repetitif
-	if (currentRoom_->getName(*currentRoom_) == "Balcon")
-	{
-		item_.addItemToCurrentRoomList("chaise");
-	}
-	else if (currentRoom_->getName(*currentRoom_) == "Salle de billard")
-	{
-		item_.addItemToCurrentRoomList("tobogan");
-	}
-	else if (currentRoom_->getName(*currentRoom_) == "Chambre a coucher")
-	{
-		item_.addItemToCurrentRoomList("oreiller");
-	}
-	else if (currentRoom_->getName(*currentRoom_) == "Grand couloir")
-	{
-		item_.addItemToCurrentRoomList("monopoly");
-	}
-	else if (currentRoom_->getName(*currentRoom_) == "Vestiaire")
-	{
-		item_.addItemToCurrentRoomList("manteau");
-	}
-	else if (currentRoom_->getName(*currentRoom_) == "Salle de reception")
-	{
-		item_.addItemToCurrentRoomList("diamant");
-	}
-	else if (currentRoom_->getName(*currentRoom_) == "Salle secrete")
-	{
-		item_.addItemToCurrentRoomList("carte");
-	}
-}
+//void World::putItemInCurrentRoom()
+//{
+//	// TODO: repetitif
+//	if (currentRoom_->getName(*currentRoom_) == "Balcon")
+//	{
+//		item_.addItemToCurrentRoomList("chaise");
+//	}
+//	else if (currentRoom_->getName(*currentRoom_) == "Salle de billard")
+//	{
+//		item_.addItemToCurrentRoomList("tobogan");
+//	}
+//	else if (currentRoom_->getName(*currentRoom_) == "Chambre a coucher")
+//	{
+//		item_.addItemToCurrentRoomList("oreiller");
+//	}
+//	else if (currentRoom_->getName(*currentRoom_) == "Grand couloir")
+//	{
+//		item_.addItemToCurrentRoomList("monopoly");
+//	}
+//	else if (currentRoom_->getName(*currentRoom_) == "Vestiaire")
+//	{
+//		item_.addItemToCurrentRoomList("manteau");
+//	}
+//	else if (currentRoom_->getName(*currentRoom_) == "Salle de reception")
+//	{
+//		item_.addItemToCurrentRoomList("diamant");
+//	}
+//	else if (currentRoom_->getName(*currentRoom_) == "Salle secrete")
+//	{
+//		item_.addItemToCurrentRoomList("carte");
+//	}
+//}
 
-void World::createRoom()
+void World::createRooms()
 {
 	roomList_.push_back(std::make_shared<Room>("Balcon", "Petit coin ou profiter de l'air frais avec des chaises et tables"));
 	roomList_.push_back(std::make_shared<Room>("Salle de billard", "Sallon de jeux avec comme activité principale le billard"));
@@ -146,7 +146,6 @@ void World::createRoom()
 		//	roomList_[0]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
 		item_.setIsUsed(false);
 	}
-
 
 	currentRoom_ = roomList_[4].get();
 	beginRoom_ = roomList_[4].get();

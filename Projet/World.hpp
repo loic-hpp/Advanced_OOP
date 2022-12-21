@@ -23,9 +23,9 @@ public:
 	void restart();
 	bool isPlaying() { return isRunning_; }
 	void setPlaying(bool status);
-	void putItemInCurrentRoom();
+	//void putItemInCurrentRoom();
 private:
-	void createRoom();
+	void createRooms();
 	Room* currentRoom_;
 	Room* beginRoom_;
 	std::vector<std::shared_ptr<class Room>> roomList_;

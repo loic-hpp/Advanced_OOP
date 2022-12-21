@@ -15,12 +15,9 @@ public:
 	Item(std::string name_, std::string description_);
 	std::string getName(void);
 	std::string getDescription(void);
-	void createItemsList(void);
+	//void createItemsList(void);
 	std::vector<std::shared_ptr<Item>> getInventoryList(void);
-	std::vector<std::shared_ptr<Item>> getItemsInRoomList(void);
 	std::vector<std::shared_ptr<Item>> getTotalItemList(void);
-	void addItemToCurrentRoomList(std::string command);
-	void clearItemsInRoomList();
 	bool IsInventoryEmpty();
 	bool isItemInInvetory(std::string word);
 	void takeItem(std::string word);
@@ -34,5 +31,4 @@ private:
 	bool isUsed_ = false;
 	std::vector<std::shared_ptr<class Item>> totalItemList_;
 	std::vector<std::shared_ptr<class Item>> itemsInInventory_;
-	std::vector<std::shared_ptr<class Item>> itemsInCurrentRoom_;
 };
