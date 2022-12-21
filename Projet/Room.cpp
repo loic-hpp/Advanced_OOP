@@ -19,6 +19,19 @@ void Room::display(std::ostream& o)
 		<< description_ << std::endl;
 
 	// Affichage ici supossement
+	o << "\n" << "Tu remarques:" << std::endl;
+	std::vector<std::shared_ptr<Item>> itemsInCurrentRoom = item_.getItemsInRoomList();
+	for (int i = 0; i <= itemsInCurrentRoom.size(); i++)
+	{
+		if (itemsInCurrentRoom.empty())
+		{
+			o << "\t" << "Rien dans cette chambre" << std::endl;
+		}
+		else
+		{
+			o << "\t" << itemsInCurrentRoom[i]->getName() << std::endl;
+		}
+	}
 
 	for (auto it = neighbour_.begin(); it != neighbour_.end(); ++it) {
 		const auto& [key, value] = *it;

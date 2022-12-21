@@ -22,6 +22,7 @@ void World::displayCurrentRoom(std::ostream& o)
 {
 	if (isRunning_) 
 	{
+		putItemInCurrentRoom();
 		currentRoom_->display(o);
 	}
 	else
@@ -88,7 +89,7 @@ void World::setPlaying(bool status)
 	isRunning_ = status;
 }
 
-// TODO: affichage d'items dans une chambre
+// TODO: ne montre pas items dans console
 void World::putItemInCurrentRoom()
 {
 	// TODO: repetitif
@@ -138,14 +139,14 @@ void World::createRoom()
 	roomList_[5]->setNeighbour(nullptr, nullptr, nullptr, roomList_[4].get());
 	roomList_[2]->setNeighbour(nullptr, nullptr, roomList_[3].get());
 	
-	// TODO : condition salle secrete doit apparaitre seulement quand diamant utilise
-	if (!item_.getIsUsed())
+	if (item_.getIsUsed())
 	{
 		roomList_[6]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
+		//	Ouverture peut etre dans meme if parce que c'est deux places loins et differentes
+		//	roomList_[0]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
 		item_.setIsUsed(false);
 	}
 
-	//	roomList_[0]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
 
 	currentRoom_ = roomList_[4].get();
 	beginRoom_ = roomList_[4].get();
