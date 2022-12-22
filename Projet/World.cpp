@@ -83,11 +83,10 @@ void World::look(const std::vector<std::string>& command)
 	}
 }
 
-// TODO : enlever items affiches dans la chambre pour seulement afficher dans inventaire (comme image example)
 // TODO: unlock room with tobogan ou diamant cle
 void World::use(const std::vector<std::string>& command)
 {
-	// TODO
+
 }
 
 void World::take(const std::vector<std::string>& command)
@@ -100,7 +99,6 @@ void World::take(const std::vector<std::string>& command)
 	inventoryInstance_.addItemToInventoryList(*item);
 	item->setIsTaken(true);
 	currentRoom_->eraseItemInRoom(item);
-	// TODO : enlever de la chambre
 }
 
 void World::restart()
@@ -149,6 +147,12 @@ void World::createRooms()
 	roomList_[5]->setNeighbour(nullptr, nullptr, nullptr, roomList_[4].get());
 	roomList_[2]->setNeighbour(nullptr, nullptr, roomList_[3].get());
 	
+	currentRoom_ = roomList_[4].get();
+	beginRoom_ = roomList_[4].get();
+}
+
+void World::createSecretRoom()
+{
 	if (totalItemsList_[0]->getIsUsed())
 	{
 		//	Ouverture peut etre dans meme if parce que c'est deux places loins
@@ -157,7 +161,4 @@ void World::createRooms()
 		roomList_[0]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
 		totalItemsList_[0]->setIsUsed(false);
 	}
-
-	currentRoom_ = roomList_[4].get();
-	beginRoom_ = roomList_[4].get();
 }

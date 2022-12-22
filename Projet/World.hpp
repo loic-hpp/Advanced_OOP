@@ -26,6 +26,7 @@ public:
 	void setPlaying(bool status);
 private:
 	void createRooms();
+	void createSecretRoom();
 	Room* currentRoom_;
 	Room* beginRoom_;
 	std::vector<std::shared_ptr<class Room>> roomList_;
