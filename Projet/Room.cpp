@@ -41,20 +41,6 @@ void Room::display(std::ostream& o)
 			o << "\n" << value->name_ << " se trouve à la position: " << key;
 	}
 
-	o << "\n" << "Tu as:" << std::endl;
-	Inventory inventoryInstance = Inventory();
-	std::vector<std::shared_ptr<Item>> inventory = inventoryInstance.getInventoryList();
-	for (int i = 0; i <= inventory.size(); i++)
-	{
-		if (inventory.empty())
-		{
-			o << "\t" << "Rien dans ton inventaire" << std::endl;
-		}
-		else
-		{
-			o << "\t" << inventory[i]->getName() << std::endl;
-		}
-	}
 }
 
 // Besoin ?

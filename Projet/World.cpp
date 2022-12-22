@@ -23,6 +23,15 @@ void World::displayCurrentRoom(std::ostream& o)
 	if (isRunning_) 
 	{
 		currentRoom_->display(o);
+		std::vector<std::shared_ptr<Item>> inventory = inventoryInstance_.getInventoryList();
+		o << "\n" << "Tu as:" << std::endl;
+		if (inventory.empty())
+			o << "\t" << "Rien dans ton inventaire" << std::endl;
+		else
+		{ 
+			for (int i = 0; i < inventory.size(); i++)
+				o << "\t" << inventory[i]->getName() << std::endl;
+		}
 	}
 	else
 	{
