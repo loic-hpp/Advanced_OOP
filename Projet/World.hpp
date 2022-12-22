@@ -32,4 +32,5 @@ private:
 	std::string header_;
 	bool isRunning_ = true;
 	Inventory inventoryInstance_ = Inventory();
+	std::vector<std::shared_ptr<class Item>> totalItemsList_ = inventoryInstance_.getTotalItemslist();
 };
