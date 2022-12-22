@@ -1,7 +1,7 @@
 //	Description: Definition de la classe Controller.
 //	Fichier: Controller.hpp
 //	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
-//	Date	12 decembre 2022
+//	Date	21 decembre 2022
 //	Créé le 11 décembre 2022
 
 #pragma once
@@ -11,19 +11,9 @@ class Controller
 {
 public:
 	Controller(std::shared_ptr<World> world);
-	void execute(std::string command);
+	void execute(const std::vector<std::string>& command);
 private:
 	std::shared_ptr<World> world_;
-	 enum CommandEnum_ {
-		NORTH,
-		SOUTH,
-		EAST,
-		WEST,
-		LOOK,
-		RESTART,
-		EXIT,
-		DEFAULTCASE,
-	};
-	inline static std::map<std::string, CommandEnum_> commandMap_;
+	inline static std::map<std::string, std::function<void(const std::vector<std::string>&)>> commandMap_;
 	void initializeMapCommand();
 };

@@ -1,7 +1,7 @@
 //	Description: Definition de la classe World.
 //	Fichier: World.hpp
 //	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
-//	Date	12 decembre 2022
+//	Date	21 decembre 2022
 //	Créé le 11 décembre 2022
 
 #pragma once
@@ -17,19 +17,22 @@ public:
 	void moveSouth();
 	void moveEast();
 	void moveWest();
-	void look();
+	void look(const std::vector<std::string>& command);
+	void use(const std::vector<std::string>& command);
+	void take(const std::vector<std::string>& command);
 	void restart();
-	bool isPlaying() {return isRunning_;}
-	void setPlaying(bool status) { isRunning_ = status; }
+	std::shared_ptr<class Item> searchItemWithCommand(const std::vector<std::string>& command, std::vector<std::shared_ptr<class Item>> itemsInInventory);
+	bool isPlaying() { return isRunning_; }
+	void setPlaying(bool status);
 private:
-	void createRoom();
+	void createRooms();
+	void createSecretRoom(std::shared_ptr<Item> item);
 	Room* currentRoom_;
 	Room* beginRoom_;
-	std::vector<std::shared_ptr<class Room>> rommList_;
+	std::vector<std::shared_ptr<class Room>> roomList_;
 	std::string name_;
 	std::string header_;
 	bool isRunning_ = true;
+	Inventory inventoryInstance_ = Inventory();
+	std::vector<std::shared_ptr<class Item>> totalItemsList_ = inventoryInstance_.getTotalItemslist();
 };
-
-
-

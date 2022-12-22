@@ -1,7 +1,7 @@
 //	Description: Implementation de la classe View.
 //	Fichier: View.cpp
 //	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
-//	Date	12 decembre 2022
+//	Date	21 decembre 2022
 //	Créé le 11 décembre 2022
 
 #include "View.hpp"
@@ -24,12 +24,18 @@ void View::actualizeView()
 	world_->displayCurrentRoom(std::cout);
 }
 
-std::string View::getCommand()
+std::vector<std::string> View::getCommand()
 {
 	std::string command;
 	std::cout << std::endl << "> ";
 	std::getline(std::cin, command);
-	return command;
+	
+	// Reference: https://stackoverflow.com/questions/5607589/right-way-to-split-an-stdstring-into-a-vectorstring
+	std::stringstream ss(command);
+	std::istream_iterator<std::string> begin(ss);
+	std::istream_iterator<std::string> end;
+	
+	return std::vector<std::string>(begin, end);
 }
 
 void View::playGame()

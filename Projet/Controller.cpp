@@ -1,7 +1,7 @@
 //	Description: Implementation de la classe Controller.
 //	Fichier: Controller.cpp
 //	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
-//	Date	12 decembre 2022
+//	Date	21 decembre 2022
 //	Créé le 11 décembre 2022
 
 #include "Controller.hpp"
@@ -12,49 +12,45 @@ Controller::Controller(std::shared_ptr<World> world) :
 	initializeMapCommand();
 }
 
-void Controller::execute( std::string command)
+void Controller::execute(const std::vector<std::string>& command)
 {
-	auto it = commandMap_.find(command);
+	auto it = commandMap_.find(command[0]);
 	if (it == commandMap_.end())
-		command = "default";
-	switch (commandMap_[command])
-	{
-	case NORTH:
-		world_->moveNorth();
-		break;
-	case SOUTH:
-		world_->moveSouth();
-		break;
-	case EAST:
-		world_->moveEast();
-		break;
-	case WEST:
-		world_->moveWest();
-		break;
-	case LOOK:
-		world_->look();
-		break;
-	case RESTART:
-		world_->restart();
-		break;
-	case EXIT:
-		world_->setPlaying(false);
-		break;
-	case DEFAULTCASE:
-	default:
 		throw Invalidcommand("\nCommande non reconnue");
-		break;
+	else 
+	{
+		auto& [key, value] = *it;
+		value(command);
 	}
 }
 
 void Controller::initializeMapCommand()
 {
-	commandMap_["N"] = CommandEnum_::NORTH;
-	commandMap_["S"] = CommandEnum_::SOUTH;
-	commandMap_["E"] = CommandEnum_::EAST;
-	commandMap_["O"] = CommandEnum_::WEST;
-	commandMap_["look"] = CommandEnum_::LOOK;
-	commandMap_["restart"] = CommandEnum_::RESTART;
-	commandMap_["exit"] = CommandEnum_::EXIT;
-	commandMap_["default"] = CommandEnum_::DEFAULTCASE;
+	commandMap_["N"] = [&](const std::vector<std::string>& command) {if (command.size() != 1)
+		throw Invalidcommand("\nCommande non reconnue");
+	else
+		world_->moveNorth(); };
+	commandMap_["S"] = [&](const std::vector<std::string>& command) {if (command.size() != 1)
+		throw Invalidcommand("\nCommande non reconnue");
+	else
+		world_->moveSouth(); };
+	commandMap_["E"] = [&](const std::vector<std::string>& command) {if (command.size() != 1)
+		throw Invalidcommand("\nCommande non reconnue");
+	else
+		world_->moveEast(); };
+	commandMap_["O"] = [&](const std::vector<std::string>& command) {if (command.size() != 1)
+		throw Invalidcommand("\nCommande non reconnue");
+	else
+		world_->moveWest(); };
+	commandMap_["look"] = [&](const std::vector<std::string>& command) {world_->look(command); };
+	commandMap_["use"] = [&](const std::vector<std::string>& command) {world_->use(command); };
+	commandMap_["take"] = [&](const std::vector<std::string>& command) {world_->take(command); };
+	commandMap_["restart"] = [&](const std::vector<std::string>& command) {if (command.size() != 1)
+		throw Invalidcommand("\nCommande non reconnue");
+	else
+		world_->restart(); };
+	commandMap_["exit"] = [&](const std::vector<std::string>& command) {if (command.size() != 1)
+		throw Invalidcommand("\nCommande non reconnue");
+	else
+		world_->setPlaying(false); };
 }
