@@ -21,12 +21,12 @@ public:
 	void use(const std::vector<std::string>& command);
 	void take(const std::vector<std::string>& command);
 	void restart();
-	std::shared_ptr<class Item> searchItemInRoomWithCommand(const std::vector<std::string>& command, std::vector<std::shared_ptr<class Item>> itemsInInventory);
+	std::shared_ptr<class Item> searchItemWithCommand(const std::vector<std::string>& command, std::vector<std::shared_ptr<class Item>> itemsInInventory);
 	bool isPlaying() { return isRunning_; }
 	void setPlaying(bool status);
 private:
 	void createRooms();
-	void createSecretRoom();
+	void createSecretRoom(std::shared_ptr<Item> item);
 	Room* currentRoom_;
 	Room* beginRoom_;
 	std::vector<std::shared_ptr<class Room>> roomList_;

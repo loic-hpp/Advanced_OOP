@@ -17,6 +17,7 @@ public:
 	std::vector<std::shared_ptr<class Item>> getTotalItemslist(void);
 	std::shared_ptr<class Item> searchItemInInventoryWithCommand(const std::vector<std::string>& command);
 	std::shared_ptr<class Item> searchItemInTotalListWithCommand(const std::vector<std::string>& command);
+	void eraseItemInInventory(std::shared_ptr<Item> item);
 private:
 	std::vector<std::shared_ptr<class Item>> itemsInInventory_;
 	std::vector<std::shared_ptr<class Item>> totalItemsList_;

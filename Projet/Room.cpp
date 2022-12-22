@@ -39,16 +39,9 @@ void Room::display(std::ostream& o)
 
 }
 
-// Besoin ?
 void Room::addItemToRoomList(std::shared_ptr<Item> item)
 {
 	itemsInRoom_.push_back(item);
-}
-
-// TODO: besoin?
-std::vector<std::shared_ptr<Item>> Room::getItemsInRoomList(void)
-{
-	return itemsInRoom_;
 }
 
 Room* Room::getNorthNeighbour()
@@ -79,9 +72,9 @@ void Room::setNeighbour(Room* northNeighbour, Room* southNeighbour, Room* eastNe
 	neighbour_["Ouest (O)"] = westNeighbour;
 }
 
-std::string Room::getName(Room room)
+std::string Room::getName()
 {
-	return room.name_;
+	return name_;
 }
 
 std::string Room::getDescription(void)

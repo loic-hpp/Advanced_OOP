@@ -41,3 +41,10 @@ int Inventory::getCurrentItemIndex(void)
 {
 	return currentItemIndex_;
 }
+
+void Inventory::eraseItemInInventory(std::shared_ptr<Item> item)
+{
+	auto it = std::find(itemsInInventory_.begin(), itemsInInventory_.end(), item);
+	if (it != itemsInInventory_.end())
+		itemsInInventory_.erase(it);
+}
