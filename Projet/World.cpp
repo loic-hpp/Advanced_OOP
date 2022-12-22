@@ -83,7 +83,6 @@ void World::look(const std::vector<std::string>& command)
 	}
 }
 
-// TODO: unlock room with tobogan ou diamant cle
 void World::use(const std::vector<std::string>& command)
 {
 	std::shared_ptr<Item> item = searchItemWithCommand(command, inventoryInstance_.getInventoryList());
@@ -136,7 +135,10 @@ void World::take(const std::vector<std::string>& command)
 
 void World::restart()
 {
-	currentRoom_ = beginRoom_;
+	inventoryInstance_.clearInventory();
+	inventoryInstance_.createTotalItemsList();
+	//totalItemsList_ = inventoryInstance_.getTotalItemslist();
+	createRooms();
 }
 
 std::shared_ptr<class Item> World::searchItemWithCommand(const std::vector<std::string>& command, std::vector<std::shared_ptr<class Item>> itemsInInventory)

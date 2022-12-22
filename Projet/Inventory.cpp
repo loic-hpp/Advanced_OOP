@@ -48,3 +48,8 @@ void Inventory::eraseItemInInventory(std::shared_ptr<Item> item)
 	if (it != itemsInInventory_.end())
 		itemsInInventory_.erase(it);
 }
+
+void Inventory::clearInventory()
+{
+	itemsInInventory_.clear();
+}
