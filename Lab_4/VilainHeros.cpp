@@ -14,15 +14,12 @@ VilainHeros::VilainHeros(const Heros& hero, const Vilain& vilain) :
 	missionSpeciale_(vilain.obtenirObjectif() + " dans le monde de " 
 		+ hero.obtenirParution())
 {
-
 }
 
 void VilainHeros::afficher(std::ostream& os) const
 {
 	changerCouleur(os, MAUVE);
 }
-
-
 
 void VilainHeros::changerCouleur(std::ostream& os, const std::string& couleur) const
 {

@@ -12,8 +12,6 @@ Vilain::Vilain(const std::string& nom, const std::string& parution, const std::s
 {
 }
 
-
-
 Vilain::Vilain(const Vilain& vilain) : Personnage(vilain.obtenirNom(), vilain.obtenirParution())
 {
 	objectif_ = vilain.objectif_;

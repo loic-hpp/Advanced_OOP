@@ -1,4 +1,5 @@
-﻿//	des classes Vilain, Hero et VilainHero dans un vecteur de personnages
+﻿//	Description: Programme permettant de vérifier le comportement polymorphique
+//	des classes Vilain, Hero et VilainHero dans un vecteur de personnages
 //	Fichier:  main.cpp
 //	Auteurs partiels (seulement des TODOS): Rodrigo A. Merino Martel et Loïc Nguemegne Temena
 //	Date	07 novembre 2022
@@ -78,9 +79,7 @@ vector <unique_ptr< Heros >> lireHeros() {
 		for (size_t j = 0; j < nAlie; j++) {
 			alies.push_back(lireString(fichier));
 		}
-
 		listeHero[i].get()->mettreListeAllies(alies);
-
 	}
 	return listeHero;
 }
@@ -128,13 +127,10 @@ int main()
 		listePersonnage.push_back(listeHero[i].get());
 	listePersonnage.push_back(&vilainhero);
 
-
 	// AFFICHAGE POLYMORPHIQUE DES OBJETS DANS UN VECTEUR DE PERSONNAGES
 	cout << "AFFICHAGE POLYMORPHIQUE DES OBJETS DANS UN VECTEUR DE PERSONNAGES"
 		<< endl << "Vilain en rouge, Heros en bleu, VilainHero en mauve";
 	for (size_t i = 0; i < listePersonnage.size(); i++)
-
 		cout << *listePersonnage[i] << endl << TRAIT << endl;
-
 
 }

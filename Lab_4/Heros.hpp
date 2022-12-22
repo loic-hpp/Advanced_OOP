@@ -5,9 +5,7 @@
 //	Créé le 8 novembre 2022
 
 #pragma once
-#include <string>
 #include "Personnage.hpp"
-#include <vector>
 const std::string BLEU = "\033[94m";
 class Heros :
 	virtual public Personnage

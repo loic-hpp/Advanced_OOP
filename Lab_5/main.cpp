@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-﻿#include "Personnage.hpp"
-=======
 ﻿//	Description: Utilisation des classes crees dans ListeLiee.hpp
 //	Fichier: main.cpp
 //	Auteurs partiels (TODOS): Rodrigo A. Merino Martel et Loïc Nguemegne Temena
@@ -8,7 +5,6 @@
 //	Créé le 15 novembre 2022
 
 #include "Personnage.hpp"
->>>>>>> main
 #include "Heros.hpp"
 #include "Vilain.hpp"
 #include "VilainHeros.hpp"
@@ -23,13 +19,10 @@
 #include <memory>
 #include "cppitertools/range.hpp"
 #include "bibliotheque_cours.hpp"
-<<<<<<< HEAD
-=======
 #include"ListeLiee.hpp"
 #include <list>
 #include <set>
 #include <map>
->>>>>>> main
 using namespace std;
 using namespace iter;
 
@@ -58,11 +51,7 @@ const Affichable& versReferenceAffichable(const unique_ptr<T>& p) { return *p; }
 
 // Trait de separation
 static const string trait =
-<<<<<<< HEAD
-	"═════════════════════════════════════════════════════════════════════════";
-=======
 "═════════════════════════════════════════════════════════════════════════";
->>>>>>> main
 
 // On ne demande pas particulièrement la surcharge de << dans ce TD.
 template <typename T>
@@ -100,26 +89,15 @@ ListeLiee<T>::iterator trouverParNom(ListeLiee<T>& liste, const string& nom)
 
 int main()
 {
-<<<<<<< HEAD
-	#pragma region "Bibliothèque du cours"
-=======
 #pragma region "Bibliothèque du cours"
->>>>>>> main
 	// Permet sous Windows les "ANSI escape code" pour changer de couleur
 	// https://en.wikipedia.org/wiki/ANSI_escape_code ; les consoles Linux/Mac
 	// les supportent normalement par défaut.
 	bibliotheque_cours::activerCouleursAnsi();
-<<<<<<< HEAD
-	#pragma endregion
-	
-	testsPourCouvertureLectureBinaire();
-	
-=======
 #pragma endregion
 
 	testsPourCouvertureLectureBinaire();
 
->>>>>>> main
 	static const string separateurSections = "\033[95m" + trait + "\033[0m\n";
 
 	//{ Solutionnaire du TD4:
@@ -127,11 +105,7 @@ int main()
 	vector<Vilain> vilains = lireVectorDuFichier<Vilain>("vilains.bin");
 	vector<unique_ptr<Personnage>> peronnages;  // Doit être des pointeurs pour le polymorphisme, l'énoncé ne force pas les unique_ptr.
 
-<<<<<<< HEAD
-	#if 1 //TODO: Vous n'avez pas à conserver ces affichages pour le TD5, ils sont pour le solutionnaire du TD4:
-=======
 #if 0 //TODO: Vous n'avez pas à conserver ces affichages pour le TD5, ils sont pour le solutionnaire du TD4:
->>>>>>> main
 	cout << separateurSections << "Heros:" << endl;
 	afficherAffichables(heros);
 
@@ -151,39 +125,6 @@ int main()
 
 	cout << separateurSections << "Un autre vilain heros (exemple de l'énoncé du TD), d'une autre couleur:" << endl;
 	VilainHeros kefkaCrono(vilains[2], heros[0]);
-<<<<<<< HEAD
-	kefkaCrono.changerCouleur(cout,3);
-	kefkaCrono.afficher(cout);
-	
-	for (int i : range(5)) { // Pour la couverture de code des couleurs (on aurait aussi pu éliminer le code pour les couleurs non utilisées).
-		kefkaCrono.changerCouleur(cout,i);
-		cout << "=";
-	}
-	#endif
-	//}
-
-	//TODO: Transférez les héros du vecteur heros dans une ListeLiee.
-
-	//TODO: Créez un itérateur sur la liste liée à la position du héros Alucard.  Servez-vous de la fonction trouverParNom définie plus haut.
-
-	//TODO: Servez-vous de l'itérateur créé précédemment pour trouver l'héroine Aya Brea, en sachant qu'elle se trouve plus loin dans la liste, en itérant sur les éléments.
-
-	//TODO: Ajouter un hero bidon à la liste avant Aya Brea en vous servant de l'itérateur.
-	//TODO: Assurez-vous que la taille de la liste est correcte après l'ajout.
-
-	//TODO: Reculez votre itérateur jusqu'au héros Mario et effacez-le en utilisant l'itérateur, puis affichez le héros suivant dans la liste (devrait êter "Naked Snake/John").
-	//TODO: Assurez-vous que la taille de la liste est correcte après le retrait.
-
-	//TODO: Effacez le premier élément de la liste.
-
-	//TODO: Affichez votre liste de héros en utilisant un itérateur. La liste débute avec le héros Randi, n'a pas Mario, et le précédent de "Aya Brea" est ce que vous avez inséré. Servez-vous des methodes begin et end de la liste...
-
-	//TODO: Refaite le même affichage mais en utilisant une simple boucle "for" sur intervalle.
-
-	//TODO: Utilisez un conteneur pour avoir les héros en ordre alphabétique (voir point 2 de l'énoncé).
-
-	//TODO: Assurez-vous de n'avoir aucune ligne non couverte dans les classes pour la liste liée.  Il peut y avoir des lignes non couvertes dans les personnages...
-=======
 	kefkaCrono.changerCouleur(cout, 3);
 	kefkaCrono.afficher(cout);
 
@@ -265,5 +206,4 @@ int main()
 	// Car l'ensemble est trié alors que la liste n'est pas triée et est non contigue donc la probabilité
 	// d'avoir a itérer plusieurs fois sur la liste pour retrouver le héros est plus grande
 		//TODO: Assurez-vous de n'avoir aucune ligne non couverte dans les classes pour la liste liée.  Il peut y avoir des lignes non couvertes dans les personnages...
-
 }

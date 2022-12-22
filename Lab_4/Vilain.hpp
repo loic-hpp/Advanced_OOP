@@ -20,3 +20,4 @@ public:
 private:
 	std::string objectif_;
 };
+

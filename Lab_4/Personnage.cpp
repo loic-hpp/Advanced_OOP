@@ -10,17 +10,12 @@ Personnage::Personnage(const std::string& nom, const std::string& parution) :
 	nom_(nom),
 	parution_(parution)
 {
-
 }
 
 void Personnage::afficher(std::ostream& os) const
 {
-	os <<
-		"Nom : " << obtenirNom() << "\n" <<
-		"Parution : " << obtenirParution() << "\n";
+	changerCouleur(os, CODE_COULEUR_FIN);
 }
-
-
 
 void Personnage::changerCouleur(std::ostream& os, const std::string& couleur) const
 {

@@ -21,6 +21,7 @@ Heros::Heros(const Heros& hero) : Personnage(hero.obtenirNom(), hero.obtenirParu
 void Heros::afficher(std::ostream& os) const
 {
 	changerCouleur(os, BLEU);
+	afficherAllies(os, BLEU);
 }
 
 void Heros::changerCouleur(std::ostream& os, const std::string& couleur) const

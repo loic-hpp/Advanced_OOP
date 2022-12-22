@@ -22,3 +22,4 @@ public:
 private:
 	std::string missionSpeciale_;
 };
+

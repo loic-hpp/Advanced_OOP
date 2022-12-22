@@ -14,3 +14,4 @@ public:
 	virtual void changerCouleur(std::ostream& os, const std::string& couleur) const = 0;
 	virtual ~Affichable() = default;
 };
+
