@@ -12,13 +12,14 @@ class Item
 {
 public:
 	Item();
-	Item(std::string searchKey, std::string name_, std::string description_);
+	Item(std::string searchKey, std::string name_, std::string description_, bool isTakeable = true);
 	std::string getName(void);
 	std::string getDescription(void);
 	void setIsUsed(bool boolean);
 	bool getIsUsed(void);
 	void setIsTaken(bool boolean);
 	bool getIsTaken(void);
+	bool getIsTakeable(void) {return isTakeable_;}
 	std::string getSearchKey(void) { return searchKey_; }
 	void display(std::ostream& o);
 private:
@@ -27,4 +28,5 @@ private:
 	std::string searchKey_;
 	bool isUsed_ = false;
 	bool isTaken_ = false;
+	bool isTakeable_ = true;
 };

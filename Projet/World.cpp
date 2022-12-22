@@ -97,6 +97,10 @@ void World::take(const std::vector<std::string>& command)
 	{
 		throw Invalidcommand("\nItem non reconnu");
 	}
+	if (!item->getIsTakeable())
+	{
+		throw Invalidcommand("\nL'item ne peut être deplacé");
+	}
 	inventoryInstance_.addItemToInventoryList(*item);
 	item->setIsTaken(true);
 	currentRoom_->eraseItemInRoom(item);
@@ -135,13 +139,15 @@ void World::setPlaying(bool status)
 
 void World::createRooms()
 {
-	roomList_.push_back(std::make_shared<Room>("Balcon", "Petit coin ou profiter de l'air frais avec des chaises et tables", totalItemsList_[2]));
-	roomList_.push_back(std::make_shared<Room>("Salle de billard", "Sallon de jeux avec comme activité principale le billard", totalItemsList_[3]));
-	roomList_.push_back(std::make_shared<Room>("Chambre a coucher", "Chambre avec lit Queen de qualite superieure", totalItemsList_[4]));
+	roomList_.push_back(std::make_shared<Room>("Balcon", "Petit coin ou profiter de l'air frais avec des chaises et tables", totalItemsList_[3]));
+	roomList_.push_back(std::make_shared<Room>("Salle de billard", "Sallon de jeux avec comme activité principale le billard", totalItemsList_[2]));
+	roomList_.push_back(std::make_shared<Room>("Chambre a coucher", "Chambre avec lit Queen de qualite superieure", totalItemsList_[3]));
 	roomList_.push_back(std::make_shared<Room>("Grand couloir", "Allee reliant plusieurs pieces dans l'hotel", totalItemsList_[5]));
 	roomList_.push_back(std::make_shared<Room>("Vestiaire", "Entree de l'hotel pour laisser manteaux et bottes", totalItemsList_[1]));
 	roomList_.push_back(std::make_shared<Room>("Salle de reception", "Salle pour check-in et recuperer ses cles", totalItemsList_[0]));
-	roomList_.push_back(std::make_shared<Room>("Salle secrete", "Salle ou se trouve le secret le plus grande de Poly", totalItemsList_[6]));
+	roomList_.push_back(std::make_shared<Room>("Salle secrete", "Salle ou se trouve le secret le plus grand de Poly", totalItemsList_[6]));
+
+	roomList_[2]->addItemToRoomList(totalItemsList_[7]);
 
 	roomList_[1]->setNeighbour(nullptr, roomList_[3].get());
 	roomList_[3]->setNeighbour(roomList_[1].get(), roomList_[4].get(),nullptr, roomList_[2].get());

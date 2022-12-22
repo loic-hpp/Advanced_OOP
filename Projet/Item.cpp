@@ -10,8 +10,8 @@ Item::Item()
 {
 }
 
-Item::Item(std::string searchKey, std::string name, std::string description):
-	searchKey_(searchKey), name_(name), description_(description)
+Item::Item(std::string searchKey, std::string name, std::string description, bool isTakeable):
+	searchKey_(searchKey), name_(name), description_(description), isTakeable_(isTakeable)
 {
 }
 
