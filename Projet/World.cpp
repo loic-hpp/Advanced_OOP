@@ -88,6 +88,8 @@ void World::use(const std::vector<std::string>& command)
 {
 	std::shared_ptr<Item> item = searchItemWithCommand(command, inventoryInstance_.getInventoryList());
 	if (item == nullptr)
+		item = searchItemWithCommand(command, currentRoom_->getItemsInRoom());
+	if (item == nullptr)
 	{
 		throw Invalidcommand("\nItem non reconnu");
 	}
@@ -100,7 +102,11 @@ void World::use(const std::vector<std::string>& command)
 		}
 		else if (currentRoom_->getName() == "Chambre a coucher" && item->getSearchKey() == "tobogan")
 		{
-			//moveNorth();
+			currentRoom_ = roomList_[0].get();
+		}
+		else if (currentRoom_->getName() == "Balcon" && item->getSearchKey() == "tobogan")
+		{
+			currentRoom_ = roomList_[2].get();
 		}
 	}
 	else
@@ -160,7 +166,7 @@ void World::setPlaying(bool status)
 
 void World::createRooms()
 {
-	roomList_.push_back(std::make_shared<Room>("Balcon", "Petit coin ou profiter de l'air frais avec des chaises et tables", totalItemsList_[2]));
+	roomList_.push_back(std::make_shared<Room>("Balcon", "Petit coin ou profiter de l'air frais avec des chaises et tables", totalItemsList_[3]));
 	roomList_.push_back(std::make_shared<Room>("Salle de billard", "Sallon de jeux avec comme activité principale le billard", totalItemsList_[4]));
 	roomList_.push_back(std::make_shared<Room>("Chambre a coucher", "Chambre avec lit Queen de qualite superieure", totalItemsList_[3]));
 	roomList_.push_back(std::make_shared<Room>("Grand couloir", "Allee reliant plusieurs pieces dans l'hotel", totalItemsList_[5]));
