@@ -92,6 +92,7 @@ void World::take(const std::vector<std::string>& command)
 	}
 	inventoryInstance_.addItemToInventoryList(*item);
 	item->setIsTaken(true);
+	currentRoom_->eraseItemInRoom(item);
 	// TODO : enlever de la chambre
 }
 
@@ -110,7 +111,7 @@ std::shared_ptr<class Item> World::searchItemInRoomWithCommand(const std::vector
 		{
 			for (int j = 1; j < command.size(); j++)
 			{
-				if (itemsInInventory[i]->getSearchKey() == command[j])
+				if (itemsInInventory[i]->getName() == command[j] or itemsInInventory[i]->getSearchKey() == command[j])
 				{
 					return itemsInInventory[i];
 				}

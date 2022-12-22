@@ -20,7 +20,7 @@ public:
 	Room* getWestNeighbour();
 	void addItemToRoomList(std::shared_ptr<Item> item);
 	std::vector<std::shared_ptr<Item>> getItemsInRoom(void) { return itemsInRoom_; }
-	//void eraseItemInRoom(std::shared_ptr<Item> item);
+	void eraseItemInRoom(std::shared_ptr<Item> item);
 	std::vector<std::shared_ptr<class Item>> getItemsInRoomList(void);
 	void setNeighbour(Room* northNeighbour = nullptr,
 		Room* southNeighbour = nullptr,

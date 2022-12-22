@@ -23,17 +23,13 @@ void Room::display(std::ostream& o)
 		<< description_ << std::endl;
 
 	o << "\n" << "Tu remarques:" << std::endl;
-	for (int i = 0; i < itemsInRoom_.size(); i++)
-	{
-		if (itemsInRoom_.empty())
-		{
-			o << "\t" << "Rien dans cette chambre" << std::endl;
-		}
-		else
-		{
+	if (itemsInRoom_.empty())
+		o << "\t" << "Rien dans cette chambre" << std::endl;
+	else {
+
+		for (int i = 0; i < itemsInRoom_.size(); i++)
 			o << "\t" << itemsInRoom_[i]->getName() << std::endl;
 		}
-	}
 
 	for (auto it = neighbour_.begin(); it != neighbour_.end(); ++it) {
 		const auto& [key, value] = *it;
@@ -91,4 +87,10 @@ std::string Room::getName(Room room)
 std::string Room::getDescription(void)
 {
 	return description_;
+}
+
+void Room::eraseItemInRoom(std::shared_ptr<Item> item) {
+	auto it = std::find(itemsInRoom_.begin(), itemsInRoom_.end(), item);
+	if(it != itemsInRoom_.end())
+		itemsInRoom_.erase(it);
 }
