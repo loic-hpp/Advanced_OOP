@@ -21,15 +21,6 @@ std::vector<std::shared_ptr<class Item>> Inventory::getInventoryList(void)
 	return itemsInInventory_;
 }
 
-bool Inventory::IsInventoryEmpty()
-{
-	if (itemsInInventory_.empty())
-	{
-		return true;
-	}
-	return false;
-}
-
 void Inventory::createTotalItemsList(void)
 {
 	totalItemsList_.push_back(std::make_shared<Item>("diamant", "Un diamant bleue", "Ce diamant brillant sert comme cle"));

@@ -17,7 +17,6 @@ Room::Room(std::string name, std::string description, std::shared_ptr<Item> item
 	addItemToRoomList(item);
 }
 
-// TODO: peut etre bouger cette methode dans vue ?? Trop de modifs a faire
 void Room::display(std::ostream& o)
 {
 	o << "\n-- " << name_ << " --" << std::endl

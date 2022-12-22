@@ -12,8 +12,6 @@ public:
 	Inventory();
 	int getCurrentItemIndex(void);
 	void addItemToInventoryList(Item item);
-	bool IsInventoryEmpty(void);
-	bool isItemInInvetory(std::string word);
 	void createTotalItemsList(void);
 	std::vector<std::shared_ptr<class Item>> getInventoryList(void);
 	std::vector<std::shared_ptr<class Item>> getTotalItemslist(void);
