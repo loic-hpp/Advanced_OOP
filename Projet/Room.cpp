@@ -11,9 +11,10 @@ Room::Room(std::string name, std::string description) :
 {
 }
 
-Room::Room(std::string name, std::string description, std::vector<std::shared_ptr<Item>> items) :
-	name_(name), description_(description), itemsInRoom_(items)
+Room::Room(std::string name, std::string description, std::shared_ptr<Item> item) :
+	name_(name), description_(description)
 {
+	addItemToRoomList(item);
 }
 
 // TODO: peut etre bouger cette methode dans vue ?? Trop de modifs a faire
@@ -23,7 +24,7 @@ void Room::display(std::ostream& o)
 		<< description_ << std::endl;
 
 	o << "\n" << "Tu remarques:" << std::endl;
-	for (int i = 0; i <= itemsInRoom_.size(); i++)
+	for (int i = 0; i < itemsInRoom_.size(); i++)
 	{
 		if (itemsInRoom_.empty())
 		{
@@ -42,9 +43,9 @@ void Room::display(std::ostream& o)
 	}
 
 	o << "\n" << "Tu as:" << std::endl;
-	Item item = Item();
-	std::vector<std::shared_ptr<Item>> inventory = item.getInventoryList();
-	for (int i = 0; i <= inventory.size(); i++)
+	Inventory inventoryInstance = Inventory();
+	std::vector<std::shared_ptr<Item>> inventory = inventoryInstance.getInventoryList();
+	for (int i = 0; i < inventory.size(); i++)
 	{
 		if (inventory.empty())
 		{
@@ -57,9 +58,10 @@ void Room::display(std::ostream& o)
 	}
 }
 
-void Room::addItemToRoomList(Item item)
+// Besoin ?
+void Room::addItemToRoomList(std::shared_ptr<Item> item)
 {
-	itemsInRoom_.push_back(std::make_shared<Item>(item));
+	itemsInRoom_.push_back(item);
 }
 
 // TODO: besoin?

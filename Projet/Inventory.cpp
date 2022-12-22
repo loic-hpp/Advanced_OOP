@@ -8,6 +8,7 @@
 
 Inventory::Inventory()
 {
+	createTotalItemsList();
 }
 
 void Inventory::addItemToInventoryList(Item item)
@@ -15,7 +16,7 @@ void Inventory::addItemToInventoryList(Item item)
 	itemsInInventory_.push_back(std::make_shared<Item>(item));
 }
 
-std::vector<std::shared_ptr<Item>> Inventory::getInventoryList(void)
+std::vector<std::shared_ptr<class Item>> Inventory::getInventoryList(void)
 {
 	return itemsInInventory_;
 }
@@ -29,12 +30,39 @@ bool Inventory::IsInventoryEmpty()
 	return false;
 }
 
-// TODO: Crois qu'il a un bogue
+void Inventory::createTotalItemsList(void)
+{
+	/*Item diamant = Item("Un diamant bleue", "Ce diamant brillant sert comme cle");
+	Item manteau = Item("Un manteau brun", "Ce manteau est plein de neige");
+	Item chaise = Item("Une chaise antique", "Cette chaise est a l'envers");
+	Item tobogan = Item("Un misterieux tobogan", "Ce tobogan est mauve");
+	Item oreiller = Item("Un oreiller blanc", "Cet oreiller a une tache de sang");
+	Item monopoly = Item("Une boite de monopoly", "Cette boite est vide");
+	Item carte = Item("Une carte dans une enveloppe", "Cette carte contient le secret de Poly");*/
+
+	totalItemsList_.push_back(std::make_shared<Item>("Un diamant bleue", "Ce diamant brillant sert comme cle"));
+	totalItemsList_.push_back(std::make_shared<Item>("Un manteau brun", "Ce manteau est plein de neige"));
+	
+	totalItemsList_.push_back(std::make_shared<Item>("Une chaise antique", "Cette chaise est a l'envers"));
+	totalItemsList_.push_back(std::make_shared<Item>("Un misterieux tobogan", "Ce tobogan est mauve"));
+	
+	totalItemsList_.push_back(std::make_shared<Item>("Un oreiller blanc", "Cet oreiller a une tache de sang"));
+	totalItemsList_.push_back(std::make_shared<Item>("Une boite de monopoly", "Cette boite est vide"));
+	
+	totalItemsList_.push_back(std::make_shared<Item>("Une carte dans une enveloppe", "Cette carte contient le secret de Poly"));
+}
+
+std::vector<std::shared_ptr<class Item>> Inventory::getTotalItemslist(void)
+{
+	return totalItemsList_;
+}
+
+// TODO: Utiliser find avec vector que Loic disait
 bool Inventory::isItemInInvetory(std::string command)
 {
-	for (int i = 0; i < totalItemList_.size(); i++)
+	for (int i = 0; i < totalItemsList_.size(); i++)
 	{
-		std::string name = totalItemList_[i]->getName();
+		std::string name = totalItemsList_[i]->getName();
 		if (name.contains(command.substr(4, command.size())) ||
 			name.contains(command.substr(5, command.size())))
 		{

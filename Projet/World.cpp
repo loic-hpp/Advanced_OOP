@@ -22,7 +22,6 @@ void World::displayCurrentRoom(std::ostream& o)
 {
 	if (isRunning_) 
 	{
-		// Peut ne pas marcher
 		currentRoom_->display(o);
 	}
 	else
@@ -70,13 +69,13 @@ void World::look(std::string command)
 
 void World::use(std::string command)
 {
-	item_.useItem(command);
-	item_.setIsUsed(true);
+	/*item_.useItem(command);
+	item_.setIsUsed(true);*/
 }
 
 void World::take(std::string command)
 {
-	item_.takeItem(command);
+	//item_.takeItem(command);
 }
 
 void World::restart()
@@ -125,13 +124,14 @@ void World::setPlaying(bool status)
 
 void World::createRooms()
 {
-	roomList_.push_back(std::make_shared<Room>("Balcon", "Petit coin ou profiter de l'air frais avec des chaises et tables"));
-	roomList_.push_back(std::make_shared<Room>("Salle de billard", "Sallon de jeux avec comme activité principale le billard"));
-	roomList_.push_back(std::make_shared<Room>("Chambre a coucher", "Chambre avec lit Queen de qualite superieure"));
-	roomList_.push_back(std::make_shared<Room>("Grand couloir", "Allee reliant plusieurs pieces dans l'hotel"));
-	roomList_.push_back(std::make_shared<Room>("Vestiaire", "Entree de l'hotel pour laisser manteaux et bottes"));
-	roomList_.push_back(std::make_shared<Room>("Salle de reception", "Salle pour check-in et recuperer ses cles"));
-	roomList_.push_back(std::make_shared<Room>("Salle secrete", "Salle ou se trouve le secret le plus grande de Poly"));
+	std::vector<std::shared_ptr<class Item>> totalItemsList = inventoryInstance_.getTotalItemslist();
+	roomList_.push_back(std::make_shared<Room>("Balcon", "Petit coin ou profiter de l'air frais avec des chaises et tables", totalItemsList[2]));
+	roomList_.push_back(std::make_shared<Room>("Salle de billard", "Sallon de jeux avec comme activité principale le billard", totalItemsList[3]));
+	roomList_.push_back(std::make_shared<Room>("Chambre a coucher", "Chambre avec lit Queen de qualite superieure", totalItemsList[4]));
+	roomList_.push_back(std::make_shared<Room>("Grand couloir", "Allee reliant plusieurs pieces dans l'hotel", totalItemsList[5]));
+	roomList_.push_back(std::make_shared<Room>("Vestiaire", "Entree de l'hotel pour laisser manteaux et bottes", totalItemsList[1]));
+	roomList_.push_back(std::make_shared<Room>("Salle de reception", "Salle pour check-in et recuperer ses cles", totalItemsList[0]));
+	roomList_.push_back(std::make_shared<Room>("Salle secrete", "Salle ou se trouve le secret le plus grande de Poly", totalItemsList[6]));
 
 	roomList_[1]->setNeighbour(nullptr, roomList_[3].get());
 	roomList_[3]->setNeighbour(roomList_[1].get(), roomList_[4].get(),nullptr, roomList_[2].get());
@@ -139,13 +139,13 @@ void World::createRooms()
 	roomList_[5]->setNeighbour(nullptr, nullptr, nullptr, roomList_[4].get());
 	roomList_[2]->setNeighbour(nullptr, nullptr, roomList_[3].get());
 	
-	if (item_.getIsUsed())
-	{
+	/*if (item_.getIsUsed())
+	{*/
 		roomList_[6]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
 		//	Ouverture peut etre dans meme if parce que c'est deux places loins et differentes
-		//	roomList_[0]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
-		item_.setIsUsed(false);
-	}
+		roomList_[0]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
+		//item_.setIsUsed(false);
+	//}
 
 	currentRoom_ = roomList_[4].get();
 	beginRoom_ = roomList_[4].get();

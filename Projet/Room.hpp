@@ -5,21 +5,21 @@
 //	Créé le 11 décembre 2022
 
 #pragma once
-#include "inclusion.hpp"
-#include "Item.hpp"
+#include "Inclusion.hpp"
+#include "Inventory.hpp"
 
 class Room
 {
 public:
 	Room(std::string name, std::string description_);
-	Room(std::string name, std::string description_, std::vector<std::shared_ptr<Item>> items_);
+	Room(std::string name, std::string description_, std::shared_ptr<Item> item);
 	void display(std::ostream& o);
 	Room* getNorthNeighbour();
 	Room* getSouthNeighbour();
 	Room* getEastNeighbour();
 	Room* getWestNeighbour();
-	void addItemToRoomList(Item item);
-	std::vector<std::shared_ptr<Item>> getItemsInRoomList(void);
+	void addItemToRoomList(std::shared_ptr<Item> item);
+	std::vector<std::shared_ptr<class Item>> getItemsInRoomList(void);
 	void setNeighbour(Room* northNeighbour = nullptr,
 		Room* southNeighbour = nullptr,
 		Room* eastNeighbour = nullptr,
@@ -31,5 +31,4 @@ private:
 	std::string description_;
 	std::vector<std::shared_ptr<Item>> itemsInRoom_;
 	std::map<std::string, Room*> neighbour_;
-	//std::vector<std::shared_ptr<class Item>> itemsInCurrentRoom_;
 };

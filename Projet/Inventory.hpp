@@ -10,12 +10,15 @@ class Inventory
 {
 public:
 	Inventory();
-	std::vector<std::shared_ptr<Item>> getInventoryList(void);
 	void addItemToInventoryList(Item item);
 	bool IsInventoryEmpty(void);
 	bool isItemInInvetory(std::string word);
+	void createTotalItemsList(void);
+	std::vector<std::shared_ptr<class Item>> getInventoryList(void);
+	std::vector<std::shared_ptr<class Item>> getTotalItemslist(void);
 
 private:
 	std::vector<std::shared_ptr<class Item>> itemsInInventory_;
+	std::vector<std::shared_ptr<class Item>> totalItemsList_;
 	int currentItemIndex_;
 };
