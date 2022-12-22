@@ -1,7 +1,7 @@
 //	Description: Implementation de la classe World.
 //	Fichier: World.cpp
 //	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
-//	Date	12 decembre 2022
+//	Date	21 decembre 2022
 //	Créé le 11 décembre 2022
 
 #include "World.hpp"
@@ -64,9 +64,11 @@ void World::moveWest()
 
 void World::look(std::string command)
 {
-	
+	// TODO : Implementer
 }
 
+// TODO : enlever items affiches dans la chambre pour seulement afficher dans inventaire (comme image example)
+// TODO: unlock room with tobogan ou diamant cle
 void World::use(std::string command)
 {
 	/*item_.useItem(command);
@@ -87,40 +89,6 @@ void World::setPlaying(bool status)
 {
 	isRunning_ = status;
 }
-
-// TODO: ne montre pas items dans console
-//void World::putItemInCurrentRoom()
-//{
-//	// TODO: repetitif
-//	if (currentRoom_->getName(*currentRoom_) == "Balcon")
-//	{
-//		item_.addItemToCurrentRoomList("chaise");
-//	}
-//	else if (currentRoom_->getName(*currentRoom_) == "Salle de billard")
-//	{
-//		item_.addItemToCurrentRoomList("tobogan");
-//	}
-//	else if (currentRoom_->getName(*currentRoom_) == "Chambre a coucher")
-//	{
-//		item_.addItemToCurrentRoomList("oreiller");
-//	}
-//	else if (currentRoom_->getName(*currentRoom_) == "Grand couloir")
-//	{
-//		item_.addItemToCurrentRoomList("monopoly");
-//	}
-//	else if (currentRoom_->getName(*currentRoom_) == "Vestiaire")
-//	{
-//		item_.addItemToCurrentRoomList("manteau");
-//	}
-//	else if (currentRoom_->getName(*currentRoom_) == "Salle de reception")
-//	{
-//		item_.addItemToCurrentRoomList("diamant");
-//	}
-//	else if (currentRoom_->getName(*currentRoom_) == "Salle secrete")
-//	{
-//		item_.addItemToCurrentRoomList("carte");
-//	}
-//}
 
 void World::createRooms()
 {

@@ -32,23 +32,12 @@ bool Inventory::IsInventoryEmpty()
 
 void Inventory::createTotalItemsList(void)
 {
-	/*Item diamant = Item("Un diamant bleue", "Ce diamant brillant sert comme cle");
-	Item manteau = Item("Un manteau brun", "Ce manteau est plein de neige");
-	Item chaise = Item("Une chaise antique", "Cette chaise est a l'envers");
-	Item tobogan = Item("Un misterieux tobogan", "Ce tobogan est mauve");
-	Item oreiller = Item("Un oreiller blanc", "Cet oreiller a une tache de sang");
-	Item monopoly = Item("Une boite de monopoly", "Cette boite est vide");
-	Item carte = Item("Une carte dans une enveloppe", "Cette carte contient le secret de Poly");*/
-
 	totalItemsList_.push_back(std::make_shared<Item>("Un diamant bleue", "Ce diamant brillant sert comme cle"));
 	totalItemsList_.push_back(std::make_shared<Item>("Un manteau brun", "Ce manteau est plein de neige"));
-	
 	totalItemsList_.push_back(std::make_shared<Item>("Une chaise antique", "Cette chaise est a l'envers"));
 	totalItemsList_.push_back(std::make_shared<Item>("Un misterieux tobogan", "Ce tobogan est mauve"));
-	
 	totalItemsList_.push_back(std::make_shared<Item>("Un oreiller blanc", "Cet oreiller a une tache de sang"));
 	totalItemsList_.push_back(std::make_shared<Item>("Une boite de monopoly", "Cette boite est vide"));
-	
 	totalItemsList_.push_back(std::make_shared<Item>("Une carte dans une enveloppe", "Cette carte contient le secret de Poly"));
 }
 

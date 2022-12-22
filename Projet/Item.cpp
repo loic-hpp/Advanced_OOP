@@ -44,23 +44,3 @@ bool Item::getIsTaken()
 {
 	return isTaken_;
 }
-
-// TODO : Ces deux methodes peuvent etre directement dans World
-// mais te force a appeler getInventoryList() avec un vector local aux fonctions
-// 
-//void Item::takeItem(std::string command)
-//{
-//	if (isItemInInvetory(command))
-//	{
-//		itemsInInventory_.push_back(totalItemList_[currentItemIndex_]);
-//	}
-//	// TODO : enlever items affiches dans la chambre pour seulement afficher dans inventaire (comme image example)
-//}
-//
-//void Item::useItem(std::string command)
-//{
-//	if (isItemInInvetory(command))
-//	{
-//		// TODO: unlock room with tobogan ou diamant cle
-//	}
-//}

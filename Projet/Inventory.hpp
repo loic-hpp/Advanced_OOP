@@ -16,7 +16,6 @@ public:
 	void createTotalItemsList(void);
 	std::vector<std::shared_ptr<class Item>> getInventoryList(void);
 	std::vector<std::shared_ptr<class Item>> getTotalItemslist(void);
-
 private:
 	std::vector<std::shared_ptr<class Item>> itemsInInventory_;
 	std::vector<std::shared_ptr<class Item>> totalItemsList_;

@@ -1,7 +1,7 @@
 //	Description: Implementation de la classe Room.
 //	Fichier: Room.cpp
 //	Auteurs: Rodrigo A. Merino Martel et Loïc Nguemegne Temena
-//	Date	12 decembre 2022
+//	Date	21 decembre 2022
 //	Créé le 11 décembre 2022
 
 #include "Room.hpp"
@@ -45,7 +45,7 @@ void Room::display(std::ostream& o)
 	o << "\n" << "Tu as:" << std::endl;
 	Inventory inventoryInstance = Inventory();
 	std::vector<std::shared_ptr<Item>> inventory = inventoryInstance.getInventoryList();
-	for (int i = 0; i < inventory.size(); i++)
+	for (int i = 0; i <= inventory.size(); i++)
 	{
 		if (inventory.empty())
 		{
