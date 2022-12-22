@@ -17,21 +17,11 @@ void Controller::execute(const std::vector<std::string>& command)
 	auto it = commandMap_.find(command[0]);
 	if (it == commandMap_.end())
 		throw Invalidcommand("\nCommande non reconnue");
-	else {
+	else 
+	{
 		auto& [key, value] = *it;
-		if(command[0]=="take" or command[0] == "use" or command[0] == "look")
-		{ // ICI C'EST LE  CAS DES COMMANDES TAKE USE ET LOOK
-		}
-		else {
-
-		if (command.size()!=1)
-			throw Invalidcommand("\nCommande non reconnue");
-		else
-			value(command);
-
-		}
+		value(command);
 	}
-
 }
 
 void Controller::initializeMapCommand()

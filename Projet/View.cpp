@@ -30,6 +30,7 @@ std::vector<std::string> View::getCommand()
 	std::cout << std::endl << "> ";
 	std::getline(std::cin, command);
 	
+	// Reference: https://stackoverflow.com/questions/5607589/right-way-to-split-an-stdstring-into-a-vectorstring
 	std::stringstream ss(command);
 	std::istream_iterator<std::string> begin(ss);
 	std::istream_iterator<std::string> end;

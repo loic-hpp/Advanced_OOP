@@ -21,6 +21,7 @@ public:
 	void use(const std::vector<std::string>& command);
 	void take(const std::vector<std::string>& command);
 	void restart();
+	std::shared_ptr<class Item> searchItemInRoomWithCommand(const std::vector<std::string>& command, std::vector<std::shared_ptr<class Item>> itemsInInventory);
 	bool isPlaying() { return isRunning_; }
 	void setPlaying(bool status);
 private:

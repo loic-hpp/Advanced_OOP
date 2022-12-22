@@ -76,16 +76,39 @@ void World::use(const std::vector<std::string>& command)
 
 void World::take(const std::vector<std::string>& command)
 {
-	// TODO
-	/*if (inventoryInstance_.isItemInInvetory(command))
+	std::shared_ptr<Item> item = searchItemInRoomWithCommand(command, currentRoom_->getItemsInRoom());
+	if (item == nullptr)
 	{
-		inventoryInstance_.addItemToInventoryList(totalItemsList_[inventoryInstance_.getCurrentItemIndex()]);
-	}*/
+		throw Invalidcommand("\nItem non reconnu");
+	}
+	inventoryInstance_.addItemToInventoryList(*item);
+	item->setIsTaken(true);
+	// TODO : enlever de la chambre
 }
 
 void World::restart()
 {
 	currentRoom_ = beginRoom_;
+}
+
+std::shared_ptr<class Item> World::searchItemInRoomWithCommand(const std::vector<std::string>& command, std::vector<std::shared_ptr<class Item>> itemsInInventory)
+{
+	if (itemsInInventory.empty())
+		return nullptr;
+	else
+	{
+		for (int i = 0; i < itemsInInventory.size(); i++)
+		{
+			for (int j = 1; j < command.size(); j++)
+			{
+				if (itemsInInventory[i]->getSearchKey() == command[j])
+				{
+					return itemsInInventory[i];
+				}
+			}
+		}
+	}
+	return nullptr;
 }
 
 void World::setPlaying(bool status)

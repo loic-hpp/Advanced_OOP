@@ -12,18 +12,18 @@ class Item
 {
 public:
 	Item();
-	Item(std::string name_, std::string description_);
+	Item(std::string searchKey, std::string name_, std::string description_);
 	std::string getName(void);
 	std::string getDescription(void);
-	void takeItem(std::string word);
-	void useItem(std::string word);
 	void setIsUsed(bool boolean);
 	bool getIsUsed(void);
 	void setIsTaken(bool boolean);
 	bool getIsTaken(void);
+	std::string getSearchKey(void) { return searchKey_; }
 private:
 	std::string name_;
 	std::string description_;
+	std::string searchKey_;
 	bool isUsed_ = false;
 	bool isTaken_ = false;
 };
