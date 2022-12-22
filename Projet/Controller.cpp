@@ -19,7 +19,17 @@ void Controller::execute(const std::vector<std::string>& command)
 		throw Invalidcommand("\nCommande non reconnue");
 	else {
 		auto& [key, value] = *it;
-		value("");
+		if(command[0]=="take" or command[0] == "use" or command[0] == "look")
+		{ // ICI C'EST LE  CAS DES COMMANDES TAKE USE ET LOOK
+		}
+		else {
+
+		if (command.size()!=1)
+			throw Invalidcommand("\nCommande non reconnue");
+		else
+			value("");
+
+		}
 	}
 
 }
