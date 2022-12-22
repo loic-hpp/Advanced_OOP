@@ -24,12 +24,17 @@ void View::actualizeView()
 	world_->displayCurrentRoom(std::cout);
 }
 
-std::string View::getCommand()
+std::vector<std::string> View::getCommand()
 {
 	std::string command;
 	std::cout << std::endl << "> ";
 	std::getline(std::cin, command);
-	return command;
+	
+	std::stringstream ss(command);
+	std::istream_iterator<std::string> begin(ss);
+	std::istream_iterator<std::string> end;
+	
+	return std::vector<std::string>(begin, end);
 }
 
 void View::playGame()

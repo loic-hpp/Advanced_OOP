@@ -11,22 +11,9 @@ class Controller
 {
 public:
 	Controller(std::shared_ptr<World> world);
-	void execute(std::string command);
+	void execute(const std::vector<std::string>& command);
 private:
 	std::shared_ptr<World> world_;
-	 enum CommandEnum_ 
-	 {
-		NORTH,
-		SOUTH,
-		EAST,
-		WEST,
-		LOOK,
-		USE,
-		TAKE,
-		RESTART,
-		EXIT,
-		DEFAULTCASE,
-	};
-	inline static std::map<std::string, CommandEnum_> commandMap_;
+	inline static std::map<std::string, std::function<void(const std::string&)>> commandMap_;
 	void initializeMapCommand();
 };
