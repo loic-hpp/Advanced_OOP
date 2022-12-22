@@ -61,3 +61,14 @@ bool Inventory::isItemInInvetory(std::string command)
 	}
 	return false;
 }
+
+int Inventory::getCurrentItemIndex(void)
+{
+	return currentItemIndex_;
+}
+
+//std::shared_ptr<class Item> Inventory::searchItemWithCommand(std::string command)
+//{
+//	
+//	return ;
+//}

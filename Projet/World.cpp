@@ -64,20 +64,23 @@ void World::moveWest()
 
 void World::look(std::string command)
 {
-	// TODO : Implementer
+	// TODO
 }
 
 // TODO : enlever items affiches dans la chambre pour seulement afficher dans inventaire (comme image example)
 // TODO: unlock room with tobogan ou diamant cle
 void World::use(std::string command)
 {
-	/*item_.useItem(command);
-	item_.setIsUsed(true);*/
+	// TODO
 }
 
 void World::take(std::string command)
 {
-	//item_.takeItem(command);
+	// TODO
+	/*if (inventoryInstance_.isItemInInvetory(command))
+	{
+		inventoryInstance_.addItemToInventoryList(totalItemsList_[inventoryInstance_.getCurrentItemIndex()]);
+	}*/
 }
 
 void World::restart()
@@ -108,7 +111,8 @@ void World::createRooms()
 	
 	if (totalItemsList_[0]->getIsUsed())
 	{
-		//	Ouverture peut etre dans meme if parce que c'est deux places loins et differentes
+		//	Ouverture peut etre dans meme if parce que c'est deux places loins
+		//  et c'est ouvert pendant un tour?
 		roomList_[6]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
 		roomList_[0]->setNeighbour(nullptr, nullptr, nullptr, roomList_[3].get());
 		totalItemsList_[0]->setIsUsed(false);
