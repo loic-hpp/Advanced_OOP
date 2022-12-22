@@ -62,19 +62,19 @@ void World::moveWest()
 		currentRoom_ = currentRoom_->getWestNeighbour();
 }
 
-void World::look(std::string command)
+void World::look(const std::vector<std::string>& command)
 {
 	// TODO
 }
 
 // TODO : enlever items affiches dans la chambre pour seulement afficher dans inventaire (comme image example)
 // TODO: unlock room with tobogan ou diamant cle
-void World::use(std::string command)
+void World::use(const std::vector<std::string>& command)
 {
 	// TODO
 }
 
-void World::take(std::string command)
+void World::take(const std::vector<std::string>& command)
 {
 	// TODO
 	/*if (inventoryInstance_.isItemInInvetory(command))

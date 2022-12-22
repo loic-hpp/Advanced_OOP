@@ -27,7 +27,7 @@ void Controller::execute(const std::vector<std::string>& command)
 		if (command.size()!=1)
 			throw Invalidcommand("\nCommande non reconnue");
 		else
-			value("");
+			value(command);
 
 		}
 	}
@@ -36,13 +36,31 @@ void Controller::execute(const std::vector<std::string>& command)
 
 void Controller::initializeMapCommand()
 {
-	commandMap_["N"] = [&](const std::string& argument) {world_->moveNorth(); };
-	commandMap_["S"] = [&](const std::string& argument) {world_->moveSouth(); };
-	commandMap_["E"] = [&](const std::string& argument) {world_->moveEast(); };
-	commandMap_["O"] = [&](const std::string& argument) {world_->moveWest(); };
-	commandMap_["look"] = [&](const std::string& argument) {world_->look(argument); };
-	commandMap_["use"] = [&](const std::string& argument) {world_->use(argument); };
-	commandMap_["take"] = [&](const std::string& argument) {world_->take(argument); };
-	commandMap_["restart"] = [&](const std::string& argument) {world_->restart(); };
-	commandMap_["exit"] = [&](const std::string& argument) {world_->setPlaying(false); };
+	commandMap_["N"] = [&](const std::vector<std::string>& command) {if (command.size() != 1)
+		throw Invalidcommand("\nCommande non reconnue");
+	else
+		world_->moveNorth(); };
+	commandMap_["S"] = [&](const std::vector<std::string>& command) {if (command.size() != 1)
+		throw Invalidcommand("\nCommande non reconnue");
+	else
+		world_->moveSouth(); };
+	commandMap_["E"] = [&](const std::vector<std::string>& command) {if (command.size() != 1)
+		throw Invalidcommand("\nCommande non reconnue");
+	else
+		world_->moveEast(); };
+	commandMap_["O"] = [&](const std::vector<std::string>& command) {if (command.size() != 1)
+		throw Invalidcommand("\nCommande non reconnue");
+	else
+		world_->moveWest(); };
+	commandMap_["look"] = [&](const std::vector<std::string>& command) {world_->look(command); };
+	commandMap_["use"] = [&](const std::vector<std::string>& command) {world_->use(command); };
+	commandMap_["take"] = [&](const std::vector<std::string>& command) {world_->take(command); };
+	commandMap_["restart"] = [&](const std::vector<std::string>& command) {if (command.size() != 1)
+		throw Invalidcommand("\nCommande non reconnue");
+	else
+		world_->restart(); };
+	commandMap_["exit"] = [&](const std::vector<std::string>& command) {if (command.size() != 1)
+		throw Invalidcommand("\nCommande non reconnue");
+	else
+		world_->setPlaying(false); };
 }

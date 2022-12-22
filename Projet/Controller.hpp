@@ -14,6 +14,6 @@ public:
 	void execute(const std::vector<std::string>& command);
 private:
 	std::shared_ptr<World> world_;
-	inline static std::map<std::string, std::function<void(const std::string&)>> commandMap_;
+	inline static std::map<std::string, std::function<void(const std::vector<std::string>&)>> commandMap_;
 	void initializeMapCommand();
 };

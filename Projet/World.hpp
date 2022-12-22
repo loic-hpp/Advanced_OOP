@@ -17,9 +17,9 @@ public:
 	void moveSouth();
 	void moveEast();
 	void moveWest();
-	void look(std::string command);
-	void use(std::string command);
-	void take(std::string command);
+	void look(const std::vector<std::string>& command);
+	void use(const std::vector<std::string>& command);
+	void take(const std::vector<std::string>& command);
 	void restart();
 	bool isPlaying() { return isRunning_; }
 	void setPlaying(bool status);
