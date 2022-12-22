@@ -136,8 +136,7 @@ void World::take(const std::vector<std::string>& command)
 void World::restart()
 {
 	inventoryInstance_.clearInventory();
-	inventoryInstance_.createTotalItemsList();
-	//totalItemsList_ = inventoryInstance_.getTotalItemslist();
+	roomList_.clear();
 	createRooms();
 }
 
