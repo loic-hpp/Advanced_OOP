@@ -44,3 +44,8 @@ bool Item::getIsTaken()
 {
 	return isTaken_;
 }
+
+void Item::display(std::ostream& o)
+{
+	o << "\n" << description_ << std::endl;
+}

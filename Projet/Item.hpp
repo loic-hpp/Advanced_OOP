@@ -4,7 +4,7 @@
 //	Date	21 decembre 2022
 //	Créé le 11 décembre 2022
 
-#include <string>
+#include "Inclusion.hpp"
 #include <vector>
 #include <memory>
 
@@ -20,6 +20,7 @@ public:
 	void setIsTaken(bool boolean);
 	bool getIsTaken(void);
 	std::string getSearchKey(void) { return searchKey_; }
+	void display(std::ostream& o);
 private:
 	std::string name_;
 	std::string description_;

@@ -73,7 +73,14 @@ void World::moveWest()
 
 void World::look(const std::vector<std::string>& command)
 {
-	// TODO
+	if (command.size() > 1) {
+		std::shared_ptr<Item> item = searchItemInRoomWithCommand(command, currentRoom_->getItemsInRoom());
+		if (item == nullptr)
+			item = searchItemInRoomWithCommand(command, inventoryInstance_.getInventoryList());
+		if (item == nullptr)
+			throw Invalidcommand("\nItem non reconnu");
+		item->display(std::cout);
+	}
 }
 
 // TODO : enlever items affiches dans la chambre pour seulement afficher dans inventaire (comme image example)
